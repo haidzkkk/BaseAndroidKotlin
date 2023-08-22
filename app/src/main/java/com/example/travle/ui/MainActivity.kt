@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.travle.R
 import com.example.travle.TravleApplication
 import com.example.travle.core.TravleBaseActivity
@@ -18,6 +20,10 @@ import javax.inject.Inject
 
 class MainActivity : TravleBaseActivity<ActivityMainBinding>() {
 
+    override fun getBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     val mViewModel : HomeViewModel by lazy{
@@ -27,12 +33,10 @@ class MainActivity : TravleBaseActivity<ActivityMainBinding>() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
 //        injector().inject(this) // scope bé trong base
         (application as TravleApplication).travleComponent.inject(this)
-
+        super.onCreate(savedInstanceState)
+        setContentView(views.root)
 
         mViewModel.observeViewEvents {
             when(it){
@@ -40,10 +44,15 @@ class MainActivity : TravleBaseActivity<ActivityMainBinding>() {
                 else -> {}
             }
         }
+
+        setUpBottomNav()
     }
 
-    override fun getBinding(): ActivityMainBinding {
-        return ActivityMainBinding.inflate(layoutInflater)
+    private fun setUpBottomNav() {
+        val navController = this.findNavController(R.id.fragment_view)
+        views.navBottom.setupWithNavController(navController)
     }
+
+
 
 }
