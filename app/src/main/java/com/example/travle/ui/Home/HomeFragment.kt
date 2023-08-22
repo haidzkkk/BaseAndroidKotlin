@@ -33,6 +33,8 @@ class HomeFragment @Inject constructor() : TravleBaseFragment<FragmentHomeBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as TravleApplication).travleComponent.inject(this)
 
+        // oke bat dau
+
         mViewModel.handleRetrunTest()
         mViewModel.handle(HomeViewAction.getTravleViewAction)
 
