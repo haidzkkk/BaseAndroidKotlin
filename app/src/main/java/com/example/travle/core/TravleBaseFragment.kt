@@ -27,7 +27,7 @@ abstract class TravleBaseFragment <VB: ViewBinding> : Fragment()
     private lateinit var screenComponent: TravleComponent
 
     private var _binding: VB? = null
-    protected val binding get() = _binding!!
+    protected val views: VB get() = _binding!!
 
     override fun onAttach(context: Context) {
         screenComponent = DaggerTravleComponent.factory().create(context)
@@ -35,9 +35,8 @@ abstract class TravleBaseFragment <VB: ViewBinding> : Fragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         _binding = getBinding(inflater, container)
-        return _binding!!.root
+        return views.root
     }
 
     override fun onDestroyView() {

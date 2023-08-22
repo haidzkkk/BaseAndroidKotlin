@@ -1,5 +1,9 @@
-<resources>
-    <string name="app_name">Travle</string>
-    <!-- TODO: Remove or change this placeholder text -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Trave</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="explore">explore</string>
+    <string name="wishlist">WishLists</string>
+    <string name="trips">Trips</string>
+    <string name="inbox">Inbox</string>
+    <string name="profile">Profile</string>
 </resources>

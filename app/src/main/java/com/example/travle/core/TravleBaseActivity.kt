@@ -3,6 +3,7 @@ package com.example.travle.core
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.PersistableBundle
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
@@ -19,27 +20,28 @@ abstract class TravleBaseActivity <VB : ViewBinding> : AppCompatActivity()
     , HasScreenInjector
 {
 
-    private lateinit var views: VB
+    protected lateinit var views: VB
 
     // scope trong pham vi này thôi
-    private val appComponent: TravleComponent by lazy {
-        DaggerTravleComponent.factory().create(this)
-    }
+    private lateinit var appComponent: TravleComponent
 
     private lateinit var fragmentFactory: FragmentFactory
     private lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-
-
+    @CallSuper
+    override fun onCreate(savedInstanceState: Bundle??) {
+        appComponent = DaggerTravleComponent.factory().create(this)
         fragmentFactory = appComponent.fragmentFactory()
         viewModelFactory = appComponent.viewModelFactory()
 
         supportFragmentManager.fragmentFactory = fragmentFactory  //giúp quản lý vòng đời của Fragment trong khi khôi phục trạng thái của activity và đảm bảo rằng việc tái tạo Fragment diễn ra đúng cách  ||||  Việc xác định FragmentFactory trong supportFragmentManager giúp đảm bảo rằng FragmentManager sẽ sử dụng FragmentFactory đã cung cấp để tái tạo các Fragment, đảm bảo rằng các tham số của Fragment như arguments hay dữ liệu trạng thái được giữ nguyên đúng cách.
 
+        super.onCreate(savedInstanceState)
         views = getBinding()
         setContentView(views.root)
+
+
+
     }
 
     abstract fun getBinding(): VB

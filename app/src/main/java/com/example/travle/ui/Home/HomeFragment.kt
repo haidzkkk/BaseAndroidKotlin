@@ -34,6 +34,7 @@ class HomeFragment @Inject constructor() : TravleBaseFragment<FragmentHomeBindin
         (requireActivity().application as TravleApplication).travleComponent.inject(this)
 
         // oke bat dau
+        views.text2.text = "hello home"
 
         mViewModel.handleRetrunTest()
         mViewModel.handle(HomeViewAction.getTravleViewAction)
