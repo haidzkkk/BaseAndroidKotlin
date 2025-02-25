@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.travle'
+    namespace 'com.app.langking'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.travle"
+        applicationId "com.app.langking"
         minSdk 24
         targetSdk 33
         versionCode 1

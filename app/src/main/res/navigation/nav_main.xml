@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.travle.ui.Home.HomeFragment"
+        android:name="com.app.langking.ui.Home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.travle.ui.profile.ProfileFragment"
+        android:name="com.app.langking.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
 
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_inbox"
-        android:name="com.example.travle.ui.inbox.InboxFragment"
+        android:name="com.app.langking.ui.inbox.InboxFragment"
         android:label="fragment_inbox"
         tools:layout="@layout/fragment_inbox" >
 
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_trips"
-        android:name="com.example.travle.ui.trips.TripFragment"
+        android:name="com.app.langking.ui.trips.TripFragment"
         android:label="fragment_trip"
         tools:layout="@layout/fragment_trip" >
 
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_wishlists"
-        android:name="com.example.travle.ui.wishlist.WishListFragment"
+        android:name="com.app.langking.ui.wishlist.WishListFragment"
         android:label="fragment_wish_list"
         tools:layout="@layout/fragment_wish_list" >
 

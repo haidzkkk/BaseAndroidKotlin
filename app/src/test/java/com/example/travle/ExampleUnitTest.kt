@@ -1,4 +1,4 @@
-package com.example.travle
+package com.app.langking
 
 import org.junit.Test
 
