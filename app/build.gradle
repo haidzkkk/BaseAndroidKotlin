@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.app.langking'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.app.langking"
@@ -47,6 +47,7 @@ kapt {
 dependencies {
 
 
+    implementation 'androidx.activity:activity:1.9.3'
     def daggerVersion = '2.35.1'
     def room_version = "2.5.1"
     def lifecycle_version = '2.2.0'
@@ -78,6 +79,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+    // coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+
     // rxjava rxandroid
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -97,5 +101,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     kapt "androidx.room:room-compiler:$room_version"
 
-
+    implementation 'com.github.jakob-grabner:Circle-Progress-View:1.4'
 }

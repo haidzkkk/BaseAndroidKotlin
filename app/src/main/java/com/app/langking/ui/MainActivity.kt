@@ -21,19 +21,17 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    val mViewModel : HomeViewModel by lazy{
-//        viewModelFactory
+    val viewModel : HomeViewModel by lazy{
         ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        injector().inject(this) // scope bé trong base
         (application as TravleApplication).travleComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(views.root)
 
-        mViewModel.observeViewEvents {
+        viewModel.observeViewEvents {
             when(it){
                 is HomeViewEvent.ReturnTestViewEvent ->  Log.e("TAG", "Test View event")
                 else -> {}

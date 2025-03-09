@@ -68,7 +68,6 @@ abstract class AppBaseFragment <VB: ViewBinding> : Fragment(), HasScreenInjector
             .disposeOnDestroyView()
     }
 
-    protected fun <L: AppViewLiveData> AppBaseViewModel<L, *, *>.observerLivedata() = liveData
 
 
     override fun injector(): TravleComponent {

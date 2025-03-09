@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/PADDING_SIZE_DEFAULT"
+        android:layout_marginHorizontal="@dimen/PADDING_SIZE_DEFAULT"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/ICON_SIZE_DEFAULT"
+            android:layout_height="@dimen/ICON_SIZE_DEFAULT"
+            android:layout_gravity="start"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/icBack"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/PADDING_SIZE_DEFAULT"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:text="Trở về"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/RADIUS_DEFAULT"
+        android:background="@color/background2">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background"
+            android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
+            app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iconList"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="@dimen/RADIUS_DEFAULT"/>
+
+                <TextView
+                    android:id="@+id/tvLessonName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+                    android:textSize="@dimen/FONT_SIZE_LARGE"
+                    android:textStyle="bold"
+                    android:text="Lesson 1"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icons8_timer"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+                android:text="Top phản xạ"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvTop"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nội dung bài học"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bám vào từng phần học bên bưới để bắt đầu học. \n* Hoàn thành các phần bắt buộc bạn mới có thể học tiếp bài mới"
+            android:textColor="@color/grey"
+            />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background"
+            android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+            app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/RADIUS_DEFAULT"
+                    android:src="@drawable/icons8_list_lesson"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+                    android:textStyle="bold"
+                    android:text="Bài học"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/RADIUS_DEFAULT"
+                    android:src="@drawable/icons8_forward_button"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>

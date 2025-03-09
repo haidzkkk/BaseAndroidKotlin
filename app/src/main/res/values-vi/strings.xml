@@ -1,9 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">LangKing</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="explore">Khám phá</string>
-    <string name="wishlist">Muốn đi</string>
-    <string name="trips">Chuyến đi</string>
-    <string name="inbox">Nhắn tin</string>
-    <string name="profile">Thông tin</string>
-</resources>

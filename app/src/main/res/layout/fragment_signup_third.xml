@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/FONT_SIZE_DEFAULT">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tilPassword"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/PADDING_SIZE_EXTRA_LARGE">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:src="@drawable/imoji_fun4"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:fontFamily="@font/poppins"
+            android:text="Hãy nhập mật khẩu để bạn đăng nhập"
+            android:layout_marginEnd="110dp"
+            android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_LARGE"
+            tools:ignore="SpUsage" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:endIconMode="password_toggle"
+        android:hint="Mật khẩu của bạn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:inputType="textPassword"
+            tools:ignore="SpUsage"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilPassword"
+        app:endIconMode="password_toggle"
+        android:hint="Hãy nhập lại mật khẩu">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:inputType="textPassword"
+            tools:ignore="SpUsage"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/PADDING_SIZE_LARGE"
+        android:text="Hoàn thành"
+        android:textColor="@color/white"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/primary"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_button"/>
+</RelativeLayout>

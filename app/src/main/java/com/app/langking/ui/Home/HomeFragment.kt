@@ -1,5 +1,6 @@
 package com.app.langking.ui.Home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.langking.ultis.Status
 import com.app.langking.TravleApplication
 import com.app.langking.core.AppBaseFragment
+import com.app.langking.data.local.DatabaseManager
+import com.app.langking.data.model.Category
 import com.app.langking.databinding.FragmentHomeBinding
+import com.app.langking.ui.Lean.LearnActivity
+import com.app.langking.ui.adapter.CategoryAdapter
+import com.app.langking.ui.auth.AuthActivity
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>() {
@@ -26,9 +32,6 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as TravleApplication).travleComponent.inject(this)
-
-        // oke bat dau
-        views.text2.text = "hello home"
 
         mViewModel.handleRetrunTest()
         mViewModel.handle(HomeViewAction.getTravleViewAction)
@@ -47,6 +50,29 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
                 Log.e("TAG", "test viewModel: ${it}", )
             }
         }
+
+        views.icUser.setOnClickListener{
+            requireActivity().startActivity(Intent(requireActivity(), AuthActivity::class.java))
+        }
+
+        val dbManager = DatabaseManager(requireContext())
+//        dbManager.insertSampleCategories()
+//        dbManager.insertSampleLesson()
+//        dbManager.insertSampleWords()
+//        dbManager.insertSampleUserProgress()
+
+        val categories: List<Category> = dbManager.getAllCategoriesWithLessonsAndWords();
+
+        Log.e("TAG", "onViewCreated: ${categories}")
+        Log.e("TAG", "onViewCreated: ${dbManager.getUserCategory()}")
+        Log.e("TAG", "onViewCreated: ${dbManager.getUserLesson()}")
+        Log.e("TAG", "onViewCreated: ${dbManager.getUserWord()}")
+        Log.e("TAG", "onViewCreated: ${dbManager.getUserProgress()}")
+
+        val adapter = CategoryAdapter(categories){ lesson ->
+            LearnActivity.start(requireContext(), lesson)
+        }
+        views.rcv.adapter = adapter
 
         super.onViewCreated(view, savedInstanceState)
     }

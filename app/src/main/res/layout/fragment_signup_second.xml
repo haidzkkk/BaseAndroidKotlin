@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/FONT_SIZE_DEFAULT">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tilUsername"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/PADDING_SIZE_EXTRA_LARGE">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:src="@drawable/imoji_fun2"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:fontFamily="@font/poppins"
+            android:text="Tên bạn muốn đăng nhập là gì?"
+            android:layout_marginEnd="110dp"
+            android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_LARGE"
+            tools:ignore="SpUsage" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:hint="Tên đăng nhập">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            tools:ignore="SpUsage" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/PADDING_SIZE_LARGE"
+        android:text="Tiếp tuc"
+        android:textColor="@color/white"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/primary"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_button"/>
+</RelativeLayout>

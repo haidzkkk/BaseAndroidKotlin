@@ -10,7 +10,7 @@ import kotlin.random.Random
 
 class HomeViewModel @Inject constructor(
     private val repo: HomeRepository
-    ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>() {
+    ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     init {
         test()
@@ -26,14 +26,14 @@ class HomeViewModel @Inject constructor(
         _viewEvents.post(HomeViewEvent.ReturnTestViewEvent)
     }
 
-    fun test() = _liveData.travTest.postValue("test viewModel: ${Random.nextInt()}")
+    fun test() = liveData.travTest.postValue("test viewModel: ${Random.nextInt()}")
 
     @SuppressLint("CheckResult")
     fun getTravle() {
-        _liveData.travlesLiveData.postValue(Resource.Loading(null))
+        liveData.travlesLiveData.postValue(Resource.Loading(null))
         repo.getTravle().observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {result ->  _liveData.travlesLiveData.postValue(Resource.Success(result))},
+                {result ->  liveData.travlesLiveData.postValue(Resource.Success(result))},
                 {error ->}
             )
     }

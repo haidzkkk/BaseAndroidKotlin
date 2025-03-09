@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.langking.ui.Home.HomeViewModel
 import com.app.langking.di.factory.TravleViewModelFactory
+import com.app.langking.ui.Lean.viewmodel.LearnViewModel
+import com.app.langking.ui.auth.AuthViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -17,10 +19,20 @@ interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    fun bindSearchViewModel(homeViewModel: HomeViewModel): ViewModel
+    fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
-    fun bindHomeViewModelFactory(factory: TravleViewModelFactory): ViewModelProvider.Factory
+    @IntoMap
+    @ViewModelKey(AuthViewModel::class)
+    fun bindAuthViewModel(authViewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LearnViewModel::class)
+    fun bindLearnViewModel(leanViewModel: LearnViewModel): ViewModel
+
+    @Binds
+    fun bindViewModelFactory(factory: TravleViewModelFactory): ViewModelProvider.Factory
 
 }
 

@@ -3,28 +3,13 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/baseline_search_24"
-        android:title="@string/explore"
+        android:icon="@drawable/icons8_home_64"
+        android:title="@string/home"
         />
 
     <item
-        android:id="@+id/nav_wishlists"
-        android:icon="@drawable/baseline_favorite_border_24"
-        android:title="@string/wishlist"/>
-
-    <item
-        android:id="@+id/nav_trips"
-        android:icon="@drawable/baseline_mode_of_travel_24"
-        android:title="@string/trips"/>
-
-    <item
         android:id="@+id/nav_inbox"
-        android:icon="@drawable/baseline_chat_bubble_outline_24"
-        android:title="@string/inbox"/>
-
-    <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/baseline_person_outline_24"
-        android:title="@string/profile"/>
+        android:icon="@drawable/icons8_chat_32"
+        android:title="@string/chat"/>
 
 </menu>
