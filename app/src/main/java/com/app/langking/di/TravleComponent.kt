@@ -8,6 +8,7 @@ import com.app.langking.di.modules.FragmentModule
 import com.app.langking.di.modules.NetworkModule
 import com.app.langking.di.modules.ViewModelModule
 import com.app.langking.ui.Home.HomeFragment
+import com.app.langking.ui.Lean.ExerciseFragment
 import com.app.langking.ui.Lean.LearnActivity
 import com.app.langking.ui.Lean.LessonWordFragment
 import com.app.langking.ui.Lean.OverviewFragment
@@ -46,6 +47,7 @@ interface TravleComponent {
     fun inject(signupSecondFragment: CongurrationsFragment)
     fun inject(overviewFragment: OverviewFragment)
     fun inject(lessonWordFragment: LessonWordFragment)
+    fun inject(exerciseFragment: ExerciseFragment)
 
 //    fun inject(fragment: HomeFragment)
 

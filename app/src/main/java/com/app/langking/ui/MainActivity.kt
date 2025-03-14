@@ -9,6 +9,7 @@ import com.app.langking.R
 import com.app.langking.TravleApplication
 import com.app.langking.core.AppBaseActivity
 import com.app.langking.databinding.ActivityMainBinding
+import com.app.langking.ui.Home.HomeViewAction
 import com.app.langking.ui.Home.HomeViewEvent
 import com.app.langking.ui.Home.HomeViewModel
 import javax.inject.Inject
@@ -39,6 +40,11 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         }
 
         setUpBottomNav()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.handle(HomeViewAction.updateViewAction)
     }
 
     private fun setUpBottomNav() {

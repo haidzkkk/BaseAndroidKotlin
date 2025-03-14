@@ -5,5 +5,6 @@ data class Lesson(
     val categoryId: Int,
     val name: String,
 
-    val words: List<Word> = arrayListOf(),
+    var words: List<Word>? = null,
+    var userProgress: UserProgress? = null,
 )

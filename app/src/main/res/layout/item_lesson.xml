@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/ivExpand"
+        android:id="@+id/icCompleted"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/icons8_true"
@@ -31,20 +31,26 @@
 
 
         <LinearLayout
+            android:id="@+id/lyMedal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/icon1"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/icons8_medal"
                 />
+
             <ImageView
+                android:id="@+id/icon2"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/icons8_medal"
                 />
+
             <ImageView
+                android:id="@+id/icon3"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/icons8_medal"
@@ -56,15 +62,15 @@
             android:id="@+id/tvProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bài tập: Đang thực hiện"
+            android:text="Bài tập:"
             android:textSize="14sp"
             android:textColor="#388E3C"/>
 
         <TextView
-            android:id="@+id/tvMemory"
+            android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thi ghi nhớ 7 giây: Chưa hoàn thành"
+            android:text="Luyện tập:"
             android:textSize="14sp"
             android:textColor="#F57C00"
             android:layout_marginBottom="8dp" />

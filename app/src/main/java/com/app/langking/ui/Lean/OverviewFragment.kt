@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.langking.R
@@ -14,6 +13,8 @@ import com.app.langking.core.AppBaseFragment
 import com.app.langking.databinding.FragmentOverviewBinding
 import com.app.langking.ui.Lean.viewmodel.LearnViewModel
 import com.app.langking.ui.adapter.TopAdapter
+import com.app.langking.ultis.finishActivityWithTransition
+import com.app.langking.ultis.navigateFragmentWithSlide
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 
@@ -36,14 +37,25 @@ class OverviewFragment @Inject constructor() : AppBaseFragment<FragmentOverviewB
         (requireActivity().application as TravleApplication).travleComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
-        views.lvBack.setOnClickListener{
-            requireActivity().finish()
-        }
+        init()
+        handleListenData()
+    }
+
+    private fun init() {
         val topAdapter = TopAdapter()
         views.rcvTop.adapter = topAdapter
         views.rcvTop.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         Glide.with(this).load(R.raw.icons8_list).into(views.iconList)
-        handleListenData()
+
+        views.lvBack.setOnClickListener{
+            requireActivity().finishActivityWithTransition()
+        }
+        views.cvLearn.setOnClickListener{
+            navigateFragmentWithSlide(R.id.SecondFragment)
+        }
+        views.cvTest.setOnClickListener{
+            navigateFragmentWithSlide(R.id.exerciseFragment)
+        }
     }
 
     private fun handleListenData(){

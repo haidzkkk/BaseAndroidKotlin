@@ -3,11 +3,13 @@ package com.app.langking.ui.auth
 import com.app.langking.core.AppBaseViewModel
 import com.app.langking.data.model.Account
 import com.app.langking.data.local.AccountDAO
+import com.app.langking.data.repository.UserRepository
 import com.app.langking.ultis.Resource
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
     private val accountRepo: AccountDAO,
+    private val userRepository: UserRepository,
 ) : AppBaseViewModel<AuthViewState, AuthViewAction, AuthViewEvent>(AuthViewState()) {
 
     override fun handle(action: AuthViewAction) {
@@ -42,6 +44,9 @@ class AuthViewModel @Inject constructor(
         val isSuccess = userId != -1L;
         if(isSuccess){
             liveData.registerResult.postValue(Resource.Success(true))
+
+            val currentAccount: Account? = accountRepo.getAccountById(userId.toInt())
+            if(currentAccount != null) userRepository.setCurrentUser(currentAccount)
             liveData.registerAccount = null
         }else{
             liveData.registerResult.postValue(Resource.Error(false, "Đăng ký thất bại"))
@@ -54,6 +59,7 @@ class AuthViewModel @Inject constructor(
             ?: accountRepo.getAccountByEmail(usernameOrEmail)
 
         if (user != null && password == user.password) {
+            userRepository.setCurrentUser(user)
             liveData.loginResult.postValue(Resource.Success(user))
         } else {
             liveData.loginResult.postValue(Resource.Error(null, "Sai thông tin đăng nhập"))

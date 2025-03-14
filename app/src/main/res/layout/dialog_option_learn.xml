@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#DDDDDD"
+            android:padding="@dimen/PADDING_SIZE_SMALL">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thiết lập trình tự phát"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/FONT_SIZE_LARGE"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FAFAFA"
+            android:padding="@dimen/PADDING_SIZE_SMALL">
+
+            <LinearLayout
+                android:id="@+id/lyEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phát câu tiếng Anh"
+                    android:layout_weight="1"
+                    tools:ignore="HardcodedText,InefficientWeight" />
+
+                <Switch
+                    android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+                    android:id="@+id/swEnglish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lyEnglishSlow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phát âm chậm tiếng Anh"
+                    android:layout_weight="1"
+                    tools:ignore="HardcodedText,InefficientWeight" />
+
+                <Switch
+                    android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+                    android:id="@+id/swEnglishSlow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyVietnamese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phát câu tiếng Việt"
+                    android:layout_weight="1"
+                    tools:ignore="HardcodedText,InefficientWeight" />
+
+                <Switch
+                    android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+                    android:id="@+id/swVietnamese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyDescEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phát câu giải thích tiếng Anh"
+                    android:layout_weight="1"
+                    tools:ignore="HardcodedText,InefficientWeight" />
+
+                <Switch
+                    android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+                    android:id="@+id/swDescEnglish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyDescVietnamese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phát câu giải thích tiếng Việt"
+                    android:layout_weight="1"
+                    tools:ignore="HardcodedText,InefficientWeight" />
+
+                <Switch
+                    android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+                    android:id="@+id/swDescVietnamese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

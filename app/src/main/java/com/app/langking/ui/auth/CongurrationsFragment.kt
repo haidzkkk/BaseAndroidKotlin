@@ -14,13 +14,14 @@ import com.app.langking.TravleApplication
 import com.app.langking.core.AppBaseFragment
 import com.app.langking.databinding.FragmentCongurrationsBinding
 import com.app.langking.ui.MainActivity
+import com.app.langking.ultis.startActivityWithTransition
 import javax.inject.Inject
 
 class CongurrationsFragment : AppBaseFragment<FragmentCongurrationsBinding>() {
 
     val handler = Handler(Looper.getMainLooper())
     var start = 0
-    var end = 10
+    var end = 3
     private val runnable = object : Runnable {
         var start = 1
         override fun run() {

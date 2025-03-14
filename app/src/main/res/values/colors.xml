@@ -11,10 +11,13 @@
     <color name="primary">#66B741</color>
     <color name="primaryVariant">#B5DCA5</color>
     <color name="background">#FFFFFFFF</color>
-    <color name="background2">#EDEDED</color>
+    <color name="background2">#F4F4F4</color>
+    <color name="background3">#DADADA</color>
+    <color name="primaryIcon">#362E23</color>
 
     <color name="blue">#2196F3</color>
     <color name="purple">#A100FF</color>
+    <color name="red">#F44336</color>
 
     <color name="secondary">#FFA000</color>
     <color name="secondaryVariant">#FFB300</color>

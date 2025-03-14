@@ -40,4 +40,29 @@ class LessonDao(context: Context) {
         db.close()
         return lessons
     }
+
+    fun getLessonById(id: Int): Lesson? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            "lessons",
+            arrayOf("id", "category_id", "name"), // Chỉ lấy các cột cần thiết
+            "id = ?",
+            arrayOf(id.toString()),
+            null, null, null,
+            "1" // Giới hạn kết quả về 1 bản ghi
+        )
+
+        val lesson = cursor.use {
+            if (it.moveToFirst()) {
+                Lesson(
+                    id = it.getInt(it.getColumnIndexOrThrow("id")),
+                    categoryId = it.getInt(it.getColumnIndexOrThrow("category_id")),
+                    name = it.getString(it.getColumnIndexOrThrow("name"))
+                )
+            } else null
+        }
+
+        return lesson
+    }
+
 }

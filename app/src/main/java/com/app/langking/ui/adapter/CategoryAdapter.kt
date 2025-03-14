@@ -1,5 +1,6 @@
 package com.app.langking.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,9 +12,17 @@ import com.app.langking.databinding.ItemCategoryBinding
 import kotlin.random.Random
 
 class CategoryAdapter(
-    private val category: List<Category>,
     private val onItemClick: (Lesson) -> Unit) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+
+    private var category: List<Category> = arrayListOf()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun populateData(category: List<Category>?) {
+        if(category == null) return;
+        this.category = category
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -28,14 +37,18 @@ class CategoryAdapter(
     inner class ViewHolder(private val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private var isExpanded: Boolean = false
-        private var process = Random.nextInt(0, 100).toFloat();
 
         fun bind(category: Category, position: Int) {
             if(position == 0) isExpanded = true
             with(binding as ItemCategoryBinding){
                 this.tvTitle.text = category.name
-                val adapter = LessonAdapter(category.lessons, onItemClick)
+                val adapter = LessonAdapter(category.lessons ?: arrayListOf(), onItemClick)
                 rcvLesson.adapter = adapter
+
+                val process = category.lessons
+                    ?.map { it.userProgress?.score ?: 0 }
+                    ?.average()?.toFloat() ?: 0f
+
                 processIndicator.setValue(process)
 
                 setupExpand()

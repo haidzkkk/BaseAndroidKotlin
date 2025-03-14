@@ -52,19 +52,26 @@ class DatabaseHelper @Inject constructor(context: Context) :
                 vietnamese TEXT NOT NULL,
                 pronunciation TEXT,
                 audio_url TEXT,
+                image_url TEXT,
+                description TEXT,
+                description_vietnamese TEXT,
                 FOREIGN KEY (lesson_id) REFERENCES lessons(id)
             );
         """
+
 
         private const val CREATE_TABLE_USER_PROGRESS = """
             CREATE TABLE user_progress (
                 user_id INTEGER NOT NULL,
                 lesson_id INTEGER NOT NULL,
                 progress INTEGER DEFAULT 0,
+                date_test TEXT DEFAULT '',
+                date_start TEXT DEFAULT '',
                 PRIMARY KEY (user_id, lesson_id),
                 FOREIGN KEY (user_id) REFERENCES ${AccountDAO.TABLE_NAME}(${AccountDAO.COLUMN_ID}),
                 FOREIGN KEY (lesson_id) REFERENCES lessons(id)
             );
         """
+
     }
 }

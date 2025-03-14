@@ -15,6 +15,7 @@ import com.app.langking.TravleApplication
 import com.app.langking.core.AppBaseFragment
 import com.app.langking.databinding.FragmentLoginBinding
 import com.app.langking.ultis.Status
+import com.app.langking.ultis.finishActivityWithTransition
 import com.app.langking.ultis.showLoadingDialog
 import javax.inject.Inject
 
@@ -51,7 +52,7 @@ class LoginFragment : AppBaseFragment<FragmentLoginBinding>() {
         }
 
         views.icBack.setOnClickListener{
-            requireActivity().finish()
+            requireActivity().finishActivityWithTransition()
         }
 
         views.btnSignup.setOnClickListener{

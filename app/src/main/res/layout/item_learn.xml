@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/PADDING_SIZE_SMALL">
+
+    <TextView
+        android:id="@+id/tvPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/PADDING_SIZE_EXTRA_SMALL"
+        android:text="1."/>
+
+    <LinearLayout
+        android:id="@+id/containerChild"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/lyHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_radius_top_background3"
+            >
+
+            <LinearLayout
+                android:id="@+id/lyVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_border_radius_1"
+                android:padding="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icVolume"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icons8_volume"/>
+
+
+                <ImageView
+                    android:id="@+id/icVolumeSlow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icons8_turtle"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvEnglish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
+                android:textColor="@color/black"
+                android:layout_toEndOf="@+id/lyVolume"
+                android:text="Big"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPronunciation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/big/"
+                android:textColor="@color/black"
+                android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
+                android:layout_toEndOf="@+id/lyVolume"
+                android:layout_below="@+id/tvEnglish"
+                />
+
+            <ImageView
+                android:id="@+id/iconShow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_toEndOf="@+id/tvEnglish"
+                android:src="@drawable/icons8_show"/>
+
+            <LinearLayout
+                android:layout_below="@+id/lyVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:layout_marginTop="@dimen/PADDING_SIZE_SMALL"
+                android:gravity="center_vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/icVolumeVietnamese"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icons8_volume"/>
+
+                <TextView
+                    android:id="@+id/tvVietnamese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lớn"
+                    android:textStyle="bold"
+                    android:textColor="@color/secondaryVariant"
+                    android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
+                    />
+
+                <ImageView
+                    android:id="@+id/iconVietnameseCopy"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                    android:src="@drawable/baseline_content_copy_24"/>
+
+                <ImageView
+                    android:id="@+id/iconVietnameseShow"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                    android:src="@drawable/icons8_show"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lySetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/background_border_radius_1"
+                android:padding="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icPlay"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/baseline_pause_arrow_24"/>
+
+
+                <ImageView
+                    android:id="@+id/isMore"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/baseline_more_horiz_24"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lyBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_radius_bottom_background">
+
+            <TextView
+                android:id="@+id/tvDescEnglish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="of more than average size or amount"
+                android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                />
+
+            <RelativeLayout
+                android:id="@+id/lyDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/PADDING_SIZE_SMALL"
+                android:background="@drawable/background_border_radius_border_secondary_1">
+
+                <TextView
+                    android:id="@+id/tvTitleVietnamese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bài giảng tiếng việt:"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                    />
+
+                <TextView
+                    android:id="@+id/tvDescVietnamese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tính từ big là to/lớn. Ví dụ nó quá to"
+                    android:layout_below="@+id/tvTitleVietnamese"
+                    android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                    />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/icExpand"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginVertical="@dimen/RADIUS_SMALL"
+                android:src="@drawable/icons8_up"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

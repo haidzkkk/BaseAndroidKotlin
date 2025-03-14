@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.app.langking.data.model.Word
-
 class WordDao(context: Context) {
     private val dbHelper = DatabaseHelper(context)
 
@@ -17,6 +16,9 @@ class WordDao(context: Context) {
             put("vietnamese", word.vietnamese)
             put("pronunciation", word.pronunciation)
             put("audio_url", word.audioUrl)
+            put("image_url", word.imageUrl)
+            put("description", word.description)
+            put("description_vietnamese", word.descriptionVietnamese)
         }
         val id = db.insert("words", null, values)
         db.close()
@@ -40,8 +42,11 @@ class WordDao(context: Context) {
             val vietnamese = cursor.getString(cursor.getColumnIndexOrThrow("vietnamese"))
             val pronunciation = cursor.getString(cursor.getColumnIndexOrThrow("pronunciation"))
             val audioUrl = cursor.getString(cursor.getColumnIndexOrThrow("audio_url"))
+            val imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("image_url"))
+            val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
+            val descriptionVietnamese = cursor.getString(cursor.getColumnIndexOrThrow("description_vietnamese"))
 
-            words.add(Word(id, lessonId, english, vietnamese, pronunciation, audioUrl))
+            words.add(Word(id, lessonId, english, vietnamese, pronunciation, audioUrl, imageUrl, description, descriptionVietnamese))
         }
         cursor.close()
         db.close()

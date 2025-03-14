@@ -1,15 +1,20 @@
 package com.app.langking.di.modules
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.app.langking.data.local.AccountDAO
 import com.app.langking.data.local.DatabaseHelper
 import com.app.langking.data.local.DatabaseManager
+import com.app.langking.data.local.LocalRepository
 import com.app.langking.data.local.UserProfileDAO
 import com.app.langking.data.network.ApiTravle
 import com.app.langking.data.network.RemoteDataSource
 import com.app.langking.data.repository.HomeRepository
+import com.app.langking.data.repository.UserRepository
+import com.app.langking.ultis.AppConstants
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 object NetworkModule {
@@ -47,4 +52,20 @@ object NetworkModule {
     fun providerDatabaseManager(
         context: Context
     ): DatabaseManager = DatabaseManager(context)
+
+    @Provides
+    fun providerLocalRepository(
+        context: Context
+    ): LocalRepository = LocalRepository(context.getSharedPreferences(AppConstants.prefsKey, Context.MODE_PRIVATE))
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(
+        context: Context
+    ): UserRepository {
+        return UserRepository(
+            context.getSharedPreferences(AppConstants.prefsKey, Context.MODE_PRIVATE),
+            AccountDAO(context)
+        )
+    }
 }

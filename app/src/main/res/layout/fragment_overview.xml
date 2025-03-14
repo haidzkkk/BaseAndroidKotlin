@@ -9,7 +9,7 @@
         android:id="@+id/lvBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/PADDING_SIZE_DEFAULT"
+        android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL"
         android:layout_marginHorizontal="@dimen/PADDING_SIZE_DEFAULT"
         android:gravity="center_vertical">
 
@@ -113,10 +113,11 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvLearn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/background"
-            android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+            android:layout_marginTop="@dimen/RADIUS_DEFAULT"
             app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
 
             <LinearLayout
@@ -136,6 +137,50 @@
                     android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
                     android:textStyle="bold"
                     android:text="Bài học"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/RADIUS_DEFAULT"
+                    android:src="@drawable/icons8_forward_button"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primaryVariant"
+            android:layout_marginTop="@dimen/RADIUS_DEFAULT"
+            app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/RADIUS_DEFAULT"
+                    android:src="@drawable/icons8_test"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+                    android:textStyle="bold"
+                    android:text="Làm bài tập"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/RADIUS_DEFAULT"
+                    android:text="  bắt buộc*"
+                    android:textColor="@color/red"
                     android:layout_weight="1"/>
 
                 <ImageView

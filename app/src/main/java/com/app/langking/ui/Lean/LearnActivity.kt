@@ -1,5 +1,6 @@
 package com.app.langking.ui.Lean
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,22 +22,25 @@ import com.app.langking.databinding.ActivityMainBinding
 import com.app.langking.ui.Home.HomeViewEvent
 import com.app.langking.ui.Home.HomeViewModel
 import com.app.langking.ui.Lean.viewmodel.LearnViewModel
+import com.app.langking.ui.MainActivity
+import com.app.langking.ui.auth.AuthActivity
+import com.app.langking.ultis.startActivityWithTransition
 import com.google.gson.Gson
 import javax.inject.Inject
 
 class LearnActivity : AppBaseActivity<ActivityLearnBinding>() {
 
     companion object{
-        fun start(context: Context, lesson: Lesson){
-            val intent = Intent(context, LearnActivity::class.java)
+        fun start(activity: Activity, lesson: Lesson){
+            val intent = Intent(activity, LearnActivity::class.java)
             intent.putExtra("lesson", Gson().toJson(lesson))
-            context.startActivity(intent)
+            activity.startActivityWithTransition(intent)
         }
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    val viewModel : LearnViewModel by lazy{
+    private val viewModel : LearnViewModel by lazy{
         ViewModelProvider(this, viewModelFactory)[LearnViewModel::class.java]
     }
 
@@ -58,8 +62,14 @@ class LearnActivity : AppBaseActivity<ActivityLearnBinding>() {
 //            }
         }
 
-
-        Log.e("TAG", "atv viewmodel: ${viewModel.hashCode()}", )
+        views.icHome.setOnClickListener {
+            finishAffinity()
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        views.icChat.setOnClickListener {
+//            finishAffinity()
+//            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     private fun handleData(){

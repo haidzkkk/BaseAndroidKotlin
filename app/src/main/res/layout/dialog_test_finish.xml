@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/background_border_radius_1">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LÀM LẠI NÀO!"
+        android:gravity="center"
+        android:textSize="@dimen/FONT_SIZE_EXTRA_LARGE"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:padding="@dimen/PADDING_SIZE_LARGE"
+        />
+
+    <LinearLayout
+        android:id="@+id/lyMedal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/PADDING_SIZE_DEFAULT"
+        >
+
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icons8_medal"
+            />
+
+        <ImageView
+            android:id="@+id/icon2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icons8_medal"
+            />
+
+        <ImageView
+            android:id="@+id/icon3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icons8_medal"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvProcess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số lần làm sai: "
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/tvProcessCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textSize="@dimen/FONT_SIZE_DEFAULT"
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            tools:ignore="SpUsage" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Làm lại nào! Bạn vẫn còn làm sai vài câu"
+        android:textSize="@dimen/FONT_SIZE_DEFAULT"
+        android:layout_gravity="center"
+        tools:ignore="SpUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginVertical="@dimen/PADDING_SIZE_DEFAULT">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnReTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background2"
+            app:cardCornerRadius="@dimen/RADIUS_DEFAULT"
+            >
+
+            <TextView
+                android:id="@+id/tvReTest"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="Làm lại"
+                android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:layout_marginHorizontal="@dimen/PADDING_SIZE_EXTRA_LARGE"
+                android:textColor="@color/primary"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            app:cardCornerRadius="@dimen/RADIUS_DEFAULT"
+            >
+
+            <LinearLayout
+                android:id="@+id/lyTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                >
+
+                <TextView
+                    android:id="@+id/tvTest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiếp tục"
+                    android:layout_marginHorizontal="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                    android:textColor="@color/white"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginHorizontal="@dimen/PADDING_SIZE_EXTRA_SMALL"/>
+
+
+                <ImageView
+                    android:id="@+id/icTest"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/baseline_arrow_right_24"
+                    />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>
