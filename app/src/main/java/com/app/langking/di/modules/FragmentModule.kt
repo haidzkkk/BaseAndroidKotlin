@@ -3,7 +3,7 @@ package com.app.langking.di.modules
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.app.langking.di.factory.TravleFragmentFactory
-import com.app.langking.ui.Home.HomeFragment
+import com.app.langking.feature.Home.HomeFragment
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

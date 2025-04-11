@@ -4,6 +4,17 @@
     package="com.app.langking">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
 
     <application
         android:name=".TravleApplication"
@@ -17,14 +28,14 @@
         android:theme="@style/Theme.Travle"
         tools:targetApi="31">
         <activity
-            android:name=".ui.Lean.LearnActivity"
+            android:name=".feature.Learn.LearnActivity"
             android:exported="false"
             android:theme="@style/Theme.Travle" />
         <activity
-            android:name=".ui.auth.AuthActivity"
+            android:name=".feature.auth.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".feature.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +43,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".feature.daily.DailyAlarmReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

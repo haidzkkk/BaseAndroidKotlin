@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="3dp">
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:maxWidth="250dp"
+        android:background="@drawable/background_border_radius_1"
+        android:backgroundTint="@color/background3"
+        android:textColor="@color/black"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="Xin chào bạn mình là hải"
+        tools:ignore="HardcodedText"
+        android:layout_below="@+id/tvTime"
+        android:layout_toEndOf="@+id/icAvatar"
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/icAvatar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/gemini_logo"
+        android:layout_below="@+id/tvTime"
+        android:layout_marginEnd="@dimen/PADDING_SIZE_EXTRA_SMALL"
+        app:shapeAppearanceOverlay="@style/roundedCorners"/>
+
+
+</RelativeLayout>

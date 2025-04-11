@@ -7,19 +7,21 @@ import com.app.langking.TravleApplication
 import com.app.langking.di.modules.FragmentModule
 import com.app.langking.di.modules.NetworkModule
 import com.app.langking.di.modules.ViewModelModule
-import com.app.langking.ui.Home.HomeFragment
-import com.app.langking.ui.Lean.ExerciseFragment
-import com.app.langking.ui.Lean.LearnActivity
-import com.app.langking.ui.Lean.LessonWordFragment
-import com.app.langking.ui.Lean.OverviewFragment
-import com.app.langking.ui.MainActivity
-import com.app.langking.ui.auth.AuthActivity
-import com.app.langking.ui.auth.CongurrationsFragment
-import com.app.langking.ui.auth.LoginFragment
-import com.app.langking.ui.auth.SignupFirstFragment
-import com.app.langking.ui.auth.SignupFragment
-import com.app.langking.ui.auth.SignupSecondFragment
-import com.app.langking.ui.auth.SignupThirdFragment
+import com.app.langking.feature.Home.HomeFragment
+import com.app.langking.feature.Learn.ExerciseFragment
+import com.app.langking.feature.Learn.LearnActivity
+import com.app.langking.feature.Learn.LessonWordFragment
+import com.app.langking.feature.Learn.OverviewFragment
+import com.app.langking.feature.MainActivity
+import com.app.langking.feature.auth.AuthActivity
+import com.app.langking.feature.auth.CongurrationsFragment
+import com.app.langking.feature.auth.LoginFragment
+import com.app.langking.feature.auth.SignupFirstFragment
+import com.app.langking.feature.auth.SignupFragment
+import com.app.langking.feature.auth.SignupSecondFragment
+import com.app.langking.feature.auth.SignupThirdFragment
+import com.app.langking.feature.inbox.InboxFragment
+import com.app.langking.feature.profile.ProfileFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -48,6 +50,8 @@ interface TravleComponent {
     fun inject(overviewFragment: OverviewFragment)
     fun inject(lessonWordFragment: LessonWordFragment)
     fun inject(exerciseFragment: ExerciseFragment)
+    fun inject(inboxFragment: InboxFragment)
+    fun inject(profileFragment: ProfileFragment)
 
 //    fun inject(fragment: HomeFragment)
 

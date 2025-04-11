@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.trips.TripFragment"
+    tools:context=".feature.trips.TripFragment"
     android:background="#7A7A7A">
 
     <!-- TODO: Update blank fragment layout -->

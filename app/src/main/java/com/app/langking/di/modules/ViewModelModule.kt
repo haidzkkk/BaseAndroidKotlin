@@ -2,15 +2,14 @@ package com.app.langking.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.app.langking.ui.Home.HomeViewModel
+import com.app.langking.feature.Home.HomeViewModel
 import com.app.langking.di.factory.TravleViewModelFactory
-import com.app.langking.ui.Lean.viewmodel.LearnViewModel
-import com.app.langking.ui.auth.AuthViewModel
+import com.app.langking.feature.Learn.viewmodel.LearnViewModel
+import com.app.langking.feature.auth.AuthViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 @Module

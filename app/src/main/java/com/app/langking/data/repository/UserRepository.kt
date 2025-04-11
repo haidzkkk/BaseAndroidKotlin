@@ -1,6 +1,7 @@
 package com.app.langking.data.repository
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.app.langking.data.local.AccountDAO
 import com.app.langking.data.model.Account
 import com.app.langking.ultis.AppConstants
@@ -19,12 +20,17 @@ class UserRepository @Inject constructor(
         sharedPreferences.edit().putInt(AppConstants.currentUserKey, user.id).apply()
     }
 
-    fun getCurrentUser(): Account? {
+    fun getCurrentUser(): Account {
         if(currentUser == null){
             val userId = sharedPreferences.getInt(AppConstants.currentUserKey, -1)
-            if(userId == -1) return null
-            currentUser = accountRepo.getAccountById(userId)
+            currentUser = if(userId != -1) (accountRepo.getAccountById(userId) ?: Account.fromDefault()) else Account.fromDefault()
         }
-        return currentUser
+        return currentUser ?: Account.fromDefault()
+    }
+
+    fun logout() {
+        currentUser = null
+        sharedPreferences.edit().remove(AppConstants.currentUserKey).apply()
+        getCurrentUser()
     }
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.app.langking.ui.Lean.OverviewFragment"
+        android:name="com.app.langking.feature.Learn.OverviewFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_overview">
 
@@ -17,10 +17,19 @@
         <action
             android:id="@+id/action_FirstFragment_to_exerciseFragment"
             app:destination="@id/exerciseFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment">
+
+            <argument
+                android:name="words"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.app.langking.ui.Lean.LessonWordFragment"
+        android:name="com.app.langking.feature.Learn.LessonWordFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_lesson">
 
@@ -30,14 +39,53 @@
         <action
             android:id="@+id/action_SecondFragment_to_exerciseFragment"
             app:destination="@id/exerciseFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment" >
+
+            <argument
+                android:name="words"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
-        android:name="com.app.langking.ui.Lean.ExerciseFragment"
+        android:name="com.app.langking.feature.Learn.ExerciseFragment"
         android:label="fragment_exercise"
         tools:layout="@layout/fragment_exercise" >
         <action
             android:id="@+id/action_exerciseFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_exerciseFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment" >
+
+            <argument
+                android:name="words"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/inboxFragment"
+        android:name="com.app.langking.feature.inbox.InboxFragment"
+        android:label="fragment_inbox"
+        tools:layout="@layout/fragment_inbox" >
+
+        <argument
+            android:name="words"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_inboxFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+        <action
+            android:id="@+id/action_inboxFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_inboxFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>

@@ -7,16 +7,10 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.app.langking.ui.Home.HomeFragment"
+        android:name="com.app.langking.feature.Home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 
-        <action
-            android:id="@+id/action_nav_home_to_nav_wishlists"
-            app:destination="@id/nav_wishlists" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_trips"
-            app:destination="@id/nav_trips" />
         <action
             android:id="@+id/action_nav_home_to_nav_inbox"
             app:destination="@id/nav_inbox" />
@@ -26,42 +20,28 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.app.langking.ui.profile.ProfileFragment"
+        android:name="com.app.langking.feature.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
 
         <action
             android:id="@+id/action_nav_profile_to_nav_home"
             app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_profile_to_nav_inbox"
+            app:destination="@id/nav_inbox" />
     </fragment>
     <fragment
         android:id="@+id/nav_inbox"
-        android:name="com.app.langking.ui.inbox.InboxFragment"
+        android:name="com.app.langking.feature.inbox.InboxFragment"
         android:label="fragment_inbox"
         tools:layout="@layout/fragment_inbox" >
 
         <action
             android:id="@+id/action_nav_inbox_to_nav_home"
             app:destination="@id/nav_home" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_trips"
-        android:name="com.app.langking.ui.trips.TripFragment"
-        android:label="fragment_trip"
-        tools:layout="@layout/fragment_trip" >
-
         <action
-            android:id="@+id/action_nav_trips_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_wishlists"
-        android:name="com.app.langking.ui.wishlist.WishListFragment"
-        android:label="fragment_wish_list"
-        tools:layout="@layout/fragment_wish_list" >
-
-        <action
-            android:id="@+id/action_nav_wishlists_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_inbox_to_nav_profile"
+            app:destination="@id/nav_profile" />
     </fragment>
 </navigation>

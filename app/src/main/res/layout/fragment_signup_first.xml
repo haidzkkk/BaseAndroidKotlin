@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/FONT_SIZE_DEFAULT"
-    tools:context=".ui.auth.SignupFirstFragment">
+    tools:context=".feature.auth.SignupFirstFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        style="@style/InputLayoutChat"
         android:hint="Tên của bạn">
 
         <com.google.android.material.textfield.TextInputEditText

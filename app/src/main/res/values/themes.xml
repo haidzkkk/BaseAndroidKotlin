@@ -46,4 +46,16 @@
         <item name="android:background">@drawable/background_border_radius_1</item>
     </style>
 
+    <style name="InputLayoutChat" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxCornerRadiusTopStart">24dp</item>
+        <item name="boxCornerRadiusTopEnd">24dp</item>
+        <item name="boxCornerRadiusBottomStart">24dp</item>
+        <item name="boxCornerRadiusBottomEnd">24dp</item>
+        <item name="boxBackgroundColor">@color/background</item>
+        <item name="boxStrokeColor">@color/primaryVariant</item>
+    </style>
+    <style name="roundedCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">3%</item>
+    </style>
 </resources>

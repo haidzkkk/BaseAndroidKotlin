@@ -37,4 +37,22 @@ object DateConverter {
             TimeUnit.MILLISECONDS.toDays(diff)
         }
     }
+
+    fun areDatesClose(dates: List<String>): Boolean {
+        if (dates.size < 2) return true
+
+        val dateTimes: List<Long> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val formatter = DateTimeFormatter.ofPattern(DATE_PATTERN)
+            dates.map { LocalDateTime.parse(it, formatter).atZone(java.time.ZoneId.systemDefault()).toEpochSecond() }
+        } else {
+            val formatter = SimpleDateFormat(DATE_PATTERN, Locale.getDefault())
+            dates.map { formatter.parse(it)!!.time / 1000 }
+        }.sorted()
+
+        for (i in 0 until dateTimes.size - 1) {
+            val durationMinutes = TimeUnit.SECONDS.toMinutes(dateTimes[i + 1] - dateTimes[i])
+            if (durationMinutes > 60) return false
+        }
+        return true
+    }
 }

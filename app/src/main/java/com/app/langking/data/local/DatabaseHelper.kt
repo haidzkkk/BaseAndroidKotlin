@@ -3,6 +3,7 @@ package com.app.langking.data.local
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.app.langking.data.model.Message
 import javax.inject.Inject
 
 class DatabaseHelper @Inject constructor(context: Context) :
@@ -15,17 +16,27 @@ class DatabaseHelper @Inject constructor(context: Context) :
         db.execSQL(CREATE_TABLE_LESSONS)
         db.execSQL(CREATE_TABLE_WORDS)
         db.execSQL(CREATE_TABLE_USER_PROGRESS)
+        db.execSQL(CREATE_TABLE_MESSAGE)
+        db.execSQL(CREATE_TABLE_CONVERSATIONS)
+        db.execSQL(CREATE_TABLE_CONVERSATION_MESSAGE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS ${AccountDAO.TABLE_NAME}")
         db.execSQL("DROP TABLE IF EXISTS ${UserProfileDAO.TABLE_NAME}")
+        db.execSQL("DROP TABLE IF EXISTS categories")
+        db.execSQL("DROP TABLE IF EXISTS lessons")
+        db.execSQL("DROP TABLE IF EXISTS words")
+        db.execSQL("DROP TABLE IF EXISTS user_progress")
+        db.execSQL("DROP TABLE IF EXISTS messages")
+        db.execSQL("DROP TABLE IF EXISTS conversations")
+        db.execSQL("DROP TABLE IF EXISTS conversation_messages")
         onCreate(db)
     }
 
     companion object {
         private const val DATABASE_NAME = "langking.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
 
         private const val CREATE_TABLE_CATEGORIES: String = """
             CREATE TABLE categories (
@@ -72,6 +83,36 @@ class DatabaseHelper @Inject constructor(context: Context) :
                 FOREIGN KEY (lesson_id) REFERENCES lessons(id)
             );
         """
+
+        private const val CREATE_TABLE_MESSAGE = """
+            CREATE TABLE messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                sender TEXT CHECK(sender IN ('${Message.SENDER_USER}', '${Message.SENDER_BOT}')) NOT NULL,
+                message TEXT NOT NULL,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+            );
+        """
+        private const val CREATE_TABLE_CONVERSATIONS= """
+            CREATE TABLE conversations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                topic TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+            );
+        """
+        private const val CREATE_TABLE_CONVERSATION_MESSAGE = """
+            CREATE TABLE conversation_messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                conversation_id INTEGER NOT NULL,
+                message_id INTEGER NOT NULL,
+                FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE,
+                FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE
+            );
+        """
+
 
     }
 }

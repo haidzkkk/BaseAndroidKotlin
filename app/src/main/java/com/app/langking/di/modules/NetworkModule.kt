@@ -1,17 +1,20 @@
 package com.app.langking.di.modules
 
 import android.content.Context
-import android.content.SharedPreferences
+import com.app.langking.BuildConfig
 import com.app.langking.data.local.AccountDAO
 import com.app.langking.data.local.DatabaseHelper
 import com.app.langking.data.local.DatabaseManager
 import com.app.langking.data.local.LocalRepository
 import com.app.langking.data.local.UserProfileDAO
 import com.app.langking.data.network.ApiTravle
+import com.app.langking.data.network.ChatRepository
 import com.app.langking.data.network.RemoteDataSource
 import com.app.langking.data.repository.HomeRepository
 import com.app.langking.data.repository.UserRepository
+import com.app.langking.feature.inbox.ChatViewModel
 import com.app.langking.ultis.AppConstants
+import com.google.ai.client.generativeai.GenerativeModel
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -59,6 +62,16 @@ object NetworkModule {
     ): LocalRepository = LocalRepository(context.getSharedPreferences(AppConstants.prefsKey, Context.MODE_PRIVATE))
 
     @Provides
+    fun ChatRepository(
+        context: Context
+    ): ChatRepository = ChatRepository(
+        GenerativeModel(
+            modelName = "gemini-1.5-pro-latest",
+            apiKey = BuildConfig.GEMINI_KEY
+        )
+    )
+
+    @Provides
     @Singleton
     fun provideUserRepository(
         context: Context
@@ -66,6 +79,20 @@ object NetworkModule {
         return UserRepository(
             context.getSharedPreferences(AppConstants.prefsKey, Context.MODE_PRIVATE),
             AccountDAO(context)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatViewModel(
+        repo: ChatRepository,
+        userRepository: UserRepository,
+        dbManager: DatabaseManager,
+    ): ChatViewModel {
+        return ChatViewModel(
+            repo = repo,
+            userRepository = userRepository,
+            dbManager = dbManager,
         )
     }
 }

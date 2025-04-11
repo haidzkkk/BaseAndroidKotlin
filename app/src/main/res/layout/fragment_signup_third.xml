@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:endIconMode="password_toggle"
+        style="@style/InputLayoutChat"
         android:hint="Mật khẩu của bạn">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -55,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tilPassword"
+        style="@style/InputLayoutChat"
         app:endIconMode="password_toggle"
         android:hint="Hãy nhập lại mật khẩu">
 

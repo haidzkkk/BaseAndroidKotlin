@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
-    tools:context=".ui.auth.LoginFragment">
+    tools:context=".feature.auth.LoginFragment">
 
     <ImageView
         android:id="@+id/icBack"
@@ -59,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
+        style="@style/InputLayoutChat"
         app:startIconDrawable="@drawable/icon_email">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -76,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/passwork"
+        style="@style/InputLayoutChat"
         app:startIconDrawable="@drawable/icon_lock"
         app:endIconMode="password_toggle">
 
@@ -155,7 +157,7 @@
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -165,8 +167,7 @@
         android:elevation="0dp"
         android:stateListAnimator="@null"
         android:textAllCaps="false"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/rounded_button"/>
+        android:backgroundTint="@color/white"/>
 
 
     <Space
