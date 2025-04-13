@@ -1,6 +1,7 @@
 package com.app.langking.feature.Learn
 
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -64,6 +65,7 @@ class OverviewFragment @Inject constructor() : AppBaseFragment<FragmentOverviewB
         viewModel.liveData.currentLesson.observe(viewLifecycleOwner){
             Log.e("TAG", "initViewmodel: ${it}", )
             views.tvLessonName.text = it?.name
+            views.tvDesc.text = viewModel.liveData.currentLesson.value?.content ?: ""
         }
     }
 }

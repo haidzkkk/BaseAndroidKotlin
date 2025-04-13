@@ -15,4 +15,7 @@ object AppConstants {
     val isVietnameseDesc: String = "isVietnameseDesc"
 
     val isDailyNotify: String = "isDailyNotify"
+
+    const val EXTRA_USER_LOGIN = "user_login"
+
 }

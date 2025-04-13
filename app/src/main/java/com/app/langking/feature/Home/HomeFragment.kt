@@ -12,27 +12,36 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.langking.R
 import com.app.langking.ultis.Status
 import com.app.langking.TravleApplication
+import com.app.langking.core.AppBaseDialog
 import com.app.langking.core.AppBaseFragment
 import com.app.langking.data.local.AccountDAO
 import com.app.langking.data.local.LessonDao
 import com.app.langking.data.local.UserProgressDao
 import com.app.langking.data.model.Account
+import com.app.langking.data.model.Category
 import com.app.langking.data.model.Lesson
+import com.app.langking.data.model.Question
 import com.app.langking.data.repository.UserRepository
+import com.app.langking.databinding.DialogLoadingBinding
+import com.app.langking.databinding.FragmentExerciseBinding
 import com.app.langking.databinding.FragmentHomeBinding
 import com.app.langking.feature.Learn.LearnActivity
 import com.app.langking.feature.adapter.CategoryAdapter
 import com.app.langking.feature.notification.AppNotificationManager
 import com.app.langking.ultis.AppConstants
 import com.app.langking.ultis.navigateFragmentWithSlide
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.LinkedList
+import java.util.Queue
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>() {

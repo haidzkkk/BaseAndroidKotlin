@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.app.langking.core.AppBaseFragment
 import com.app.langking.databinding.FragmentCongurrationsBinding
 import com.app.langking.feature.MainActivity
+import com.app.langking.ultis.AppConstants
 
 class CongurrationsFragment : AppBaseFragment<FragmentCongurrationsBinding>() {
 
@@ -49,7 +50,9 @@ class CongurrationsFragment : AppBaseFragment<FragmentCongurrationsBinding>() {
 
     private fun startToHomeActivity() {
         requireActivity().finishAffinity()
-        requireActivity().startActivity(Intent(requireContext(), MainActivity::class.java))
+        requireActivity().startActivity(Intent(requireContext(), MainActivity::class.java).apply {
+            putExtra(AppConstants.EXTRA_USER_LOGIN, true)
+        })
     }
 
 }

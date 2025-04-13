@@ -14,6 +14,7 @@ class LessonDao(context: Context) {
         val values = ContentValues().apply {
             put("category_id", lesson.categoryId)
             put("name", lesson.name)
+            put("content", lesson.content)
         }
         val id = db.insert("lessons", null, values)
         db.close()
@@ -34,7 +35,8 @@ class LessonDao(context: Context) {
         while (cursor.moveToNext()) {
             val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
             val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-            lessons.add(Lesson(id, categoryId, name))
+            val content = cursor.getString(cursor.getColumnIndexOrThrow("content"))
+            lessons.add(Lesson(id, categoryId, name, content))
         }
         cursor.close()
         db.close()
@@ -45,11 +47,11 @@ class LessonDao(context: Context) {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             "lessons",
-            arrayOf("id", "category_id", "name"), // Chỉ lấy các cột cần thiết
+            arrayOf("id", "category_id", "name", "content"),
             "id = ?",
             arrayOf(id.toString()),
             null, null, null,
-            "1" // Giới hạn kết quả về 1 bản ghi
+            "1"
         )
 
         val lesson = cursor.use {
@@ -57,7 +59,8 @@ class LessonDao(context: Context) {
                 Lesson(
                     id = it.getInt(it.getColumnIndexOrThrow("id")),
                     categoryId = it.getInt(it.getColumnIndexOrThrow("category_id")),
-                    name = it.getString(it.getColumnIndexOrThrow("name"))
+                    name = it.getString(it.getColumnIndexOrThrow("name")),
+                    content = it.getString(it.getColumnIndexOrThrow("content")),
                 )
             } else null
         }

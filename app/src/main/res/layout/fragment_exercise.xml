@@ -12,11 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:layout_marginHorizontal="@dimen/PADDING_SIZE_DEFAULT"
         >
 
         <ImageView
+            android:id="@+id/icBack"
             android:layout_width="@dimen/ICON_SIZE_DEFAULT"
             android:layout_height="@dimen/ICON_SIZE_DEFAULT"
             android:layout_gravity="start"
@@ -39,6 +40,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:gravity="center"
         >
 
         <ImageView
@@ -82,6 +84,7 @@
 
 
     <LinearLayout
+        android:id="@+id/lyHeart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
@@ -131,6 +134,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvGuess"
         android:layout_marginStart="@dimen/PADDING_SIZE_SMALL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -23,7 +23,9 @@ import com.app.langking.databinding.ActivityMainBinding
 import com.app.langking.feature.Home.HomeViewAction
 import com.app.langking.feature.Home.HomeViewEvent
 import com.app.langking.feature.Home.HomeViewModel
+import com.app.langking.feature.Home.UserNewbieDialogManager
 import com.app.langking.feature.Learn.LearnActivity
+import com.app.langking.ultis.AppConstants
 import com.app.langking.ultis.Status
 import com.app.langking.ultis.observeOnce
 import javax.inject.Inject
@@ -36,7 +38,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    val viewModel : HomeViewModel by lazy{
+    private val viewModel : HomeViewModel by lazy{
         ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
     }
 
@@ -78,9 +80,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
 
     private fun handleStateViewModel(){
-        val lessonId = intent?.extras?.getInt("lesson_id")
-        Log.e("TAG", "Intent: lessonId: $lessonId")
         viewModel.liveData.apply {
+            val lessonId = intent?.extras?.getInt("lesson_id")
             if(lessonId != null){
                 categories.observeOnce(this@MainActivity) {
                     when(it.status){
@@ -97,6 +98,20 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
                             if(lessonSearch != null){
                                 LearnActivity.start(this@MainActivity, lessonSearch!!)
                             }
+                        }
+                        else -> {}
+                    }
+                }
+            }
+
+            val userLogin = intent?.getBooleanExtra(AppConstants.EXTRA_USER_LOGIN, false)
+            Log.e("TAG", "userLogin: $userLogin")
+            if(userLogin == true){
+                categories.observeOnce(this@MainActivity) {
+                    when(it.status){
+                        Status.SUCCESS ->{
+                            val userNewbieDialogManager = UserNewbieDialogManager(this@MainActivity, viewModel, layoutInflater)
+                            userNewbieDialogManager.checkNewbie(it.data)
                         }
                         else -> {}
                     }

@@ -4,6 +4,7 @@ data class Lesson(
     val id: Int = 0,
     val categoryId: Int,
     val name: String,
+    val content: String = "",
 
     var words: List<Word>? = null,
     var userProgress: UserProgress? = null,

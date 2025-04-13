@@ -13,7 +13,7 @@ import android.view.WindowManager
 import androidx.viewbinding.ViewBinding
 import com.app.langking.R
 
-class AppBaseDialog<VB: ViewBinding>(
+open class AppBaseDialog<VB: ViewBinding>(
     private val context: Context,                               // context
     val binding: VB,                                            // binding
     private val isBorderRadius: Boolean,                        // bo góc

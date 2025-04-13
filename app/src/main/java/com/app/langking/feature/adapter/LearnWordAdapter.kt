@@ -148,6 +148,13 @@ class LearnWordAdapter(
         }
 
         private fun handleExpandDesc(binding: ItemLearnBinding){
+            if(word.descriptionVietnamese == null || word.descriptionVietnamese!!.isEmpty()){
+                binding.lyDesc.isVisible = false
+                binding.icExpand.isVisible = false
+                return
+            }
+
+            binding.icExpand.isVisible = true
             binding.lyDesc.isVisible = settingItem.isExpanded
             binding.icExpand.setImageResource(if (settingItem.isExpanded) R.drawable.icons8_up else R.drawable.icons8_down)
         }

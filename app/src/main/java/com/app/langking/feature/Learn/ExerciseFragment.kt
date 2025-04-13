@@ -174,6 +174,7 @@ class ExerciseFragment @Inject constructor() : AppBaseFragment<FragmentExerciseB
         binding.tvPosition.isVisible = false
         binding.icExpand.isVisible = false
         binding.iconShow.isVisible = false
+        binding.lyDesc.isVisible = false
         binding.iconVietnameseShow.isVisible = false
         binding.iconVietnameseCopy.isVisible = false
         binding.tvEnglish.text = word?.english
@@ -210,7 +211,6 @@ class ExerciseFragment @Inject constructor() : AppBaseFragment<FragmentExerciseB
             textToSpeech.stop()
             handleNextQuestion()
         }
-
     }
 
     private fun handleNextQuestion() {

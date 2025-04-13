@@ -51,6 +51,7 @@ class DatabaseHelper @Inject constructor(context: Context) :
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 category_id INTEGER NOT NULL,
                 name TEXT NOT NULL,
+                content TEXT NOT NULL,
                 FOREIGN KEY (category_id) REFERENCES categories(id)
             );
         """

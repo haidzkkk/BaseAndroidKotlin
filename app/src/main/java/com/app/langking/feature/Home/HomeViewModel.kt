@@ -86,4 +86,15 @@ class HomeViewModel @Inject constructor(
         }
         return myMap
     }
+
+    fun initProcessWithCategoryLesson(categories: List<Category>){
+        for (index in categories.indices) {
+            val category = categories[index]
+            val listLessonWithoutProcess = category.getLessonWithoutProcess() ?: arrayListOf()
+            if(listLessonWithoutProcess.isNotEmpty()){
+                createUserProcessForLesson(listLessonWithoutProcess)
+            }
+        }
+        getCategory()
+    }
 }
