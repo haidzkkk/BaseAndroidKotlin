@@ -8,16 +8,6 @@
         />
 
     <item
-        android:id="@+id/nav_wishlists"
-        android:icon="@drawable/baseline_favorite_border_24"
-        android:title="@string/wishlist"/>
-
-    <item
-        android:id="@+id/nav_trips"
-        android:icon="@drawable/baseline_mode_of_travel_24"
-        android:title="@string/trips"/>
-
-    <item
         android:id="@+id/nav_inbox"
         android:icon="@drawable/baseline_chat_bubble_outline_24"
         android:title="@string/inbox"/>
