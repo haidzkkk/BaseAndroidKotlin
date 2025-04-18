@@ -1,20 +1,25 @@
 package com.app.motel.feature.Home
 
-import android.R
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.app.motel.AppApplication
 import com.app.motel.core.AppBaseFragment
-import com.app.motel.data.model.Status
 import com.app.motel.databinding.FragmentHomeBinding
+import com.app.motel.ui.adapter.ViewPagerAdapter
+import com.app.motel.ui.custom.CustomTabBar
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>() {
+
+    val fragments = arrayListOf(
+        ManagementBoardingHouseFragment(),
+        GeneralBoardingHouseFragment(),
+    )
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater, container, false)
@@ -29,35 +34,37 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
-        mViewModel.sendEventTest()
-        mViewModel.handle(HomeViewAction.getMotelViewAction)
+//        mViewModel.handle(HomeViewAction.GetMotelViewAction)
+//        mViewModel.handle(HomeViewAction.GetBoardingViewAction)
 
-        mViewModel.liveData.apply {
-            this.motelsLiveData.observe(requireActivity()) {
-                when(it.status){
-                    Status.SUCCESS ->{
-                        Log.e("TAG", "frg liveData: ${it.data}", )
+        setupUI()
 
-                        val adapter = ArrayAdapter(
-                            requireContext(),
-                            R.layout.simple_list_item_1,
-                            it.data?.map { item -> item.name } ?: arrayListOf()
-                        )
-
-                        views.listView.adapter = adapter
-                        adapter.notifyDataSetChanged()
-
-                    }
-                    else -> {}
-                }
-            }
-
-            testString.observe(requireActivity()){
-                Log.e("TAG", "test viewModel: ${it}", )
-            }
-        }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupUI() {
+        views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
+            override fun onTabSelected(position: Int) {
+                views.viewPager.currentItem = position
+            }
+        })
+
+        val adapter = ViewPagerAdapter(
+            fragments,
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
+
+        views.viewPager.adapter = adapter
+        views.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            @SuppressLint("SetTextI18n")
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                views.tabBar.onTabSelected(position)
+                views.viewPager.currentItem = position
+            }
+        })
     }
 
 }

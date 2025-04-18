@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.feature.Home.HomeViewModel
 import com.app.motel.di.factory.AppViewModelFactory
+import com.app.motel.feature.BoardingHouse.viewmodel.BoardingHouseViewModel
+import com.app.motel.feature.CreateContract.viewmodel.CreateContractViewModel
+import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -19,7 +22,22 @@ interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    fun bindSearchViewModel(homeViewModel: HomeViewModel): ViewModel
+    fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AuthViewModel::class)
+    fun bindAuthViewModel(authViewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateContractViewModel::class)
+    fun bindCreateContractViewModel(authViewModel: CreateContractViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BoardingHouseViewModel::class)
+    fun bindBoardingHouseViewModel(boardingHouseViewModel: BoardingHouseViewModel): ViewModel
 
 }
 

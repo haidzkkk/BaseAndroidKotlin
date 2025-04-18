@@ -11,11 +11,14 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
+            android:id="@+id/action_nav_home_to_newsFragment"
+            app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_notifyFragment"
+            app:destination="@id/notifyFragment" />
+        <action
             android:id="@+id/action_nav_home_to_nav_profile"
             app:destination="@id/nav_profile" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_inbox"
-            app:destination="@id/nav_inbox" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
@@ -23,22 +26,43 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_nav_profile_to_nav_inbox"
-            app:destination="@id/nav_inbox" />
-        <action
             android:id="@+id/action_nav_profile_to_nav_home"
             app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_profile_to_newsFragment"
+            app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_nav_profile_to_notifyFragment"
+            app:destination="@id/notifyFragment" />
     </fragment>
     <fragment
-        android:id="@+id/nav_inbox"
-        android:name="com.app.motel.feature.inbox.InboxFragment"
-        android:label="fragment_inbox"
-        tools:layout="@layout/fragment_inbox" >
+        android:id="@+id/newsFragment"
+        android:name="com.app.motel.feature.news.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" >
         <action
-            android:id="@+id/action_nav_inbox_to_nav_profile"
-            app:destination="@id/nav_profile" />
-        <action
-            android:id="@+id/action_nav_inbox_to_nav_home"
+            android:id="@+id/action_newsFragment_to_nav_home"
             app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_newsFragment_to_notifyFragment"
+            app:destination="@id/notifyFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/notifyFragment"
+        android:name="com.app.motel.feature.notify.NotifyFragment"
+        android:label="fragment_notify"
+        tools:layout="@layout/fragment_notify" >
+        <action
+            android:id="@+id/action_notifyFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_notifyFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_notifyFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
     </fragment>
 </navigation>

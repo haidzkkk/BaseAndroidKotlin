@@ -12,14 +12,14 @@
     <dimen name="RADIUS_LARGE">15dp</dimen>
     <dimen name="RADIUS_EXTRA_LARGE">20dp</dimen>
 
-    <dimen name="FONT_SIZE_EXTRA_SMALL">8dp</dimen>
-    <dimen name="FONT_SIZE_SMALL">10dp</dimen>
-    <dimen name="FONT_SIZE_DEFAULT">13dp</dimen>
-    <dimen name="FONT_SIZE_LARGE">16dp</dimen>
-    <dimen name="FONT_SIZE_EXTRA_LARGE">20dp</dimen>
-    <dimen name="FONT_SIZE_OVER_LARGE">22dp</dimen>
-    <dimen name="FONT_SIZE_EXTRA_OVER_LARGE">24dp</dimen>
-    <dimen name="FONT_SIZE_OVER_OVER_LARGE">28.dp</dimen>
+    <dimen name="TEXT_SIZE_EXTRA_SMALL">8sp</dimen>
+    <dimen name="TEXT_SIZE_SMALL">10sp</dimen>
+    <dimen name="TEXT_SIZE_DEFAULT">13sp</dimen>
+    <dimen name="TEXT_SIZE_LARGE">16sp</dimen>
+    <dimen name="TEXT_SIZE_EXTRA_LARGE">20sp</dimen>
+    <dimen name="TEXT_SIZE_OVER_LARGE">22sp</dimen>
+    <dimen name="TEXT_SIZE_EXTRA_OVER_LARGE">24sp</dimen>
+    <dimen name="TEXT_SIZE_OVER_OVER_LARGE">28sp</dimen>
 
     <dimen name="ICON_SIZE_EXTRA_SMALL">10dp</dimen>
     <dimen name="ICON_SIZE_SMALL">15dp</dimen>

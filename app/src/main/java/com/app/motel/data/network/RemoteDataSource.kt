@@ -2,9 +2,8 @@ package com.app.motel.data.network
 
 import android.content.Context
 import android.util.Log
-import com.app.motel.ultis.AppConstants
-import com.app.motel.ultis.NetworkUtil
-import okhttp3.Headers
+import com.app.motel.common.AppConstants
+import com.app.motel.common.ultis.NetworkUtil
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request

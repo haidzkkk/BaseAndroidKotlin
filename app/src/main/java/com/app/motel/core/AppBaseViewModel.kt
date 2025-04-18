@@ -1,15 +1,12 @@
 package com.app.motel.core
 
 import androidx.lifecycle.ViewModel
-import com.app.motel.feature.Home.HomeViewLiveData
-import com.app.motel.ultis.DataSource
-import com.app.motel.ultis.PublishDataSource
+import com.app.motel.common.DataSource
+import com.app.motel.common.PublishDataSource
 
-abstract class AppBaseViewModel <S : AppViewLiveData, VA : AppViewActions, VE : AppViewEvent>
-    : ViewModel() {
-
-    protected val _liveData = HomeViewLiveData()
-    val liveData: HomeViewLiveData = _liveData
+abstract class AppBaseViewModel <S : AppViewLiveData, VA : AppViewActions, VE : AppViewEvent>(
+    val liveData: S
+) : ViewModel() {
 
     // Used to post transient events to the View
     protected val _viewEvents = PublishDataSource<VE>()

@@ -1,23 +1,26 @@
 package com.app.motel.feature
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.app.motel.R
 import com.app.motel.AppApplication
 import com.app.motel.core.AppBaseActivity
-import com.app.motel.core.AppBaseBottomSheet
-import com.app.motel.core.AppBaseDialog
 import com.app.motel.databinding.ActivityMainBinding
 import com.app.motel.feature.Home.HomeViewEvent
 import com.app.motel.feature.Home.HomeViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
-import java.util.LinkedList
-import java.util.Queue
+import com.app.motel.common.ultis.navigateFragment
+import com.app.motel.common.ultis.startActivityWithTransition
+import com.app.motel.data.model.Role
+import com.app.motel.feature.BoardingHouse.BoardingHouseActivity
+import com.app.motel.feature.auth.AuthActivity
 import javax.inject.Inject
 
 class MainActivity : AppBaseActivity<ActivityMainBinding>() {
@@ -32,7 +35,6 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as AppApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -44,8 +46,10 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
                 else -> {}
             }
         }
-
         setUpBottomNav()
+        setupToolBar()
+        init()
+        handleObserverData()
     }
 
     private fun setUpBottomNav() {
@@ -53,6 +57,37 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         views.navBottom.setupWithNavController(navController)
     }
 
+    private fun setupToolBar(){
+        (views.toolbar.context as AppCompatActivity).setSupportActionBar(views.toolbar)
+        views.toolbar.setNavigationIcon(R.drawable.baseline_home_24)
+        views.toolbar.navigationIcon?.setTint(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.setTitleTextColor(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.setSubtitleTextColor(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.overflowIcon?.setTint(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.setTitleTextAppearance(baseContext, R.style.ToolbarTitleStyle)
+        views.toolbar.isTitleCentered = true
+        views.toolbar.setNavigationOnClickListener {
+            navigateFragment(R.id.fragment_view, R.id.nav_home,)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_action_toolbar, menu)
+        val icon = menu?.findItem(R.id.action_menu)?.icon
+        icon?.mutate()?.setTint(ContextCompat.getColor(baseContext, R.color.white))
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_menu -> {
+                // handle search click
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
 
     private fun showBottomSheet(isCorrect: Boolean) {
@@ -77,4 +112,29 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 //
 //        }
     }
+
+    private fun init() {
+        mViewModel.profileController.getCurrentUser()
+    }
+
+    private fun handleObserverData() {
+        mViewModel.profileController.state.currentUser.observe(this){
+            Log.e("MainActivity", "currentUser: ${it.data?.role}")
+            if(it.isSuccess() && it.data?.role == Role.admin){
+                mViewModel.getBoardingByUserId()
+            }else if(it.isError()){
+                mViewModel.logout()
+                finishAffinity()
+                startActivity(Intent(this, AuthActivity::class.java))
+            }
+        }
+
+        mViewModel.liveData.boardingHouse.observe(this){
+            if(it.isSuccess() && it.data.isNullOrEmpty()){
+                startActivityWithTransition(Intent(this, BoardingHouseActivity::class.java))
+                finishAffinity()
+            }
+        }
+    }
+
 }

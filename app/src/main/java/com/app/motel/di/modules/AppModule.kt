@@ -1,13 +1,16 @@
 package com.app.motel.di.modules
 
 import android.content.Context
-import androidx.room.Room
 import com.app.motel.data.local.AppDatabase
-import com.app.motel.data.local.RoomDAO
 import com.app.motel.data.network.ApiMock
 import com.app.motel.data.network.RemoteDataSource
+import com.app.motel.data.repository.AuthRepository
 import com.app.motel.data.repository.HomeRepository
-import com.app.motel.ultis.AppConstants
+import com.app.motel.common.AppConstants
+import com.app.motel.data.repository.BoardingHouseRepository
+import com.app.motel.data.repository.CreateContractRepository
+import com.app.motel.data.repository.ProfileRepository
+import com.app.motel.feature.profile.ProfileController
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -19,11 +22,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providerAppDatabase(context: Context): AppDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        AppDatabase::class.java,
-        AppConstants.DATABASE_NAME
-    ).build()
+    fun providerAppDatabase(context: Context): AppDatabase = AppDatabase.getInstance(context)
 
     @Provides
     fun providerApiMotel(
@@ -32,14 +31,57 @@ object AppModule {
     ): ApiMock = remoteDataSource.buildApi(ApiMock::class.java, context, AppConstants.MOCK_BASE_URL)
 
     @Provides
-    fun provideRoomDAO(db: AppDatabase): RoomDAO = db.roomDao()
-
-    @Provides
     fun providerHomeRepository(
         api: ApiMock,
-        roomDAO: RoomDAO,
+        db: AppDatabase,
     ): HomeRepository = HomeRepository(
         api = api,
-        roomDAO = roomDAO
+        roomDAO = db.roomDao(),
+        boardingHouseDAO = db.boardingHouseDao(),
     )
+
+    @Provides
+    fun providerAuthRepository(
+        api: ApiMock,
+        db: AppDatabase,
+    ): AuthRepository = AuthRepository(
+        api = api,
+        userDAO = db.userDao(),
+        tenantDAO = db.tenantDao(),
+    )
+
+    @Provides
+    fun providerBoardingHouseRepository(
+        db: AppDatabase,
+    ): BoardingHouseRepository = BoardingHouseRepository(
+        boardingHouseDAO = db.boardingHouseDao(),
+        roomDAO = db.roomDao(),
+    )
+
+    @Provides
+    fun providerProfileRepository(
+        context: Context,
+        db: AppDatabase,
+    ): ProfileRepository = ProfileRepository(
+        prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE),
+        userDAO = db.userDao(),
+        tenantDAO = db.tenantDao(),
+    )
+
+    @Provides
+    fun providerCreateContractRepository(
+        db: AppDatabase,
+    ): CreateContractRepository = CreateContractRepository(
+        roomDAO = db.roomDao(),
+    )
+
+    @Provides
+    @Singleton
+    fun provideProfileController(
+        repository: ProfileRepository
+    ): ProfileController {
+        return ProfileController(
+            repo = repository,
+        )
+    }
 }

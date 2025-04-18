@@ -17,7 +17,7 @@
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/FONT_SIZE_LARGE"
+        android:textSize="@dimen/TEXT_SIZE_LARGE"
         android:fontFamily="@font/poppins"
         tools:ignore="SpUsage" />
 

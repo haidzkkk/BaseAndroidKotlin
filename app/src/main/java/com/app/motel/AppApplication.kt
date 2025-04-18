@@ -3,8 +3,13 @@ package com.app.motel
 import android.app.Application
 import com.app.motel.di.DaggerAppComponent
 import com.app.motel.di.AppComponent
+import com.app.motel.feature.profile.ProfileController
+import javax.inject.Inject
 
 class AppApplication : Application() {
+
+    @Inject
+    lateinit var profileViewModel: ProfileController
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.factory().create(applicationContext)
@@ -13,5 +18,10 @@ class AppApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appComponent.inject(this)
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        profileViewModel.clearCoroutine()
     }
 }
