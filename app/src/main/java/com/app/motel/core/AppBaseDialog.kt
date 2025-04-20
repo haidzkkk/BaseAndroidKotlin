@@ -87,7 +87,7 @@ open class AppBaseDialog<VB: ViewBinding>(
 
     class Builder<VB: ViewBinding>(private val context: Context, val binding: VB) : IBuilder<VB>{
         // mặc định nó là như này
-        override var isBorderRadius: Boolean = true
+        override var isBorderRadius: Boolean = false
         override var isWidthMatchParent: Boolean = true
         override var isHeightMatchParent: Boolean = false
         override var isTransparent: Boolean = true

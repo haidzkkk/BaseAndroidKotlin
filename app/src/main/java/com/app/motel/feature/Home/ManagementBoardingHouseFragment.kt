@@ -12,6 +12,7 @@ import com.app.motel.common.ultis.startActivityWithSlide
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.databinding.FragmentManagementBoardingHouseBinding
 import com.app.motel.feature.CreateContract.CreateContractActivity
+import com.app.motel.feature.Service.ServiceActivity
 import javax.inject.Inject
 
 class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<FragmentManagementBoardingHouseBinding>() {
@@ -43,7 +44,7 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyService.img.setImageResource(R.drawable.bed)
         views.lyService.title.text = "Dịch vụ"
         views.lyService.root.setOnClickListener{
-
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), ServiceActivity::class.java))
         }
 
         views.lyHandleContract.img.setImageResource(R.drawable.handle_contract)

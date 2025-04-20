@@ -16,6 +16,9 @@ import com.app.motel.feature.Home.GeneralBoardingHouseFragment
 import com.app.motel.feature.Home.HomeFragment
 import com.app.motel.feature.Home.ManagementBoardingHouseFragment
 import com.app.motel.feature.MainActivity
+import com.app.motel.feature.Service.ServiceActivity
+import com.app.motel.feature.Service.ServiceFormFragment
+import com.app.motel.feature.Service.ServiceListFragment
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.auth.LoginFragment
 import com.app.motel.feature.auth.RegisterFragment
@@ -39,6 +42,7 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(authActivity: AuthActivity)
     fun inject(createContractActivity: CreateContractActivity)
+    fun inject(serviceActivity: ServiceActivity)
 
     fun inject(homeFragment: HomeFragment)
     fun inject(newsFragment: NewsFragment)
@@ -52,6 +56,8 @@ interface AppComponent {
     fun inject(createBoardingHouseFragment: CreateBoardingHouseFragment)
     fun inject(createContractListFragment: CreateContractListFragment)
     fun inject(createContractFormFragment: CreateContractFormFragment)
+    fun inject(serviceListFragment: ServiceListFragment)
+    fun inject(serviceFormFragment: ServiceFormFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

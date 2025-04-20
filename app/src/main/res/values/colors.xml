@@ -12,6 +12,7 @@
 
     <color name="primary">#673AB7</color>
     <color name="primaryVariant">#8953EB</color>
+    <color name="primaryVariant2">#DCCCFF</color>
 
     <color name="secondary">#FFA000</color>
     <color name="secondaryVariant">#FFB300</color>

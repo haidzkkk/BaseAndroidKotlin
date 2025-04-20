@@ -9,7 +9,7 @@ data class Room(
     val maxOccupants: Int? = null,
     val area: Double? = null,
     val rentalPrice: String = "",
-    val services: String? = null,
+    var services: String? = null,
     val status: String? = null,
     val areaId: String
     ) {

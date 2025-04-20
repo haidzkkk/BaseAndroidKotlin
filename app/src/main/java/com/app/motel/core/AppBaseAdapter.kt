@@ -34,7 +34,7 @@ abstract class AppBaseAdapter<T, VB : ViewBinding>(
 
     // listener
     abstract class AppListener<T> {
-        abstract fun onClickItem(item: T, action: ItemAction = ItemAction.ACTION_CLICK)
+        abstract fun onClickItem(item: T, action: ItemAction = ItemAction.CLICK)
     }
 
 //    interface AppListener<T> {
@@ -42,13 +42,13 @@ abstract class AppBaseAdapter<T, VB : ViewBinding>(
 //    }
 
     enum class ItemAction {
-        ACTION_CLICK,
-        ACTION_LONG_CLICK,
-        ACTION_EDIT,
-        ACTION_DELETE,
-        ACTION_SHARE,
-        ACTION_DOWNLOAD,
-        ACTION_CUSTOM
+        CLICK,
+        LONG_CLICK,
+        EDIT,
+        DELETE,
+        SHARE,
+        DOWNLOAD,
+        CUSTOM
     }
 
 }

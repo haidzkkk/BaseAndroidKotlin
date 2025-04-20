@@ -10,6 +10,7 @@ import com.app.motel.common.AppConstants
 import com.app.motel.data.repository.BoardingHouseRepository
 import com.app.motel.data.repository.CreateContractRepository
 import com.app.motel.data.repository.ProfileRepository
+import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.feature.profile.ProfileController
 import dagger.Module
 import dagger.Provides
@@ -77,6 +78,15 @@ object AppModule {
         roomDAO = db.roomDao(),
         contractDAO = db.contractDao(),
         tenantDAO = db.tenantDao(),
+    )
+
+    @Provides
+    fun providerServiceRepository(
+        db: AppDatabase,
+    ): ServiceRepository = ServiceRepository(
+        serviceDAO = db.serviceDao(),
+        boardingHouseDAO = db.boardingHouseDao(),
+        roomDAO = db.roomDao(),
     )
 
     @Provides

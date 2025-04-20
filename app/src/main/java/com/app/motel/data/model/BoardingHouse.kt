@@ -13,6 +13,7 @@ data class BoardingHouse(
     val description: String? = null
 ){
     var rooms: List<Room>? = null
+    var service: List<Service>? = null
 
     fun toEntity(): KhuTroEntity {
         return KhuTroEntity(

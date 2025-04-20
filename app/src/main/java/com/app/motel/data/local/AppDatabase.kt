@@ -14,6 +14,7 @@ import com.app.motel.data.entity.PhongEntity
 import com.app.motel.common.AppConstants
 import com.app.motel.common.service.DateRoomConverters
 import com.app.motel.common.service.StringListRoomConverter
+import com.app.motel.data.entity.DichVuEntity
 import com.app.motel.data.entity.HopDongEntity
 
 @Database(entities = [
@@ -22,6 +23,7 @@ import com.app.motel.data.entity.HopDongEntity
     NguoiThueEntity::class,
     PhongEntity::class,
     HopDongEntity::class,
+    DichVuEntity::class,
 ], version = 1)
 @TypeConverters(StringListRoomConverter::class, DateRoomConverters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -30,6 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun tenantDao(): TenantDAO
     abstract fun roomDao(): RoomDAO
     abstract fun contractDao(): ContractDAO
+    abstract fun serviceDao(): ServiceDAO
 
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null
