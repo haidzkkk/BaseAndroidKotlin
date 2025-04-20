@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/creatContractFormFragment"
-        android:name="com.app.motel.feature.CreateContract.CreatContractFormFragment"
+        android:name="com.app.motel.feature.CreateContract.CreateContractFormFragment"
         android:label="fragment_creat_contract_form"
         tools:layout="@layout/fragment_creat_contract_form" >
         <action

@@ -21,8 +21,8 @@ class GreetingBoardingHouseFragment @Inject constructor() : AppBaseFragment<Frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
-//        mViewModel.handle(HomeViewAction.GetMotelViewAction)
-//        mViewModel.handle(HomeViewAction.GetBoardingViewAction)
+//        viewModel.handle(HomeViewAction.GetMotelViewAction)
+//        viewModel.handle(HomeViewAction.GetBoardingViewAction)
         views.btnCreate.setOnClickListener{
             navigateFragmentWithSlide(R.id.createBoardingHouseFragment)
         }

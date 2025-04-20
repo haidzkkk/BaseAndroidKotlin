@@ -9,7 +9,7 @@ import com.app.motel.di.modules.AppModule
 import com.app.motel.di.modules.ViewModelModule
 import com.app.motel.feature.BoardingHouse.CreateBoardingHouseFragment
 import com.app.motel.feature.BoardingHouse.GreetingBoardingHouseFragment
-import com.app.motel.feature.CreateContract.CreatContractFormFragment
+import com.app.motel.feature.CreateContract.CreateContractFormFragment
 import com.app.motel.feature.CreateContract.CreateContractActivity
 import com.app.motel.feature.CreateContract.CreateContractListFragment
 import com.app.motel.feature.Home.GeneralBoardingHouseFragment
@@ -51,7 +51,7 @@ interface AppComponent {
     fun inject(greetingBoardingHouseFragment: GreetingBoardingHouseFragment)
     fun inject(createBoardingHouseFragment: CreateBoardingHouseFragment)
     fun inject(createContractListFragment: CreateContractListFragment)
-    fun inject(createContractFormFragment: CreatContractFormFragment)
+    fun inject(createContractFormFragment: CreateContractFormFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

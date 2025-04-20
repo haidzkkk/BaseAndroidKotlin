@@ -22,8 +22,13 @@ interface RoomDAO {
     suspend fun getAllPhongs(): List<PhongEntity>
 
     @Query("SELECT * FROM Phong WHERE MaKhuTro = :areaId")
-    suspend fun getPhongsByKhuTro(areaId: String): List<PhongEntity>
+    suspend fun getPhongsByKhuTroId(areaId: String): List<PhongEntity>
 
     @Query("SELECT * FROM Phong WHERE TrangThai = :status")
     suspend fun getPhongsByStatus(status: String): List<PhongEntity>
+
+    @Query("UPDATE Phong SET TrangThai = :trangThai WHERE ID = :id")
+    suspend fun updateStatus(id: String, trangThai: String)
+
+
 }

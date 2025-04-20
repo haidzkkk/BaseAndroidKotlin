@@ -4,14 +4,16 @@ import com.app.motel.common.service.IDManager
 import com.app.motel.data.entity.KhuTroEntity
 
 data class BoardingHouse(
-    val id: String,
+    val id: String = "",
     val name: String,
     val address: String,
     val roomCount: Int?,
     val ownerId: String,
     val isActive: Boolean = true,
-    val description: String?
+    val description: String? = null
 ){
+    var rooms: List<Room>? = null
+
     fun toEntity(): KhuTroEntity {
         return KhuTroEntity(
             id = id,

@@ -38,6 +38,7 @@ object AppModule {
         api = api,
         roomDAO = db.roomDao(),
         boardingHouseDAO = db.boardingHouseDao(),
+        tenantDAO = db.tenantDao(),
     )
 
     @Provides
@@ -72,7 +73,10 @@ object AppModule {
     fun providerCreateContractRepository(
         db: AppDatabase,
     ): CreateContractRepository = CreateContractRepository(
+        boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
+        contractDAO = db.contractDao(),
+        tenantDAO = db.tenantDao(),
     )
 
     @Provides

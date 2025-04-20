@@ -57,7 +57,7 @@
                 android:id="@+id/cb_auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/primary"
+                android:buttonTint="@color/check_box_color_selector"
                 android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
                 android:text="Tự động tạo phòng hàng loạt"/>
 

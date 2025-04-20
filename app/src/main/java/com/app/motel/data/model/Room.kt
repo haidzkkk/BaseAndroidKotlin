@@ -4,15 +4,20 @@ import com.app.motel.common.service.IDManager
 import com.app.motel.data.entity.PhongEntity
 
 data class Room(
-    val id: String,
+    val id: String = "",
     val roomName: String,
-    val maxOccupants: Int?,
-    val area: Double?,
-    val rentalPrice: String,
-    val services: String?,
-    val status: String?,
+    val maxOccupants: Int? = null,
+    val area: Double? = null,
+    val rentalPrice: String = "",
+    val services: String? = null,
+    val status: String? = null,
     val areaId: String
     ) {
+
+    val isEmpty get() = status == PhongEntity.STATE_EMPTY
+    val isLiving get() = status == PhongEntity.STATE_RENTED
+
+    var tenants: List<Tenant>? = null
 
     fun toEntity(): PhongEntity {
         return PhongEntity(

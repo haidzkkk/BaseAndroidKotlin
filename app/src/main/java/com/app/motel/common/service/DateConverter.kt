@@ -26,6 +26,17 @@ object DateConverter {
         }
     }
 
+    fun getCurrentLocalDateTime(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val currentDateTime = LocalDateTime.now()
+            currentDateTime.format(DateTimeFormatter.ofPattern(LOCAL_DATE_FORMAT))
+        } else {
+            val calendar = Calendar.getInstance()
+            val dateFormat = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.getDefault())
+            dateFormat.format(calendar.time)
+        }
+    }
+
     fun getDaysDifference(date1: String?, date2: String?): Long {
         if(date1.isNullOrEmpty() || date2.isNullOrEmpty()) return 0;
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

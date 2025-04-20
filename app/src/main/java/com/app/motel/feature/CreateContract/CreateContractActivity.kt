@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.app.motel.AppApplication
 import com.app.motel.R
@@ -12,16 +13,18 @@ import com.app.motel.common.ultis.navigateFragmentWithSlide
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
 import com.app.motel.databinding.ActivityCreateContractBinding
+import com.app.motel.feature.CreateContract.viewmodel.CreateContractViewModel
 import com.bumptech.glide.Glide.init
+import javax.inject.Inject
 
 
 class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>() {
 
-//    @Inject
-//    lateinit var viewModelFactory: ViewModelProvider.Factory
-//    private val viewModel : AuthViewModel by lazy{
-//        ViewModelProvider(this, viewModelFactory).get(AuthViewModel::class.java)
-//    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel : CreateContractViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(CreateContractViewModel::class.java)
+    }
 
     override fun getBinding(): ActivityCreateContractBinding {
         return ActivityCreateContractBinding.inflate(layoutInflater)
@@ -46,9 +49,6 @@ class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>(
         findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
             val isHomeFragment = destination.id == R.id.creatContractListFragment
             supportActionBar?.setDisplayShowTitleEnabled(isHomeFragment)
-        }
-        views.root.setOnClickListener{
-            navigateFragmentWithSlide(R.id.fragment_view, R.id.creatContractFormFragment)
         }
     }
 

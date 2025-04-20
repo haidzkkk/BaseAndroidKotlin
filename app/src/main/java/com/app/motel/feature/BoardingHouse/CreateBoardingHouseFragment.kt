@@ -89,7 +89,7 @@ class CreateBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragme
         views.btnCreate.setOnClickListener{
             viewModel.createBoardingHouse(
                 name = views.txtUserName.text.toString(),
-                roomCount = views.txtUserName.text.toString().toIntOrNull(),
+                roomCount = views.txtTotalRoom.text.toString().toIntOrNull(),
                 address = views.txtAddressDetail.text.toString(),
             )
         }

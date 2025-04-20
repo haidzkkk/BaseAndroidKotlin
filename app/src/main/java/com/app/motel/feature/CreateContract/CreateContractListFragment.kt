@@ -1,60 +1,62 @@
 package com.app.motel.feature.CreateContract
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.app.motel.AppApplication
 import com.app.motel.R
+import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.core.AppBaseAdapter
+import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.model.Room
+import com.app.motel.databinding.FragmentCreateContractListBinding
+import com.app.motel.feature.CreateContract.viewmodel.CreateContractViewModel
+import com.google.gson.Gson
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class CreateContractListFragment @Inject constructor() : AppBaseFragment<FragmentCreateContractListBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateContractListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CreateContractListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentCreateContractListBinding {
+        return FragmentCreateContractListBinding.inflate(inflater, container, false)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_contract_list, container, false)
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel : CreateContractViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(CreateContractViewModel::class.java)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreatContractListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateContractListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (requireActivity().application as AppApplication).appComponent.inject(this)
+
+        init()
+        listenStateViewModel()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    lateinit var adapter: RoomContractAdapter
+
+    private fun init() {
+        viewModel.getRoom()
+
+        adapter = RoomContractAdapter(object: AppBaseAdapter.AppListener<Room>(){
+            override fun onClickItem(item: Room, action: AppBaseAdapter.ItemAction) {
+                navigateFragmentWithSlide(R.id.creatContractFormFragment, args = Bundle().apply { putString(CreateContractFormFragment.ITEM_KEY, Gson().toJson(item)) })
             }
+        })
+        views.rcv.adapter = adapter
+    }
+
+    private fun listenStateViewModel() {
+        viewModel.liveData.boardingRoom.observe(viewLifecycleOwner){
+            if(it.isSuccess()){
+                val rooms = viewModel.liveData.roomsNotRented
+                adapter.updateData(rooms)
+                Log.d("TAG", "listenStateViewModel: ${rooms}")
+            }
+        }
     }
 }

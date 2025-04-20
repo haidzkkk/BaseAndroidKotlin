@@ -24,8 +24,12 @@ interface TenantDAO {
     @Query("SELECT * FROM NguoiThue WHERE ID = :id")
     suspend fun getNguoiThueById(id: String): NguoiThueEntity?
 
-    @Query("SELECT * FROM NguoiThue WHERE MaPhong = :roomId")
-    suspend fun getNguoiThueByRoomId(roomId: String): List<NguoiThueEntity>
+    @Query("""
+    SELECT * FROM NguoiThue 
+    WHERE (:roomId IS NULL AND (MaPhong IS NULL OR MaPhong = '')) 
+       OR (MaPhong = :roomId)
+""")
+    suspend fun getNguoiThueByRoomId(roomId: String?): List<NguoiThueEntity>
 
     @Query("SELECT * FROM NguoiThue WHERE TenDangNhap = :username AND MatKhau = :password")
     suspend fun getNguoiThueByUsernameAndPassword(username: String, password: String): NguoiThueEntity?
@@ -35,4 +39,7 @@ interface TenantDAO {
 
     @Query("SELECT * FROM NguoiThue WHERE ID = :id")
     suspend fun getById(id: String): NguoiThueEntity?
+
+    @Query("UPDATE NguoiThue SET MaPhong = :roomId WHERE ID = :id")
+    suspend fun updateRoomId(id: String, roomId: String?)
 }

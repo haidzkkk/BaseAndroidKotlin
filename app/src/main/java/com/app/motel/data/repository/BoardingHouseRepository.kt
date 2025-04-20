@@ -1,5 +1,6 @@
 package com.app.motel.data.repository
 
+import android.util.Log
 import com.app.motel.data.local.BoardingHouseDAO
 import com.app.motel.data.local.RoomDAO
 import com.app.motel.data.local.TenantDAO
@@ -17,8 +18,9 @@ class BoardingHouseRepository @Inject constructor(
 
     suspend fun createBoardingHouse(boardingHouse: BoardingHouse): Resource<BoardingHouse>{
         return try {
-            boardingHouseDAO.insert(boardingHouse.toCreateEntity())
-            Resource.Success(boardingHouse)
+            val boardingEntity = boardingHouse.toCreateEntity()
+            boardingHouseDAO.insert(boardingEntity)
+            Resource.Success(boardingEntity.toModel())
         }catch (e: Exception){
             Resource.Error(message = e.toString())
         }
@@ -26,8 +28,9 @@ class BoardingHouseRepository @Inject constructor(
 
     suspend fun createRoom(room: Room): Resource<Room>{
         return try {
-            roomDAO.insert(room.toCreateEntity())
-            Resource.Success(room)
+            val roomEntity = room.toCreateEntity()
+            roomDAO.insert(roomEntity)
+            Resource.Success(roomEntity.toModel())
         }catch (e: Exception){
             Resource.Error(message = e.toString())
         }

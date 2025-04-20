@@ -1,6 +1,8 @@
 package com.app.motel.feature.BoardingHouse.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.viewModelScope
+import com.app.motel.common.ultis.formatRoomName
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Resource
@@ -20,6 +22,7 @@ class BoardingHouseViewModel @Inject constructor(
     override fun handle(action: BoardingHouseViewAction) {
     }
 
+    @SuppressLint("DefaultLocale")
     fun createBoardingHouse(
         name: String?,
         roomCount: Int?,
@@ -45,26 +48,18 @@ class BoardingHouseViewModel @Inject constructor(
 
         viewModelScope.launch {
             val newBoardingHouse = BoardingHouse(
-                id = "",
                 name = name!!,
                 address = address!!,
                 roomCount = roomCount,
                 ownerId = currentUser!!.id,
-                isActive = true,
-                description = null,
             )
 
             val boardingHouseCreated = boardingRepository.createBoardingHouse(newBoardingHouse)
             if(boardingHouseCreated.isSuccess() && (boardingHouseCreated.data?.roomCount ?: 0) > 0){
                 for (i in 1..boardingHouseCreated.data!!.roomCount!!) {
                     val newRoom = Room(
-                        id = "",
-                        roomName = "Phòng $i",
-                        maxOccupants = null,
-                        area = null,
+                        roomName = "Phòng ${i.formatRoomName()}",
                         rentalPrice = "0",
-                        services = null,
-                        status = null,
                         areaId = boardingHouseCreated.data.id,
                     )
                     boardingRepository.createRoom(newRoom)
