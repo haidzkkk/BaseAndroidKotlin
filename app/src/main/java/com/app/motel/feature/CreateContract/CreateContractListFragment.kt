@@ -32,9 +32,9 @@ class CreateContractListFragment @Inject constructor() : AppBaseFragment<Fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
+        super.onViewCreated(view, savedInstanceState)
         init()
         listenStateViewModel()
-        super.onViewCreated(view, savedInstanceState)
     }
 
     lateinit var adapter: RoomContractAdapter

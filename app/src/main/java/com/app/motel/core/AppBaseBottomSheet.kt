@@ -14,7 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 abstract class AppBaseBottomSheet<VB: ViewBinding> : BottomSheetDialogFragment() {
 
-
     abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): VB
     private var _binding: VB? = null
     protected val views: VB get() = _binding!!

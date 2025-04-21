@@ -26,4 +26,13 @@ interface ContractDAO {
 
     @Query("SELECT * FROM HopDong WHERE MaPhong = :roomId")
     suspend fun getByRoomId(roomId: String): List<HopDongEntity>
+
+    @Query("""
+    SELECT HopDong.*
+    FROM HopDong
+    INNER JOIN Phong ON HopDong.MaPhong = Phong.ID
+    INNER JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID
+    WHERE KhuTro.MaChuNha = :userId
+""")
+    suspend fun getContractsByUserId(userId: String): List<HopDongEntity>
 }

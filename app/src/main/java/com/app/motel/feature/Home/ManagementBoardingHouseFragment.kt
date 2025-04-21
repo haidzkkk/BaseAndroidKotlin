@@ -12,6 +12,7 @@ import com.app.motel.common.ultis.startActivityWithSlide
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.databinding.FragmentManagementBoardingHouseBinding
 import com.app.motel.feature.CreateContract.CreateContractActivity
+import com.app.motel.feature.HandleContract.HandleContractActivity
 import com.app.motel.feature.Service.ServiceActivity
 import javax.inject.Inject
 
@@ -50,14 +51,14 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyHandleContract.img.setImageResource(R.drawable.handle_contract)
         views.lyHandleContract.title.text = "Xử lý hợp đồng"
         views.lyHandleContract.root.setOnClickListener{
-
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), HandleContractActivity::class.java))
         }
 
         views.lyCreateBill.img.setImageResource(R.drawable.create_bill)
         views.lyCreateBill.title.text = "Tạo hóa đơn"
         views.lyCreateBill.root.setOnClickListener{
 
-        }
+         }
 
         views.lyListRoom.img.setImageResource(R.drawable.room)
         views.lyListRoom.title.text = "Danh sách phòng thuê"

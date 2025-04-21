@@ -4,7 +4,9 @@ import android.os.Build
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -14,8 +16,17 @@ object DateConverter {
     private const val PATTERN_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     private const val LOCAL_DATE_FORMAT = "dd/MM/yyyy"
 
+    fun getCurrentDateTime(): Date {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val currentDateTime = LocalDateTime.now()
+            Date.from(currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant())
+        } else {
+            val calendar = Calendar.getInstance()
+            calendar.time
+        }
+    }
 
-    fun getCurrentDateTime(): String {
+    fun getCurrentStringDateTime(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val currentDateTime = LocalDateTime.now()
             currentDateTime.format(DateTimeFormatter.ofPattern(PATTERN_DATE_FORMAT))
@@ -41,13 +52,13 @@ object DateConverter {
         if(date1.isNullOrEmpty() || date2.isNullOrEmpty()) return 0;
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val formatter = DateTimeFormatter.ofPattern(PATTERN_DATE_FORMAT)
-            val firstDate = LocalDate.parse(date1 ?: getCurrentDateTime(), formatter)
-            val secondDate = LocalDate.parse(date2 ?: getCurrentDateTime(), formatter)
+            val firstDate = LocalDate.parse(date1 ?: getCurrentStringDateTime(), formatter)
+            val secondDate = LocalDate.parse(date2 ?: getCurrentStringDateTime(), formatter)
             kotlin.math.abs(java.time.temporal.ChronoUnit.DAYS.between(firstDate, secondDate))
         } else {
             val dateFormat = SimpleDateFormat(PATTERN_DATE_FORMAT, Locale.getDefault())
-            val firstDate = dateFormat.parse(date1 ?: getCurrentDateTime())!!
-            val secondDate = dateFormat.parse(date2 ?: getCurrentDateTime())!!
+            val firstDate = dateFormat.parse(date1 ?: getCurrentStringDateTime())!!
+            val secondDate = dateFormat.parse(date2 ?: getCurrentStringDateTime())!!
             val diff = kotlin.math.abs(firstDate.time - secondDate.time)
             TimeUnit.MILLISECONDS.toDays(diff)
         }
@@ -71,10 +82,10 @@ object DateConverter {
         return true
     }
 
-    fun localStringToDate(dateString: String): Date?{
+    fun localStringToDate(dateString: String?): Date?{
         val format = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.getDefault())
         return try{
-            format.parse(dateString)
+            format.parse(dateString!!)
         }catch (e: Exception){
             null
         }
@@ -83,6 +94,34 @@ object DateConverter {
     fun dateToLocalString(date: Date): String {
         val format = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.getDefault())
         return format.format(date)
+    }
+
+    fun monthsBetweenDates(date1: Date, date2: Date): Int {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val localDate1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+            val localDate2 = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+            ChronoUnit.MONTHS.between(localDate1, localDate2).toInt()
+        } else {
+            val cal1 = Calendar.getInstance().apply { time = date1 }
+            val cal2 = Calendar.getInstance().apply { time = date2 }
+
+            val yearDiff = cal2.get(Calendar.YEAR) - cal1.get(Calendar.YEAR)
+            val monthDiff = cal2.get(Calendar.MONTH) - cal1.get(Calendar.MONTH)
+
+            yearDiff * 12 + monthDiff
+        }
+    }
+
+    fun addMonthsToDate(date: Date, monthsToAdd: Int): Date {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+            val updatedDate = localDate.plusMonths(monthsToAdd.toLong())
+            Date.from(updatedDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
+        } else {
+            val calendar = Calendar.getInstance().apply { time = date }
+            calendar.add(Calendar.MONTH, monthsToAdd)
+            calendar.time
+        }
     }
 
 }

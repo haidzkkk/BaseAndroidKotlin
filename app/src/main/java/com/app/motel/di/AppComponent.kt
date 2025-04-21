@@ -12,6 +12,11 @@ import com.app.motel.feature.BoardingHouse.GreetingBoardingHouseFragment
 import com.app.motel.feature.CreateContract.CreateContractFormFragment
 import com.app.motel.feature.CreateContract.CreateContractActivity
 import com.app.motel.feature.CreateContract.CreateContractListFragment
+import com.app.motel.feature.HandleContract.DetailContractBottomSheet
+import com.app.motel.feature.HandleContract.HandleContractActivity
+import com.app.motel.feature.HandleContract.HandleContractListFragment
+import com.app.motel.feature.HandleContract.HandleContractTerminalFragment
+import com.app.motel.feature.HandleContract.RefreshContractBottomSheet
 import com.app.motel.feature.Home.GeneralBoardingHouseFragment
 import com.app.motel.feature.Home.HomeFragment
 import com.app.motel.feature.Home.ManagementBoardingHouseFragment
@@ -43,6 +48,7 @@ interface AppComponent {
     fun inject(authActivity: AuthActivity)
     fun inject(createContractActivity: CreateContractActivity)
     fun inject(serviceActivity: ServiceActivity)
+    fun inject(handleContractActivity: HandleContractActivity)
 
     fun inject(homeFragment: HomeFragment)
     fun inject(newsFragment: NewsFragment)
@@ -58,6 +64,10 @@ interface AppComponent {
     fun inject(createContractFormFragment: CreateContractFormFragment)
     fun inject(serviceListFragment: ServiceListFragment)
     fun inject(serviceFormFragment: ServiceFormFragment)
+    fun inject(handleContractListFragment: HandleContractListFragment)
+    fun inject(handleContractTerminalFragment: HandleContractTerminalFragment)
+    fun inject(detailContractBottomSheet: DetailContractBottomSheet)
+    fun inject(refreshContractBottomSheet: RefreshContractBottomSheet)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

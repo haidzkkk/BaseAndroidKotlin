@@ -30,7 +30,7 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
         .inflate(LayoutInflater.from(context), this, true)
     private lateinit var listTabName: List<String>
     private lateinit var listTabTv: List<TextView>
-    private var selectedIndex = 0
+    var currentPosition = 0
     init {
         setupAttrs(attrs)
         setupUI()
@@ -88,7 +88,7 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
         setTextColor(
             ContextCompat.getColor(
                 this.context,
-                if (position == selectedIndex) R.color.white else R.color.textColor2
+                if (position == currentPosition) R.color.white else R.color.textColor2
             )
         )
 
@@ -110,7 +110,7 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
             start()
         }
 
-        selectedIndex = position
+        currentPosition = position
         listTabTv.forEachIndexed { i, textView ->
             textView.setTextColor(
                 ContextCompat.getColor(

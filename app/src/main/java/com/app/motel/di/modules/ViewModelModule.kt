@@ -6,6 +6,7 @@ import com.app.motel.feature.Home.HomeViewModel
 import com.app.motel.di.factory.AppViewModelFactory
 import com.app.motel.feature.BoardingHouse.viewmodel.BoardingHouseViewModel
 import com.app.motel.feature.CreateContract.viewmodel.CreateContractViewModel
+import com.app.motel.feature.HandleContract.viewmodel.HandleContractViewModel
 import com.app.motel.feature.Service.viewmodel.ServiceViewModel
 import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import dagger.Binds
@@ -34,6 +35,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(CreateContractViewModel::class)
     fun bindCreateContractViewModel(authViewModel: CreateContractViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HandleContractViewModel::class)
+    fun bindHandleContractViewModel(authViewModel: HandleContractViewModel): ViewModel
 
     @Binds
     @IntoMap

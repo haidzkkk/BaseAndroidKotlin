@@ -9,6 +9,7 @@ import com.app.motel.data.repository.HomeRepository
 import com.app.motel.common.AppConstants
 import com.app.motel.data.repository.BoardingHouseRepository
 import com.app.motel.data.repository.CreateContractRepository
+import com.app.motel.data.repository.HandleContractRepository
 import com.app.motel.data.repository.ProfileRepository
 import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.feature.profile.ProfileController
@@ -74,6 +75,16 @@ object AppModule {
     fun providerCreateContractRepository(
         db: AppDatabase,
     ): CreateContractRepository = CreateContractRepository(
+        boardingHouseDAO = db.boardingHouseDao(),
+        roomDAO = db.roomDao(),
+        contractDAO = db.contractDao(),
+        tenantDAO = db.tenantDao(),
+    )
+
+    @Provides
+    fun providerHandleContractRepository(
+        db: AppDatabase,
+    ): HandleContractRepository = HandleContractRepository(
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
         contractDAO = db.contractDao(),

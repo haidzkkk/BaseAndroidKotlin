@@ -9,7 +9,7 @@
         android:id="@+id/tabBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/tabs"/>
+        android:entries="@array/tab_home"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

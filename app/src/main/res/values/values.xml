@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <array name="tabs">
+    <array name="tab_home">
         <item>Quản lý</item>
         <item>Tổng quan</item>
+    </array>
+
+    <array name="tab_handle_contract">
+        <item>Còn hạn</item>
+        <item>Sắp hết hạn</item>
+        <item>Hết hạn</item>
     </array>
 
 </resources>

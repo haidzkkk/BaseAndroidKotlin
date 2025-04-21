@@ -3,7 +3,7 @@ package com.app.motel.data.model
 import androidx.paging.RemoteMediator
 import com.bumptech.glide.load.engine.Initializable
 
-class Resource<out T> (val status: Status, val data: T?, val message: String?) {
+class Resource<out T> (val status: Status, val data: T?, var message: String?) {
 
     companion object{
         fun <T> Initialize(data: T? = null,message: String? = null): Resource<T> = Resource<T>(Status.INITIALIZE, data, message)

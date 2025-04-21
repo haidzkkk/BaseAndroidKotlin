@@ -65,6 +65,23 @@
         <item name="boxStrokeWidthFocused">0dp</item>
     </style>
 
+    <style name="InputLayoutStyle2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+        <item name="boxCornerRadiusTopStart">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/RADIUS_SMALL</item>
+
+        <item name="boxBackgroundColor">@color/background2</item>
+
+        <item name="boxStrokeColor">@color/background3</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+    </style>
+
 
     <style name="roundedCorners" parent="">
         <item name="cornerFamily">rounded</item>

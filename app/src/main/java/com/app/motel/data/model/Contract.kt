@@ -1,7 +1,10 @@
 package com.app.motel.data.model
 
+import com.app.motel.common.service.DateConverter
 import com.app.motel.common.service.IDManager
 import com.app.motel.data.entity.HopDongEntity
+import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 data class Contract(
     val id: String = "",
@@ -16,6 +19,12 @@ data class Contract(
     val customerId: String,
     val note: String?
 ) {
+    var room: Room? = null
+    var tenant: Tenant? = null
+
+    val state: State
+        get() = State.getStateByDate(endDate ?: "")
+
     fun toEntity() = HopDongEntity(
         id = id,
         thoiHan = duration,
@@ -32,7 +41,7 @@ data class Contract(
 
     fun toCreateEntity() = HopDongEntity(
         id = IDManager.createID(),
-        thoiHan = duration,
+        thoiHan = DateConverter.monthsBetweenDates(DateConverter.localStringToDate(startDate ?: "")!!, DateConverter.localStringToDate(endDate ?: "")!!),
         ngayLapHopDong = createdDate,
         ngayBatDau = startDate,
         ngayKetThuc = endDate,
@@ -43,4 +52,38 @@ data class Contract(
         maKhach = customerId,
         ghiChu = note
     )
+
+    enum class State(
+        val stateName: String
+    ) {
+        ACTIVE("Còn hạn"),
+        NEAR_END("Sắp hết hạn"),
+        ENDED("Đã hế hạn"),
+        UNKNOWN("Không xác định");
+
+        companion object {
+            fun getStateByDate(date: String): State {
+                val expiryDate = DateConverter.localStringToDate(date)
+                val today = DateConverter.getCurrentDateTime()
+
+                if (expiryDate == null) return UNKNOWN
+
+                val calToday = Calendar.getInstance()
+                val calExpiry = Calendar.getInstance()
+                calToday.time = today
+                calExpiry.time = expiryDate
+
+                return when {
+                    calExpiry.before(calToday) -> ENDED
+                    getDaysBetween(calToday, calExpiry) <= 30 -> NEAR_END
+                    else -> ACTIVE
+                }
+            }
+
+            private fun getDaysBetween(start: Calendar, end: Calendar): Long {
+                val diffMillis = end.timeInMillis - start.timeInMillis
+                return TimeUnit.MILLISECONDS.toDays(diffMillis)
+            }
+        }
+    }
 }

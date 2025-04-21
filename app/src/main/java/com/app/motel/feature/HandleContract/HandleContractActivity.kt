@@ -1,10 +1,12 @@
-package com.app.motel.feature.CreateContract
+package com.app.motel.feature.HandleContract
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.app.motel.AppApplication
@@ -12,22 +14,22 @@ import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
 import com.app.motel.databinding.ActivityCreateContractBinding
-import com.app.motel.feature.CreateContract.viewmodel.CreateContractViewModel
+import com.app.motel.databinding.ActivityHandleContractBinding
+import com.app.motel.feature.HandleContract.viewmodel.HandleContractViewModel
+import com.app.motel.feature.Home.HomeViewModel
 import javax.inject.Inject
 
+class HandleContractActivity() : AppBaseActivity<ActivityHandleContractBinding>() {
 
-class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>() {
+    override fun getBinding(): ActivityHandleContractBinding {
+        return ActivityHandleContractBinding.inflate(layoutInflater)
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel : CreateContractViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(CreateContractViewModel::class.java)
+    val mViewModel : HandleContractViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(HandleContractViewModel::class.java)
     }
-
-    override fun getBinding(): ActivityCreateContractBinding {
-        return ActivityCreateContractBinding.inflate(layoutInflater)
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as AppApplication).appComponent.inject(this)
@@ -60,7 +62,7 @@ class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>(
         views.toolbar.overflowIcon?.setTint(ContextCompat.getColor(this, R.color.white))
         views.toolbar.setTitleTextAppearance(this, R.style.ToolbarTitleStyle)
         views.toolbar.isTitleCentered = true
-        supportActionBar?.title = "Lập hợp đồng mới"
+        supportActionBar?.title = "Xử lý hợp đồng"
         views.toolbar.setNavigationOnClickListener {
             handleBackWithAnimation()
         }
@@ -69,7 +71,7 @@ class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>(
     private fun handleBackWithAnimation() {
         val navController = findNavController(R.id.fragment_view)
 
-        if (navController.currentDestination?.id == R.id.creatContractListFragment) {
+        if (navController.currentDestination?.id == R.id.handleContractListFragment) {
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         } else {

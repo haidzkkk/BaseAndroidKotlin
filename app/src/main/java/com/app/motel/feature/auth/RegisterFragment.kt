@@ -102,7 +102,7 @@ class RegisterFragment @Inject constructor() : AppBaseFragment<FragmentRegisterB
         }
 
         val calendar: Calendar = Calendar.getInstance()
-        DateConverter.getCurrentDateTime()
+        DateConverter.getCurrentStringDateTime()
 
         val currentDate = DateConverter.localStringToDate(views.txtBirthDay.text.toString())
         if (currentDate != null) calendar.time = currentDate
