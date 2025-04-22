@@ -29,9 +29,9 @@ class HomeRepository @Inject constructor(
         tenantDAO.insert(
             NguoiThueEntity(
                 id = IDManager.createID(),
-                hoTen = "Nguyen Van ${Random.nextInt(10)}",
-                tenDangNhap = "1${Random.nextInt(10)}",
-                matKhau = "1${Random.nextInt(10)}",
+                hoTen = "Nguyen Van ${Random.nextInt(10000)}",
+                tenDangNhap = "1${Random.nextInt(10000)}",
+                matKhau = "1${Random.nextInt(10000)}",
             )
         )
     }

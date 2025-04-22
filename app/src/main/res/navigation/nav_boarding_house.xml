@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/greetingBoardingHouseFragment"
-        android:name="com.app.motel.feature.BoardingHouse.GreetingBoardingHouseFragment"
+        android:name="com.app.motel.feature.boardingHouse.GreetingBoardingHouseFragment"
         android:label="fragment_greeting_boarding_house"
         tools:layout="@layout/fragment_greeting_boarding_house" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/createBoardingHouseFragment"
-        android:name="com.app.motel.feature.BoardingHouse.CreateBoardingHouseFragment"
+        android:name="com.app.motel.feature.boardingHouse.CreateBoardingHouseFragment"
         android:label="fragment_create_boarding_house"
         tools:layout="@layout/fragment_create_boarding_house" >
         <action

@@ -58,6 +58,7 @@
             android:id="@+id/txt_time_old_contract"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/background3"
             android:inputType="number"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             android:enabled="false"
@@ -94,6 +95,7 @@
             android:id="@+id/txt_end_date_old_contract"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/background3"
             android:enabled="false"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
@@ -113,6 +115,7 @@
             android:id="@+id/txt_end_date_new_contract"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/background3"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             android:enabled="false"
             tools:ignore="SpUsage" />

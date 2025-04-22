@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/handleContractListFragment"
-        android:name="com.app.motel.feature.HandleContract.HandleContractListFragment"
+        android:name="com.app.motel.feature.handleContract.HandleContractListFragment"
         android:label="fragment_handle_contract_list"
         tools:layout="@layout/fragment_handle_contract_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/handleContractTerminalFragment"
-        android:name="com.app.motel.feature.HandleContract.HandleContractTerminalFragment"
+        android:name="com.app.motel.feature.handleContract.HandleContractTerminalFragment"
         android:label="fragment_handle_contract_terminal"
         tools:layout="@layout/fragment_handle_contract_terminal" >
         <action

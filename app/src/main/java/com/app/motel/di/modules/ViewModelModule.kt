@@ -2,13 +2,14 @@ package com.app.motel.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.app.motel.feature.Home.HomeViewModel
+import com.app.motel.feature.home.viewmodel.HomeViewModel
 import com.app.motel.di.factory.AppViewModelFactory
-import com.app.motel.feature.BoardingHouse.viewmodel.BoardingHouseViewModel
-import com.app.motel.feature.CreateContract.viewmodel.CreateContractViewModel
-import com.app.motel.feature.HandleContract.viewmodel.HandleContractViewModel
-import com.app.motel.feature.Service.viewmodel.ServiceViewModel
+import com.app.motel.feature.boardingHouse.viewmodel.BoardingHouseViewModel
+import com.app.motel.feature.createContract.viewmodel.CreateContractViewModel
+import com.app.motel.feature.handleContract.viewmodel.HandleContractViewModel
+import com.app.motel.feature.service.viewmodel.ServiceViewModel
 import com.app.motel.feature.auth.viewmodel.AuthViewModel
+import com.app.motel.feature.createBill.viewmodel.CreateBillViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -45,6 +46,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(ServiceViewModel::class)
     fun bindServiceViewModel(authViewModel: ServiceViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateBillViewModel::class)
+    fun bindCreateBillViewModel(authViewModel: CreateBillViewModel): ViewModel
 
     @Binds
     @IntoMap

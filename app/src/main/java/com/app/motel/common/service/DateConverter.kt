@@ -124,4 +124,15 @@ object DateConverter {
         }
     }
 
+    fun calculateMonth(date: Date, monthCountToCalculate: Int): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.add(Calendar.MONTH, monthCountToCalculate)
+        return calendar
+    }
+
+    fun Date.toCalendar(): Calendar{
+        val date = this
+        return Calendar.getInstance().apply {time = date}
+    }
 }

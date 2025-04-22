@@ -7,10 +7,13 @@ import com.app.motel.data.network.RemoteDataSource
 import com.app.motel.data.repository.AuthRepository
 import com.app.motel.data.repository.HomeRepository
 import com.app.motel.common.AppConstants
+import com.app.motel.data.repository.BillRepository
 import com.app.motel.data.repository.BoardingHouseRepository
-import com.app.motel.data.repository.CreateContractRepository
-import com.app.motel.data.repository.HandleContractRepository
+import com.app.motel.data.repository.ComplaintRepository
+import com.app.motel.data.repository.ContractRepository
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.ProfileRepository
+import com.app.motel.data.repository.RegulationRepository
 import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.feature.profile.ProfileController
 import dagger.Module
@@ -74,7 +77,7 @@ object AppModule {
     @Provides
     fun providerCreateContractRepository(
         db: AppDatabase,
-    ): CreateContractRepository = CreateContractRepository(
+    ): ContractRepository = ContractRepository(
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
         contractDAO = db.contractDao(),
@@ -82,13 +85,13 @@ object AppModule {
     )
 
     @Provides
-    fun providerHandleContractRepository(
+    fun providerBillRepository(
         db: AppDatabase,
-    ): HandleContractRepository = HandleContractRepository(
+    ): BillRepository = BillRepository(
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
-        contractDAO = db.contractDao(),
-        tenantDAO = db.tenantDao(),
+        billDAO = db.billDao(),
+        serviceDAO = db.serviceDao(),
     )
 
     @Provides
@@ -98,6 +101,27 @@ object AppModule {
         serviceDAO = db.serviceDao(),
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
+    )
+
+    @Provides
+    fun providerRegulationRepository(
+        db: AppDatabase,
+    ): RegulationRepository = RegulationRepository(
+        regulationDAO = db.regulationDao(),
+    )
+
+    @Provides
+    fun providerComplaintRepository(
+        db: AppDatabase,
+    ): ComplaintRepository = ComplaintRepository(
+        complaintDAO = db.complaintDao(),
+    )
+
+    @Provides
+    fun providerNotificationRepository(
+        db: AppDatabase,
+    ): NotificationRepository = NotificationRepository(
+        notificationDAO = db.notificationDao(),
     )
 
     @Provides

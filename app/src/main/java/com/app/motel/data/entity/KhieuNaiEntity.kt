@@ -1,0 +1,71 @@
+package com.app.motel.data.entity
+
+import androidx.room.*
+import com.app.motel.data.model.Complaint
+
+@Entity(
+    tableName = "KhieuNai",
+    foreignKeys = [
+        ForeignKey(
+            entity = PhongEntity::class,
+            parentColumns = ["ID"],
+            childColumns = ["MaPhong"],
+        ),
+        ForeignKey(
+            entity = NguoiThueEntity::class,
+            parentColumns = ["ID"],
+            childColumns = ["NguoiNop"],
+        )
+    ],
+//    indices = [Index(value = ["MaPhong"]), Index(value = ["NguoiNop"])]
+)
+data class KhieuNaiEntity(
+    @PrimaryKey
+    @ColumnInfo(name = "ID")
+    val id: String,
+
+    @ColumnInfo(name = "TieuDe")
+    val title: String,
+
+    @ColumnInfo(name = "NoiDung")
+    val content: String?,
+
+    @ColumnInfo(name = "NgayTao")
+    val createdDate: String?,
+
+    @ColumnInfo(name = "NguoiNop")
+    val submittedBy: String,
+
+    @ColumnInfo(name = "MaPhong")
+    val roomId: String,
+
+    @ColumnInfo(name = "TrangThai")
+    val status: String?
+) {
+    enum class Status(val value: String) {
+        NEW("Mới"),
+        PENDING("Đang xử lý"),
+        RESOLVED("Đã xử lý"),
+        REJECTED("Từ chối"),;
+
+        companion object {
+            fun fromValue(value: String) = when(value) {
+                NEW.value -> NEW
+                PENDING.value -> PENDING
+                RESOLVED.value -> RESOLVED
+                REJECTED.value -> REJECTED
+                else -> NEW
+            }
+        }
+    }
+
+    fun toModel() = Complaint(
+        id = id,
+        title = title,
+        content = content,
+        createdDate = createdDate,
+        submittedBy = submittedBy,
+        roomId = roomId,
+        status = status
+    )
+}

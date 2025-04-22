@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
-    tools:context=".feature.CreateContract.CreateContractFormFragment">
+    tools:context=".feature.createContract.CreateContractFormFragment">
 
 
     <LinearLayout

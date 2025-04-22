@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
     android:background="@color/background2"
-    tools:context=".feature.CreateContract.CreateContractListFragment">
+    tools:context=".feature.createContract.CreateContractListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"

@@ -14,12 +14,12 @@ import com.app.motel.R
 import com.app.motel.AppApplication
 import com.app.motel.core.AppBaseActivity
 import com.app.motel.databinding.ActivityMainBinding
-import com.app.motel.feature.Home.HomeViewEvent
-import com.app.motel.feature.Home.HomeViewModel
+import com.app.motel.feature.home.viewmodel.HomeViewEvent
+import com.app.motel.feature.home.viewmodel.HomeViewModel
 import com.app.motel.common.ultis.navigateFragment
 import com.app.motel.common.ultis.startActivityWithTransition
 import com.app.motel.data.model.Role
-import com.app.motel.feature.BoardingHouse.BoardingHouseActivity
+import com.app.motel.feature.boardingHouse.BoardingHouseActivity
 import com.app.motel.feature.auth.AuthActivity
 import javax.inject.Inject
 

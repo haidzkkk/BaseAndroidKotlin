@@ -7,26 +7,29 @@ import com.app.motel.AppApplication
 import com.app.motel.di.modules.FragmentModule
 import com.app.motel.di.modules.AppModule
 import com.app.motel.di.modules.ViewModelModule
-import com.app.motel.feature.BoardingHouse.CreateBoardingHouseFragment
-import com.app.motel.feature.BoardingHouse.GreetingBoardingHouseFragment
-import com.app.motel.feature.CreateContract.CreateContractFormFragment
-import com.app.motel.feature.CreateContract.CreateContractActivity
-import com.app.motel.feature.CreateContract.CreateContractListFragment
-import com.app.motel.feature.HandleContract.DetailContractBottomSheet
-import com.app.motel.feature.HandleContract.HandleContractActivity
-import com.app.motel.feature.HandleContract.HandleContractListFragment
-import com.app.motel.feature.HandleContract.HandleContractTerminalFragment
-import com.app.motel.feature.HandleContract.RefreshContractBottomSheet
-import com.app.motel.feature.Home.GeneralBoardingHouseFragment
-import com.app.motel.feature.Home.HomeFragment
-import com.app.motel.feature.Home.ManagementBoardingHouseFragment
+import com.app.motel.feature.boardingHouse.CreateBoardingHouseFragment
+import com.app.motel.feature.boardingHouse.GreetingBoardingHouseFragment
+import com.app.motel.feature.createContract.CreateContractFormFragment
+import com.app.motel.feature.createContract.CreateContractActivity
+import com.app.motel.feature.createContract.CreateContractListFragment
+import com.app.motel.feature.handleContract.DetailContractBottomSheet
+import com.app.motel.feature.handleContract.HandleContractActivity
+import com.app.motel.feature.handleContract.HandleContractListFragment
+import com.app.motel.feature.handleContract.HandleContractTerminalFragment
+import com.app.motel.feature.handleContract.RefreshContractBottomSheet
+import com.app.motel.feature.home.GeneralBoardingHouseFragment
+import com.app.motel.feature.home.HomeFragment
+import com.app.motel.feature.home.ManagementBoardingHouseFragment
 import com.app.motel.feature.MainActivity
-import com.app.motel.feature.Service.ServiceActivity
-import com.app.motel.feature.Service.ServiceFormFragment
-import com.app.motel.feature.Service.ServiceListFragment
+import com.app.motel.feature.service.ServiceActivity
+import com.app.motel.feature.service.ServiceFormFragment
+import com.app.motel.feature.service.ServiceListFragment
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.auth.LoginFragment
 import com.app.motel.feature.auth.RegisterFragment
+import com.app.motel.feature.createBill.CreateBillActivity
+import com.app.motel.feature.createBill.CreateBillFormFragment
+import com.app.motel.feature.createBill.CreateBillListFragment
 import com.app.motel.feature.news.NewsFragment
 import com.app.motel.feature.notify.NotifyFragment
 import com.app.motel.feature.profile.ProfileFragment
@@ -49,6 +52,7 @@ interface AppComponent {
     fun inject(createContractActivity: CreateContractActivity)
     fun inject(serviceActivity: ServiceActivity)
     fun inject(handleContractActivity: HandleContractActivity)
+    fun inject(createBillActivity: CreateBillActivity)
 
     fun inject(homeFragment: HomeFragment)
     fun inject(newsFragment: NewsFragment)
@@ -68,6 +72,8 @@ interface AppComponent {
     fun inject(handleContractTerminalFragment: HandleContractTerminalFragment)
     fun inject(detailContractBottomSheet: DetailContractBottomSheet)
     fun inject(refreshContractBottomSheet: RefreshContractBottomSheet)
+    fun inject(createBillListFragment: CreateBillListFragment)
+    fun inject(createBillFormFragment: CreateBillFormFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

@@ -6,7 +6,7 @@
     app:startDestination="@id/serviceListFragment">
     <fragment
         android:id="@+id/serviceListFragment"
-        android:name="com.app.motel.feature.Service.ServiceListFragment"
+        android:name="com.app.motel.feature.service.ServiceListFragment"
         android:label="ServiceListFragment" >
         <action
             android:id="@+id/action_serviceListFragment_to_serviceFormFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/serviceFormFragment"
-        android:name="com.app.motel.feature.Service.ServiceFormFragment"
+        android:name="com.app.motel.feature.service.ServiceFormFragment"
         android:label="ServiceFormFragment" >
         <action
             android:id="@+id/action_serviceFormFragment_to_serviceListFragment"

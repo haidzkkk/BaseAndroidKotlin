@@ -24,4 +24,11 @@ interface ServiceDAO {
 
     @Query("SELECT * FROM DichVu WHERE MaKhuTro = :areaId")
     suspend fun getServiceByKhuTroId(areaId: String): List<DichVuEntity>
+
+    @Query("""
+        SELECT * FROM DichVu 
+        WHERE MaKhuTro = :maKhuTro 
+        AND (MaPhong IS NULL OR MaPhong = :maPhong)
+    """)
+    suspend fun getServiceOfRoom(maKhuTro: String, maPhong: String): List<DichVuEntity>
 }

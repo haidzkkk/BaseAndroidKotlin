@@ -45,7 +45,7 @@ data class DichVuEntity(
         TO_METER("Theo đồng hồ");
 
         companion object{
-            fun getType(name: String): TypePay?{
+            fun getType(name: String?): TypePay?{
                 return when(name){
                     FREE.typeName -> FREE
                     TO_ROOM.typeName -> TO_ROOM

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background2"
     android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
-    tools:context=".feature.Home.ManagementBoardingHouseFragment">
+    tools:context=".feature.home.ManagementBoardingHouseFragment">
 
     <LinearLayout
         android:id="@+id/ly_admin"
