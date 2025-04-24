@@ -42,7 +42,7 @@ class HandleContractActivity() : AppBaseActivity<ActivityHandleContractBinding>(
             }
         })
         findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
-            val isHomeFragment = destination.id == R.id.creatContractListFragment
+            val isHomeFragment = destination.id == R.id.handleContractListFragment
             supportActionBar?.setDisplayShowTitleEnabled(isHomeFragment)
         }
     }

@@ -95,4 +95,13 @@ class ServiceRepository@Inject constructor(
             Resource.Error(message = e.toString())
         }
     }
+
+    suspend fun getServiceByRoom(boardingHouse: String, roomId: String): Resource<List<Service>> {
+        return try {
+            val services = serviceDAO.getServiceOfRoom(boardingHouse, roomId)
+            Resource.Success(services.map { it.toModel() })
+        }catch (e: Exception){
+            Resource.Error(message = e.toString())
+        }
+    }
 }

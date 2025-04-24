@@ -10,11 +10,13 @@ import com.app.motel.data.model.Service
             entity = PhongEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaPhong"],
+            onDelete = ForeignKey.SET_NULL,
         ),
         ForeignKey(
             entity = KhuTroEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaKhuTro"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ]
 )

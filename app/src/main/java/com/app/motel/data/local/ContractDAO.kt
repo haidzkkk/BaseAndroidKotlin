@@ -28,11 +28,15 @@ interface ContractDAO {
     suspend fun getByRoomId(roomId: String): List<HopDongEntity>
 
     @Query("""
-    SELECT HopDong.*
+    SELECT *
     FROM HopDong
-    INNER JOIN Phong ON HopDong.MaPhong = Phong.ID
-    INNER JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID
-    WHERE KhuTro.MaChuNha = :userId
+    LEFT JOIN Phong ON HopDong.MaPhong = Phong.ID
+    LEFT JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID
+    WHERE KhuTro.MaChuNha = :userId OR HopDong.MaPhong IS NULL
 """)
     suspend fun getContractsByUserId(userId: String): List<HopDongEntity>
+
+
+    @Query("UPDATE HopDong SET MaPhong = NULL WHERE MaPhong = :roomId")
+    suspend fun updateRoomIdToNull(roomId: String)
 }

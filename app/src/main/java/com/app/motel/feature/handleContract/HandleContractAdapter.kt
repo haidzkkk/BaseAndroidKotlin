@@ -24,7 +24,7 @@ class HandleContractAdapter(
     @SuppressLint("ResourceAsColor")
     override fun bind(binding: ItemHandleContractBinding, item: Contract, position: Int) {
         binding.apply{
-            tvRoomName.text = item.room?.roomName
+            tvRoomName.text = item.name
             tvTanantName.text = "Họ và tên: ${item.tenant?.fullName ?: ""}"
 
             if(item.isActive == HopDongEntity.ACTIVE){

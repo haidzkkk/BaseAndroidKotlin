@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
-    tools:context=".feature.CreateContract.CreateContractFormFragment">
+    android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -11,13 +11,15 @@ data class Room(
     val rentalPrice: String = "",
     var services: String? = null,
     val status: String? = null,
-    val areaId: String
+    val areaId: String? = null
     ) {
 
-    val isEmpty get() = status == PhongEntity.STATE_EMPTY
-    val isLiving get() = status == PhongEntity.STATE_RENTED
+    val isEmpty get() = status == PhongEntity.Status.EMPTY.value
+    val isRenting get() = status == PhongEntity.Status.RENTED.value
 
     var tenants: List<Tenant>? = null
+    var listService: List<Service>? = null
+    var contract: Contract? = null
 
     fun toEntity(): PhongEntity {
         return PhongEntity(
@@ -40,7 +42,7 @@ data class Room(
             dienTich = area,
             giaThue = rentalPrice,
             dichVu = services,
-            trangThai = PhongEntity.STATE_EMPTY,
+            trangThai = PhongEntity.Status.EMPTY.value,
             maKhuTro = areaId
         )
     }

@@ -8,12 +8,16 @@ import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.ContractRepository
+import com.app.motel.data.repository.RoomRepository
+import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.ProfileController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateContractViewModel @Inject constructor(
     private val repository: ContractRepository,
+    private val tenantRepository: TenantRepository,
+    private val roomRepository: RoomRepository,
     private val profileController: ProfileController,
 ): AppBaseViewModel<CreateContractViewState, CreateContractViewAction, CreateContractViewEvent>(
     CreateContractViewState()
@@ -29,7 +33,7 @@ class CreateContractViewModel @Inject constructor(
     fun getTenantNotRented(){
         viewModelScope.launch {
             try {
-                liveData.tenantNotRented.postValue(Resource.Success(repository.getTenantsByRoomId(null)))
+                liveData.tenantNotRented.postValue(Resource.Success(tenantRepository.getTenantsByRoomId(null)))
             }catch (e: Exception){
                 liveData.tenantNotRented.postValue(Resource.Error(message = e.toString()))
             }
@@ -41,7 +45,7 @@ class CreateContractViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val userId = profileController.state.currentUserId
-                val boardingHouses = repository.getBoardingRoomByUserId(userId)
+                val boardingHouses = roomRepository.getBoardingRoomByUserId(userId)
                 liveData.boardingRoom.postValue(Resource.Success(boardingHouses))
             }catch (e: Exception){
                 liveData.boardingRoom.postValue(Resource.Error(message = e.toString()))
@@ -52,6 +56,7 @@ class CreateContractViewModel @Inject constructor(
     fun createContact(
         room: Room?,
         tenant: Tenant?,
+        nameContract: String?,
         createdDate: String?,
         startDate: String?,
         endDate: String?,
@@ -65,12 +70,16 @@ class CreateContractViewModel @Inject constructor(
                 liveData.createContract.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
-            room == null -> {
+            room?.id.isNullOrBlank() -> {
                 liveData.createContract.postValue(Resource.Error(message = "Không tìm thấy phòng thuê"))
                 return
             }
-            tenant == null -> {
+            tenant?.id.isNullOrBlank() -> {
                 liveData.createContract.postValue(Resource.Error(message = "Không tìm thấy người đại diện thuê phòng"))
+                return
+            }
+            nameContract.isNullOrBlank() -> {
+                liveData.createContract.postValue(Resource.Error(message = "Thời gian lập hợp đồng là bắt buộc"))
                 return
             }
             createdDate.isNullOrBlank() -> {
@@ -94,6 +103,7 @@ class CreateContractViewModel @Inject constructor(
         viewModelScope.launch {
             val newContract = Contract(
                 roomId = room!!.id,
+                name = nameContract,
                 customerId = tenant!!.id,
                 createdDate = createdDate,
                 startDate = startDate,
@@ -104,7 +114,7 @@ class CreateContractViewModel @Inject constructor(
 
             val contractCreated = repository.createContract(newContract)
             if(contractCreated.isSuccess()){
-                repository.updateStateRoom(room.id, PhongEntity.STATE_RENTED)
+                repository.updateStateRoom(room.id, PhongEntity.Status.RENTED.value)
                 repository.updateUserRented(tenant.id, room.id)
             }
             liveData.createContract.postValue(contractCreated)

@@ -13,6 +13,7 @@ import com.app.motel.data.model.Bill
             entity = PhongEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaPhong"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ],
 )
@@ -20,6 +21,9 @@ data class HoaDonEntity(
     @PrimaryKey
     @ColumnInfo(name = "ID")
     val id: String,
+
+    @ColumnInfo(name = "Ten")
+    val ten: String?,
 
     @ColumnInfo(name = "NgayTao")
     val createdDate: String?,
@@ -46,7 +50,7 @@ data class HoaDonEntity(
     val status: Int?,
 
     @ColumnInfo(name = "MaPhong")
-    val roomId: String,
+    val roomId: String? = null,
 
     @ColumnInfo(name = "Thang")
     val month: Int,
@@ -68,6 +72,7 @@ data class HoaDonEntity(
     fun toModel(): Bill {
         return Bill(
             id = id,
+            name = ten,
             createdDate = createdDate,
             roomPrice = rentPrice,
             waterUsage = waterUsed,

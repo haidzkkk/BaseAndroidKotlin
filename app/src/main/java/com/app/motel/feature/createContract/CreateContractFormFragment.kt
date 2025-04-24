@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.service.DateConverter
+import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.common.ultis.toStringMoney
 import com.app.motel.core.AppBaseFragment
@@ -60,6 +61,7 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
             mViewModel.createContact(
                 item,
                 mViewModel.liveData.tenantNotRented.value?.data?.get(views.spinnerCustomer.selectedItemPosition),
+                views.txtName.text.toString(),
                 views.txtCreateDate.text.toString(),
                 views.txtStartDate.text.toString(),
                 views.txtEndDate.text.toString(),
@@ -85,11 +87,11 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
         mViewModel.liveData.createContract.observe(viewLifecycleOwner){
             when(it.status){
                 Status.SUCCESS -> {
-                    requireContext().showToast("Tao hợp đồng thành công")
+                    activity?.showToast("Tao hợp đồng thành công")
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
                 Status.ERROR -> {
-                    requireContext().showToast(it.message ?: "Có lỗi xảy ra")
+                    activity?.showToast(it.message ?: "Có lỗi xảy ra")
                 }
                 else -> {}
             }

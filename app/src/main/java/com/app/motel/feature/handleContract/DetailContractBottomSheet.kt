@@ -30,6 +30,7 @@ class DetailContractBottomSheet(
         super.onViewCreated(view, savedInstanceState)
 
         views.apply {
+            tvId.text = contract.name
             tvCraeteDate.text = contract.createdDate
             tvNameRoom.text = contract.room?.roomName
             tvContractOwner.text = contract.tenant?.fullName ?: ""

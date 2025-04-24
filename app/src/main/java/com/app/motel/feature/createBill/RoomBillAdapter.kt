@@ -1,10 +1,8 @@
 package com.app.motel.feature.createBill
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.app.motel.common.service.DateConverter
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.data.model.Room
 import com.app.motel.databinding.ItemRoomContractBinding
@@ -30,6 +28,6 @@ class RoomBillAdapter (
         binding.tvName.text = item.roomName
         binding.tvPrice.text = item.rentalPrice
         binding.cbEmpty.text = "Đang ở"
-        binding.cbEmpty.isChecked = item.isLiving
+        binding.cbEmpty.isChecked = item.isRenting
     }
 }

@@ -13,6 +13,8 @@ import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.repository.BillRepository
 import com.app.motel.data.repository.ContractRepository
+import com.app.motel.data.repository.RoomRepository
+import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.feature.profile.ProfileController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +22,8 @@ import javax.inject.Inject
 class CreateBillViewModel @Inject constructor(
     private val billRepository: BillRepository,
     private val contractRepository: ContractRepository,
+    private val serviceRepository: ServiceRepository,
+    private val roomRepository: RoomRepository,
     private val profileController: ProfileController,
 ): AppBaseViewModel<CreateBillViewState, CreateBillViewAction, CreateBillViewEvent>(
     CreateBillViewState()
@@ -47,7 +51,7 @@ class CreateBillViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            liveData.currentServiceRoom.postValue(billRepository.getServiceByRoom(boardingHouseId, roomId))
+            liveData.currentServiceRoom.postValue(serviceRepository.getServiceByRoom(boardingHouseId, roomId))
         }
     }
 
@@ -71,7 +75,7 @@ class CreateBillViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val userId = profileController.state.currentUserId
-                val boardingHouses = contractRepository.getBoardingRoomByUserId(userId)
+                val boardingHouses = roomRepository.getBoardingRoomByUserId(userId)
                 liveData.boardingRoom.postValue(Resource.Success(boardingHouses))
             }catch (e: Exception){
                 liveData.boardingRoom.postValue(Resource.Error(message = e.toString()))
@@ -146,6 +150,7 @@ class CreateBillViewModel @Inject constructor(
                     (discount ?: 0)
 
             val newBill = Bill(
+                name = room?.roomName,
                 createdDate = createdDate,
                 roomPrice = room?.rentalPrice.toMoney().toDouble(),
                 waterUsage = newWaterMeter,

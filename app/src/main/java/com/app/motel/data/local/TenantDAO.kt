@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.app.motel.data.entity.NguoiDungEntity
 import com.app.motel.data.entity.NguoiThueEntity
 
 @Dao
@@ -29,7 +28,7 @@ interface TenantDAO {
     WHERE (:roomId IS NULL AND (MaPhong IS NULL OR MaPhong = '')) 
        OR (MaPhong = :roomId)
 """)
-    suspend fun getNguoiThueByRoomId(roomId: String?): List<NguoiThueEntity>
+    suspend fun getTenantByRoomId(roomId: String?): List<NguoiThueEntity>
 
     @Query("SELECT * FROM NguoiThue WHERE TenDangNhap = :username AND MatKhau = :password")
     suspend fun getNguoiThueByUsernameAndPassword(username: String, password: String): NguoiThueEntity?

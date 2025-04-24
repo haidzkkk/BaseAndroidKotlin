@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".feature.tenant.TenantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.room.RoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.createBill.CreateBillActivity"
             android:exported="false" />
         <activity

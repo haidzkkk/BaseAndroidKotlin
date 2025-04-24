@@ -14,7 +14,9 @@ import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.ProfileRepository
 import com.app.motel.data.repository.RegulationRepository
+import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.ServiceRepository
+import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.ProfileController
 import dagger.Module
 import dagger.Provides
@@ -78,7 +80,6 @@ object AppModule {
     fun providerCreateContractRepository(
         db: AppDatabase,
     ): ContractRepository = ContractRepository(
-        boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
         contractDAO = db.contractDao(),
         tenantDAO = db.tenantDao(),
@@ -122,6 +123,25 @@ object AppModule {
         db: AppDatabase,
     ): NotificationRepository = NotificationRepository(
         notificationDAO = db.notificationDao(),
+    )
+
+    @Provides
+    fun providerRoomRepository(
+        db: AppDatabase,
+        tenantRepository: TenantRepository,
+    ): RoomRepository = RoomRepository(
+        boardingHouseDAO = db.boardingHouseDao(),
+        roomDAO = db.roomDao(),
+        contractDAO = db.contractDao(),
+        tenantDAO = db.tenantDao(),
+        tenantRepository = tenantRepository,
+    )
+
+    @Provides
+    fun providerTenantRepository(
+        db: AppDatabase,
+    ): TenantRepository = TenantRepository(
+        tenantDAO = db.tenantDao(),
     )
 
     @Provides

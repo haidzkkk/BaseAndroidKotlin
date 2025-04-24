@@ -6,7 +6,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import com.app.motel.data.entity.KhuTroEntity
 import com.app.motel.data.entity.NguoiDungEntity
 import com.app.motel.data.entity.NguoiThueEntity
@@ -62,9 +65,9 @@ abstract class AppDatabase : RoomDatabase() {
                             super.onCreate(db)
                             Log.d("ROOM", "Room DB created from asset: ${db.path}")
                         }
-
                         override fun onOpen(db: SupportSQLiteDatabase) {
                             super.onOpen(db)
+                            db.execSQL("PRAGMA foreign_keys=ON;")
                             Log.d("ROOM", "Database opened===>: ${db.path}")
                         }
                     })

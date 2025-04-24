@@ -28,7 +28,7 @@ class ServiceAdapter (
             onListener?.onClickItem(item, action = ItemAction.DELETE)
         }
         binding.tvName.text = item.name
-        binding.tvPrice.text = "${item.price.toStringMoney()} đồng/${(item.typePay?.replace("Theo", " ")?.trim() ?: "")}"
+        binding.tvPrice.text = item.getPriceTypePay
         binding.tvApply.text = if(item.isAppliesAllRoom) "Áp dụng cho tất cả phòng" else "Áp dụng cho một số phòng"
     }
 }

@@ -82,7 +82,7 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
         textSize = 14f
         typeface = Typeface.DEFAULT_BOLD
         isAllCaps = true
-        setPadding(8, 8, 8, 8)
+        setPadding(2, 2, 2, 2)
 
         // Set initial color
         setTextColor(
@@ -93,11 +93,11 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
         )
 
         setOnClickListener {
-            onTabSelected(position)
+            setTabSelected(position)
         }
     }
 
-    fun onTabSelected(position: Int) {
+    fun setTabSelected(position: Int) {
         tabSelectedListener?.onTabSelected(position)
 
         ObjectAnimator.ofFloat(

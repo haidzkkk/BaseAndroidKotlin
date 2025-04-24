@@ -72,15 +72,6 @@ class BillRepository @Inject constructor(
         }
     }
 
-    suspend fun getServiceByRoom(boardingHouse: String, roomId: String): Resource<List<Service>> {
-        return try {
-            val services = serviceDAO.getServiceOfRoom(boardingHouse, roomId)
-            Resource.Success(services.map { it.toModel() })
-        }catch (e: Exception){
-            Resource.Error(message = e.toString())
-        }
-    }
-
     suspend fun createBill(bill: Bill): Resource<Bill>{
         return try {
             val billEntity = bill.toCreateEntity()

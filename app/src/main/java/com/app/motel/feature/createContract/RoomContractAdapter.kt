@@ -26,6 +26,6 @@ class RoomContractAdapter (
         binding.tvQuantity.text = "Số lượng người tối đa: ${item.maxOccupants ?: 0} \tSố người đang ở: ${item.tenants?.size ?: 0}"
         binding.tvPrice.text = item.rentalPrice.toStringMoney()
         binding.cbEmpty.isChecked = item.isEmpty
-        binding.cbLiving.isChecked = item.isLiving
+        binding.cbLiving.isChecked = item.isRenting
     }
 }

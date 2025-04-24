@@ -11,7 +11,8 @@ import com.app.motel.data.model.Tenant
     foreignKeys = [ForeignKey(
         entity = PhongEntity::class,
         parentColumns = ["ID"],
-        childColumns = ["MaPhong"]
+        childColumns = ["MaPhong"],
+        onDelete = ForeignKey.SET_NULL,
     )]
 )
 data class NguoiThueEntity(

@@ -7,8 +7,8 @@ data class Complaint(
     val title: String,
     val content: String?,
     val createdDate: String?,
-    val submittedBy: String,
-    val roomId: String,
+    val submittedBy: String? = null,
+    val roomId: String? = null,
     val status: String?
 ){
     fun toEntity() = KhieuNaiEntity(

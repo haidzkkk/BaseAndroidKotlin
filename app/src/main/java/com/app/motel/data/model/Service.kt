@@ -1,6 +1,7 @@
 package com.app.motel.data.model
 
 import com.app.motel.common.service.IDManager
+import com.app.motel.common.ultis.toStringMoney
 import com.app.motel.data.entity.DichVuEntity
 
 data class Service(
@@ -12,6 +13,8 @@ data class Service(
     val roomId: String?
 ) {
     val isAppliesAllRoom: Boolean get() = roomId == null
+
+    val getPriceTypePay get() = "${price.toStringMoney()} đồng/${(typePay?.replace("Theo", " ")?.trim() ?: "")}"
 
     fun toEntity(): DichVuEntity {
         return DichVuEntity(

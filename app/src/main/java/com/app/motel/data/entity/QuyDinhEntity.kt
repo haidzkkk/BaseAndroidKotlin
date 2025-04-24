@@ -10,6 +10,7 @@ import com.app.motel.data.model.Regulation
             entity = KhuTroEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaKhuTro"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ],
 //    indices = [Index(value = ["MaKhuTro"])]
@@ -29,7 +30,7 @@ data class QuyDinhEntity(
     val createdDate: String?,
 
     @ColumnInfo(name = "MaKhuTro")
-    val khuTroId: String,
+    val khuTroId: String? = null,
 
     @ColumnInfo(name = "TrangThai")
     val status: Int? = 1

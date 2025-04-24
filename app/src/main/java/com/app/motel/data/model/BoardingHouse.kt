@@ -8,7 +8,7 @@ data class BoardingHouse(
     val name: String,
     val address: String,
     val roomCount: Int?,
-    val ownerId: String,
+    val ownerId: String? = null,
     val isActive: Boolean = true,
     val description: String? = null
 ){

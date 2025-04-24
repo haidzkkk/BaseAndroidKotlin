@@ -16,6 +16,6 @@ class CreateBillViewState: AppViewLiveData {
     val currentServiceRoom = MutableLiveData<Resource<List<Service>>>()
     val createBill = MutableLiveData<Resource<Bill>>()
 
-    val roomsRented: List<Room> get () = (boardingRoom.value?.data?.flatMap { boardingHouse -> boardingHouse.rooms ?: arrayListOf()}  ?: arrayListOf()).filter { item -> item.isLiving}
+    val roomsRented: List<Room> get () = (boardingRoom.value?.data?.flatMap { boardingHouse -> boardingHouse.rooms ?: arrayListOf()}  ?: arrayListOf()).filter { item -> item.isRenting}
 
 }

@@ -13,6 +13,7 @@ import com.app.motel.data.model.BoardingHouse
             entity = NguoiDungEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaChuNha"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ]
 )
@@ -31,7 +32,7 @@ data class KhuTroEntity(
     val soLuongPhong: Int?,
 
     @ColumnInfo(name = "MaChuNha")
-    val maChuNha: String,
+    val maChuNha: String? = null,
 
     @ColumnInfo(name = "TrangThai")
     val trangThai: Int?,

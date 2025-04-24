@@ -10,11 +10,13 @@ import com.app.motel.data.model.Complaint
             entity = PhongEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaPhong"],
+            onDelete = ForeignKey.SET_NULL,
         ),
         ForeignKey(
             entity = NguoiThueEntity::class,
             parentColumns = ["ID"],
             childColumns = ["NguoiNop"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ],
 //    indices = [Index(value = ["MaPhong"]), Index(value = ["NguoiNop"])]
@@ -34,10 +36,10 @@ data class KhieuNaiEntity(
     val createdDate: String?,
 
     @ColumnInfo(name = "NguoiNop")
-    val submittedBy: String,
+    val submittedBy: String? = null,
 
     @ColumnInfo(name = "MaPhong")
-    val roomId: String,
+    val roomId: String? = null,
 
     @ColumnInfo(name = "TrangThai")
     val status: String?

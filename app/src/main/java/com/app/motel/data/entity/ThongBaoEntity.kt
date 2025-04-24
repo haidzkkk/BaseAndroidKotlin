@@ -10,11 +10,13 @@ import com.app.motel.data.model.Notification
             entity = KhuTroEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaKhuTro"],
+            onDelete = ForeignKey.SET_NULL,
         ),
         ForeignKey(
             entity = PhongEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaPhong"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ],
 //    indices = [Index(value = ["MaKhuTro"]), Index(value = ["MaPhong"])]

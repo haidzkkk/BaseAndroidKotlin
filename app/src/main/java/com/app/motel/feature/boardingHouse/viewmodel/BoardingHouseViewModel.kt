@@ -8,12 +8,14 @@ import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.repository.BoardingHouseRepository
+import com.app.motel.data.repository.RoomRepository
 import com.app.motel.feature.profile.ProfileController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BoardingHouseViewModel @Inject constructor(
     private val boardingRepository: BoardingHouseRepository,
+    private val roomRepository: RoomRepository,
     private val profileController: ProfileController,
 ) : AppBaseViewModel<BoardingHouseState, BoardingHouseViewAction, BoardingHouseViewEvent>(
     BoardingHouseState()
@@ -62,7 +64,7 @@ class BoardingHouseViewModel @Inject constructor(
                         rentalPrice = "2 000 000",
                         areaId = boardingHouseCreated.data.id,
                     )
-                    boardingRepository.createRoom(newRoom)
+                    roomRepository.createRoom(newRoom)
                 }
             }
             liveData.createBoardingHouse.postValue(boardingHouseCreated)

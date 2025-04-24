@@ -12,7 +12,8 @@ import java.util.UUID
     foreignKeys = [ForeignKey(
         entity = KhuTroEntity::class,
         parentColumns = ["ID"],
-        childColumns = ["MaKhuTro"]
+        childColumns = ["MaKhuTro"],
+        onDelete = ForeignKey.SET_NULL,
     )]
 )
 data class PhongEntity(
@@ -39,13 +40,18 @@ data class PhongEntity(
     val trangThai: String? = null,
 
     @ColumnInfo(name = "MaKhuTro")
-    val maKhuTro: String
+    val maKhuTro: String? = null
 ){
-    companion object{
-        const val STATE_EMPTY = "Trống"
-        const val STATE_RENTED = "Đã thuê"
-        const val STATE_REPAIRING = "Đang sửa chữa"
-        const val STATE_DEPOSIT = "Đặt cọc"
+    enum class Status(val value: String) {
+        EMPTY("Trống"),
+        RENTED("Đã thuê"),
+        REPAIRING("Đang sửa chữa"),
+        DEPOSIT("Đặt cọc");
+        companion object {
+            fun fromValue(value: String): Status? {
+                return entries.find { it.value == value }
+            }
+        }
     }
 
     fun toModel(): Room {

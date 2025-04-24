@@ -5,6 +5,7 @@ import com.app.motel.data.entity.HoaDonEntity
 
 data class Bill(
     val id: String = "",
+    val name: String? = "",
     val createdDate: String?,
     val roomPrice: Double,
     val waterUsage: Int?,
@@ -13,7 +14,7 @@ data class Bill(
     val discount: String?,
     val totalAmount: String?,
     val status: Int? = HoaDonEntity.STATUS_UNPAID,
-    val roomId: String,
+    val roomId: String? = null,
     val month: Int,
     val year: Int,
     val note: String?
@@ -21,6 +22,7 @@ data class Bill(
     fun toEntity(): HoaDonEntity {
         return HoaDonEntity(
             id = id,
+            ten = name,
             createdDate = createdDate,
             rentPrice = roomPrice,
             waterUsed = waterUsage,
@@ -39,6 +41,7 @@ data class Bill(
     fun toCreateEntity(): HoaDonEntity {
         return HoaDonEntity(
             id = IDManager.createID(),
+            ten = name,
             createdDate = createdDate,
             rentPrice = roomPrice,
             waterUsed = waterUsage,

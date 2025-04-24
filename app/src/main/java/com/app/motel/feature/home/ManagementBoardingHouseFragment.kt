@@ -15,7 +15,9 @@ import com.app.motel.feature.createBill.CreateBillActivity
 import com.app.motel.feature.createContract.CreateContractActivity
 import com.app.motel.feature.handleContract.HandleContractActivity
 import com.app.motel.feature.home.viewmodel.HomeViewModel
+import com.app.motel.feature.room.RoomActivity
 import com.app.motel.feature.service.ServiceActivity
+import com.app.motel.feature.tenant.TenantActivity
 import javax.inject.Inject
 
 class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<FragmentManagementBoardingHouseBinding>() {
@@ -65,13 +67,13 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyListRoom.img.setImageResource(R.drawable.room)
         views.lyListRoom.title.text = "Danh sách phòng thuê"
         views.lyListRoom.root.setOnClickListener{
-
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), RoomActivity::class.java))
         }
 
         views.lyListTenant.img.setImageResource(R.drawable.tenant)
         views.lyListTenant.title.text = "Danh sách khách thuê"
         views.lyListTenant.root.setOnClickListener{
-
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), TenantActivity::class.java))
         }
 
         views.lyListBill.img.setImageResource(R.drawable.payment)

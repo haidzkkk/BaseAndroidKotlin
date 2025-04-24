@@ -12,4 +12,15 @@
         <item>Hết hạn</item>
     </array>
 
+    <array name="tab_room">
+        <item>TẤT CẢ</item>
+        <item>ĐANG THUÊ</item>
+        <item>ĐANG TRỐNG</item>
+    </array>
+
+    <array name="tab_room_detail">
+        <item>THÔNG TIN</item>
+        <item>NGƯỜI THUÊ</item>
+    </array>
+
 </resources>

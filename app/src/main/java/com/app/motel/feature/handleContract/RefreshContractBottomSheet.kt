@@ -43,6 +43,7 @@ class RefreshContractBottomSheet(
         (requireActivity().application as AppApplication).appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
+        views.tvId.text = contract.name
         views.tvName.text = contract.room?.roomName
         views.txtTimeOldContract.setText(contract.duration?.toString())
         views.txtEndDateOldContract.setText(contract.endDate)

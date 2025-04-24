@@ -1,5 +1,6 @@
 package com.app.motel.data.repository
 
+import android.util.Log
 import com.app.motel.data.entity.HopDongEntity
 import com.app.motel.data.entity.KhuTroEntity
 import com.app.motel.data.local.BoardingHouseDAO
@@ -13,7 +14,6 @@ import com.app.motel.data.model.Tenant
 import javax.inject.Inject
 
 class ContractRepository @Inject constructor(
-    private val boardingHouseDAO: BoardingHouseDAO,
     private val roomDAO: RoomDAO,
     private val contractDAO: ContractDAO,
     private val tenantDAO: TenantDAO,
@@ -21,9 +21,10 @@ class ContractRepository @Inject constructor(
 
     suspend fun getContractByUserId(userId: String): List<Contract> {
         val contractEntities: List<HopDongEntity> = contractDAO.getContractsByUserId(userId)
+        Log.d("ContractRepository", "getContractByUserId: $contractEntities")
         return contractEntities.map { contractEntity ->
-            val roomEntity = roomDAO.getPhongById(contractEntity.maPhong)
-            val tenantEntity = tenantDAO.getNguoiThueById(contractEntity.maKhach)
+            val roomEntity = roomDAO.getPhongById(contractEntity.maPhong ?: "")
+            val tenantEntity = tenantDAO.getNguoiThueById(contractEntity.maKhach ?: "")
             contractEntity.toModel().apply {
                 this.room = roomEntity?.toModel()
                 this.tenant = tenantEntity?.toModel()
@@ -31,22 +32,11 @@ class ContractRepository @Inject constructor(
         }
     }
 
-    suspend fun getTenantsByRoomId(roomId: String?): List<Tenant> {
-        return tenantDAO.getNguoiThueByRoomId(roomId).map { it.toModel() }
-    }
-
-    suspend fun getBoardingRoomByUserId(userId: String): List<BoardingHouse> {
-        val boardingHousesEntities: List<KhuTroEntity> = boardingHouseDAO.getByUserId(userId)
-        return boardingHousesEntities.map { boardingHouseEntity ->
-            val roomEntities = roomDAO.getPhongsByKhuTroId(boardingHouseEntity.id)
-            val boardingHouse = boardingHouseEntity.toModel()
-            boardingHouse.rooms = roomEntities.map {
-                it.toModel().apply {
-                    tenants = getTenantsByRoomId(this.id)
-                }
-            }
-            boardingHouse
-        }
+    suspend fun getContractActiveByRoomId(roomId: String): Contract? {
+        val contractEntities: List<HopDongEntity> = contractDAO.getByRoomId(roomId)
+        return contractEntities.firstOrNull{ contractEntity ->
+            contractEntity.hieuLuc == HopDongEntity.ACTIVE
+        }?.toModel()
     }
 
     suspend fun createContract(contract: Contract): Resource<Contract>{

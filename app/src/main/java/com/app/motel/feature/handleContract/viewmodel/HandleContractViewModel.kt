@@ -120,7 +120,7 @@ class HandleContractViewModel @Inject constructor(
 
             val contractUpdated = repository.updateContract(contractUpdate)
             if(contractUpdated.isSuccess()){
-                repository.updateStateRoom(contractUpdated.data?.roomId ?: "", PhongEntity.STATE_EMPTY)
+                repository.updateStateRoom(contractUpdated.data?.roomId ?: "", PhongEntity.Status.EMPTY.value)
                 repository.updateUserRented(contractUpdated.data?.customerId ?: "", null)
             }
             liveData.updateContract.postValue(contractUpdated.apply {

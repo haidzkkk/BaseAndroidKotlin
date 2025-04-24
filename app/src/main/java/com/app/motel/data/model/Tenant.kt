@@ -1,5 +1,6 @@
 package com.app.motel.data.model
 
+import com.app.motel.data.entity.NguoiThueEntity
 import java.util.UUID
 
 data class Tenant(
@@ -13,4 +14,19 @@ data class Tenant(
     val roomId: String?,
     val username: String,
     val password: String
-)
+){
+    fun toEntity(): NguoiThueEntity{
+        return NguoiThueEntity(
+            id = id,
+            hoTen = fullName,
+            cccd = idCard,
+            queQuan = homeTown,
+            ngaySinh = birthDate,
+            soDienThoai = phoneNumber,
+            trangThai = status,
+            maPhong = roomId,
+            tenDangNhap = username,
+            matKhau = password,
+        )
+    }
+}

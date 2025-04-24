@@ -26,13 +26,4 @@ class BoardingHouseRepository @Inject constructor(
         }
     }
 
-    suspend fun createRoom(room: Room): Resource<Room>{
-        return try {
-            val roomEntity = room.toCreateEntity()
-            roomDAO.insert(roomEntity)
-            Resource.Success(roomEntity.toModel())
-        }catch (e: Exception){
-            Resource.Error(message = e.toString())
-        }
-    }
 }

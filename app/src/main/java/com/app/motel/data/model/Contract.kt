@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit
 
 data class Contract(
     val id: String = "",
+    val name: String?,
     val duration: Int? = null,
     val createdDate: String? = null,
     val startDate: String?,
@@ -15,8 +16,8 @@ data class Contract(
     val deposit: String?,
     val status: Int? = null,
     val isActive: Int? = null,
-    val roomId: String,
-    val customerId: String,
+    val roomId: String? = null,
+    val customerId: String? = null,
     val note: String?
 ) {
     var room: Room? = null
@@ -27,6 +28,7 @@ data class Contract(
 
     fun toEntity() = HopDongEntity(
         id = id,
+        ten = name,
         thoiHan = duration,
         ngayLapHopDong = createdDate,
         ngayBatDau = startDate,
@@ -41,6 +43,7 @@ data class Contract(
 
     fun toCreateEntity() = HopDongEntity(
         id = IDManager.createID(),
+        ten = name,
         thoiHan = DateConverter.monthsBetweenDates(DateConverter.localStringToDate(startDate ?: "")!!, DateConverter.localStringToDate(endDate ?: "")!!),
         ngayLapHopDong = createdDate,
         ngayBatDau = startDate,

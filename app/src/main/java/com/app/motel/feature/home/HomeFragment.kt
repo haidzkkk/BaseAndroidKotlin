@@ -62,7 +62,7 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
             @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                views.tabBar.onTabSelected(position)
+                views.tabBar.setTabSelected(position)
                 views.viewPager.currentItem = position
             }
         })

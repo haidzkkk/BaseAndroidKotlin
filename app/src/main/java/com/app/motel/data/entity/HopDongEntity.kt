@@ -13,11 +13,13 @@ import com.app.motel.data.model.Contract
             entity = NguoiThueEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaKhach"],
+            onDelete = ForeignKey.SET_NULL,
         ),
         ForeignKey(
             entity = PhongEntity::class,
             parentColumns = ["ID"],
             childColumns = ["MaPhong"],
+            onDelete = ForeignKey.SET_NULL,
         )
     ]
 )
@@ -25,6 +27,9 @@ data class HopDongEntity(
     @PrimaryKey
     @ColumnInfo(name = "ID")
     val id: String,
+
+    @ColumnInfo(name = "Ten")
+    val ten: String?,
 
     @ColumnInfo(name = "ThoiHan")
     val thoiHan: Int?,
@@ -48,10 +53,10 @@ data class HopDongEntity(
     val hieuLuc: Int?,
 
     @ColumnInfo(name = "MaPhong")
-    val maPhong: String,
+    val maPhong: String? = null,
 
     @ColumnInfo(name = "MaKhach")
-    val maKhach: String,
+    val maKhach: String? = null,
 
     @ColumnInfo(name = "GhiChu")
     val ghiChu: String?
@@ -66,6 +71,7 @@ data class HopDongEntity(
 
     fun toModel() = Contract(
         id = id,
+        name = ten,
         duration = thoiHan,
         createdDate = ngayLapHopDong,
         startDate = ngayBatDau,

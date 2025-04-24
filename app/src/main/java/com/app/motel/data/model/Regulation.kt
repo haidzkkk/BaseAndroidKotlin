@@ -7,7 +7,7 @@ data class Regulation(
     val title: String,
     val content: String?,
     val createdDate: String?,
-    val khuTroId: String,
+    val khuTroId: String? = null,
     val status: Int = 1
 ){
     fun fromModel() = QuyDinhEntity(

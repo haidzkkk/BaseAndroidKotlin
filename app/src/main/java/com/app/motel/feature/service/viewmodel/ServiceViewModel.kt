@@ -3,6 +3,7 @@ package com.app.motel.feature.service.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.app.motel.common.ultis.toStringMoney
 import com.app.motel.core.AppBaseViewModel
+import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Service
 import com.app.motel.data.repository.ServiceRepository
@@ -19,10 +20,10 @@ class ServiceViewModel @Inject constructor(
     override fun handle(action: ServiceViewAction) {
     }
 
-    fun initForm(item: Service?) {
+    fun initForm(item: Service?,  boardingHouse: BoardingHouse? = null) {
         liveData.currentService.postValue(item)
 
-        val currentBoardingHouse = liveData.boardingService.value?.data?.firstOrNull{
+        val currentBoardingHouse = boardingHouse ?: liveData.boardingService.value?.data?.firstOrNull{
             it.service?.firstOrNull { service -> service.id == item?.id } != null
         } ?: liveData.boardingService.value?.data?.firstOrNull()
 
@@ -117,9 +118,9 @@ class ServiceViewModel @Inject constructor(
         viewModelScope.launch {
             val serviceDeleted = repository.deleteService(serviceDelete!!)
 
-            val roomFilterTypePay = (liveData.boardingService.value?.data?.firstOrNull{ boardingHouse ->
+            val roomFilterTypePay = ((liveData.currentBoardingHouse.value ?: liveData.boardingService.value?.data?.firstOrNull{ boardingHouse ->
                 boardingHouse.service?.firstOrNull { service -> service.id == serviceDelete.id } != null
-            }?.rooms ?: arrayListOf()).let { roomsFromBoarding ->
+            })?.rooms ?: arrayListOf()).let { roomsFromBoarding ->
                 if(serviceDeleted.data?.isAppliesAllRoom == true) roomsFromBoarding
                 else roomsFromBoarding.filter { room -> room.id == serviceDeleted.data?.roomId }
             }
@@ -133,6 +134,5 @@ class ServiceViewModel @Inject constructor(
             }
             liveData.createService.postValue(serviceDeleted)
         }
-
     }
 }

@@ -5,12 +5,21 @@ import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.app.motel.core.AppBaseDialog
+import com.app.motel.databinding.DialogConfirmBinding
+import com.app.motel.databinding.DialogDatePickerBinding
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.Normalizer
+import java.util.Locale
+import java.util.regex.Pattern
 
 fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: Observer<T>) {
     observe(owner, object : Observer<T> {
@@ -65,4 +74,51 @@ fun Int.formatRoomName(): String {
 
 fun Context.showToast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
+
+fun Context.showDialogConfirm(
+    title: String,
+    content: String?,
+    buttonConfirm: String = "Có",
+    buttonCancel: String = "Hủy",
+    confirm: (() -> Unit) = {},
+    cancel: (() -> Unit) = {}
+){
+    val dialog = AppBaseDialog
+        .Builder(this, DialogConfirmBinding.inflate(LayoutInflater.from(this)))
+        .build()
+    dialog.show()
+
+    dialog.binding.apply {
+        tvTitle.text = title
+        tvContent.text = content
+        tvConfirm.text = buttonConfirm
+        tvCancel.text = buttonCancel
+
+        tvContent.isVisible = !content.isNullOrEmpty()
+
+        tvConfirm.setOnClickListener {
+            confirm()
+            dialog.dismiss()
+        }
+        tvCancel.setOnClickListener {
+            cancel()
+            dialog.dismiss()
+        }
+    }
+}
+
+fun String.containsSearch(str: String): Boolean {
+    val normalized1 = Normalizer.normalize(this, Normalizer.Form.NFD)
+    val normalized2 = Normalizer.normalize(str, Normalizer.Form.NFD)
+    val text1String = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
+        .matcher(normalized1)
+        .replaceAll("")
+        .lowercase(Locale.getDefault())
+  val text2String = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
+        .matcher(normalized2)
+        .replaceAll("")
+        .lowercase(Locale.getDefault())
+
+    return text1String.contains(text2String)
 }
