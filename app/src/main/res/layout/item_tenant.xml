@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/PADDING_SIZE_SMALL"
     app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
@@ -126,7 +126,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_call"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="Gọi điện"
                 android:textColor="@color/white"
@@ -145,7 +145,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_notification"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="Thông báo"
                 android:textColor="@color/white"

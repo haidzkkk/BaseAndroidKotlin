@@ -20,12 +20,6 @@ class HomeViewModel @Inject constructor(
 //        }
     }
 
-    init {
-        viewModelScope.launch {
-            repo.addSomeTenant()
-        }
-    }
-
     fun getBoardingByUserId(){
         liveData.boardingHouse.postValue(Resource.Loading())
         viewModelScope.launch {

@@ -47,10 +47,14 @@ data class NguoiThueEntity(
     @ColumnInfo(name = "MatKhau")
     val matKhau: String
 ){
-    companion object {
-        const val STATE_ACTIVE = "Đang thuê"
-        const val STATE_INACTIVE = "Đã rời đi"
-        const val STATE_TEMPORARY_ABSENT = "Tạm vắng"
+    enum class Status(val value: String) {
+        ACTIVE("Đang thuê"),
+        INACTIVE("Đã rời đi"),
+        TEMPORARY_ABSENT("Tạm vắng");
+
+        companion object {
+            fun fromValue(value: String) = entries.firstOrNull { it.value == value } ?: ACTIVE
+        }
     }
 
     fun toModel() = Tenant(
@@ -58,7 +62,7 @@ data class NguoiThueEntity(
         fullName = hoTen,
         idCard = cccd,
         homeTown = queQuan,
-        birthDate = ngaySinh,
+        birthDay = ngaySinh,
         phoneNumber = soDienThoai,
         status = trangThai,
         roomId = maPhong,

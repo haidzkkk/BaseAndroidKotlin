@@ -142,6 +142,8 @@ object AppModule {
         db: AppDatabase,
     ): TenantRepository = TenantRepository(
         tenantDAO = db.tenantDao(),
+        roomDAO = db.roomDao(),
+        contractDAO = db.contractDao(),
     )
 
     @Provides

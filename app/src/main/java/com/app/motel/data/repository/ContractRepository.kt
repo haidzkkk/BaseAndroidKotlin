@@ -2,15 +2,12 @@ package com.app.motel.data.repository
 
 import android.util.Log
 import com.app.motel.data.entity.HopDongEntity
-import com.app.motel.data.entity.KhuTroEntity
-import com.app.motel.data.local.BoardingHouseDAO
+import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.local.ContractDAO
 import com.app.motel.data.local.RoomDAO
 import com.app.motel.data.local.TenantDAO
-import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
-import com.app.motel.data.model.Tenant
 import javax.inject.Inject
 
 class ContractRepository @Inject constructor(
@@ -70,7 +67,10 @@ class ContractRepository @Inject constructor(
 
     suspend fun updateUserRented(tenantId: String, roomId: String?): Resource<Boolean>{
         return try {
-            tenantDAO.updateRoomId(tenantId, roomId)
+            val stateTenant = if(roomId != null) NguoiThueEntity.Status.ACTIVE.value
+                else NguoiThueEntity.Status.INACTIVE.value
+
+            tenantDAO.updateRent(tenantId, roomId, stateTenant)
             Resource.Success(true)
         }catch (e: Exception) {
             Resource.Error(message = e.toString())

@@ -22,10 +22,13 @@ interface ContractDAO {
     suspend fun getAll(): List<HopDongEntity>
 
     @Query("SELECT * FROM HopDong WHERE MaKhach = :customerId")
-    suspend fun getByCustomerId(customerId: String): List<HopDongEntity>
+    suspend fun getByTenantId(customerId: String): List<HopDongEntity>
 
     @Query("SELECT * FROM HopDong WHERE MaPhong = :roomId")
     suspend fun getByRoomId(roomId: String): List<HopDongEntity>
+
+    @Query("SELECT * FROM HopDong WHERE MaPhong = :roomId AND MaKhach = :tenantId")
+    suspend fun getByRoomTenantId(roomId: String, tenantId: String): List<HopDongEntity>
 
     @Query("""
     SELECT *

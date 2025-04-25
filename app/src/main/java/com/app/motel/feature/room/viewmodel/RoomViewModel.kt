@@ -49,7 +49,11 @@ class RoomViewModel @Inject constructor(
 
             roomFind.listService = services.data
             roomFind.contract = contract
-            roomFind.tenants = tenants
+            roomFind.tenants = tenants.map {
+                it.room = roomFind
+                it.contract = contract
+                it
+            }
 
             liveData.currentRoom.value = Resource.Success(roomFind)
         }

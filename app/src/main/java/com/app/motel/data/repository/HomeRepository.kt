@@ -24,15 +24,4 @@ class HomeRepository @Inject constructor(
     suspend fun getBoardingByUserId(userId: String): List<BoardingHouse> {
         return boardingHouseDAO.getByUserId(userId).map { it.toModel() }
     }
-
-    suspend fun addSomeTenant(){
-        tenantDAO.insert(
-            NguoiThueEntity(
-                id = IDManager.createID(),
-                hoTen = "Nguyen Van ${Random.nextInt(10000)}",
-                tenDangNhap = "1${Random.nextInt(10000)}",
-                matKhau = "1${Random.nextInt(10000)}",
-            )
-        )
-    }
 }

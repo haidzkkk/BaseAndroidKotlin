@@ -31,7 +31,6 @@ class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as AppApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(views.root)
 
         init()
         setupToolBar()
