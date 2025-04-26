@@ -32,9 +32,15 @@ data class HoaDonEntity(
     val rentPrice: Double,
 
     @ColumnInfo(name = "SONUOC")
+    val waterIndex: Int?,
+
+    @ColumnInfo(name = "SoNuocTieuThu")
     val waterUsed: Int?,
 
     @ColumnInfo(name = "SODIEN")
+    val electricityIndex: Int?,
+
+    @ColumnInfo(name = "SoDienTieuThu")
     val electricityUsed: Int?,
 
     @ColumnInfo(name = "GiaDichVu")
@@ -75,8 +81,10 @@ data class HoaDonEntity(
             name = ten,
             createdDate = createdDate,
             roomPrice = rentPrice,
-            waterUsage = waterUsed,
-            electricityUsage = electricityUsed,
+            waterIndex = waterIndex,
+            waterUsed = waterUsed,
+            electricityIndex = electricityIndex,
+            electricityUsed = electricityUsed,
             serviceFee = serviceFee,
             discount = discount,
             totalAmount = total,

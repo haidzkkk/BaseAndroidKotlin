@@ -115,7 +115,7 @@ class CreateContractViewModel @Inject constructor(
             val contractCreated = repository.createContract(newContract)
             if(contractCreated.isSuccess()){
                 repository.updateStateRoom(room.id, PhongEntity.Status.RENTED.value)
-                repository.updateUserRented(tenant.id, room.id)
+                tenantRepository.updateUserRented(tenant, room.id)
             }
             liveData.createContract.postValue(contractCreated)
         }

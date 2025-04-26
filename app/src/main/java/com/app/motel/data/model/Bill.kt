@@ -8,8 +8,10 @@ data class Bill(
     val name: String? = "",
     val createdDate: String?,
     val roomPrice: Double,
-    val waterUsage: Int?,
-    val electricityUsage: Int?,
+    val waterIndex: Int?,
+    val waterUsed: Int?,
+    val electricityIndex: Int?,
+    val electricityUsed: Int?,
     val serviceFee: String?,
     val discount: String?,
     val totalAmount: String?,
@@ -19,14 +21,19 @@ data class Bill(
     val year: Int,
     val note: String?
 ){
+    var room: Room? = null
+    var tenant: Tenant? = null
+
     fun toEntity(): HoaDonEntity {
         return HoaDonEntity(
             id = id,
             ten = name,
             createdDate = createdDate,
             rentPrice = roomPrice,
-            waterUsed = waterUsage,
-            electricityUsed = electricityUsage,
+            waterIndex = waterIndex,
+            waterUsed = waterUsed,
+            electricityIndex = electricityIndex,
+            electricityUsed = electricityUsed,
             serviceFee = serviceFee,
             discount = discount ?: "0",
             total = totalAmount,
@@ -44,8 +51,10 @@ data class Bill(
             ten = name,
             createdDate = createdDate,
             rentPrice = roomPrice,
-            waterUsed = waterUsage,
-            electricityUsed = electricityUsage,
+            waterIndex = waterIndex,
+            waterUsed = waterUsed,
+            electricityIndex = electricityIndex,
+            electricityUsed = electricityUsed,
             serviceFee = serviceFee,
             discount = discount ?: "0",
             total = totalAmount,

@@ -29,4 +29,9 @@
         <item>TẠM VẮNG</item>
     </array>
 
+    <array name="tab_list_bill">
+        <item>ĐÃ THANH TOÁN</item>
+        <item>CHƯA THANH TOÁN</item>
+    </array>
+
 </resources>

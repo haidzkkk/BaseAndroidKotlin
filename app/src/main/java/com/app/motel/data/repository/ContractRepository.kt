@@ -64,16 +64,4 @@ class ContractRepository @Inject constructor(
             Resource.Error(message = e.toString())
         }
     }
-
-    suspend fun updateUserRented(tenantId: String, roomId: String?): Resource<Boolean>{
-        return try {
-            val stateTenant = if(roomId != null) NguoiThueEntity.Status.ACTIVE.value
-                else NguoiThueEntity.Status.INACTIVE.value
-
-            tenantDAO.updateRent(tenantId, roomId, stateTenant)
-            Resource.Success(true)
-        }catch (e: Exception) {
-            Resource.Error(message = e.toString())
-        }
-    }
 }

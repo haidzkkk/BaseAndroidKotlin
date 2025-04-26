@@ -92,8 +92,8 @@ class CreateBillFormFragment @Inject constructor() : AppBaseFragment<FragmentCre
             Log.d("previousBill", "${it.data} ${it.status} ${it.message}")
             when(it.status){
                 Status.SUCCESS -> {
-                    views.txtElectricityOld.setText(it.data?.electricityUsage?.toString() ?: 0.toString())
-                    views.txtWaterOld.setText(it.data?.waterUsage?.toString() ?: 0.toString())
+                    views.txtElectricityOld.setText(it.data?.electricityIndex?.toString() ?: 0.toString())
+                    views.txtWaterOld.setText(it.data?.waterIndex?.toString() ?: 0.toString())
                 }
                 Status.ERROR -> {
                     requireActivity().showToast(it.message ?: "Có lỗi xảy ra")

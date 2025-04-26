@@ -17,7 +17,9 @@ data class Tenant(
     val username: String,
     val password: String
 ){
+    @Transient
     var room: Room? = null
+    @Transient
     var contract: Contract? = null
 
     val isRenting: Boolean get() = status == NguoiThueEntity.Status.ACTIVE.value

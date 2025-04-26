@@ -37,6 +37,10 @@ class TenantRepository @Inject constructor(
         return tenantDAO.getTenantByRoomId(roomId).map { it.toModel() }
     }
 
+    suspend fun getTenantsById(id: String): Tenant? {
+        return tenantDAO.getNguoiThueById(id)?.toModel()
+    }
+
     suspend fun updateTenant(tenant: Tenant): Resource<Tenant> {
         try {
             val tenantEntity = tenant.toEntity()
@@ -54,6 +58,18 @@ class TenantRepository @Inject constructor(
             Resource.Success(tenantEntity.toModel(), message = "Thêm thành công")
         }catch (e: Exception) {
             Resource.Error(message = e.message ?: "Unknown error")
+        }
+    }
+
+    suspend fun updateUserRented(tenant: Tenant, roomId: String?): Resource<Tenant>{
+        return try {
+            val stateTenant = if(roomId != null) NguoiThueEntity.Status.ACTIVE.value
+            else NguoiThueEntity.Status.INACTIVE.value
+
+            tenantDAO.updateRent(tenant.id, roomId, stateTenant)
+            Resource.Success(tenant.copy(roomId = roomId, status = stateTenant), message = "Cập nhật thành công")
+        }catch (e: Exception) {
+            Resource.Error(message = e.toString())
         }
     }
 }

@@ -30,6 +30,9 @@ import com.app.motel.feature.auth.RegisterFragment
 import com.app.motel.feature.createBill.CreateBillActivity
 import com.app.motel.feature.createBill.CreateBillFormFragment
 import com.app.motel.feature.createBill.CreateBillListFragment
+import com.app.motel.feature.handleBill.HandleBillActivity
+import com.app.motel.feature.handleBill.HandleBillListFragment
+import com.app.motel.feature.handleBill.HandleDetailBillBottomSheet
 import com.app.motel.feature.news.NewsFragment
 import com.app.motel.feature.notify.NotifyFragment
 import com.app.motel.feature.profile.ProfileFragment
@@ -41,6 +44,7 @@ import com.app.motel.feature.room.RoomFormFragment
 import com.app.motel.feature.room.RoomListFragment
 import com.app.motel.feature.tenant.TenantActivity
 import com.app.motel.feature.tenant.TenantFormFragment
+import com.app.motel.feature.tenant.TenantListAddRoomFragment
 import com.app.motel.feature.tenant.TenantListFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -64,6 +68,7 @@ interface AppComponent {
     fun inject(createBillActivity: CreateBillActivity)
     fun inject(roomActivity: RoomActivity)
     fun inject(tenantActivity: TenantActivity)
+    fun inject(handleBillActivity: HandleBillActivity)
 
     fun inject(homeFragment: HomeFragment)
     fun inject(newsFragment: NewsFragment)
@@ -92,6 +97,9 @@ interface AppComponent {
     fun inject(roomFormFragment: RoomFormFragment)
     fun inject(tenantListFragment: TenantListFragment)
     fun inject(tenantFormFragment: TenantFormFragment)
+    fun inject(handleBillListFragment: HandleBillListFragment)
+    fun inject(handleDetailBillBottomSheet: HandleDetailBillBottomSheet)
+    fun inject(tenantListAddRoomFragment: TenantListAddRoomFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

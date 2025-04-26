@@ -5,16 +5,20 @@ import androidx.lifecycle.viewModelScope
 import com.app.motel.common.service.DateConverter
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.entity.HopDongEntity
+import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.entity.PhongEntity
 import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
+import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.ContractRepository
+import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.ProfileController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HandleContractViewModel @Inject constructor(
     private val repository: ContractRepository,
+    private val tenantRepository: TenantRepository,
     private val profileController: ProfileController,
 ): AppBaseViewModel<HandleContractViewState, HandleContractViewAction, HandleContractViewEvent>(
     HandleContractViewState()
@@ -121,7 +125,9 @@ class HandleContractViewModel @Inject constructor(
             val contractUpdated = repository.updateContract(contractUpdate)
             if(contractUpdated.isSuccess()){
                 repository.updateStateRoom(contractUpdated.data?.roomId ?: "", PhongEntity.Status.EMPTY.value)
-                repository.updateUserRented(contractUpdated.data?.customerId ?: "", null)
+
+                val tenantUpdate = Tenant(id = contractUpdated.data?.customerId ?: "", roomId = null, fullName = "", phoneNumber = "", birthDay = "", idCard = "", homeTown = "", username = "", password = "",)
+                tenantRepository.updateUserRented(tenantUpdate, null)
             }
             liveData.updateContract.postValue(contractUpdated.apply {
                 message = "Kết thúc hợp đồng thành công"

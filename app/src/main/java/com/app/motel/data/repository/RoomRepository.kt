@@ -78,7 +78,6 @@ class RoomRepository @Inject constructor(
         return try {
             val roomEntity = room.toEntity()
 
-//            contractDAO.updateRoomIdToNull(room.id)
             roomDAO.delete(roomEntity)
             Resource.Success(roomEntity.toModel())
         }catch (e: Exception) {

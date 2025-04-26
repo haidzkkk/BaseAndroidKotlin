@@ -88,11 +88,12 @@ object AppModule {
     @Provides
     fun providerBillRepository(
         db: AppDatabase,
+        contractRepository: ContractRepository,
     ): BillRepository = BillRepository(
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
         billDAO = db.billDao(),
-        serviceDAO = db.serviceDao(),
+        tenantDAO = db.tenantDao(),
     )
 
     @Provides

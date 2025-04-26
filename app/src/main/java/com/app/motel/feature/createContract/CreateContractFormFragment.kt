@@ -58,9 +58,13 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
         mViewModel.getTenantNotRented()
 
         views.btnSave.setOnClickListener{
+            val currentTenantPosition = views.spinnerCustomer.selectedItemPosition
+            val currentTenant: Tenant? = if(currentTenantPosition >= 0) mViewModel.liveData.tenantNotRented.value?.data?.get(currentTenantPosition)
+                else null
+
             mViewModel.createContact(
                 item,
-                mViewModel.liveData.tenantNotRented.value?.data?.get(views.spinnerCustomer.selectedItemPosition),
+                currentTenant,
                 views.txtName.text.toString(),
                 views.txtCreateDate.text.toString(),
                 views.txtStartDate.text.toString(),

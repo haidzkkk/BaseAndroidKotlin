@@ -143,9 +143,11 @@ class CreateBillViewModel @Inject constructor(
                 return@launch
             }
 
+            val waterUsed = newWaterMeter!! - (oldWaterMeter ?: 0)
+            val electricityUsed = newElectricityMeter!! - (oldElectricityMeter ?: 0)
             val total = room?.rentalPrice.toMoney().toDouble() +
-                    (newElectricityMeter!! - (oldElectricityMeter ?: 0)) * HoaDonEntity.PRICE_ELECTRICITY +
-                    (newWaterMeter!! - (oldWaterMeter ?: 0)) * HoaDonEntity.PRICE_WATER +
+                    waterUsed * HoaDonEntity.PRICE_ELECTRICITY +
+                    electricityUsed * HoaDonEntity.PRICE_WATER +
                     (servicePrice ?: 0) -
                     (discount ?: 0)
 
@@ -153,8 +155,10 @@ class CreateBillViewModel @Inject constructor(
                 name = room?.roomName,
                 createdDate = createdDate,
                 roomPrice = room?.rentalPrice.toMoney().toDouble(),
-                waterUsage = newWaterMeter,
-                electricityUsage = newElectricityMeter,
+                waterIndex = newWaterMeter,
+                waterUsed = waterUsed,
+                electricityIndex = newElectricityMeter,
+                electricityUsed = electricityUsed,
                 serviceFee = servicePrice.toStringMoney(),
                 discount = discount.toStringMoney(),
                 totalAmount = total.toInt().toStringMoney(),

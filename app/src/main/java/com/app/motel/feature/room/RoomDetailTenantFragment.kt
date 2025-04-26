@@ -16,6 +16,8 @@ import com.app.motel.databinding.FragmentRoomDetailTenantBinding
 import com.app.motel.feature.createContract.CreateContractFormFragment
 import com.app.motel.feature.room.viewmodel.RoomViewModel
 import com.app.motel.feature.tenant.TenantAdapter
+import com.app.motel.feature.tenant.TenantFormFragment
+import com.app.motel.feature.tenant.TenantListAddRoomFragment
 import com.google.gson.Gson
 import javax.inject.Inject
 
@@ -39,16 +41,20 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
         adapter = TenantAdapter(
             object : AppBaseAdapter.AppListener<Tenant>() {
                 override fun onClickItem(item: Tenant, action: AppBaseAdapter.ItemAction) {
-//                    navigateFragmentWithSlide(R.id.roomServiceFormFragment, args = Bundle().apply {
-//                        putString(ServiceFormFragment.ITEM_KEY, Gson().toJson(item))
-//                        putString(ServiceFormFragment.BOARDING_HOUSE_KEY, Gson().toJson(viewModel.liveData.currentBoardingHouse.value))
-//                    })
+                    val json = Gson().toJson(item)
+                    navigateFragmentWithSlide(R.id.roomTenantFormFragment, args = Bundle().apply { putString(
+                        TenantFormFragment.ITEM_KEY, json) })
                 }
             }
         )
+
         views.btnCreateContract.setOnClickListener{
             navigateFragmentWithSlide(R.id.roomCreateContractFormFragment, args = Bundle().apply { putString(
                 CreateContractFormFragment.ITEM_KEY, Gson().toJson(viewModel.liveData.currentRoom.value?.data)) })
+        }
+        views.btnAddTenant.setOnClickListener{
+            navigateFragmentWithSlide(R.id.tenantListAddRoomFragment, args = Bundle().apply { putString(
+                TenantListAddRoomFragment.ITEM_KEY, Gson().toJson(viewModel.liveData.currentRoom.value?.data)) })
         }
 
         views.rcvTenant.adapter = adapter
@@ -59,8 +65,9 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
         viewModel.liveData.currentRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 views.lyEmpty.isVisible = it.data?.contract == null
-                views.rcvTenant.isVisible = it.data?.tenants?.isNotEmpty() == true
+                views.lyTenant.isVisible = it.data?.tenants?.isNotEmpty() == true
                 adapter.updateData(it.data?.tenants ?: arrayListOf())
+                views.btnAddTenant.isVisible = it.data?.maxOccupants == null || it.data.maxOccupants > (it.data.tenants?.size ?: 0)
             }
         }
     }

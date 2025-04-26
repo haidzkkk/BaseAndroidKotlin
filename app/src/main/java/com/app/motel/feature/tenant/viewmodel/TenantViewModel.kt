@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.model.Resource
+import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.ProfileController
@@ -123,6 +124,21 @@ class TenantViewModel @Inject constructor(
             liveData.handleTenant.postValue(result.apply {
                 message = if(isLock) "Khóa người thuê thành công" else "Mở khóa người thuê thành công"
             })
+        }
+    }
+
+    fun updateTenantRent(tenant: Tenant, room: Room?){
+        liveData.handleTenant.postValue(Resource.Loading())
+        val currentUser = profileController.state.currentUser.value?.data
+        when {
+            currentUser == null || !currentUser.isAdmin -> {
+                liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
+                return
+            }
+        }
+        viewModelScope.launch {
+            val result = tenantRepository.updateUserRented(tenant, room?.id)
+            liveData.handleTenant.postValue(result)
         }
     }
 

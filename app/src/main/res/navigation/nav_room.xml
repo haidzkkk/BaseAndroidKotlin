@@ -28,6 +28,12 @@
         <action
             android:id="@+id/action_roomDetailFragment_to_creatContractFormFragment"
             app:destination="@id/roomCreateContractFormFragment" />
+        <action
+            android:id="@+id/action_roomDetailFragment_to_tenantFormFragment2"
+            app:destination="@id/roomTenantFormFragment" />
+        <action
+            android:id="@+id/action_roomDetailFragment_to_tenantListAddRoomFragment"
+            app:destination="@id/tenantListAddRoomFragment" />
     </fragment>
     <fragment
         android:id="@+id/roomServiceFormFragment"
@@ -62,6 +68,24 @@
         <action
             android:id="@+id/action_roomFormFragment_to_roomServiceFormFragment"
             app:destination="@id/roomServiceFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomTenantFormFragment"
+        android:name="com.app.motel.feature.tenant.TenantFormFragment"
+        android:label="fragment_tenant_form"
+        tools:layout="@layout/fragment_tenant_form" >
+        <action
+            android:id="@+id/action_tenantFormFragment2_to_roomDetailFragment"
+            app:destination="@id/roomDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tenantListAddRoomFragment"
+        android:name="com.app.motel.feature.tenant.TenantListAddRoomFragment"
+        android:label="fragment_tenant_list_add_room"
+        tools:layout="@layout/fragment_tenant_list_add_room" >
+        <action
+            android:id="@+id/action_tenantListAddRoomFragment_to_roomDetailFragment"
+            app:destination="@id/roomDetailFragment" />
     </fragment>
 
 </navigation>

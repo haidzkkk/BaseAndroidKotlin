@@ -13,6 +13,7 @@ import com.app.motel.core.AppBaseFragment
 import com.app.motel.databinding.FragmentManagementBoardingHouseBinding
 import com.app.motel.feature.createBill.CreateBillActivity
 import com.app.motel.feature.createContract.CreateContractActivity
+import com.app.motel.feature.handleBill.HandleBillActivity
 import com.app.motel.feature.handleContract.HandleContractActivity
 import com.app.motel.feature.home.viewmodel.HomeViewModel
 import com.app.motel.feature.room.RoomActivity
@@ -79,7 +80,7 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyListBill.img.setImageResource(R.drawable.payment)
         views.lyListBill.title.text = "Danh sách hóa đơn"
         views.lyListBill.root.setOnClickListener{
-
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), HandleBillActivity::class.java))
         }
 
         views.lyListContract.img.setImageResource(R.drawable.list_contract)
