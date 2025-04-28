@@ -1,7 +1,7 @@
 package com.app.motel.data.entity
 
 import androidx.room.*
-import com.app.motel.data.model.Regulation
+import com.app.motel.data.model.Rules
 
 @Entity(
     tableName = "QuyDinh",
@@ -35,12 +35,17 @@ data class QuyDinhEntity(
     @ColumnInfo(name = "TrangThai")
     val status: Int? = 1
 ) {
-    fun toModel() = Regulation(
+    companion object{
+        const val STATUS_ACTIVE = 1
+        const val STATUS_INACTIVE = 0
+    }
+
+    fun toModel() = Rules(
         id = id,
         title = title,
         content = content,
         createdDate = createdDate,
-        khuTroId = khuTroId,
+        boardingHouseId = khuTroId,
         status = status ?: 1
     )
 }

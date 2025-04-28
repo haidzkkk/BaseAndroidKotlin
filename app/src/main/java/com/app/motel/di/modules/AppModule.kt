@@ -13,8 +13,8 @@ import com.app.motel.data.repository.ComplaintRepository
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.ProfileRepository
-import com.app.motel.data.repository.RegulationRepository
 import com.app.motel.data.repository.RoomRepository
+import com.app.motel.data.repository.RulesRepository
 import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.ProfileController
@@ -106,13 +106,6 @@ object AppModule {
     )
 
     @Provides
-    fun providerRegulationRepository(
-        db: AppDatabase,
-    ): RegulationRepository = RegulationRepository(
-        regulationDAO = db.regulationDao(),
-    )
-
-    @Provides
     fun providerComplaintRepository(
         db: AppDatabase,
     ): ComplaintRepository = ComplaintRepository(
@@ -145,6 +138,14 @@ object AppModule {
         tenantDAO = db.tenantDao(),
         roomDAO = db.roomDao(),
         contractDAO = db.contractDao(),
+    )
+
+    @Provides
+    fun providerRulesRepository(
+        db: AppDatabase,
+    ): RulesRepository = RulesRepository(
+        boardingHouseDAO = db.boardingHouseDao(),
+        rulesDAO = db.rulesDAO(),
     )
 
     @Provides

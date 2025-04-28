@@ -14,6 +14,7 @@ data class BoardingHouse(
 ){
     var rooms: List<Room>? = null
     var service: List<Service>? = null
+    var rules: ArrayList<Rules>? = null
 
     fun toEntity(): KhuTroEntity {
         return KhuTroEntity(

@@ -12,6 +12,7 @@ import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import com.app.motel.feature.createBill.viewmodel.CreateBillViewModel
 import com.app.motel.feature.handleBill.viewmodel.HandleBillViewModel
 import com.app.motel.feature.room.viewmodel.RoomViewModel
+import com.app.motel.feature.rules.viewmodel.RulesViewModel
 import com.app.motel.feature.tenant.viewmodel.TenantViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -69,6 +70,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(HandleBillViewModel::class)
     fun bindHandleBillViewModel(authViewModel: HandleBillViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RulesViewModel::class)
+    fun bindRulesViewModel(authViewModel: RulesViewModel): ViewModel
 
     @Binds
     @IntoMap

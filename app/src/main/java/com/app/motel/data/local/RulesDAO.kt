@@ -4,16 +4,16 @@ import androidx.room.*
 import com.app.motel.data.entity.QuyDinhEntity
 
 @Dao
-interface RegulationDAO {
+interface RulesDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRegulation(regulation: QuyDinhEntity)
+    suspend fun insert(regulation: QuyDinhEntity)
 
     @Update
-    suspend fun updateRegulation(regulation: QuyDinhEntity)
+    suspend fun update(regulation: QuyDinhEntity)
 
     @Delete
-    suspend fun deleteRegulation(regulation: QuyDinhEntity)
+    suspend fun delete(regulation: QuyDinhEntity)
 
     @Query("SELECT * FROM QuyDinh WHERE ID = :id")
     suspend fun getRegulationById(id: String): QuyDinhEntity?

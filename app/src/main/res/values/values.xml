@@ -12,6 +12,11 @@
         <item>Hết hạn</item>
     </array>
 
+    <array name="tab_contract_lít">
+        <item>Còn hiệu lực</item>
+        <item>Hết hiệu lực</item>
+    </array>
+
     <array name="tab_room">
         <item>TẤT CẢ</item>
         <item>ĐANG THUÊ</item>
@@ -32,6 +37,11 @@
     <array name="tab_list_bill">
         <item>ĐÃ THANH TOÁN</item>
         <item>CHƯA THANH TOÁN</item>
+    </array>
+
+    <array name="tab_rules">
+        <item>NỘI QUY CHUNG</item>
+        <item>CHỈNH SỬA</item>
     </array>
 
 </resources>

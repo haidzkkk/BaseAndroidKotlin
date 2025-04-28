@@ -50,7 +50,7 @@
         <item name="android:background">@drawable/background_border_radius_1</item>
     </style>
 
-<!--    text input layout-->
+    <!--    text input layout-->
     <style name="InputLayoutStyle1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
         <item name="boxCornerRadiusTopStart">@dimen/RADIUS_SMALL</item>
