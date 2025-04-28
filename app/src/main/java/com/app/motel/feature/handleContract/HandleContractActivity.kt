@@ -10,11 +10,19 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
+import com.app.motel.data.entity.PhongEntity
+import com.app.motel.data.model.Contract
+import com.app.motel.data.model.Resource
 import com.app.motel.databinding.ActivityHandleContractBinding
 import com.app.motel.feature.handleContract.viewmodel.HandleContractViewModel
+import com.app.motel.feature.room.RoomActivity.Companion.ROOM_STATE_KEY
 import javax.inject.Inject
 
 class HandleContractActivity() : AppBaseActivity<ActivityHandleContractBinding>() {
+
+    companion object{
+        const val CONTRACT_STATE_KEY = "CONTRACT_STATE_KEY"
+    }
 
     override fun getBinding(): ActivityHandleContractBinding {
         return ActivityHandleContractBinding.inflate(layoutInflater)
@@ -44,6 +52,11 @@ class HandleContractActivity() : AppBaseActivity<ActivityHandleContractBinding>(
         findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
             val isHomeFragment = destination.id == R.id.handleContractListFragment
             supportActionBar?.setDisplayShowTitleEnabled(isHomeFragment)
+        }
+
+        val status: String? = intent.getStringExtra(CONTRACT_STATE_KEY)
+        if(status != null){
+            mViewModel.liveData.currentStateContract.postValue(Contract.State.getStateByValue(status))
         }
     }
 

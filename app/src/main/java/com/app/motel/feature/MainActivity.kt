@@ -48,8 +48,13 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         }
         setUpBottomNav()
         setupToolBar()
-        init()
         handleObserverData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        init()
     }
 
     private fun setUpBottomNav() {
@@ -114,6 +119,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
     }
 
     private fun init() {
+        Log.e("MainActivity", "init:")
         mViewModel.profileController.getCurrentUser()
     }
 

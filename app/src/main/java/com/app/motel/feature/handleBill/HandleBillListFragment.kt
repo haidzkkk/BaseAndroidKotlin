@@ -3,6 +3,7 @@ package com.app.motel.feature.handleBill
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.app.motel.core.AppBaseDialog
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.data.entity.HoaDonEntity
 import com.app.motel.data.model.Bill
+import com.app.motel.data.model.Contract
 import com.app.motel.databinding.DialogDatePickerBinding
 import com.app.motel.databinding.FragmentHandleBillListBinding
 import com.app.motel.feature.handleBill.viewmodel.HandleBillViewModel
@@ -32,7 +34,7 @@ class HandleBillListFragment : AppBaseFragment<FragmentHandleBillListBinding>() 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel : HandleBillViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(HandleBillViewModel::class.java)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(HandleBillViewModel::class.java)
     }
 
     lateinit var adapter: BillAdapter
@@ -63,6 +65,13 @@ class HandleBillListFragment : AppBaseFragment<FragmentHandleBillListBinding>() 
                 }
             }
         })
+        views.tabBar.post {
+            views.tabBar.setTabSelected(when(viewModel.liveData.filterState.value){
+                HoaDonEntity.STATUS_PAID -> 0
+                HoaDonEntity.STATUS_UNPAID -> 1
+                else -> 0
+            })
+        }
         views.btnPreviousMonth.setOnClickListener {
             val calendar = viewModel.liveData.currentDate.value!!
             calendar.add(Calendar.MONTH, -1)

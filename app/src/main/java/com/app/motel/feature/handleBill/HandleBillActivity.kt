@@ -1,6 +1,7 @@
 package com.app.motel.feature.handleBill
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,12 +11,19 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
+import com.app.motel.data.entity.HoaDonEntity
+import com.app.motel.data.model.Contract
 import com.app.motel.databinding.ActivityHandleBillBinding
 import com.app.motel.databinding.ActivityTenantBinding
 import com.app.motel.feature.handleBill.viewmodel.HandleBillViewModel
+import com.app.motel.feature.handleContract.HandleContractActivity.Companion.CONTRACT_STATE_KEY
 import javax.inject.Inject
 
 class HandleBillActivity : AppBaseActivity<ActivityHandleBillBinding>() {
+
+    companion object{
+        const val BILL_STATE_KEY = "BILL_STATE_KEY"
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -43,13 +51,8 @@ class HandleBillActivity : AppBaseActivity<ActivityHandleBillBinding>() {
             }
         })
 
-        findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
-//            supportActionBar?.title = when(destination.id){
-//                R.id.tenantListFragment -> "Danh sách khách thuê"
-//                R.id.tenantListFragment -> "Chỉnh sửa khách thuê"
-//                else -> "Danh sách khách thuê"
-//            }
-        }
+        val status: Int = intent.getIntExtra(BILL_STATE_KEY, HoaDonEntity.STATUS_PAID)
+        viewModel.liveData.filterState.postValue(status)
     }
 
     private fun setupToolBar(){

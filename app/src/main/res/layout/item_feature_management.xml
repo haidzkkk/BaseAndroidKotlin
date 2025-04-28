@@ -14,11 +14,22 @@
         android:src="@drawable/tenant"/>
 
     <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/TEXT_SIZE_EXTRA_LARGE"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/PADDING_SIZE_SMALL"
+        android:visibility="gone"
+        android:text="0"/>
+
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/TEXT_SIZE_DEFAULT"
         android:textStyle="bold"
+        android:textAlignment="center"
         android:layout_marginTop="@dimen/PADDING_SIZE_SMALL"
         android:text="Tạo hợp đồng"/>
 

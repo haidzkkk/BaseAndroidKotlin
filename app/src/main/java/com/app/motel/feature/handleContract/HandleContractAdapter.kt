@@ -27,7 +27,7 @@ class HandleContractAdapter(
             tvRoomName.text = item.name
             tvTanantName.text = "Họ và tên: ${item.tenant?.fullName ?: ""}"
 
-            tvState.text = "Tình trạng hợp đồng: ${item.state.stateName}"
+            tvState.text = "Tình trạng hợp đồng: ${item.state.value}"
             tvState.setTextColor(binding.root.context.resources.getColor(R.color.green, binding.root.context.theme))
 
             tvDateCreate.text = item.createdDate

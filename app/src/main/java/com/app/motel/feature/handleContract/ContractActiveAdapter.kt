@@ -28,7 +28,7 @@ class ContractActiveAdapter(
             tvTanantName.text = "Họ và tên: ${item.tenant?.fullName ?: ""}"
 
             if(item.isActive == HopDongEntity.ACTIVE){
-                tvState.text = "Tình trạng hợp đồng: ${item.state.stateName}"
+                tvState.text = "Tình trạng hợp đồng: ${item.state.value}"
                 tvState.setTextColor(binding.root.context.resources.getColor(R.color.green, binding.root.context.theme))
             }else{
                 tvState.text = "Tình trạng hợp đồng: hết hiệu lực"

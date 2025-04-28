@@ -16,6 +16,11 @@ data class BoardingHouse(
     var service: List<Service>? = null
     var rules: ArrayList<Rules>? = null
 
+    val getRoomEmpty get() = rooms?.filter { it.isEmpty}
+    val getRoomRenting get() = rooms?.filter { it.isRenting}
+    val getRoomNearEnd get() = rooms?.filter { it.contract?.isNearEnd == true}
+    val getRoomNotPayBill get() = rooms
+
     fun toEntity(): KhuTroEntity {
         return KhuTroEntity(
             id = id,

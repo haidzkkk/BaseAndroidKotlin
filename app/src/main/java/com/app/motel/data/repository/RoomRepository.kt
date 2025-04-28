@@ -22,18 +22,6 @@ class RoomRepository @Inject constructor(
     private val tenantRepository: TenantRepository,
 ) {
 
-    suspend fun getContractByUserId(userId: String): List<Contract> {
-        val contractEntities: List<HopDongEntity> = contractDAO.getContractsByUserId(userId)
-        return contractEntities.map { contractEntity ->
-            val roomEntity = roomDAO.getPhongById(contractEntity.maPhong ?: "")
-            val tenantEntity = tenantDAO.getNguoiThueById(contractEntity.maKhach ?: "")
-            contractEntity.toModel().apply {
-                this.room = roomEntity?.toModel()
-                this.tenant = tenantEntity?.toModel()
-            }
-        }
-    }
-
     suspend fun getBoardingRoomByUserId(userId: String): List<BoardingHouse> {
         val boardingHousesEntities: List<KhuTroEntity> = boardingHouseDAO.getByUserId(userId)
         return boardingHousesEntities.map { boardingHouseEntity ->

@@ -11,6 +11,7 @@ import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.entity.PhongEntity
 import com.app.motel.data.model.Contract
 import com.app.motel.databinding.FragmentHandleContractListBinding
 import com.app.motel.feature.handleContract.viewmodel.HandleContractViewModel
@@ -41,12 +42,19 @@ class HandleContractListFragment @Inject constructor() : AppBaseFragment<Fragmen
 
     private fun init() {
         viewModel.getContracts()
-        viewModel.setCurrentStateContract(views.tabBar.currentPosition)
         views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
             override fun onTabSelected(position: Int) {
                 viewModel.setCurrentStateContract(position)
             }
         })
+        views.tabBar.post {
+            views.tabBar.setTabSelected(when(viewModel.liveData.currentStateContract.value){
+                Contract.State.ACTIVE -> 0
+                Contract.State.NEAR_END -> 1
+                Contract.State.ENDED -> 2
+                else -> 0
+            })
+        }
         adapter = HandleContractAdapter(object: AppBaseAdapter.AppListener<Contract>(){
             override fun onClickItem(item: Contract, action: AppBaseAdapter.ItemAction) {
                 when(action){

@@ -26,6 +26,8 @@ data class Contract(
     val state: State
         get() = State.getStateByDate(endDate ?: "")
 
+    val isNearEnd get () = state == State.NEAR_END
+
     fun toEntity() = HopDongEntity(
         id = id,
         ten = name,
@@ -57,7 +59,7 @@ data class Contract(
     )
 
     enum class State(
-        val stateName: String
+        val value: String
     ) {
         ACTIVE("Còn hạn"),
         NEAR_END("Sắp hết hạn"),
@@ -65,6 +67,10 @@ data class Contract(
         UNKNOWN("Không xác định");
 
         companion object {
+            fun getStateByValue(value: String): State{
+                return entries.firstOrNull{ it.value == value } ?: ACTIVE
+            }
+
             fun getStateByDate(date: String): State {
                 val expiryDate = DateConverter.localStringToDate(date)
                 val today = DateConverter.getCurrentDateTime()

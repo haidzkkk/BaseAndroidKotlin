@@ -38,13 +38,13 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
 //        viewModel.handle(HomeViewAction.GetMotelViewAction)
 //        viewModel.handle(HomeViewAction.GetBoardingViewAction)
 
-        setupUI()
+        setup()
 
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setupUI() {
+    private fun setup() {
         views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
             override fun onTabSelected(position: Int) {
                 views.viewPager.currentItem = position

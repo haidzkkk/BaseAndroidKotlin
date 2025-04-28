@@ -10,12 +10,18 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
+import com.app.motel.data.entity.PhongEntity
+import com.app.motel.data.model.Resource
 import com.app.motel.databinding.ActivityRoomBinding
 import com.app.motel.feature.room.viewmodel.RoomViewModel
 import javax.inject.Inject
 
 
 class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
+
+    companion object{
+        const val ROOM_STATE_KEY = "room_status"
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -48,7 +54,11 @@ class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
                 R.id.roomDetailFragment -> "Chi tiết phòng"
                 else -> "Danh sách các phòng"
             }
+        }
 
+        val status: String? = intent.getStringExtra(ROOM_STATE_KEY)
+        if(status != null){
+            viewModel.liveData.currentRoomState.postValue(Resource.Success(PhongEntity.Status.fromValue(status)))
         }
     }
 
