@@ -13,5 +13,6 @@ class ProfileViewState : AppViewLiveData {
     val isAdmin: Boolean get () = currentUser.value?.data?.isAdmin == true
     val currentUserId: String get() = currentUser.value?.data?.id ?: ""
     val currentBoardingHouseId: String get() = currentBoardingHouse.value?.data?.id ?: ""
+    val getCurrentUser: CommonUser? get() = currentUser.value?.data
     val getCurrentBoardingHouse: BoardingHouse? get() = currentBoardingHouse.value?.data
 }

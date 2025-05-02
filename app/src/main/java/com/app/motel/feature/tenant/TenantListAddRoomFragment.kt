@@ -1,17 +1,12 @@
 package com.app.motel.feature.tenant
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
-import com.app.motel.R
-import com.app.motel.common.ultis.containsSearch
-import com.app.motel.common.ultis.navigateFragmentWithSlide
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
@@ -20,9 +15,7 @@ import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
 import com.app.motel.databinding.FragmentTenantListAddRoomBinding
-import com.app.motel.databinding.FragmentTenantListBinding
 import com.app.motel.feature.tenant.viewmodel.TenantViewModel
-import com.app.motel.ui.custom.CustomTabBar
 import com.google.gson.Gson
 import javax.inject.Inject
 
@@ -80,7 +73,7 @@ class TenantListAddRoomFragment : AppBaseFragment<FragmentTenantListAddRoomBindi
                 views.tvEmpty.isVisible = tenants.isEmpty()
             }
         }
-        viewModel.liveData.handleTenant.observe(viewLifecycleOwner){
+        viewModel.liveData.updateTenant.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 viewModel.getTenants()
                 requireContext().showToast(it.message ?: "Thành công")

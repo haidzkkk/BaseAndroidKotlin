@@ -25,6 +25,11 @@ class ProfileFragment @Inject constructor() : AppBaseFragment<FragmentProfileBin
         (requireActivity().application as AppApplication).appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
+        views.tvInfo.setOnClickListener {
+            requireActivity().apply {
+                startActivity(Intent(this, ProfileDetailActivity::class.java))
+            }
+        }
         views.tvLogout.setOnClickListener {
             requireActivity().apply {
                 profileViewModel.logout()

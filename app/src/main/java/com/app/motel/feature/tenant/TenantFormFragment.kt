@@ -115,7 +115,7 @@ class TenantFormFragment : AppBaseFragment<FragmentTenantFormBinding>() {
                 }
             }
         }
-        viewModel.liveData.handleTenant.observe(viewLifecycleOwner){
+        viewModel.liveData.updateTenant.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                  requireActivity().showToast(it.message ?: "Thành công")
                  popFragmentWithSlide()

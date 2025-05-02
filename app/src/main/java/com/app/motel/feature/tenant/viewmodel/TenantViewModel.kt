@@ -3,9 +3,12 @@ package com.app.motel.feature.tenant.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.entity.NguoiThueEntity
+import com.app.motel.data.model.CommonUser
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
+import com.app.motel.data.model.User
+import com.app.motel.data.repository.ProfileRepository
 import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
@@ -13,6 +16,7 @@ import javax.inject.Inject
 
 class TenantViewModel @Inject constructor(
     private val tenantRepository: TenantRepository,
+    private val profileRepository: ProfileRepository,
     private val userController: UserController
 ): AppBaseViewModel<TenantState, TenantViewAction, TenantViewEvent>(TenantState()) {
     override fun handle(action: TenantViewAction) {
@@ -42,27 +46,27 @@ class TenantViewModel @Inject constructor(
         username: String?,
         password: String?,
     ){
-        liveData.handleTenant.postValue(Resource.Loading())
+        liveData.updateTenant.postValue(Resource.Loading())
         val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
             fullName.isNullOrBlank() -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Họ tên là bắt buộc"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Họ tên là bắt buộc"))
                 return
             }
             state.isNullOrBlank() -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Trạng thái là bắt buộc"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Trạng thái là bắt buộc"))
                 return
             }
             username.isNullOrBlank() -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Tên đăng nhập là bắt buộc"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Tên đăng nhập là bắt buộc"))
                 return
             }
             password.isNullOrBlank() -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Mật khẩu là bắt buộc"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Mật khẩu là bắt buộc"))
                 return
             }
         }
@@ -92,7 +96,7 @@ class TenantViewModel @Inject constructor(
             val result = if(isUpdate) tenantRepository.updateTenant(tenantUpdate)
                 else tenantRepository.addTenant(tenantUpdate)
 
-            liveData.handleTenant.postValue(result)
+            liveData.updateTenant.postValue(result)
         }
     }
 
@@ -100,15 +104,15 @@ class TenantViewModel @Inject constructor(
         tenant: Tenant?,
         isLock: Boolean,
     ){
-        liveData.handleTenant.postValue(Resource.Loading())
+        liveData.updateTenant.postValue(Resource.Loading())
         val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
             tenant?.id == null -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Người thuê không tồn tại"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Người thuê không tồn tại"))
                 return
             }
         }
@@ -121,29 +125,75 @@ class TenantViewModel @Inject constructor(
             )
 
             val result = tenantRepository.updateTenant(tenantUpdate)
-            liveData.handleTenant.postValue(result.apply {
+            liveData.updateTenant.postValue(result.apply {
                 message = if(isLock) "Khóa người thuê thành công" else "Mở khóa người thuê thành công"
             })
         }
     }
 
     fun updateTenantRent(tenant: Tenant, room: Room?){
-        liveData.handleTenant.postValue(Resource.Loading())
+        liveData.updateTenant.postValue(Resource.Loading())
         val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
             room?.id.isNullOrBlank() -> {
-                liveData.handleTenant.postValue(Resource.Error(message = "Phòng không tồn tại"))
+                liveData.updateTenant.postValue(Resource.Error(message = "Phòng không tồn tại"))
                 return
             }
         }
         viewModelScope.launch {
             val result = tenantRepository.updateTenantRentToRoom(tenant, room!!.id)
-            liveData.handleTenant.postValue(result)
+            liveData.updateTenant.postValue(result)
         }
     }
 
+    fun updateCurrentUser(
+        currentUser: CommonUser?,
+        fullName: String?,
+        birthDay: String?,
+        phoneNumber: String?,
+        email: String?,
+        homeTown: String?,
+        username: String?,
+        password: String?,
+    ){
+        liveData.updateCurrentUser.postValue(Resource.Loading())
+        when {
+            currentUser?.child !is User && currentUser?.child !is Tenant -> {
+                liveData.updateTenant.postValue(Resource.Error(message = "Không tìm thấy thông tin hiện tại của bạn"))
+                return
+            }
+            fullName.isNullOrBlank() -> {
+                liveData.updateTenant.postValue(Resource.Error(message = "Họ tên là bắt buộc"))
+                return
+            }
+            username.isNullOrBlank() -> {
+                liveData.updateTenant.postValue(Resource.Error(message = "Tên đăng nhập là bắt buộc"))
+                return
+            }
+            password.isNullOrBlank() -> {
+                liveData.updateTenant.postValue(Resource.Error(message = "Mật khẩu là bắt buộc"))
+                return
+            }
+        }
+
+        viewModelScope.launch {
+            val userUpdate: CommonUser = currentUser!!.copy(
+                fullName = fullName!!,
+                birthDay = birthDay,
+                phoneNumber = phoneNumber,
+                homeTown = homeTown,
+                email = email,
+                username = username,
+                password = password,
+            )
+
+            val result = profileRepository.updateCurrentUser(userUpdate)
+
+            liveData.updateCurrentUser.postValue(result)
+        }
+    }
 }

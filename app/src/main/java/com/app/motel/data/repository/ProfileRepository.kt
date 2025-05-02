@@ -5,6 +5,7 @@ import com.app.motel.common.AppConstants
 import com.app.motel.data.local.TenantDAO
 import com.app.motel.data.local.UserDAO
 import com.app.motel.data.model.CommonUser
+import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Tenant
 import com.app.motel.data.model.User
 import javax.inject.Inject
@@ -38,4 +39,22 @@ class ProfileRepository @Inject constructor(
         return  null
     }
 
+    suspend fun updateCurrentUser(user: CommonUser): Resource<CommonUser> {
+        try {
+            if(user.isAdmin){
+                val userEntity = (user.child as User).toEntity()
+                userDAO.update(userEntity)
+                return Resource.Success(CommonUser.AdminUser(userEntity.toModel()), message = "Cập nhật thành công")
+            }else {
+                val userEntity = (user.child as Tenant).toEntity()
+                tenantDAO.update(userEntity)
+                return Resource.Success(
+                    CommonUser.NormalUser(userEntity.toModel()),
+                    message = "Cập nhật thành công"
+                )
+            }
+        } catch (e: Exception) {
+            return Resource.Error(message = e.message ?: "Unknown error")
+        }
+    }
 }

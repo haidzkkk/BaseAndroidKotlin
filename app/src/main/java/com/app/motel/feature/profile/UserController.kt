@@ -1,7 +1,11 @@
 package com.app.motel.feature.profile
 
+import androidx.lifecycle.viewModelScope
 import com.app.motel.data.model.BoardingHouse
+import com.app.motel.data.model.CommonUser
 import com.app.motel.data.model.Resource
+import com.app.motel.data.model.Room
+import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.BoardingHouseRepository
 import com.app.motel.data.repository.ProfileRepository
 import kotlinx.coroutines.CoroutineScope
@@ -28,13 +32,15 @@ class UserController @Inject constructor(
                 state.currentUser.postValue(Resource.Error(message = "Không tìm thấy người dùng"))
             }else{
                 state.currentUser.postValue(Resource.Success(user))
-                getCurrentBoardingHouse(user.id)
+                getCurrentBoardingHouse(user)
             }
         }
     }
 
-    suspend fun getCurrentBoardingHouse(userId: String){
-        val boardingHouse = boardingHouseRepository.getCurrentBoardingHouse(userId)
+    suspend fun getCurrentBoardingHouse(user: CommonUser){
+        if(user.id.isEmpty() || !user.isAdmin) return
+
+        val boardingHouse = boardingHouseRepository.getCurrentBoardingHouse(user.id)
         if(boardingHouse == null){
             state.currentBoardingHouse.postValue(Resource.Error(message = "Không tìm thấy người dùng"))
         }else{
@@ -62,7 +68,7 @@ class UserController @Inject constructor(
         try {
             boardingHouseRepository.setCurrentBoardingHouse(currentUser.id, boardingHouse)
             scope.launch {
-                getCurrentBoardingHouse(currentUser.id)
+                getCurrentBoardingHouse(currentUser)
             }
             return true
         }catch (e: Exception){

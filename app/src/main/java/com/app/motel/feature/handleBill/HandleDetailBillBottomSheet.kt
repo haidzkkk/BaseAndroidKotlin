@@ -56,7 +56,7 @@ class HandleDetailBillBottomSheet(private val bill: Bill): AppBaseBottomSheet<Di
                 tvTenantName.text = "Tên khách: ${it?.tenant?.fullName}"
                 tvBillDate.text = "Hóa đơn tháng ${it?.month}/${it?.year}"
                 tvPriceRoom.text = it?.roomPrice?.toInt().toStringMoney() + " VND"
-                tvPriceService.text = it?.serviceFee?.toInt().toStringMoney() + " VND"
+                tvPriceService.text = it?.serviceFee.toStringMoney() + " VND"
                 tvElectricityIndex.text = it?.electricityUsed.toStringMoney() + " Số"
                 tvWaterIndex.text = it?.waterUsed.toStringMoney() + " Khối"
                 tvPriceDiscount.text = it?.discount.toStringMoney() + " VND"
