@@ -27,6 +27,12 @@ interface NotificationDAO {
     @Query("SELECT * FROM ThongBao WHERE MaPhong = :phongId")
     suspend fun getByPhong(phongId: String): List<ThongBaoEntity>
 
+    @Query("SELECT * FROM ThongBao LEFT JOIN KhuTro ON ThongBao.MaKhuTro = KhuTro.ID WHERE KhuTro.ID = :boardingHouseId ORDER BY NgayTao DESC")
+    suspend fun getNewByPhongByUserId(boardingHouseId: String): List<ThongBaoEntity>
+
     @Query("UPDATE ThongBao SET DaDoc = 1 WHERE ID = :id")
     suspend fun markAsRead(id: String)
+
+    @Query("DELETE FROM ThongBao WHERE MaKhuTro = :id")
+    suspend fun deleteByBoardingHouseId(id: String)
 }

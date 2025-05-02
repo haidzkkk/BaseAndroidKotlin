@@ -79,7 +79,7 @@ class RoomListFragment @Inject constructor() : AppBaseFragment<FragmentListRoomB
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.boardingRoom.observe(viewLifecycleOwner){
+        viewModel.liveData.rooms.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 val rooms = viewModel.liveData.roomsWithCurrentStateSearch
                 adapter.updateData(rooms)

@@ -10,7 +10,7 @@ import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.TenantRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ class CreateContractViewModel @Inject constructor(
     private val repository: ContractRepository,
     private val tenantRepository: TenantRepository,
     private val roomRepository: RoomRepository,
-    private val profileController: ProfileController,
+    private val userController: UserController,
 ): AppBaseViewModel<CreateContractViewState, CreateContractViewAction, CreateContractViewEvent>(
     CreateContractViewState()
 ) {
@@ -41,14 +41,14 @@ class CreateContractViewModel @Inject constructor(
     }
 
     fun getRoom(){
-        liveData.boardingRoom.postValue(Resource.Loading())
+        liveData.rooms.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val boardingHouses = roomRepository.getBoardingRoomByUserId(userId)
-                liveData.boardingRoom.postValue(Resource.Success(boardingHouses))
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val rooms = roomRepository.geRoomBytBoardingHouseId(boardingHouseId)
+                liveData.rooms.postValue(Resource.Success(rooms))
             }catch (e: Exception){
-                liveData.boardingRoom.postValue(Resource.Error(message = e.toString()))
+                liveData.rooms.postValue(Resource.Error(message = e.toString()))
             }
         }
     }
@@ -64,7 +64,7 @@ class CreateContractViewModel @Inject constructor(
         note: String?,
     ){
         liveData.createContract.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.createContract.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
@@ -115,7 +115,7 @@ class CreateContractViewModel @Inject constructor(
             val contractCreated = repository.createContract(newContract)
             if(contractCreated.isSuccess()){
                 repository.updateStateRoom(room.id, PhongEntity.Status.RENTED.value)
-                tenantRepository.updateUserRented(tenant, room.id)
+                tenantRepository.updateTenantRentToRoom(tenant, room.id)
             }
             liveData.createContract.postValue(contractCreated)
         }

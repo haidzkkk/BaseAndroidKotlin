@@ -19,13 +19,13 @@ class ProfileFragment @Inject constructor() : AppBaseFragment<FragmentProfileBin
     }
 
     @Inject
-    lateinit var profileViewModel : ProfileController
+    lateinit var profileViewModel : UserController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
-        views.tvContent.setOnClickListener {
+        views.tvLogout.setOnClickListener {
             requireActivity().apply {
                 profileViewModel.logout()
                 finishAffinity()
@@ -37,7 +37,8 @@ class ProfileFragment @Inject constructor() : AppBaseFragment<FragmentProfileBin
             when(it.status){
                 Status.SUCCESS -> {
                     val user = it.data!!
-                    views.tvContent.text = "${user.id} ${user.name} ${user.role}"
+                    views.tvUserName.text = user.name
+                    views.tvNumberPhone.text = user.phone
                 }
                 else -> {}
             }

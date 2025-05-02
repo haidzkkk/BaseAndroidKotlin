@@ -7,44 +7,36 @@ import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Service
 import com.app.motel.data.repository.ServiceRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ServiceViewModel @Inject constructor(
     private val repository: ServiceRepository,
-    private val profileController: ProfileController,
+    private val userController: UserController,
 ): AppBaseViewModel<ServiceViewState, ServiceViewAction, ServiceViewEvent>(
     ServiceViewState()
 ) {
     override fun handle(action: ServiceViewAction) {
     }
 
-    fun initForm(item: Service?,  boardingHouse: BoardingHouse? = null) {
+    fun initForm(item: Service?) {
         liveData.currentService.postValue(item)
-
-        val currentBoardingHouse = boardingHouse ?: liveData.boardingService.value?.data?.firstOrNull{
-            it.service?.firstOrNull { service -> service.id == item?.id } != null
-        } ?: liveData.boardingService.value?.data?.firstOrNull()
-
-        liveData.currentBoardingHouse.postValue(currentBoardingHouse)
     }
 
     fun clearForm(){
         liveData.currentService.postValue(null)
-        liveData.currentBoardingHouse.postValue(null)
         liveData.createService.postValue(Resource.Initialize())
     }
 
     fun getService(){
-        liveData.boardingService.postValue(Resource.Loading())
+        liveData.services.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val boardingHouses = repository.getBoardingServiceByUserId(userId)
-                liveData.boardingService.postValue(Resource.Success(boardingHouses))
+                val services = repository.getBoardingServiceByUserId(userController.state.currentBoardingHouseId)
+                liveData.services.postValue(Resource.Success(services))
             }catch (e: Exception){
-                liveData.boardingService.postValue(Resource.Error(message = e.toString()))
+                liveData.services.postValue(Resource.Error(message = e.toString()))
             }
         }
     }
@@ -56,13 +48,13 @@ class ServiceViewModel @Inject constructor(
         isAppliesAllRoom: Boolean,
     ){
         liveData.createService.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.createService.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
-            liveData.currentBoardingHouse.value == null -> {
+            userController.state.currentBoardingHouse.value == null -> {
                 liveData.createService.postValue(Resource.Error(message = "Không tìm thấy khu trọ của bạn"))
                 return
             }
@@ -82,7 +74,7 @@ class ServiceViewModel @Inject constructor(
                 name = name!!,
                 price = price.toStringMoney(),
                 typePay = typePay,
-                areaId = liveData.currentBoardingHouse.value!!.id,
+                areaId = userController.state.currentBoardingHouseId,
                 roomId = if (isAppliesAllRoom) null else liveData.currentService.value?.roomId,
             ) else liveData.currentService.value!!.copy(
                 name = name!!,
@@ -95,7 +87,7 @@ class ServiceViewModel @Inject constructor(
                 else repository.updateService(newService)
             if(serviceCreated.isSuccess()){
                 if(serviceCreated.data?.isAppliesAllRoom == true){
-                    repository.updateRoomService(serviceCreated.data, liveData.currentBoardingHouse.value?.rooms ?: arrayListOf())
+                    repository.updateRoomService(serviceCreated.data, userController.state.currentBoardingHouseId)
                 }
             }
             liveData.createService.postValue(serviceCreated)
@@ -104,10 +96,14 @@ class ServiceViewModel @Inject constructor(
 
     fun deleteService(serviceDelete: Service?){
         liveData.createService.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.createService.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
+                return
+            }
+            userController.state.currentBoardingHouse.value == null -> {
+                liveData.createService.postValue(Resource.Error(message = "Không tìm thấy khu trọ của bạn"))
                 return
             }
             serviceDelete == null -> {
@@ -118,17 +114,10 @@ class ServiceViewModel @Inject constructor(
         viewModelScope.launch {
             val serviceDeleted = repository.deleteService(serviceDelete!!)
 
-            val roomFilterTypePay = ((liveData.currentBoardingHouse.value ?: liveData.boardingService.value?.data?.firstOrNull{ boardingHouse ->
-                boardingHouse.service?.firstOrNull { service -> service.id == serviceDelete.id } != null
-            })?.rooms ?: arrayListOf()).let { roomsFromBoarding ->
-                if(serviceDeleted.data?.isAppliesAllRoom == true) roomsFromBoarding
-                else roomsFromBoarding.filter { room -> room.id == serviceDeleted.data?.roomId }
-            }
-
             if(serviceDeleted.isSuccess()){
                 repository.updateRoomService(
                     service = serviceDeleted.data!!,
-                    rooms = roomFilterTypePay,
+                    boardingHouseId = userController.state.currentBoardingHouseId,
                     isUpdate = false
                 )
             }

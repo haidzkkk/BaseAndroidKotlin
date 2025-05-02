@@ -35,11 +35,14 @@ interface ContractDAO {
     FROM HopDong
     LEFT JOIN Phong ON HopDong.MaPhong = Phong.ID
     LEFT JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID
-    WHERE KhuTro.MaChuNha = :userId OR HopDong.MaPhong IS NULL
+    WHERE KhuTro.ID = :boardingHouseId OR HopDong.MaPhong IS NULL
 """)
-    suspend fun getContractsByUserId(userId: String): List<HopDongEntity>
+    suspend fun getContractsByUserId(boardingHouseId: String): List<HopDongEntity>
 
 
     @Query("UPDATE HopDong SET MaPhong = NULL WHERE MaPhong = :roomId")
     suspend fun updateRoomIdToNull(roomId: String)
+
+    @Query("DELETE FROM HopDong WHERE MaPhong = :roomId")
+    suspend fun deleteByRoomId(roomId: String)
 }

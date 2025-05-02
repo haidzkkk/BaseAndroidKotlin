@@ -1,5 +1,6 @@
 package com.app.motel.data.model
 
+import com.app.motel.common.AppConstants
 import com.app.motel.common.service.IDManager
 import com.app.motel.data.entity.KhuTroEntity
 
@@ -19,7 +20,6 @@ data class BoardingHouse(
     val getRoomEmpty get() = rooms?.filter { it.isEmpty}
     val getRoomRenting get() = rooms?.filter { it.isRenting}
     val getRoomNearEnd get() = rooms?.filter { it.contract?.isNearEnd == true}
-    val getRoomNotPayBill get() = rooms
 
     fun toEntity(): KhuTroEntity {
         return KhuTroEntity(

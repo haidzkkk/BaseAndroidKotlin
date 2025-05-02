@@ -8,9 +8,8 @@ import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
 
 open class HomeViewLiveData : AppViewLiveData {
-     val boardingHouse : MutableLiveData<Resource<List<BoardingHouse>>> = MutableLiveData()
+     val boardingHouse : MutableLiveData<Resource<BoardingHouse>> = MutableLiveData()
      val contracts : MutableLiveData<Resource<List<Contract>>> = MutableLiveData()
      val bills = MutableLiveData<Resource<List<Bill>>>()
 
-     val getBoardingSelected: BoardingHouse? get () = boardingHouse.value?.data?.firstOrNull()
 }

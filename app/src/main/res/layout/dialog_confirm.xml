@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bạn có chắc muốn xóa phòng này"
-        android:textSize="@dimen/RADIUS_DEFAULT"
+        android:textSize="@dimen/RADIUS_LARGE"
         android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL"
         android:textColor="@color/textColor1"
         />

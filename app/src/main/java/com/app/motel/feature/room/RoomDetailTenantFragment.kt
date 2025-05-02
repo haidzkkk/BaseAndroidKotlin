@@ -65,7 +65,7 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
         viewModel.liveData.currentRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 views.lyEmpty.isVisible = it.data?.contract == null
-                views.lyTenant.isVisible = it.data?.tenants?.isNotEmpty() == true
+                views.lyTenant.isVisible = it.data?.contract != null
                 adapter.updateData(it.data?.tenants ?: arrayListOf())
                 views.btnAddTenant.isVisible = it.data?.maxOccupants == null || it.data.maxOccupants > (it.data.tenants?.size ?: 0)
             }

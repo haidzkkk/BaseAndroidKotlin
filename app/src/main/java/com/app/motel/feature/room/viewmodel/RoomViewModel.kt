@@ -1,5 +1,6 @@
 package com.app.motel.feature.room.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.common.ultis.toStringMoney
 import com.app.motel.core.AppBaseViewModel
@@ -12,7 +13,7 @@ import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.data.repository.TenantRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class RoomViewModel @Inject constructor(
     private val serviceRepository: ServiceRepository,
     private val contractRepository: ContractRepository,
     private val tenantRepository: TenantRepository,
-    private val profileController: ProfileController,
+    val userController: UserController,
 ): AppBaseViewModel<RoomViewState, RoomViewAction, RoomViewEvent>(
     RoomViewState()
 ) {
@@ -29,13 +30,7 @@ class RoomViewModel @Inject constructor(
     }
 
     fun initRoomDetail(item: Room?){
-        val currentBoardingHouse = liveData.boardingRoom.value?.data?.firstOrNull{
-            it.rooms?.firstOrNull { room -> room.id == item?.id } != null
-        } ?: liveData.boardingRoom.value?.data?.firstOrNull()
-
         liveData.currentRoom.value = Resource.Success(item)
-        liveData.currentBoardingHouse.postValue(currentBoardingHouse)
-
 
         viewModelScope.launch {
             val roomFind = roomRepository.getRoomById(item?.id ?: "")
@@ -46,7 +41,7 @@ class RoomViewModel @Inject constructor(
             val contract: Contract? = contractRepository.getContractActiveByRoomId(roomFind.id)
             val services: Resource<List<Service>> = serviceRepository.getServiceByRoom(roomFind.areaId ?: "", roomFind.id)
             val tenants: List<Tenant> = tenantRepository.getTenantsByRoomId(roomFind.id)
-
+            Log.e("RoomViewModel", "tenants: ${tenants}")
             roomFind.listService = services.data
             roomFind.contract = contract
             roomFind.tenants = tenants.map {
@@ -63,18 +58,17 @@ class RoomViewModel @Inject constructor(
         liveData.currentRoom.postValue(Resource.Initialize())
         liveData.updateRoom.postValue(Resource.Initialize())
         liveData.deleteRoom.postValue(Resource.Initialize())
-        liveData.currentBoardingHouse.postValue(null)
     }
 
     fun getRoom(){
-        liveData.boardingRoom.postValue(Resource.Loading())
+        liveData.rooms.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val boardingHouses = roomRepository.getBoardingRoomByUserId(userId)
-                liveData.boardingRoom.postValue(Resource.Success(boardingHouses))
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val boardingHouses = roomRepository.geRoomBytBoardingHouseId(boardingHouseId)
+                liveData.rooms.postValue(Resource.Success(boardingHouses))
             }catch (e: Exception){
-                liveData.boardingRoom.postValue(Resource.Error(message = e.toString()))
+                liveData.rooms.postValue(Resource.Error(message = e.toString()))
             }
         }
     }
@@ -87,7 +81,7 @@ class RoomViewModel @Inject constructor(
         priceRoom: String?,
     ){
         liveData.updateRoom.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.updateRoom.postValue(Resource.Error(message = "Bạn không có quyền sửa"))
@@ -129,7 +123,7 @@ class RoomViewModel @Inject constructor(
 
     fun deleteRoom(roomDelete: Room?){
         liveData.deleteRoom.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.deleteRoom.postValue(Resource.Error(message = "Bạn không có quyền xóa"))
@@ -165,8 +159,8 @@ class RoomViewModel @Inject constructor(
     ){
         liveData.createRoom.postValue(Resource.Loading())
 
-        val currentUser = profileController.state.currentUser.value?.data
-        val currentBoardingHouse = liveData.boardingRoom.value?.data?.firstOrNull()
+        val currentUser = userController.state.currentUser.value?.data
+        val currentBoardingHouse = userController.state.getCurrentBoardingHouse
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.createRoom.postValue(Resource.Error(message = "Bạn không có quyền tạo"))

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_profile"
             app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_nav_home_to_boardingHouseListFragment"
+            app:destination="@id/boardingHouseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_nav_profile_to_notifyFragment"
             app:destination="@id/notifyFragment" />
+        <action
+            android:id="@+id/action_nav_profile_to_boardingHouseListFragment"
+            app:destination="@id/boardingHouseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -49,6 +55,9 @@
         <action
             android:id="@+id/action_newsFragment_to_nav_profile"
             app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_newsFragment_to_boardingHouseListFragment"
+            app:destination="@id/boardingHouseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifyFragment"
@@ -64,5 +73,26 @@
         <action
             android:id="@+id/action_notifyFragment_to_nav_profile"
             app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_notifyFragment_to_boardingHouseListFragment"
+            app:destination="@id/boardingHouseListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardingHouseListFragment"
+        android:name="com.app.motel.feature.boardingHouse.BoardingHouseListFragment"
+        android:label="fragment_boarding_house_list"
+        tools:layout="@layout/fragment_boarding_house_list" >
+        <action
+            android:id="@+id/action_boardingHouseListFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_boardingHouseListFragment_to_notifyFragment"
+            app:destination="@id/notifyFragment" />
+        <action
+            android:id="@+id/action_boardingHouseListFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
+        <action
+            android:id="@+id/action_boardingHouseListFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
 </navigation>

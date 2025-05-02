@@ -14,7 +14,7 @@ abstract class AppBaseAdapter<T, VB : ViewBinding>(
     private var items: List<T> = listOf()
 
     @Suppress("NotifyDataSetChanged")
-    fun updateData(newItems: List<T>) {
+    open fun updateData(newItems: List<T>) {
         items = newItems
         notifyDataSetChanged()
     }

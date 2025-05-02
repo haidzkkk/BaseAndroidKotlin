@@ -22,7 +22,6 @@ import com.app.motel.databinding.FragmentRoomDetailInformationBinding
 import com.app.motel.feature.createBill.CreateBillFormFragment
 import com.app.motel.feature.room.viewmodel.RoomViewModel
 import com.app.motel.feature.service.ServiceFormFragment
-import com.app.motel.feature.service.ServiceFormFragment.Companion.BOARDING_HOUSE_KEY
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import javax.inject.Inject
@@ -54,15 +53,12 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
                 override fun onClickItem(item: Service, action: AppBaseAdapter.ItemAction) {
                     navigateFragmentWithSlide(R.id.roomServiceFormFragment, args = Bundle().apply {
                         putString(ServiceFormFragment.ITEM_KEY, Gson().toJson(item))
-                        putString(BOARDING_HOUSE_KEY, Gson().toJson(viewModel.liveData.currentBoardingHouse.value))
                     })
                 }
             }
         )
         views.btnChangeService.setOnClickListener{
-            navigateFragmentWithSlide(R.id.roomServiceFormFragment, args = Bundle().apply {
-                putString(BOARDING_HOUSE_KEY, Gson().toJson(viewModel.liveData.currentBoardingHouse.value))
-            })
+            navigateFragmentWithSlide(R.id.roomServiceFormFragment)
         }
 
         views.rcvService.adapter = adapterService
@@ -89,9 +85,9 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
 
     private lateinit var adapterService: DetailRoomServiceAdapter
     private fun listenStateViewModel() {
-        viewModel.liveData.currentBoardingHouse.observe(viewLifecycleOwner){
+        viewModel.userController.state.currentBoardingHouse.observe(viewLifecycleOwner){
             if(it != null){
-                views.tvNameBoardingHouse.text = it.name
+                views.tvNameBoardingHouse.text = it.data?.name
             }
         }
         viewModel.liveData.updateRoom.observe(viewLifecycleOwner){

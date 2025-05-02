@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -18,6 +19,7 @@ import com.app.motel.feature.home.viewmodel.HomeViewEvent
 import com.app.motel.feature.home.viewmodel.HomeViewModel
 import com.app.motel.common.ultis.navigateFragment
 import com.app.motel.common.ultis.startActivityWithTransition
+import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Role
 import com.app.motel.feature.boardingHouse.BoardingHouseActivity
 import com.app.motel.feature.auth.AuthActivity
@@ -53,13 +55,17 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
-
         init()
     }
 
     private fun setUpBottomNav() {
         val navController = this.findNavController(R.id.fragment_view)
         views.navBottom.setupWithNavController(navController)
+
+
+        this.findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
+            views.navBottom.isVisible = destination.id != R.id.boardingHouseListFragment
+        }
     }
 
     private fun setupToolBar(){
@@ -87,56 +93,33 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_menu -> {
-                // handle search click
+                navigateFragment(R.id.fragment_view, R.id.boardingHouseListFragment,)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-
-    private fun showBottomSheet(isCorrect: Boolean) {
-//        val dialog = BottomSheetDialog(baseContext)
-//        val binding = ItemLearnBinding.inflate(layoutInflater)
-//
-//        dialog.setContentView(binding.root)
-//        dialog.show()
-//
-//        dialog.setOnDismissListener {
-//
-//        }
-    }
-
-    private fun showDialogNewbie(){
-//        val dialog = AppBaseDialog.Builder(baseContext, FragmentExerciseBinding.inflate(layoutInflater))
-//            .build()
-//        dialog.show()
-//        dialog.setCancelable(false)
-//
-//        dialog.setOnDismissListener {
-//
-//        }
-    }
-
     private fun init() {
-        Log.e("MainActivity", "init:")
-        mViewModel.profileController.getCurrentUser()
+        mViewModel.userController.getCurrentUser()
     }
 
     private fun handleObserverData() {
-        mViewModel.profileController.state.currentUser.observe(this){
+        mViewModel.userController.state.currentUser.observe(this){
             Log.e("MainActivity", "currentUser: ${it.data?.role}")
-            if(it.isSuccess() && it.data?.role == Role.admin){
-                mViewModel.getBoardingByUserId()
-            }else if(it.isError()){
+            if(it.isError()){
                 mViewModel.logout()
                 finishAffinity()
                 startActivity(Intent(this, AuthActivity::class.java))
             }
         }
 
-        mViewModel.liveData.boardingHouse.observe(this){
-            if(it.isSuccess() && it.data.isNullOrEmpty()){
+        mViewModel.userController.state.currentBoardingHouse.observe(this){
+            if(it.isSuccess()){
+                mViewModel.getBoardingById(it?.data?.id)
+            }
+            if(it.isError()){
+                mViewModel.userController.state.currentBoardingHouse.postValue(Resource.Initialize())
                 startActivityWithTransition(Intent(this, BoardingHouseActivity::class.java))
                 finishAffinity()
             }

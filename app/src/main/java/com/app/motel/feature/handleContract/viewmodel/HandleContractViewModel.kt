@@ -12,14 +12,14 @@ import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.TenantRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HandleContractViewModel @Inject constructor(
     private val repository: ContractRepository,
     private val tenantRepository: TenantRepository,
-    private val profileController: ProfileController,
+    private val userController: UserController,
 ): AppBaseViewModel<HandleContractViewState, HandleContractViewAction, HandleContractViewEvent>(
     HandleContractViewState()
 ) {
@@ -40,8 +40,8 @@ class HandleContractViewModel @Inject constructor(
         liveData.contracts.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val contracts = repository.getContractByUserId(userId)
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val contracts = repository.getContractByBoardingHouseId(boardingHouseId)
                 liveData.contracts.postValue(Resource.Success(contracts))
             }catch (e: Exception){
                 Log.e("HandleContractViewModel", e.toString())
@@ -62,7 +62,7 @@ class HandleContractViewModel @Inject constructor(
         newEndDate: String?,
     ){
         liveData.updateContract.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.updateContract.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
@@ -126,8 +126,7 @@ class HandleContractViewModel @Inject constructor(
             if(contractUpdated.isSuccess()){
                 repository.updateStateRoom(contractUpdated.data?.roomId ?: "", PhongEntity.Status.EMPTY.value)
 
-                val tenantUpdate = Tenant(id = contractUpdated.data?.customerId ?: "", roomId = null, fullName = "", phoneNumber = "", birthDay = "", idCard = "", homeTown = "", username = "", password = "",)
-                tenantRepository.updateUserRented(tenantUpdate, null)
+                tenantRepository.removeTenantFromRoom(contractUpdated.data?.roomId ?: "")
             }
             liveData.updateContract.postValue(contractUpdated.apply {
                 message = "Kết thúc hợp đồng thành công"

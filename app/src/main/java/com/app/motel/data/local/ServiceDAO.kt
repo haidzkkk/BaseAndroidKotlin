@@ -31,4 +31,7 @@ interface ServiceDAO {
         AND (MaPhong IS NULL OR MaPhong = :maPhong)
     """)
     suspend fun getServiceOfRoom(maKhuTro: String, maPhong: String): List<DichVuEntity>
+
+    @Query("DELETE FROM DichVu WHERE MaKhuTro = :id")
+    suspend fun deleteByBoardingHouseId(id: String)
 }

@@ -15,7 +15,7 @@ import com.app.motel.data.repository.BillRepository
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.ServiceRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class CreateBillViewModel @Inject constructor(
     private val contractRepository: ContractRepository,
     private val serviceRepository: ServiceRepository,
     private val roomRepository: RoomRepository,
-    private val profileController: ProfileController,
+    private val userController: UserController,
 ): AppBaseViewModel<CreateBillViewState, CreateBillViewAction, CreateBillViewEvent>(
     CreateBillViewState()
 ) {
@@ -70,15 +70,15 @@ class CreateBillViewModel @Inject constructor(
         }
     }
 
-    fun getRoom(){
-        liveData.boardingRoom.postValue(Resource.Loading())
+    fun getService(){
+        liveData.rooms.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val boardingHouses = roomRepository.getBoardingRoomByUserId(userId)
-                liveData.boardingRoom.postValue(Resource.Success(boardingHouses))
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val boardingHouses = roomRepository.geRoomBytBoardingHouseId(boardingHouseId)
+                liveData.rooms.postValue(Resource.Success(boardingHouses))
             }catch (e: Exception){
-                liveData.boardingRoom.postValue(Resource.Error(message = e.toString()))
+                liveData.rooms.postValue(Resource.Error(message = e.toString()))
             }
         }
     }
@@ -96,7 +96,7 @@ class CreateBillViewModel @Inject constructor(
         liveData.createBill.postValue(Resource.Loading())
 
         val room = liveData.currentRoom.value?.data
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         val createDate = DateConverter.localStringToDate(createdDate)
         when {
             currentUser == null || !currentUser.isAdmin -> {

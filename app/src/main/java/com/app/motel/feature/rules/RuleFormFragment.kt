@@ -50,19 +50,17 @@ class RuleFormFragment @Inject constructor() : AppBaseFragment<FragmentRuleFormB
         views.rcv.adapter = adapter
 
         views.btnSave.setOnClickListener {
-            viewModel.saveRules(viewModel.liveData.getAllRulesFromBoardingHouse)
+            viewModel.saveRules(viewModel.liveData.getAllRules)
         }
 
         views.btnAdd.setOnClickListener {
-            viewModel.liveData.boardingHouseRules.apply {
-                showAddDialog()
-            }
+            showAddDialog()
         }
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.boardingHouseRules.observe(viewLifecycleOwner){
-            val rules: List<Rules> = viewModel.liveData.getAllRulesActiveFromBoardingHouse
+        viewModel.liveData.rules.observe(viewLifecycleOwner){
+            val rules: List<Rules> = viewModel.liveData.getAllRulesActive
 
             adapter.updateData(rules)
             views.tvEmpty.isVisible = rules.isEmpty()

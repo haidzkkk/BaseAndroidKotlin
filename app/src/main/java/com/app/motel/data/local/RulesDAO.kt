@@ -23,4 +23,7 @@ interface RulesDAO {
 
     @Query("SELECT * FROM QuyDinh WHERE MaKhuTro = :khuTroId")
     suspend fun getRegulationsByKhuTro(khuTroId: String): List<QuyDinhEntity>
+
+    @Query("DELETE FROM QuyDinh WHERE MaKhuTro = :id")
+    suspend fun deleteByBoardingHouseId(id: String)
 }

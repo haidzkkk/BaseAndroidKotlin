@@ -18,7 +18,7 @@ class AuthRepository @Inject constructor(
     suspend fun register(user: User): Resource<CommonUser> {
         val userEntity = user.toEntityRegister()
         return try {
-            if (userDAO.getUserByUsername(userEntity.tenDangNhap) != null) {
+            if (userDAO.getByUsername(userEntity.tenDangNhap) != null) {
                 Resource.Error(message = "Tên đăng nhập đã tồn tại")
             } else if(userEntity.email == null || userDAO.getUserByEmail(userEntity.email) != null){
                 Resource.Error(message = "Email đã tồn tại")
@@ -33,7 +33,7 @@ class AuthRepository @Inject constructor(
 
     suspend fun login(username: String, password: String): Resource<CommonUser> {
         return try {
-            val admin = userDAO.getUserByUsername(username)
+            val admin = userDAO.getByUsername(username)
             val user = tenantDAO.getUserByUsername(username)
 
             if (admin == null && user == null) {

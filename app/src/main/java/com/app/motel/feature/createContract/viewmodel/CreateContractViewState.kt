@@ -10,9 +10,9 @@ import com.app.motel.data.model.Tenant
 
 class CreateContractViewState: AppViewLiveData {
     val createContract = MutableLiveData<Resource<Contract>>()
-    val boardingRoom = MutableLiveData<Resource<List<BoardingHouse>>>()
+    val rooms = MutableLiveData<Resource<List<Room>>>()
     val tenantNotRented = MutableLiveData<Resource<List<Tenant>>>()
 
-    val roomsNotRented: List<Room> get () = (boardingRoom.value?.data?.flatMap { boardingHouse -> boardingHouse.rooms ?: arrayListOf()}  ?: arrayListOf()).filter { item -> item.isEmpty}
+    val roomsNotRented: List<Room> get () = rooms.value?.data?.filter { item -> item.isEmpty} ?: arrayListOf()
 
 }

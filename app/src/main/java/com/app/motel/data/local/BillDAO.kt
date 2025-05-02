@@ -3,7 +3,6 @@ package com.app.motel.data.local
 import androidx.room.*
 import com.app.motel.data.entity.HoaDonEntity
 import com.app.motel.data.entity.HoaDonWithPhong
-import com.app.motel.data.entity.HopDongEntity
 
 @Dao
 interface BillDAO {
@@ -31,7 +30,10 @@ interface BillDAO {
     FROM HoaDon
     LEFT JOIN Phong ON HoaDon.MaPhong = Phong.ID
     LEFT JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID
-    WHERE KhuTro.MaChuNha = :userId OR HoaDon.MaPhong IS NULL
+    WHERE KhuTro.ID = :boardingHouseId OR HoaDon.MaPhong IS NULL
 """)
-    suspend fun getBillsByUserId(userId: String): List<HoaDonWithPhong>
+    suspend fun getBillByBoardingHouseId(boardingHouseId: String): List<HoaDonWithPhong>
+
+    @Query("DELETE FROM HoaDon WHERE MaPhong = :roomId")
+    suspend fun deleteByRoomId(roomId: String)
 }

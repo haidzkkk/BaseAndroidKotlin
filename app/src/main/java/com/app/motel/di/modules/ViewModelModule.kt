@@ -11,6 +11,8 @@ import com.app.motel.feature.service.viewmodel.ServiceViewModel
 import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import com.app.motel.feature.createBill.viewmodel.CreateBillViewModel
 import com.app.motel.feature.handleBill.viewmodel.HandleBillViewModel
+import com.app.motel.feature.news.viewmodel.NewsViewModel
+import com.app.motel.feature.notify.viewmodel.NotifyViewModel
 import com.app.motel.feature.room.viewmodel.RoomViewModel
 import com.app.motel.feature.rules.viewmodel.RulesViewModel
 import com.app.motel.feature.tenant.viewmodel.TenantViewModel
@@ -75,6 +77,16 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(RulesViewModel::class)
     fun bindRulesViewModel(authViewModel: RulesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsViewModel::class)
+    fun bindNewsViewModel(authViewModel: NewsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NotifyViewModel::class)
+    fun bindNotifyViewModel(authViewModel: NotifyViewModel): ViewModel
 
     @Binds
     @IntoMap

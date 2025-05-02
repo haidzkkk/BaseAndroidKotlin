@@ -26,4 +26,17 @@ interface ComplaintDAO {
 
     @Query("SELECT * FROM KhieuNai WHERE NguoiNop = :userId")
     suspend fun getComplaintsByUser(userId: String): List<KhieuNaiEntity>
+
+    @Query("DELETE FROM KhieuNai WHERE MaPhong = :roomId")
+    suspend fun deleteByRoomId(roomId: String)
+
+//    @Query("SELECT * FROM KhieuNai " +
+//            "LEFT JOIN Phong ON KhieuNai.MaPhong = Phong.ID " +
+//            "LEFT JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID " +
+//            "WHERE Phong.MaKhuTro = :boardingHouseId" +
+//            "" )
+//    suspend fun getByBoardingHouseId(boardingHouseId: String): List<KhieuNaiEntity>
+
+    @Query("SELECT * FROM KhieuNai")
+    suspend fun getByBoardingHouseId(): List<KhieuNaiEntity>
 }

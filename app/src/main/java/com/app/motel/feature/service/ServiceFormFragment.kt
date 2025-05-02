@@ -26,7 +26,6 @@ import javax.inject.Inject
 class ServiceFormFragment @Inject constructor() : AppBaseFragment<FragmentServiceFormBinding>() {
     companion object{
         const val ITEM_KEY = "service_item"
-        const val BOARDING_HOUSE_KEY = "boarding_house_room_item"
     }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentServiceFormBinding {
@@ -49,8 +48,7 @@ class ServiceFormFragment @Inject constructor() : AppBaseFragment<FragmentServic
 
     private fun init() {
         val item = Gson().fromJson(arguments?.getString(ITEM_KEY), Service::class.java)
-        val boardingHouse: BoardingHouse? = Gson().fromJson(arguments?.getString(BOARDING_HOUSE_KEY), BoardingHouse::class.java)
-        viewModel.initForm(item, boardingHouse)
+        viewModel.initForm(item)
         views.txtName.setText(item?.name ?: "")
 
         views.lyTypePay.setOnClickListener {

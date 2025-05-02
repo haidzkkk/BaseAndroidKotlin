@@ -86,11 +86,11 @@ class GeneralBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragm
     private fun handleObserverData() {
         viewModel.liveData.boardingHouse.observe(viewLifecycleOwner){
             if(it.isSuccess()){
-                views.tvNameBoardingHouse.text = viewModel.liveData.getBoardingSelected?.name
-                views.tvBoardingHouseTotalRoom.text = (viewModel.liveData.getBoardingSelected?.rooms?.size ?: 0).toString()
+                views.tvNameBoardingHouse.text = viewModel.liveData.boardingHouse.value?.data?.name
+                views.tvBoardingHouseTotalRoom.text = (viewModel.liveData.boardingHouse.value?.data?.rooms?.size ?: 0).toString()
 
-                views.lyRoomEmpty.tvPosition.text = viewModel.liveData.getBoardingSelected?.getRoomEmpty?.size.toString()
-                views.lyRoomRenting.tvPosition.text = viewModel.liveData.getBoardingSelected?.getRoomRenting?.size.toString()
+                views.lyRoomEmpty.tvPosition.text = viewModel.liveData.boardingHouse.value?.data?.getRoomEmpty?.size.toString()
+                views.lyRoomRenting.tvPosition.text = viewModel.liveData.boardingHouse.value?.data?.getRoomRenting?.size.toString()
             }
         }
         viewModel.liveData.contracts.observe(viewLifecycleOwner){

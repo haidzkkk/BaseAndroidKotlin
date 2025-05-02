@@ -4,12 +4,11 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.model.Resource
-import com.app.motel.data.model.Role
 import com.app.motel.data.repository.BillRepository
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.HomeRepository
 import com.app.motel.data.repository.RoomRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +17,7 @@ class HomeViewModel @Inject constructor(
     private val roomRepository: RoomRepository,
     private val contractRepository: ContractRepository,
     private val billRepository: BillRepository,
-    val profileController: ProfileController,
+    val userController: UserController,
     ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     override fun handle(action: HomeViewAction) {
@@ -27,11 +26,11 @@ class HomeViewModel @Inject constructor(
 //        }
     }
 
-    fun getBoardingByUserId(){
+    fun getBoardingById(boardingHouseId: String?) {
         liveData.boardingHouse.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val user = profileController.state.currentUser.value?.data
+                val user = userController.state.currentUser.value?.data
                 when{
                     user?.id.isNullOrBlank() -> {
                         liveData.boardingHouse.postValue(Resource.Error(message = "Không tìm thấy người dùng"))
@@ -41,13 +40,15 @@ class HomeViewModel @Inject constructor(
                         liveData.boardingHouse.postValue(Resource.Error(message = "Người dùng không phải là quản lý"))
                         return@launch
                     }
+                    boardingHouseId.isNullOrBlank() -> {
+                        liveData.boardingHouse.postValue(Resource.Error(message = "Không tìm thấy nhà trọ"))
+                        return@launch
+                    }
                 }
 
-                val response = roomRepository.getBoardingRoomByUserId(user?.id ?: "")
+                val response = roomRepository.getBoardingRoomById(boardingHouseId ?: "")
                 liveData.boardingHouse.postValue(Resource.Success(response))
-                Log.e("TAG", "getRoomsLocal: ${user?.id} - $response", )
             } catch (e: Exception) {
-                Log.e("TAG", "getRoomsLocal: $e", )
                 liveData.boardingHouse.postValue(Resource.Error(message = e.toString()))
             }
         }
@@ -57,11 +58,10 @@ class HomeViewModel @Inject constructor(
         liveData.contracts.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val contracts = contractRepository.getContractByUserId(userId)
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val contracts = contractRepository.getContractByBoardingHouseId(boardingHouseId)
                 liveData.contracts.postValue(Resource.Success(contracts))
             }catch (e: Exception){
-                Log.e("HandleContractViewModel", e.toString())
                 liveData.contracts.postValue(Resource.Error(message = e.toString()))
             }
         }
@@ -71,8 +71,8 @@ class HomeViewModel @Inject constructor(
         liveData.bills.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val bills = billRepository.getBillByUserId(userId)
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val bills = billRepository.getBillByBoardingHouseId(boardingHouseId)
                 liveData.bills.postValue(Resource.Success(bills))
             }catch (e: Exception){
                 liveData.bills.postValue(Resource.Error(message = e.toString()))
@@ -81,7 +81,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun logout(){
-        profileController.logout()
+        userController.logout()
         liveData.boardingHouse.postValue(Resource.Initialize())
     }
 }

@@ -3,6 +3,7 @@ package com.app.motel.feature.boardingHouse
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.require
+import com.app.motel.common.ultis.showToast
 import com.app.motel.common.ultis.startActivityWithTransition
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.data.model.Status
@@ -29,7 +31,7 @@ class CreateBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragme
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel : BoardingHouseViewModel by lazy{
-        ViewModelProvider(this, viewModelFactory).get(BoardingHouseViewModel::class.java)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(BoardingHouseViewModel::class.java)
     }
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentCreateBoardingHouseBinding {
@@ -47,7 +49,15 @@ class CreateBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragme
 
     private var dialogLoading: Dialog? = null
     private fun listenDataViewModel() {
-        viewModel.liveData.createBoardingHouse.observe(viewLifecycleOwner){
+        viewModel.liveData.currentBoardingHouse.observe(viewLifecycleOwner){
+            views.cbAuto.isVisible = !viewModel.liveData.isUpdateBoardingHouse
+            if(it != null){
+                views.txtUserName.setText(it.name)
+                views.txtAddressDetail.setText(it.address)
+                views.toolbar.title = "SỬA KHU TRỌ"
+            }
+        }
+        viewModel.liveData.saveBoardingHouse.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
                     dialogLoading = showLoadingDialog(requireContext(), layoutInflater)
@@ -56,10 +66,14 @@ class CreateBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragme
                     dialogLoading?.dismiss()
                     dialogLoading = null
 
-                    Toast.makeText(requireContext(), "Tạo khu trọ thành công", Toast.LENGTH_LONG).show()
-                    requireActivity().apply {
-                        startActivityWithTransition(Intent(this, MainActivity::class.java))
-                        finishAffinity()
+                    requireContext().showToast(message = it.message ?: "Lưu thành công")
+                    if(viewModel.liveData.isUpdateBoardingHouse){
+                        requireActivity().finish()
+                    }else{
+                        requireActivity().apply {
+                            startActivityWithTransition(Intent(this, MainActivity::class.java))
+                            finishAffinity()
+                        }
                     }
                 }
                 Status.ERROR -> {
@@ -87,7 +101,7 @@ class CreateBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragme
         }
 
         views.btnCreate.setOnClickListener{
-            viewModel.createBoardingHouse(
+            viewModel.saveBoardingHouse(
                 name = views.txtUserName.text.toString(),
                 roomCount = views.txtTotalRoom.text.toString().toIntOrNull(),
                 address = views.txtAddressDetail.text.toString(),
@@ -105,7 +119,9 @@ class CreateBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fragme
         views.toolbar.setTitleTextAppearance(requireActivity(), R.style.ToolbarTitleStyle)
         views.toolbar.isTitleCentered = true
         views.toolbar.setNavigationOnClickListener {
-            popFragmentWithSlide()
+            Log.e("CreateBoardingHouseFragment", "setupToolBar: ${viewModel.liveData.boardingHouse.value != null}")
+            if(viewModel.liveData.isUpdateBoardingHouse) requireActivity().finish()
+            else popFragmentWithSlide()
         }
     }
 

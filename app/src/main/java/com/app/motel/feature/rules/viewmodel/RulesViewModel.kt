@@ -7,13 +7,13 @@ import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Rules
 import com.app.motel.data.repository.RulesRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RulesViewModel @Inject constructor(
     private val rulesRepository: RulesRepository,
-    private val profileController: ProfileController,
+    private val userController: UserController,
 ): AppBaseViewModel<RulesViewState, RulesViewAction, RulesViewEvent>(
     RulesViewState()
 ) {
@@ -24,30 +24,21 @@ class RulesViewModel @Inject constructor(
     fun getRules(){
         viewModelScope.launch {
            try {
-               val boardingRules = rulesRepository.getRulesByUserId(profileController.state.currentUserId)
-                liveData.boardingHouseRules.postValue(Resource.Success(boardingRules))
+               val boardingRules = rulesRepository.getRulesByUserId(userController.state.currentBoardingHouseId)
+                liveData.rules.postValue(Resource.Success(boardingRules))
            }catch (e: Exception){
-               liveData.boardingHouseRules.postValue(Resource.Error(message = e.message ?: "Unknown error"))
+               liveData.rules.postValue(Resource.Error(message = e.message ?: "Unknown error"))
            }
 
         }
     }
 
     fun handleRules(rule: Rules, isUpdate: Boolean = true){
-        val currentUser = profileController.state.currentUser.value?.data
-
-        val boardingHouse: BoardingHouse? = liveData.boardingHouseRules.value?.data.let {
-            it?.firstOrNull{boardingHouse -> boardingHouse.id == rule.boardingHouseId}
-                ?: it?.firstOrNull()
-        }
+        val currentUser = userController.state.currentUser.value?.data
 
         when{
             currentUser?.isAdmin != true -> {
                 liveData.addRules.postValue(Resource.Error(message = "Bạn không có quyền thêm nội quy"))
-                return
-            }
-            rule.boardingHouseId == null -> {
-                liveData.addRules.postValue(Resource.Error(message = "Không tìm thấy khu trọ"))
                 return
             }
             rule.title.isBlank() -> {
@@ -59,22 +50,26 @@ class RulesViewModel @Inject constructor(
                 return
             }
         }
-        if(boardingHouse!!.rules == null) boardingHouse.rules = arrayListOf()
 
-        val positionExits: Int = boardingHouse.rules!!.indexOfFirst { it.id == rule.id }
+        val rulesUpdate: ArrayList<Rules> = liveData.rules.value?.data as? ArrayList<Rules> ?: arrayListOf()
+
+        val positionExits: Int = rulesUpdate.indexOfFirst { it.id == rule.id }
         if(isUpdate) {
-            if(positionExits != -1) boardingHouse.rules!![positionExits] = rule
-            else boardingHouse.rules!!.add(rule.copy(boardingHouseId = boardingHouse.id))
+            // update
+            if(positionExits != -1) rulesUpdate[positionExits] = rule
+            // add
+            else rulesUpdate.add(rule.copy(boardingHouseId = userController.state.currentBoardingHouseId))
         }
         else {
-            if(positionExits != -1) boardingHouse.rules!![positionExits] = rule.copy(status = QuyDinhEntity.STATUS_INACTIVE)
+            // delete
+            if(positionExits != -1) rulesUpdate[positionExits] = rule.copy(status = QuyDinhEntity.STATUS_INACTIVE)
         }
-        liveData.boardingHouseRules.postValue(Resource.Success(liveData.boardingHouseRules.value!!.data!!))
+        liveData.rules.postValue(Resource.Success(rulesUpdate))
         liveData.addRules.postValue(Resource.Success(rule))
     }
 
     fun saveRules(rules: List<Rules>){
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
 
         when{
             currentUser?.isAdmin != true -> {

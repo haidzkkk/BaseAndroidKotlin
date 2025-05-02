@@ -54,6 +54,7 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
         views.txtEndDate.setText(DateConverter.dateToLocalString(Calendar.getInstance().apply {
             set(this.get(Calendar.YEAR) + 1, this.get(Calendar.MONTH), this.get(Calendar.DATE))
         }.time))
+        views.txtDeposit.setText(item?.rentalPrice.toStringMoney())
 
         mViewModel.getTenantNotRented()
 

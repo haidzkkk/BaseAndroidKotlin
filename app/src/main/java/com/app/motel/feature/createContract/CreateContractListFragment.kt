@@ -52,7 +52,7 @@ class CreateContractListFragment @Inject constructor() : AppBaseFragment<Fragmen
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.boardingRoom.observe(viewLifecycleOwner){
+        viewModel.liveData.rooms.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 val rooms = viewModel.liveData.roomsNotRented
                 adapter.updateData(rooms)

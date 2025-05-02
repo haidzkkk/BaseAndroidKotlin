@@ -1,6 +1,7 @@
 package com.app.motel.data.model
 
 import com.app.motel.data.entity.KhieuNaiEntity
+import com.app.motel.data.local.TenantDAO
 
 data class Complaint(
     val id: String,
@@ -11,6 +12,9 @@ data class Complaint(
     val roomId: String? = null,
     val status: String?
 ){
+    var room: Room? = null
+    var tenant: Tenant? = null
+
     fun toEntity() = KhieuNaiEntity(
         id = id,
         title = title,

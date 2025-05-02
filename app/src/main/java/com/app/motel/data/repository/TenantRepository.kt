@@ -1,14 +1,13 @@
 package com.app.motel.data.repository
 
-import com.app.motel.common.service.IDManager
 import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.local.ContractDAO
 import com.app.motel.data.local.RoomDAO
 import com.app.motel.data.local.TenantDAO
+import com.app.motel.data.model.CommonUser
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Tenant
 import javax.inject.Inject
-import kotlin.random.Random
 
 class TenantRepository @Inject constructor(
     private val tenantDAO: TenantDAO,
@@ -54,6 +53,10 @@ class TenantRepository @Inject constructor(
     suspend fun addTenant(tenant: Tenant): Resource<Tenant>{
         return try {
             val tenantEntity = tenant.toEntityCreate()
+
+            if (tenantDAO.getUserByUsername(tenantEntity.tenDangNhap) != null) {
+                return Resource.Error(message = "Tên đăng nhập đã tồn tại")
+            }
             tenantDAO.insert(tenantEntity)
             Resource.Success(tenantEntity.toModel(), message = "Thêm thành công")
         }catch (e: Exception) {
@@ -61,13 +64,19 @@ class TenantRepository @Inject constructor(
         }
     }
 
-    suspend fun updateUserRented(tenant: Tenant, roomId: String?): Resource<Tenant>{
+    suspend fun updateTenantRentToRoom(tenant: Tenant, roomId: String, status: NguoiThueEntity.Status = NguoiThueEntity.Status.ACTIVE): Resource<Tenant>{
         return try {
-            val stateTenant = if(roomId != null) NguoiThueEntity.Status.ACTIVE.value
-            else NguoiThueEntity.Status.INACTIVE.value
+            tenantDAO.updateRent(tenant.id, roomId, status.value)
+            Resource.Success(tenant.copy(roomId = roomId, status = status.value), message = "Cập nhật thành công")
+        }catch (e: Exception) {
+            Resource.Error(message = e.toString())
+        }
+    }
 
-            tenantDAO.updateRent(tenant.id, roomId, stateTenant)
-            Resource.Success(tenant.copy(roomId = roomId, status = stateTenant), message = "Cập nhật thành công")
+    suspend fun removeTenantFromRoom(roomId: String): Resource<List<Tenant>?>{
+        return try {
+            tenantDAO.updateRentByRoomId(roomId)
+            Resource.Success(data = null, message = "Cập nhật thành công")
         }catch (e: Exception) {
             Resource.Error(message = e.toString())
         }

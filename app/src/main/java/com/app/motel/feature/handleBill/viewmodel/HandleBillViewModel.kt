@@ -1,6 +1,5 @@
 package com.app.motel.feature.handleBill.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.model.Bill
@@ -10,7 +9,7 @@ import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.BillRepository
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.TenantRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +17,7 @@ class HandleBillViewModel @Inject constructor(
     private val billRepository: BillRepository,
     private val contractRepository: ContractRepository,
     private val tenantRepository: TenantRepository,
-    private val profileController: ProfileController
+    private val userController: UserController
 ): AppBaseViewModel<HandleBillState, HandleBillAction, HandleBillEvent>(HandleBillState()) {
     override fun handle(action: HandleBillAction) {
 
@@ -28,8 +27,8 @@ class HandleBillViewModel @Inject constructor(
         liveData.bills.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val userId = profileController.state.currentUserId
-                val bills = billRepository.getBillByUserId(userId)
+                val boardingHouseId = userController.state.currentBoardingHouseId
+                val bills = billRepository.getBillByBoardingHouseId(boardingHouseId)
                 liveData.bills.postValue(Resource.Success(bills))
             }catch (e: Exception){
                 liveData.bills.postValue(Resource.Error(message = e.toString()))

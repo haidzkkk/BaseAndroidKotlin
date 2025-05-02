@@ -47,4 +47,5 @@ data class Room(
         )
     }
 
+    override fun toString(): String = roomName
 }

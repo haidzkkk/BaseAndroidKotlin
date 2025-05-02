@@ -47,7 +47,7 @@
                     android:id="@+id/txtUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tên đăng nhập"
+                    android:hint="Tên khu trọ"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     style="@style/InputLayoutStyle1"
                     tools:ignore="SpUsage" />

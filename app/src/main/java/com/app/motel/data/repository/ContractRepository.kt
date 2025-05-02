@@ -1,8 +1,6 @@
 package com.app.motel.data.repository
 
-import android.util.Log
 import com.app.motel.data.entity.HopDongEntity
-import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.local.ContractDAO
 import com.app.motel.data.local.RoomDAO
 import com.app.motel.data.local.TenantDAO
@@ -16,9 +14,8 @@ class ContractRepository @Inject constructor(
     private val tenantDAO: TenantDAO,
 ) {
 
-    suspend fun getContractByUserId(userId: String): List<Contract> {
-        val contractEntities: List<HopDongEntity> = contractDAO.getContractsByUserId(userId)
-        Log.d("ContractRepository", "getContractByUserId: $contractEntities")
+    suspend fun getContractByBoardingHouseId(boardingHouseId: String): List<Contract> {
+        val contractEntities: List<HopDongEntity> = contractDAO.getContractsByUserId(boardingHouseId)
         return contractEntities.map { contractEntity ->
             val roomEntity = roomDAO.getPhongById(contractEntity.maPhong ?: "")
             val tenantEntity = tenantDAO.getNguoiThueById(contractEntity.maKhach ?: "")

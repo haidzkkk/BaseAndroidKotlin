@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit
 object DateConverter {
     private const val PATTERN_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     private const val LOCAL_DATE_FORMAT = "dd/MM/yyyy"
+    private const val LOCAL_DATE_FORMAT2 = "HH:mm - dd/MM/yyyy"
 
     fun getCurrentDateTime(): Date {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -82,6 +83,15 @@ object DateConverter {
         return true
     }
 
+    fun stringToDate(dateString: String?): Date?{
+        val format = SimpleDateFormat(PATTERN_DATE_FORMAT, Locale.getDefault())
+        return try{
+            format.parse(dateString!!)
+        }catch (e: Exception){
+            null
+        }
+    }
+
     fun localStringToDate(dateString: String?): Date?{
         val format = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.getDefault())
         return try{
@@ -93,6 +103,11 @@ object DateConverter {
 
     fun dateToLocalString(date: Date): String {
         val format = SimpleDateFormat(LOCAL_DATE_FORMAT, Locale.getDefault())
+        return format.format(date)
+    }
+
+    fun dateToLocalString2(date: Date): String {
+        val format = SimpleDateFormat(LOCAL_DATE_FORMAT2, Locale.getDefault())
         return format.format(date)
     }
 

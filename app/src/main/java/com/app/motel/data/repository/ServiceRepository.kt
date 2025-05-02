@@ -17,16 +17,9 @@ class ServiceRepository@Inject constructor(
     private val roomDAO: RoomDAO,
 ) {
 
-    suspend fun getBoardingServiceByUserId(userId: String): List<BoardingHouse> {
-        val boardingHousesEntities: List<KhuTroEntity> = boardingHouseDAO.getByUserId(userId)
-        return boardingHousesEntities.map { boardingHouseEntity ->
-            val roomEntities = roomDAO.getPhongsByKhuTroId(boardingHouseEntity.id)
-            val serviceEntities = serviceDAO.getServiceByKhuTroId(boardingHouseEntity.id)
-            val boardingHouse = boardingHouseEntity.toModel()
-            boardingHouse.service = serviceEntities.map { it.toModel() }
-            boardingHouse.rooms = roomEntities.map { it.toModel() }
-            boardingHouse
-        }
+    suspend fun getBoardingServiceByUserId(boardingHouseId: String): List<Service> {
+        val serviceEntities = serviceDAO.getServiceByKhuTroId(boardingHouseId)
+        return serviceEntities.map { it.toModel() }
     }
 
     suspend fun createService(service: Service): Resource<Service> {
@@ -63,34 +56,35 @@ class ServiceRepository@Inject constructor(
 
     suspend fun updateRoomService(
         service: Service,
-        rooms: List<Room>,
+        boardingHouseId: String,
         isUpdate: Boolean = true
     ): Resource<List<Room>> {
+        val roomEntities = roomDAO.getPhongsByKhuTroId(boardingHouseId)
         return try {
-            Log.e("TAG", "updateServiceRoom: ${rooms}")
-            for (room in rooms){
-                // update service to room
-                if(isUpdate){
-                    if(room.services?.contains(service.name) != true){
-                        if(room.services == null){
-                            room.services = service.name
+            return Resource.Success(
+                roomEntities.map {
+                    it.toModel().apply {
+                        if(isUpdate){
+                            if(services?.contains(service.name) != true){
+                                if(services == null){
+                                    services = service.name
+                                }else{
+                                    services += ",${service.name}"
+                                }
+                                roomDAO.update(toEntity())
+                                Log.e("TAG", "updateServiceRoom update: ${services}")
+                            }
+                            // remove service to room
                         }else{
-                            room.services += ",${service.name}"
+                            Log.e("TAG", "updateServiceRoom delete: ${services}")
+                            if(services?.contains(service.name) == true){
+                                services = services?.replace(",${service.name}", "")?.replace(service.name, "")
+                                roomDAO.update(toEntity())
+                            }
                         }
-                        roomDAO.update(room.toEntity())
-                        Log.e("TAG", "updateServiceRoom update: ${room.services}")
-                    }
-                // remove service to room
-                }else{
-                    Log.e("TAG", "updateServiceRoom delete: ${room.services}")
-                    if(room.services?.contains(service.name) == true){
-                        room.services = room.services?.replace(",${service.name}", "")?.replace(service.name, "")
-                        roomDAO.update(room.toEntity())
                     }
                 }
-
-            }
-            Resource.Success(rooms)
+            )
         }   catch (e: Exception){
             Resource.Error(message = e.toString())
         }

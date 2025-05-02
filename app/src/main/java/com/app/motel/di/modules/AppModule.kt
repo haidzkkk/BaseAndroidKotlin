@@ -17,7 +17,7 @@ import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.RulesRepository
 import com.app.motel.data.repository.ServiceRepository
 import com.app.motel.data.repository.TenantRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -60,10 +60,19 @@ object AppModule {
 
     @Provides
     fun providerBoardingHouseRepository(
+        context: Context,
         db: AppDatabase,
     ): BoardingHouseRepository = BoardingHouseRepository(
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
+        prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE),
+        serviceDAO = db.serviceDao(),
+        billDAO = db.billDao(),
+        contractDAO = db.contractDao(),
+        complaintDAO = db.complaintDao(),
+        rulesDAO = db.rulesDAO(),
+        tenantDAO = db.tenantDao(),
+        notificationDAO = db.notificationDao(),
     )
 
     @Provides
@@ -110,6 +119,8 @@ object AppModule {
         db: AppDatabase,
     ): ComplaintRepository = ComplaintRepository(
         complaintDAO = db.complaintDao(),
+        roomDAO = db.roomDao(),
+        tenantDAO = db.tenantDao(),
     )
 
     @Provides
@@ -126,8 +137,6 @@ object AppModule {
     ): RoomRepository = RoomRepository(
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
-        contractDAO = db.contractDao(),
-        tenantDAO = db.tenantDao(),
         tenantRepository = tenantRepository,
     )
 
@@ -151,10 +160,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideProfileController(
-        repository: ProfileRepository
-    ): ProfileController {
-        return ProfileController(
+        repository: ProfileRepository,
+        boardingHouseRepository: BoardingHouseRepository,
+    ): UserController {
+        return UserController(
             repo = repository,
+            boardingHouseRepository = boardingHouseRepository,
         )
     }
 }

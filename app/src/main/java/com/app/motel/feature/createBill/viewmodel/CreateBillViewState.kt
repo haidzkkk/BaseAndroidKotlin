@@ -9,13 +9,13 @@ import com.app.motel.data.model.Room
 import com.app.motel.data.model.Service
 
 class CreateBillViewState: AppViewLiveData {
-    val boardingRoom = MutableLiveData<Resource<List<BoardingHouse>>>()
+    val rooms = MutableLiveData<Resource<List<Room>>>()
 
     val currentRoom = MutableLiveData<Resource<Room>>()
     val previousBill = MutableLiveData<Resource<Bill>>()
     val currentServiceRoom = MutableLiveData<Resource<List<Service>>>()
     val createBill = MutableLiveData<Resource<Bill>>()
 
-    val roomsRented: List<Room> get () = (boardingRoom.value?.data?.flatMap { boardingHouse -> boardingHouse.rooms ?: arrayListOf()}  ?: arrayListOf()).filter { item -> item.isRenting}
+    val roomsRented: List<Room> get () = rooms.value?.data?.filter { item -> item.isRenting} ?: arrayListOf()
 
 }

@@ -106,4 +106,6 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
 
     ksp "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    implementation "com.github.skydoves:powerspinner:1.2.7"
 }

@@ -30,5 +30,7 @@ interface RoomDAO {
     @Query("UPDATE Phong SET TrangThai = :trangThai WHERE ID = :id")
     suspend fun updateStatus(id: String, trangThai: String)
 
+    @Query("DELETE FROM Phong WHERE MaKhuTro = :id")
+    suspend fun deleteByBoardingHouseId(id: String)
 
 }

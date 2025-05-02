@@ -5,56 +5,49 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import com.app.motel.AppApplication
 import com.app.motel.R
+import com.app.motel.core.AppBaseFragment
+import com.app.motel.databinding.FragmentListRoomBinding
+import com.app.motel.databinding.FragmentNotifyBinding
+import com.app.motel.feature.notify.viewmodel.NotifyViewModel
+import com.app.motel.feature.room.viewmodel.RoomViewModel
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class NotifyFragment @Inject constructor() : AppBaseFragment<FragmentNotifyBinding>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NotifyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NotifyFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentNotifyBinding {
+        return FragmentNotifyBinding.inflate(inflater, container, false)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel : NotifyViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(NotifyViewModel::class.java)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (requireActivity().application as AppApplication).appComponent.inject(this)
+
+        super.onViewCreated(view, savedInstanceState)
+        init()
+        listenStateViewModel()
+    }
+    val adapter = NotificationAdapter()
+    private fun init() {
+        viewModel.getComplaint()
+
+        views.rcv.adapter = adapter
+    }
+
+    private fun listenStateViewModel() {
+        viewModel.liveData.complaints.observe(viewLifecycleOwner){
+            val complaints = it ?: arrayListOf()
+            adapter.updateData(complaints)
+            views.tvEmpty.isVisible = complaints.isEmpty()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notify, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NotifyFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NotifyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

@@ -45,4 +45,7 @@ interface TenantDAO {
     @Query("UPDATE NguoiThue SET MaPhong = :roomId, TrangThai = :status WHERE ID = :id")
     suspend fun updateRent(id: String, roomId: String?, status: String)
 
+    @Query("UPDATE NguoiThue SET MaPhong = NULL, TrangThai = :status WHERE MaPhong = :roomId")
+    suspend fun updateRentByRoomId(roomId: String, status: String = NguoiThueEntity.Status.INACTIVE.value)
+
 }

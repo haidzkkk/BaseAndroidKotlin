@@ -1,7 +1,6 @@
 package com.app.motel.feature.createBill
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +40,7 @@ class CreateBillListFragment @Inject constructor() : AppBaseFragment<FragmentCre
     lateinit var adapter: RoomBillAdapter
 
     private fun init() {
-        viewModel.getRoom()
+        viewModel.getService()
 
         adapter = RoomBillAdapter(object: AppBaseAdapter.AppListener<Room>(){
             override fun onClickItem(item: Room, action: AppBaseAdapter.ItemAction) {
@@ -52,7 +51,7 @@ class CreateBillListFragment @Inject constructor() : AppBaseFragment<FragmentCre
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.boardingRoom.observe(viewLifecycleOwner){
+        viewModel.liveData.rooms.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 val rooms = viewModel.liveData.roomsRented
                 adapter.updateData(rooms)

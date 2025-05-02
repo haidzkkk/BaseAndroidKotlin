@@ -72,8 +72,8 @@ class ServiceListFragment @Inject constructor() : AppBaseFragment<FragmentServic
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.boardingService.observe(viewLifecycleOwner){
-            val services = viewModel.liveData.services
+        viewModel.liveData.services.observe(viewLifecycleOwner){
+            val services = viewModel.liveData.getServices
             views.tvEmpty.isVisible = services.isEmpty()
             if(it.isSuccess()){
                 adapter.updateData(services)

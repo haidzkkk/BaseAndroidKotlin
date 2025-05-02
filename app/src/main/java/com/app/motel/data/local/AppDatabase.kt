@@ -64,6 +64,7 @@ abstract class AppDatabase : RoomDatabase() {
                         }
                         override fun onOpen(db: SupportSQLiteDatabase) {
                             super.onOpen(db)
+//                            db.execSQL("PRAGMA journal_mode=DELETE") // run with with scrip top merge file database in data/data
                             db.execSQL("PRAGMA foreign_keys=ON;")
                             Log.d("ROOM", "Database opened===>: ${db.path}")
                         }

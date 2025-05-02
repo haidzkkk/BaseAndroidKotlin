@@ -7,13 +7,13 @@ import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.TenantRepository
-import com.app.motel.feature.profile.ProfileController
+import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TenantViewModel @Inject constructor(
     private val tenantRepository: TenantRepository,
-    private val profileController: ProfileController
+    private val userController: UserController
 ): AppBaseViewModel<TenantState, TenantViewAction, TenantViewEvent>(TenantState()) {
     override fun handle(action: TenantViewAction) {
 
@@ -43,7 +43,7 @@ class TenantViewModel @Inject constructor(
         password: String?,
     ){
         liveData.handleTenant.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
@@ -101,7 +101,7 @@ class TenantViewModel @Inject constructor(
         isLock: Boolean,
     ){
         liveData.handleTenant.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
@@ -129,15 +129,19 @@ class TenantViewModel @Inject constructor(
 
     fun updateTenantRent(tenant: Tenant, room: Room?){
         liveData.handleTenant.postValue(Resource.Loading())
-        val currentUser = profileController.state.currentUser.value?.data
+        val currentUser = userController.state.currentUser.value?.data
         when {
             currentUser == null || !currentUser.isAdmin -> {
                 liveData.handleTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
+            room?.id.isNullOrBlank() -> {
+                liveData.handleTenant.postValue(Resource.Error(message = "Phòng không tồn tại"))
+                return
+            }
         }
         viewModelScope.launch {
-            val result = tenantRepository.updateUserRented(tenant, room?.id)
+            val result = tenantRepository.updateTenantRentToRoom(tenant, room!!.id)
             liveData.handleTenant.postValue(result)
         }
     }

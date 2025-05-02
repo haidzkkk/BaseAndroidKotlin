@@ -2,20 +2,13 @@ package com.app.motel.data.repository
 
 import android.util.Log
 import com.app.motel.common.service.DateConverter
-import com.app.motel.common.service.DateConverter.toCalendar
 import com.app.motel.data.entity.HoaDonWithPhong
-import com.app.motel.data.entity.HopDongEntity
-import com.app.motel.data.entity.NguoiThueEntity
 import com.app.motel.data.local.BillDAO
 import com.app.motel.data.local.BoardingHouseDAO
 import com.app.motel.data.local.RoomDAO
-import com.app.motel.data.local.ServiceDAO
 import com.app.motel.data.local.TenantDAO
 import com.app.motel.data.model.Bill
-import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
-import com.app.motel.data.model.Service
-import com.app.motel.data.model.Tenant
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -29,8 +22,8 @@ class BillRepository @Inject constructor(
         private const val SEARCH_MONTH_MAX_LENGTH = 36 // 3 year
     }
 
-    suspend fun getBillByUserId(userId: String): List<Bill> {
-        val hoaDonEntity: List<HoaDonWithPhong> = billDAO.getBillsByUserId(userId)
+    suspend fun getBillByBoardingHouseId(boardingHouseId: String): List<Bill> {
+        val hoaDonEntity: List<HoaDonWithPhong> = billDAO.getBillByBoardingHouseId(boardingHouseId)
         return hoaDonEntity.map { billWithRoom ->
             val room = billWithRoom.phong?.toModel()
             billWithRoom.hoaDon.toModel().apply {

@@ -44,4 +44,10 @@
         <item>CHỈNH SỬA</item>
     </array>
 
+    <array name="tab_notify">
+        <item>THÔNG BÁO ỨNG DỤNG</item>
+        <item>KHIẾU NẠI TỪ KHÁCH HÀNG</item>
+        <item>YÊU CẦU THUÊ PHÒNG</item>
+    </array>
+
 </resources>

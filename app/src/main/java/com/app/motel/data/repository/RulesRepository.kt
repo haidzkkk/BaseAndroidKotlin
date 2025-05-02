@@ -12,14 +12,9 @@ class RulesRepository @Inject constructor(
     private val rulesDAO: RulesDAO,
     private val boardingHouseDAO: BoardingHouseDAO,
 ){
-    suspend fun getRulesByUserId(userId: String): List<BoardingHouse> {
-        val boardingHousesEntities: List<KhuTroEntity> = boardingHouseDAO.getByUserId(userId)
-        return boardingHousesEntities.map { boardingHouseEntity ->
-            boardingHouseEntity.toModel().apply {
-                val rulesEntities = rulesDAO.getRegulationsByKhuTro(id)
-                rules = rulesEntities.map { it.toModel() } as ArrayList<Rules>
-            }
-        }
+    suspend fun getRulesByUserId(boardingHouseId: String): List<Rules> {
+        val rulesEntities = rulesDAO.getRegulationsByKhuTro(boardingHouseId)
+        return rulesEntities.map { it.toModel() } as ArrayList<Rules>
     }
 
     suspend fun saveRules(rules: List<Rules>): Resource<Boolean>{
