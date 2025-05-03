@@ -20,7 +20,6 @@ import com.app.motel.feature.home.viewmodel.HomeViewModel
 import com.app.motel.common.ultis.navigateFragment
 import com.app.motel.common.ultis.startActivityWithTransition
 import com.app.motel.data.model.Resource
-import com.app.motel.data.model.Role
 import com.app.motel.feature.boardingHouse.BoardingHouseActivity
 import com.app.motel.feature.auth.AuthActivity
 import javax.inject.Inject
@@ -62,6 +61,11 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         val navController = this.findNavController(R.id.fragment_view)
         views.navBottom.setupWithNavController(navController)
 
+        views.navBottom.menu.clear()
+        views.navBottom.inflateMenu(
+            if (mViewModel.userController.state.getCurrentUser?.isAdmin == true)
+                R.menu.menu_bottom_admin else R.menu.menu_bottom_user
+        )
 
         this.findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
             views.navBottom.isVisible = destination.id != R.id.boardingHouseListFragment
@@ -83,10 +87,12 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_action_toolbar, menu)
+        if(mViewModel.userController.state.getCurrentUser?.isAdmin == true){
+            menuInflater.inflate(R.menu.menu_action_toolbar, menu)
+        }
+
         val icon = menu?.findItem(R.id.action_menu)?.icon
         icon?.mutate()?.setTint(ContextCompat.getColor(baseContext, R.color.white))
-
         return true
     }
 
@@ -112,6 +118,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
                 finishAffinity()
                 startActivity(Intent(this, AuthActivity::class.java))
             }
+            setUpBottomNav()
+            invalidateOptionsMenu()
         }
 
         mViewModel.userController.state.currentBoardingHouse.observe(this){

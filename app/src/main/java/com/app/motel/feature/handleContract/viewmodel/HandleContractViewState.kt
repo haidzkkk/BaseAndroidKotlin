@@ -7,9 +7,13 @@ import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
 
 class HandleContractViewState: AppViewLiveData {
+    val isAdmin = MutableLiveData<Boolean>(false)
+
     val contracts = MutableLiveData<Resource<List<Contract>>>()
+
     val currentStateContract = MutableLiveData<Contract.State>()
-    val currentActiveContract = MutableLiveData<Int>(HopDongEntity.ACTIVE)
+    val currentStateActiveContract = MutableLiveData<Int>(HopDongEntity.ACTIVE)
+
     val updateContract = MutableLiveData<Resource<Contract>>()
 
     val getContractToState: List<Contract>
@@ -18,6 +22,6 @@ class HandleContractViewState: AppViewLiveData {
         } ?: arrayListOf()
     val getContractToActive: List<Contract>
         get() = contracts.value?.data?.filter {
-            it.isActive == currentActiveContract.value
+            it.isActive == currentStateActiveContract.value
         } ?: arrayListOf()
 }

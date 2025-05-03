@@ -29,7 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/menu_bottom"
         app:itemIconSize="30dp"
         android:background="@color/background1"
         app:itemIconTint="@color/icon2"

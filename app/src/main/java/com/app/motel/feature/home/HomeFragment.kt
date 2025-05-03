@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
 import com.app.motel.AppApplication
 import com.app.motel.core.AppBaseFragment
@@ -17,10 +19,6 @@ import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>() {
 
-    val fragments = arrayListOf(
-        ManagementBoardingHouseFragment(),
-        GeneralBoardingHouseFragment(),
-    )
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater, container, false)
@@ -35,21 +33,34 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
-//        viewModel.handle(HomeViewAction.GetMotelViewAction)
-//        viewModel.handle(HomeViewAction.GetBoardingViewAction)
-
-        setup()
-
+        mViewModel
+        listenStateViewModel()
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setup() {
-        views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
-            override fun onTabSelected(position: Int) {
-                views.viewPager.currentItem = position
-            }
-        })
+    private fun listenStateViewModel() {
+        mViewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            setup(it.data?.isAdmin == true)
+        }
+    }
+
+    private fun setup(isAdmin: Boolean) {
+        views.tabBar.isVisible = isAdmin
+        if(isAdmin){
+            views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
+                override fun onTabSelected(position: Int) {
+                    views.viewPager.currentItem = position
+                }
+            })
+        }
+
+        val fragments: ArrayList<AppBaseFragment<out ViewBinding>> = if(isAdmin) arrayListOf(
+            ManagementBoardingHouseFragment(),
+            GeneralBoardingHouseFragment(),
+        ) else arrayListOf(
+            ManagementBoardingHouseFragment(),
+        )
 
         val adapter = ViewPagerAdapter(
             fragments,

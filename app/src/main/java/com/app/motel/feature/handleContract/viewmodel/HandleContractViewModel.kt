@@ -23,6 +23,10 @@ class HandleContractViewModel @Inject constructor(
 ): AppBaseViewModel<HandleContractViewState, HandleContractViewAction, HandleContractViewEvent>(
     HandleContractViewState()
 ) {
+    init {
+        liveData.isAdmin.value = userController.state.isAdmin
+    }
+
     override fun handle(action: HandleContractViewAction) {
     }
 
@@ -40,8 +44,15 @@ class HandleContractViewModel @Inject constructor(
         liveData.contracts.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val boardingHouseId = userController.state.currentBoardingHouseId
-                val contracts = repository.getContractByBoardingHouseId(boardingHouseId)
+                val contracts = liveData.isAdmin.value.let {
+                    if(it == true){
+                        val boardingHouseId = userController.state.currentBoardingHouseId
+                        repository.getContractByBoardingHouseId(boardingHouseId)
+                    } else{
+                        val tenantId = userController.state.currentUserId
+                        repository.getContractByTenantId(tenantId)
+                    }
+                }
                 liveData.contracts.postValue(Resource.Success(contracts))
             }catch (e: Exception){
                 Log.e("HandleContractViewModel", e.toString())
