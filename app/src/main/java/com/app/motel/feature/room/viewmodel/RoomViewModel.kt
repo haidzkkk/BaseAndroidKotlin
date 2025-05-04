@@ -4,11 +4,14 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.common.ultis.toStringMoney
 import com.app.motel.core.AppBaseViewModel
+import com.app.motel.data.entity.PhongEntity
+import com.app.motel.data.model.Complaint
 import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Service
 import com.app.motel.data.model.Tenant
+import com.app.motel.data.repository.ComplaintRepository
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.ServiceRepository
@@ -22,11 +25,17 @@ class RoomViewModel @Inject constructor(
     private val serviceRepository: ServiceRepository,
     private val contractRepository: ContractRepository,
     private val tenantRepository: TenantRepository,
+    private val complaintRepository: ComplaintRepository,
     val userController: UserController,
 ): AppBaseViewModel<RoomViewState, RoomViewAction, RoomViewEvent>(
     RoomViewState()
 ) {
     override fun handle(action: RoomViewAction) {
+    }
+
+    fun setStateRoomListData(status: PhongEntity.Status?){
+
+        liveData.currentRoomState.postValue(Resource.Success(status))
     }
 
     fun initRoomDetail(item: Room?){
@@ -64,9 +73,25 @@ class RoomViewModel @Inject constructor(
         liveData.rooms.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val boardingHouseId = userController.state.currentBoardingHouseId
-                val boardingHouses = roomRepository.geRoomBytBoardingHouseId(boardingHouseId)
-                liveData.rooms.postValue(Resource.Success(boardingHouses))
+                val rooms = userController.state.getCurrentUser.let {
+                // get room to the admin
+                    if(it?.isAdmin == true){
+                        val boardingHouseId = userController.state.currentBoardingHouseId
+                        val roomState = liveData.currentRoomState.value?.data
+                        return@let roomRepository.geRoomBytBoardingHouseId(boardingHouseId, roomState)
+                    }
+
+                // get room to the user
+                    val roomState = liveData.currentRoomState.value?.data
+                    // if is user and the status is room empty it means get all room empty -> user want rent
+                    if(roomState == PhongEntity.Status.EMPTY){
+                        return@let roomRepository.getRoomByStatus(PhongEntity.Status.EMPTY)
+                    }
+                    val userId = userController.state.currentUserId
+                    roomRepository.geRoomByTenantId(userId)
+                }
+
+                liveData.rooms.postValue(Resource.Success(rooms))
             }catch (e: Exception){
                 liveData.rooms.postValue(Resource.Error(message = e.toString()))
             }
@@ -194,6 +219,39 @@ class RoomViewModel @Inject constructor(
                 initRoomDetail(roomUpdated.data)
             }
             liveData.createRoom.postValue(roomUpdated)
+        }
+    }
+
+    fun rentRoom(room: Room){
+        viewModelScope.launch {
+
+            liveData.rentRoom.postValue(Resource.Loading())
+            val currentUser = userController.state.currentUser.value?.data
+
+            when {
+                currentUser == null -> {
+                    liveData.rentRoom.postValue(Resource.Error(message = "Không tìm thấy người dùng"))
+                    return@launch
+                }
+                room.isRenting -> {
+                    liveData.rentRoom.postValue(Resource.Error(message = "Phòng đang có người thuê"))
+                    return@launch
+                }
+                contractRepository.getContractActiveByTenantId(currentUser.id) == null -> {
+                    liveData.rentRoom.postValue(Resource.Error(message = "Hiện bạn đang thuê phòng khác"))
+                    return@launch
+                }
+            }
+
+            val rentRoomInsert = Complaint(
+                title = "Yêu cầu thuê phòng",
+                content = "Tôi muốn thuê phòng ${room.roomName}",
+                submittedBy = currentUser?.id,
+                roomId = room.id,
+            )
+
+            val rentRoom = complaintRepository.createRequireRentRoom(rentRoomInsert)
+            liveData.rentRoom.postValue(rentRoom)
         }
     }
 }

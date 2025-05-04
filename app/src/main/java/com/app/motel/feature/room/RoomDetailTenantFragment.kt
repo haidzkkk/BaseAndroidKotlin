@@ -27,6 +27,8 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
         return FragmentRoomDetailTenantBinding.inflate(inflater, container, false)
     }
 
+    private var enableForm: Boolean = false
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     val viewModel : RoomViewModel by lazy {
@@ -38,21 +40,21 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
 
         super.onViewCreated(view, savedInstanceState)
         listenStateViewModel()
-        adapter = TenantAdapter(
-            object : AppBaseAdapter.AppListener<Tenant>() {
-                override fun onClickItem(item: Tenant, action: AppBaseAdapter.ItemAction) {
-                    val json = Gson().toJson(item)
-                    navigateFragmentWithSlide(R.id.roomTenantFormFragment, args = Bundle().apply { putString(
-                        TenantFormFragment.ITEM_KEY, json) })
-                }
-            }
-        )
+
+    }
+
+    private fun initUI() {
+
+        views.btnAddTenant.isVisible = enableForm
+        views.btnCreateContract.isVisible = enableForm
 
         views.btnCreateContract.setOnClickListener{
+            if(!enableForm) return@setOnClickListener
             navigateFragmentWithSlide(R.id.roomCreateContractFormFragment, args = Bundle().apply { putString(
                 CreateContractFormFragment.ITEM_KEY, Gson().toJson(viewModel.liveData.currentRoom.value?.data)) })
         }
         views.btnAddTenant.setOnClickListener{
+            if(!enableForm) return@setOnClickListener
             navigateFragmentWithSlide(R.id.tenantListAddRoomFragment, args = Bundle().apply { putString(
                 TenantListAddRoomFragment.ITEM_KEY, Gson().toJson(viewModel.liveData.currentRoom.value?.data)) })
         }
@@ -60,8 +62,21 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
         views.rcvTenant.adapter = adapter
     }
 
-    private lateinit var adapter: TenantAdapter
+    private var adapter = TenantAdapter(
+        object : AppBaseAdapter.AppListener<Tenant>() {
+            override fun onClickItem(item: Tenant, action: AppBaseAdapter.ItemAction) {
+                if(!enableForm) return
+                val json = Gson().toJson(item)
+                navigateFragmentWithSlide(R.id.roomTenantFormFragment, args = Bundle().apply { putString(
+                    TenantFormFragment.ITEM_KEY, json) })
+            }
+        }
+    )
     private fun listenStateViewModel() {
+        viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            enableForm = it.data?.isAdmin == true
+            initUI()
+        }
         viewModel.liveData.currentRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 views.lyEmpty.isVisible = it.data?.contract == null

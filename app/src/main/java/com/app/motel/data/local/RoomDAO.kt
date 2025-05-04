@@ -1,6 +1,7 @@
 package com.app.motel.data.local
 
 import androidx.room.*
+import com.app.motel.data.entity.HopDongEntity
 import com.app.motel.data.entity.PhongEntity
 
 @Dao
@@ -21,11 +22,16 @@ interface RoomDAO {
     @Query("SELECT * FROM Phong")
     suspend fun getAllPhongs(): List<PhongEntity>
 
-    @Query("SELECT * FROM Phong WHERE MaKhuTro = :areaId")
-    suspend fun getPhongsByKhuTroId(areaId: String): List<PhongEntity>
+    @Query("SELECT * FROM Phong WHERE MaKhuTro = :areaId AND (:status IS NULL OR TrangThai = :status)")
+    suspend fun getPhongsByKhuTroId(areaId: String, status: String? = null): List<PhongEntity>
 
-    @Query("SELECT * FROM Phong WHERE TrangThai = :status")
-    suspend fun getPhongsByStatus(status: String): List<PhongEntity>
+    @Query("SELECT * FROM Phong LEFT JOIN HopDong ON Phong.ID = HopDong.MaPhong " +
+            "WHERE HopDong.MaKhach = :tenantId AND HopDong.HieuLuc = ${HopDongEntity.ACTIVE} " +
+            "AND (:status IS NULL OR Phong.TrangThai = :status)")
+    suspend fun getRoomRentingByTenantId(tenantId: String, status: String?): List<PhongEntity>
+
+    @Query("SELECT * FROM Phong WHERE TrangThai = :status OR :status IS NULL")
+    suspend fun getPhongsByStatus(status: String?): List<PhongEntity>
 
     @Query("UPDATE Phong SET TrangThai = :trangThai WHERE ID = :id")
     suspend fun updateStatus(id: String, trangThai: String)

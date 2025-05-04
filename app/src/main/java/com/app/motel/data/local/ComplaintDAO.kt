@@ -39,4 +39,7 @@ interface ComplaintDAO {
 
     @Query("SELECT * FROM KhieuNai")
     suspend fun getByBoardingHouseId(): List<KhieuNaiEntity>
+
+    @Query("SELECT * FROM KhieuNai WHERE NguoiNop = :userId ORDER BY NgayTao DESC")
+    suspend fun getByTenantId(userId: String): List<KhieuNaiEntity>
 }

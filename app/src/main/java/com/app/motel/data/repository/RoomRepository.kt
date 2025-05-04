@@ -3,6 +3,7 @@ package com.app.motel.data.repository
 import android.util.Log
 import androidx.room.Transaction
 import com.app.motel.data.entity.KhuTroEntity
+import com.app.motel.data.entity.PhongEntity
 import com.app.motel.data.local.BillDAO
 import com.app.motel.data.local.BoardingHouseDAO
 import com.app.motel.data.local.ComplaintDAO
@@ -23,8 +24,26 @@ class RoomRepository @Inject constructor(
     private val tenantRepository: TenantRepository,
 ) {
 
-    suspend fun geRoomBytBoardingHouseId(boardingHouseId: String): List<Room> {
-        val roomEntities = roomDAO.getPhongsByKhuTroId(boardingHouseId)
+    suspend fun geRoomBytBoardingHouseId(boardingHouseId: String, state: PhongEntity.Status? = null): List<Room> {
+        val roomEntities = roomDAO.getPhongsByKhuTroId(boardingHouseId, state?.value)
+        return roomEntities.map {
+            it.toModel().apply {
+                tenants = tenantRepository.getTenantsByRoomId(this.id)
+            }
+        }
+    }
+
+    suspend fun geRoomByTenantId(tenantId: String, status: PhongEntity.Status? = null): List<Room> {
+        val roomEntities = roomDAO.getRoomRentingByTenantId(tenantId, status?.value)
+        return roomEntities.map {
+            it.toModel().apply {
+                tenants = tenantRepository.getTenantsByRoomId(this.id)
+            }
+        }
+    }
+
+    suspend fun getRoomByStatus( status: PhongEntity.Status? = null): List<Room> {
+        val roomEntities = roomDAO.getPhongsByStatus(status?.value)
         return roomEntities.map {
             it.toModel().apply {
                 tenants = tenantRepository.getTenantsByRoomId(this.id)

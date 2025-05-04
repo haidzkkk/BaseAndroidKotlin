@@ -1,6 +1,7 @@
 package com.app.motel.feature.room
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ import javax.inject.Inject
 
 class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<FragmentRoomDetailInformationBinding>() {
 
+    private var enableForm: Boolean = false
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -44,25 +46,31 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
 
         super.onViewCreated(view, savedInstanceState)
 
-        setEnableEdittext(views.txtCountService, false)
-        setEnableEdittext(views.txtCurrentTenant, false)
-
         listenStateViewModel()
-        adapterService = DetailRoomServiceAdapter(
-            object : AppBaseAdapter.AppListener<Service>() {
-                override fun onClickItem(item: Service, action: AppBaseAdapter.ItemAction) {
-                    navigateFragmentWithSlide(R.id.roomServiceFormFragment, args = Bundle().apply {
-                        putString(ServiceFormFragment.ITEM_KEY, Gson().toJson(item))
-                    })
-                }
-            }
-        )
+        initUI()
+    }
+
+    private fun initUI() {
+        setEnableEdittext(views.txtNameRoom, enableForm)
+        setEnableEdittext(views.txtArea, enableForm)
+        setEnableEdittext(views.txtMaxTenant, enableForm)
+        setEnableEdittext(views.txtCurrentTenant, false)
+        setEnableEdittext(views.txtPriceRoom, enableForm)
+        setEnableEdittext(views.txtCountService, false)
+
+        views.btnChangeService.isVisible = enableForm
+        views.btnUpdate.isVisible = enableForm
+        views.btnDelete.isVisible = enableForm
+
+
         views.btnChangeService.setOnClickListener{
+            if(!enableForm) return@setOnClickListener
             navigateFragmentWithSlide(R.id.roomServiceFormFragment)
         }
 
         views.rcvService.adapter = adapterService
         views.btnUpdate.setOnClickListener {
+            if(!enableForm) return@setOnClickListener
             viewModel.updateRoom(
                 viewModel.liveData.currentRoom.value?.data,
                 views.txtNameRoom.text.toString(),
@@ -73,6 +81,7 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
         }
 
         views.btnDelete.setOnClickListener{
+            if(!enableForm) return@setOnClickListener
             requireContext().showDialogConfirm(
                 "Xóa phòng",
                 "Bạn có chắc muốn xóa phòng ${viewModel.liveData.currentRoom.value?.data?.roomName} không ?",
@@ -83,8 +92,22 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
         }
     }
 
-    private lateinit var adapterService: DetailRoomServiceAdapter
+    private var adapterService: DetailRoomServiceAdapter = DetailRoomServiceAdapter(
+        object : AppBaseAdapter.AppListener<Service>() {
+            override fun onClickItem(item: Service, action: AppBaseAdapter.ItemAction) {
+                if(!enableForm) return
+                navigateFragmentWithSlide(R.id.roomServiceFormFragment, args = Bundle().apply {
+                    putString(ServiceFormFragment.ITEM_KEY, Gson().toJson(item))
+                })
+            }
+        }
+    )
+
     private fun listenStateViewModel() {
+        viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            enableForm = it.data?.isAdmin == true
+            initUI()
+        }
         viewModel.userController.state.currentBoardingHouse.observe(viewLifecycleOwner){
             if(it != null){
                 views.tvNameBoardingHouse.text = it.data?.name

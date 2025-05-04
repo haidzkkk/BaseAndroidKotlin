@@ -3,11 +3,7 @@ package com.app.motel.feature.notify.viewmodel
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
-import com.app.motel.data.model.Notification
-import com.app.motel.data.model.Resource
 import com.app.motel.data.repository.ComplaintRepository
-import com.app.motel.data.repository.NotificationRepository
-import com.app.motel.data.repository.RoomRepository
 import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,14 +19,13 @@ class NotifyViewModel @Inject constructor(
     fun getComplaint(){
         viewModelScope.launch {
             try {
-                val complaints = complaintRepository.getComplaint(userController.state.currentBoardingHouseId)
+                val complaints = complaintRepository.getComplaintAdmin(userController.state.currentBoardingHouseId)
                 liveData.complaints.postValue(complaints)
             }catch (e: Exception){
                 Log.e("NotifyViewModel", "lỗi: complaints: ${e.message}")
             }
         }
     }
-
 
 //    fun addNews(title: String, content: String, roomId: String?){
 //

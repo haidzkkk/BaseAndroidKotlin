@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.common.ultis.showDialogConfirm
+import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.data.entity.PhongEntity
@@ -45,11 +47,24 @@ class RoomListFragment @Inject constructor() : AppBaseFragment<FragmentListRoomB
     lateinit var adapter: RoomAdapter
 
     private fun init() {
-        viewModel.getRoom()
-
         adapter = RoomAdapter(object: AppBaseAdapter.AppListener<Room>(){
             override fun onClickItem(item: Room, action: AppBaseAdapter.ItemAction) {
-                navigateFragmentWithSlide(R.id.roomDetailFragment, args = Bundle().apply { putString(RoomDetailFragment.ITEM_KEY, Gson().toJson(item)) })
+                when(action){
+                    AppBaseAdapter.ItemAction.CLICK -> {
+                        navigateFragmentWithSlide(R.id.roomDetailFragment, args = Bundle().apply { putString(RoomDetailFragment.ITEM_KEY, Gson().toJson(item)) })
+                    }
+                    AppBaseAdapter.ItemAction.CUSTOM -> {
+                        requireActivity().showDialogConfirm(
+                            title = "XÁC NHẬN THUÊ PHÒNG",
+                            content = "Bạn có chắc muốn thuê phòng ${item.roomName}",
+                            confirm = {
+                                viewModel.rentRoom(item)
+                            }
+                        )
+                    }
+                    else -> {
+                    }
+                }
             }
         })
         views.rcv.adapter = adapter
@@ -57,9 +72,9 @@ class RoomListFragment @Inject constructor() : AppBaseFragment<FragmentListRoomB
         views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
             override fun onTabSelected(position: Int) {
                 when(position){
-                    0 -> viewModel.liveData.currentRoomState.postValue(Resource.Success(data = null))
-                    1 -> viewModel.liveData.currentRoomState.postValue(Resource.Success(data = PhongEntity.Status.RENTED))
-                    2 -> viewModel.liveData.currentRoomState.postValue(Resource.Success(data = PhongEntity.Status.EMPTY))
+                    0 -> viewModel.setStateRoomListData(null)
+                    1 -> viewModel.setStateRoomListData(PhongEntity.Status.RENTED)
+                    2 -> viewModel.setStateRoomListData(PhongEntity.Status.EMPTY)
                 }
             }
         })
@@ -79,25 +94,41 @@ class RoomListFragment @Inject constructor() : AppBaseFragment<FragmentListRoomB
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.rooms.observe(viewLifecycleOwner){
-            if(it.isSuccess()){
-                val rooms = viewModel.liveData.roomsWithCurrentStateSearch
-                adapter.updateData(rooms)
-                views.tvEmpty.isVisible = rooms.isEmpty()
-            }
+        viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            views.tabBar.isVisible = it.data?.isAdmin == true
+            views.btnAdd.isVisible = it.data?.isAdmin == true
+
         }
         viewModel.liveData.currentRoomState.observe(viewLifecycleOwner){
             if(it.isSuccess()){
+                viewModel.getRoom()
+            }
+        }
+        viewModel.liveData.rooms.observe(viewLifecycleOwner){
+            if(it.isSuccess()){
+                val isShowRentButton = viewModel.liveData.currentRoomState.value?.data == PhongEntity.Status.EMPTY
+                        && viewModel.userController.state.currentUser.value?.data?.isAdmin == false
+
                 val rooms = viewModel.liveData.roomsWithCurrentStateSearch
                 adapter.updateData(rooms)
+                adapter.setShowButtonRentRoom(isShowRentButton)
+
                 views.tvEmpty.isVisible = rooms.isEmpty()
             }
         }
         viewModel.liveData.searchText.observe(viewLifecycleOwner){
-            Log.d("RoomListFragment", "searchText: $it")
             val rooms = viewModel.liveData.roomsWithCurrentStateSearch
             adapter.updateData(rooms)
             views.tvEmpty.isVisible = rooms.isEmpty()
+        }
+        viewModel.liveData.rentRoom.observe(viewLifecycleOwner){
+            if(it.isSuccess()){
+                requireActivity().showToast("Yêu cầu thuê phòng thành công")
+                viewModel.getRoom()
+            }else if(it.isError()){
+                requireActivity().showToast(it.message ?: "Có lỗi xảy ra")
+            }
+            viewModel.liveData.rentRoom.postValue(Resource.Initialize())
         }
     }
 }

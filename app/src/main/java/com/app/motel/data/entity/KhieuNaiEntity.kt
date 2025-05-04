@@ -19,7 +19,6 @@ import com.app.motel.data.model.Complaint
             onDelete = ForeignKey.SET_NULL,
         )
     ],
-//    indices = [Index(value = ["MaPhong"]), Index(value = ["NguoiNop"])]
 )
 data class KhieuNaiEntity(
     @PrimaryKey
@@ -42,7 +41,10 @@ data class KhieuNaiEntity(
     val roomId: String? = null,
 
     @ColumnInfo(name = "TrangThai")
-    val status: String?
+    val status: String?,
+
+    @ColumnInfo(name = "KieuKhieuNai")
+    val type: Int?,
 ) {
     enum class Status(val value: String) {
         NEW("Mới"),
@@ -57,6 +59,18 @@ data class KhieuNaiEntity(
                 RESOLVED.value -> RESOLVED
                 REJECTED.value -> REJECTED
                 else -> NEW
+            }
+        }
+    }
+    enum class Type(val value: Int) {
+        COMPLAINT(0),
+        RENT_ROOM(1),;
+
+        companion object {
+            fun fromValue(value: Int) = when(value) {
+                COMPLAINT.value -> COMPLAINT
+                RENT_ROOM.value -> RENT_ROOM
+                else -> COMPLAINT
             }
         }
     }

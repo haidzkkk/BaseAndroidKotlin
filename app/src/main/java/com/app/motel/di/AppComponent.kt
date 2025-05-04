@@ -29,6 +29,9 @@ import com.app.motel.feature.auth.LoginFragment
 import com.app.motel.feature.auth.RegisterFragment
 import com.app.motel.feature.boardingHouse.BoardingHouseActivity
 import com.app.motel.feature.boardingHouse.BoardingHouseListFragment
+import com.app.motel.feature.complaint.ComplaintActivity
+import com.app.motel.feature.complaint.ComplaintFormFragment
+import com.app.motel.feature.complaint.ComplaintListFragment
 import com.app.motel.feature.createBill.CreateBillActivity
 import com.app.motel.feature.createBill.CreateBillFormFragment
 import com.app.motel.feature.createBill.CreateBillListFragment
@@ -83,6 +86,7 @@ interface AppComponent {
     fun inject(rulesActivity: RulesActivity)
     fun inject(boardingHouseActivity: BoardingHouseActivity)
     fun inject(profileDetailActivity: ProfileDetailActivity)
+    fun inject(complaintActivity: ComplaintActivity)
 
     fun inject(homeFragment: HomeFragment)
     fun inject(newsFragment: NewsFragment)
@@ -120,6 +124,8 @@ interface AppComponent {
     fun inject(ruleFormFragment: RuleFormFragment)
     fun inject(boardingHouseListFragment: BoardingHouseListFragment)
     fun inject(profileDetailFragment: ProfileDetailFragment)
+    fun inject(complaintListFragment: ComplaintListFragment)
+    fun inject(complaintFormFragment: ComplaintFormFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

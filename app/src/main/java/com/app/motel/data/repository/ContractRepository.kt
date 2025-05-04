@@ -38,6 +38,13 @@ class ContractRepository @Inject constructor(
         }
     }
 
+    suspend fun getContractActiveByTenantId(tenantId: String): Contract? {
+        val contractEntities: List<HopDongEntity> = contractDAO.getByTenantId(tenantId)
+        return contractEntities.firstOrNull{ contractEntity ->
+            contractEntity.hieuLuc == HopDongEntity.ACTIVE
+        }?.toModel()
+    }
+
     suspend fun getContractActiveByRoomId(roomId: String): Contract? {
         val contractEntities: List<HopDongEntity> = contractDAO.getByRoomId(roomId)
         return contractEntities.firstOrNull{ contractEntity ->

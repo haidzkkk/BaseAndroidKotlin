@@ -10,7 +10,9 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.startActivityWithSlide
 import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.entity.PhongEntity
 import com.app.motel.databinding.FragmentManagementBoardingHouseBinding
+import com.app.motel.feature.complaint.ComplaintActivity
 import com.app.motel.feature.createBill.CreateBillActivity
 import com.app.motel.feature.createContract.CreateContractActivity
 import com.app.motel.feature.handleBill.HandleBillActivity
@@ -130,13 +132,15 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyUser.lyRoomRenting.img.setImageResource(R.drawable.bed)
         views.lyUser.lyRoomRenting.title.text = "Phòng đang thuê"
         views.lyUser.lyRoomRenting.root.setOnClickListener{
-            requireActivity().startActivityWithSlide(Intent(requireActivity(), ServiceActivity::class.java))
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), RoomActivity::class.java).apply {
+                putExtra(RoomActivity.ROOM_STATE_KEY, PhongEntity.Status.RENTED.value)
+            })
         }
 
         views.lyUser.lySendComplaint.img.setImageResource(R.drawable.handle_contract)
         views.lyUser.lySendComplaint.title.text = "Giử khiếu nại"
         views.lyUser.lySendComplaint.root.setOnClickListener{
-            requireActivity().startActivityWithSlide(Intent(requireActivity(), HandleContractActivity::class.java))
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), ComplaintActivity::class.java))
         }
 
         views.lyUser.lyBillPayment.img.setImageResource(R.drawable.create_bill)
@@ -148,7 +152,9 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyUser.lyListRoomEmpty.img.setImageResource(R.drawable.room)
         views.lyUser.lyListRoomEmpty.title.text = "Danh sách phòng trống"
         views.lyUser.lyListRoomEmpty.root.setOnClickListener{
-            requireActivity().startActivityWithSlide(Intent(requireActivity(), RoomActivity::class.java))
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), RoomActivity::class.java).apply {
+                putExtra(RoomActivity.ROOM_STATE_KEY, PhongEntity.Status.EMPTY.value)
+            })
         }
 
         views.lyUser.lyBillPaid.img.setImageResource(R.drawable.payment)

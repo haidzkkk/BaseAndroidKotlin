@@ -66,7 +66,9 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
             if (mViewModel.userController.state.getCurrentUser?.isAdmin == true)
                 R.menu.menu_bottom_admin else R.menu.menu_bottom_user
         )
-
+        this.findNavController(R.id.fragment_view).currentDestination?.id?.apply {
+            views.navBottom.selectedItemId = this
+        }
         this.findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
             views.navBottom.isVisible = destination.id != R.id.boardingHouseListFragment
         }

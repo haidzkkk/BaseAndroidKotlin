@@ -127,6 +127,7 @@ object AppModule {
     fun providerNotificationRepository(
         db: AppDatabase,
     ): NotificationRepository = NotificationRepository(
+        roomDAO = db.roomDao(),
         notificationDAO = db.notificationDao(),
     )
 

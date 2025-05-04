@@ -1,38 +1,38 @@
-package com.app.motel.feature.room
+package com.app.motel.feature.complaint
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
-import com.app.motel.data.entity.PhongEntity
-import com.app.motel.data.model.Resource
-import com.app.motel.databinding.ActivityRoomBinding
-import com.app.motel.feature.room.viewmodel.RoomViewModel
+import com.app.motel.core.AppBaseFragment
+import com.app.motel.databinding.ActivityComplaintBinding
+import com.app.motel.databinding.FragmentComplaintListBinding
+import com.app.motel.feature.complaint.viewmodel.ComplaintViewModel
 import javax.inject.Inject
 
+class ComplaintActivity: AppBaseActivity<ActivityComplaintBinding>() {
 
-class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
-
-    companion object{
-        const val ROOM_STATE_KEY = "room_status"
+    override fun getBinding(): ActivityComplaintBinding {
+        return ActivityComplaintBinding.inflate(layoutInflater)
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel : RoomViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(RoomViewModel::class.java)
-    }
 
-    override fun getBinding(): ActivityRoomBinding {
-        return ActivityRoomBinding.inflate(layoutInflater)
+    val viewmodel: ComplaintViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(ComplaintViewModel::class.java)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as AppApplication).appComponent.inject(this)
@@ -48,17 +48,6 @@ class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
                 handleBackWithAnimation()
             }
         })
-        findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
-            supportActionBar?.title = when(destination.id){
-                R.id.roomListFragment -> "Danh sách các phòng"
-                R.id.roomDetailFragment -> "Chi tiết phòng"
-                else -> "Danh sách các phòng"
-            }
-        }
-
-        val status: String? = intent.getStringExtra(ROOM_STATE_KEY)
-        viewModel.setStateRoomListData(status?.let { PhongEntity.Status.fromValue(status) })
-
     }
 
     private fun setupToolBar(){
@@ -71,7 +60,7 @@ class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
         views.toolbar.overflowIcon?.setTint(ContextCompat.getColor(this, R.color.white))
         views.toolbar.setTitleTextAppearance(this, R.style.ToolbarTitleStyle)
         views.toolbar.isTitleCentered = true
-        supportActionBar?.title = "Danh sách các phòng"
+        supportActionBar?.title = "Danh sách khiếu nại"
         views.toolbar.setNavigationOnClickListener {
             handleBackWithAnimation()
         }
@@ -80,11 +69,12 @@ class RoomActivity() : AppBaseActivity<ActivityRoomBinding>() {
     private fun handleBackWithAnimation() {
         val navController = findNavController(R.id.fragment_view)
 
-        if (navController.currentDestination?.id == R.id.roomListFragment) {
+        if (navController.currentDestination?.id == R.id.complaintListFragment) {
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         } else {
             popFragmentWithSlide(R.id.fragment_view)
         }
     }
+
 }
