@@ -2,6 +2,7 @@ package com.app.motel.feature.handleBill.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
+import com.app.motel.data.entity.HoaDonEntity
 import com.app.motel.data.model.Bill
 import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
@@ -17,7 +18,7 @@ class HandleBillViewModel @Inject constructor(
     private val billRepository: BillRepository,
     private val contractRepository: ContractRepository,
     private val tenantRepository: TenantRepository,
-    private val userController: UserController
+    val userController: UserController
 ): AppBaseViewModel<HandleBillState, HandleBillAction, HandleBillEvent>(HandleBillState()) {
     override fun handle(action: HandleBillAction) {
 
@@ -27,8 +28,15 @@ class HandleBillViewModel @Inject constructor(
         liveData.bills.postValue(Resource.Loading())
         viewModelScope.launch {
             try {
-                val boardingHouseId = userController.state.currentBoardingHouseId
-                val bills = billRepository.getBillByBoardingHouseId(boardingHouseId)
+                val bills = userController.state.isAdmin.let {
+                    if (it){
+                        val boardingHouseId = userController.state.currentBoardingHouseId
+                        billRepository.getBillByBoardingHouseId(boardingHouseId)
+                    }else {
+                        val currentUserId = userController.state.currentUserId
+                        billRepository.getBillByTenantRentedRoom(currentUserId)
+                    }
+                }
                 liveData.bills.postValue(Resource.Success(bills))
             }catch (e: Exception){
                 liveData.bills.postValue(Resource.Error(message = e.toString()))
@@ -43,6 +51,40 @@ class HandleBillViewModel @Inject constructor(
             bill.tenant = tenant
             liveData.currentBill.postValue(bill)
         }
+    }
+
+    fun clearForm(){
+        liveData.currentBill.postValue(null)
+        liveData.updateBill.postValue(Resource.Initialize())
+        getBills()
+    }
+
+    fun payingBill(bill: Bill?){
+        val currentUser = userController.state.getCurrentUser
+        when{
+            bill == null -> {
+                liveData.updateBill.postValue(Resource.Error(message = "Hóa đơn không tồn tại"))
+                return
+            }
+            currentUser?.id != bill.tenant?.id -> {
+                liveData.updateBill.postValue(Resource.Error(message = "Bạn không có quyền thanh toán hóa đơn này"))
+                return
+            }
+            bill.status == HoaDonEntity.STATUS_PAID -> {
+                liveData.updateBill.postValue(Resource.Error(message = "Hóa đơn đã được thanh toán"))
+                return
+            }
+        }
+
+        viewModelScope.launch {
+            val billUpdate = bill!!.copy(
+                status = HoaDonEntity.STATUS_PAID
+            )
+            val billUpdated = billRepository.updateBill(billUpdate)
+            liveData.updateBill.postValue(billUpdated)
+
+        }
+
     }
 
 }

@@ -14,11 +14,14 @@ class HandleBillState: AppViewLiveData {
     val currentDate = MutableLiveData(DateConverter.getCurrentDateTime().toCalendar())
     val bills = MutableLiveData<Resource<List<Bill>>>()
 
-    val currentBill = MutableLiveData<Bill?>()
+    val currentBill = MutableLiveData<Bill>()
+    val updateBill = MutableLiveData<Resource<Bill>>()
 
-    val getListBillByFilter: List<Bill> get() = (bills.value?.data ?: arrayListOf()).filter{
+    fun getListBillByFilter(isAdmin: Boolean): List<Bill> = (bills.value?.data ?: arrayListOf()).filter{
         it.status == filterState.value
-        && it.month == currentDate.value!!.get(Calendar.MONTH) + 1
-        && it.year == currentDate.value!!.get(Calendar.YEAR)
+        && (!isAdmin || (it.month == currentDate.value!!.get(Calendar.MONTH) + 1
+            && it.year == currentDate.value!!.get(Calendar.YEAR)
+                ))
+
     }
 }

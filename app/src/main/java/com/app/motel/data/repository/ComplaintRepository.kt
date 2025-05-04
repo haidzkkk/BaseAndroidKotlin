@@ -15,8 +15,7 @@ class ComplaintRepository @Inject constructor(
 ) {
 
     suspend fun getComplaintAdmin(boardingHouseId: String): List<Complaint>{
-//        return complaintDAO.getByBoardingHouseId(boardingHouseId).map {
-        return complaintDAO.getByBoardingHouseId().map {
+        return complaintDAO.getByBoardingHouseId(boardingHouseId).map {
             it.toModel().apply {
                 room = roomDAO.getPhongById(it.roomId ?: "")?.toModel()
                 tenant = tenantDAO.getById(it.submittedBy ?: "")?.toModel()

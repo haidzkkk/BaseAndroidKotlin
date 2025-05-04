@@ -46,23 +46,33 @@ fun String?.toMoney(): Int{
 }
 
 fun String?.toStringMoney(): String{
-    val money = this.toMoney()
-    if(money == 0) return this ?: ""
+    return try {
+        val money = this.toMoney()
+        if(money == 0) return this ?: ""
 
-    val symbols = DecimalFormatSymbols().apply {
-        groupingSeparator = ' '
+        val symbols = DecimalFormatSymbols().apply {
+            groupingSeparator = ' '
+        }
+        val formatter = DecimalFormat("#,###", symbols)
+        formatter.format(money)
+    } catch (e: Exception) {
+        "0"
     }
-    val formatter = DecimalFormat("#,###", symbols)
-    return formatter.format(money)
 }
 
-fun Int?.toStringMoney(): String{
-    val symbols = DecimalFormatSymbols().apply {
-        groupingSeparator = ' '
+fun Any?.toStringMoney(): String {
+    return try {
+        val number = when (this) {
+            is Number -> this.toDouble()
+            is String -> this.toDoubleOrNull() ?: 0.0
+            else -> 0.0
+        }
+        DecimalFormat("#,###").format(number)
+    } catch (e: Exception) {
+        "0"
     }
-    val formatter = DecimalFormat("#,###", symbols)
-    return formatter.format(this)
 }
+
 
 fun Int.formatRoomName(): String {
     return if (this < 100) {

@@ -102,7 +102,7 @@ object AppModule {
         boardingHouseDAO = db.boardingHouseDao(),
         roomDAO = db.roomDao(),
         billDAO = db.billDao(),
-        tenantDAO = db.tenantDao(),
+        contractDAO = db.contractDao(),
     )
 
     @Provides

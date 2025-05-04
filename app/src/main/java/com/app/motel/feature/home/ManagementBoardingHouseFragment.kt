@@ -10,6 +10,7 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.startActivityWithSlide
 import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.entity.HoaDonEntity
 import com.app.motel.data.entity.PhongEntity
 import com.app.motel.databinding.FragmentManagementBoardingHouseBinding
 import com.app.motel.feature.complaint.ComplaintActivity
@@ -146,7 +147,9 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyUser.lyBillPayment.img.setImageResource(R.drawable.create_bill)
         views.lyUser.lyBillPayment.title.text = "Thanh toán hóa đơn"
         views.lyUser.lyBillPayment.root.setOnClickListener{
-            requireActivity().startActivityWithSlide(Intent(requireActivity(), CreateBillActivity::class.java))
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), HandleBillActivity::class.java).apply {
+                putExtra(HandleBillActivity.BILL_STATE_KEY, HoaDonEntity.STATUS_UNPAID)
+            })
         }
 
         views.lyUser.lyListRoomEmpty.img.setImageResource(R.drawable.room)
@@ -160,7 +163,9 @@ class ManagementBoardingHouseFragment @Inject constructor() : AppBaseFragment<Fr
         views.lyUser.lyBillPaid.img.setImageResource(R.drawable.payment)
         views.lyUser.lyBillPaid.title.text = "Hóa đơn đã thanh toán"
         views.lyUser.lyBillPaid.root.setOnClickListener{
-            requireActivity().startActivityWithSlide(Intent(requireActivity(), TenantActivity::class.java))
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), HandleBillActivity::class.java).apply {
+                putExtra(HandleBillActivity.BILL_STATE_KEY, HoaDonEntity.STATUS_PAID)
+            })
         }
 
         views.lyUser.lyRule.img.setImageResource(R.drawable.icon_rule)

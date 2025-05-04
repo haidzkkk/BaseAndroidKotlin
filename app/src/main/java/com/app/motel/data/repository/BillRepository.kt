@@ -2,11 +2,12 @@ package com.app.motel.data.repository
 
 import android.util.Log
 import com.app.motel.common.service.DateConverter
+import com.app.motel.common.service.DateConverter.toCalendar
 import com.app.motel.data.entity.HoaDonWithPhong
 import com.app.motel.data.local.BillDAO
 import com.app.motel.data.local.BoardingHouseDAO
+import com.app.motel.data.local.ContractDAO
 import com.app.motel.data.local.RoomDAO
-import com.app.motel.data.local.TenantDAO
 import com.app.motel.data.model.Bill
 import com.app.motel.data.model.Resource
 import java.util.Calendar
@@ -16,7 +17,7 @@ class BillRepository @Inject constructor(
     private val boardingHouseDAO: BoardingHouseDAO,
     private val roomDAO: RoomDAO,
     private val billDAO: BillDAO,
-    private val tenantDAO: TenantDAO,
+    private val contractDAO: ContractDAO,
 ) {
     companion object{
         private const val SEARCH_MONTH_MAX_LENGTH = 36 // 3 year
@@ -31,6 +32,42 @@ class BillRepository @Inject constructor(
             }
         }
     }
+
+    suspend fun getBillByTenantRentedRoom(tenantId: String): List<Bill> {
+        try {
+            val contractEntities = contractDAO.getByTenantId(tenantId)
+            val bills: ArrayList<Bill> = arrayListOf()
+
+            contractEntities.forEach { contractEntity ->
+                var leftDate = DateConverter.localStringToDate(contractEntity.ngayBatDau)?.toCalendar()
+                val rightDate = DateConverter.localStringToDate(contractEntity.ngayKetThuc)?.toCalendar()
+                Log.e("getBillByTenantRentedRoom", "start leftDate $leftDate rightDate $rightDate")
+                if(leftDate != null && rightDate != null){
+                    while (leftDate!!.before(rightDate)){
+                        Log.e("getBillByTenantRentedRoom", "leftDate $leftDate rightDate $rightDate")
+                        val bill = billDAO.getByRoomAndMonth(
+                            contractEntity.maPhong ?: "",
+                            leftDate.get(Calendar.MONTH),
+                            leftDate.get(Calendar.YEAR),
+                        )
+                        if(bill != null){
+                            bills.add(bill.toModel().apply {
+                                this.room = contractEntity.maPhong?.let { roomDAO.getPhongById(it)?.toModel() }
+                            })
+                        }
+
+                        leftDate = DateConverter.calculateMonth(leftDate.time, 1)
+                    }
+                }
+            }
+            Log.e("getBillByTenantRentedRoom", "bills ok $bills")
+            return bills.reversed()
+        }catch (e: Exception){
+            Log.e("getBillByTenantRentedRoom", "bills error $e")
+            return listOf()
+        }
+    }
+
     suspend fun checkBillCreateDate(roomId: String, createdDate: Calendar): Resource<Bill> {
         return try {
 
@@ -88,4 +125,13 @@ class BillRepository @Inject constructor(
         }
     }
 
+    suspend fun updateBill(bill: Bill): Resource<Bill>{
+        return try {
+            val billEntity = bill.toEntity()
+            billDAO.update(billEntity)
+            Resource.Success(billEntity.toModel())
+        }catch (e: Exception){
+            Resource.Error(message = e.toString())
+        }
+    }
 }

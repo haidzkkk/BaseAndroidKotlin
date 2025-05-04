@@ -91,23 +91,32 @@ class HandleBillListFragment : AppBaseFragment<FragmentHandleBillListBinding>() 
 
     @SuppressLint("SetTextI18n")
     private fun listenStateViewModel() {
+        viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            (it.data?.isAdmin == true).apply{
+                views.tabBar.isVisible = this
+                views.lyFilter.isVisible = this
+            }
+        }
         viewModel.liveData.bills.observe(viewLifecycleOwner){
             if(it.isSuccess()){
-                val tenants = viewModel.liveData.getListBillByFilter
+                val tenants = viewModel.liveData.getListBillByFilter(viewModel.userController.state.isAdmin)
                 adapter.updateData(tenants)
+
                 views.tvEmpty.isVisible = tenants.isEmpty()
             }
         }
         viewModel.liveData.filterState.observe(viewLifecycleOwner){
-            val tenants = viewModel.liveData.getListBillByFilter
+            val tenants = viewModel.liveData.getListBillByFilter(viewModel.userController.state.isAdmin)
+
             adapter.updateData(tenants)
             views.tvEmpty.isVisible = tenants.isEmpty()
         }
         viewModel.liveData.currentDate.observe(viewLifecycleOwner){
-            views.tvMonth.text = "${it.get(Calendar.MONTH) + 1}/${it.get(Calendar.YEAR)}"
-            val tenants = viewModel.liveData.getListBillByFilter
+            val tenants = viewModel.liveData.getListBillByFilter(viewModel.userController.state.isAdmin)
             adapter.updateData(tenants)
+
             views.tvEmpty.isVisible = tenants.isEmpty()
+            views.tvMonth.text = "${it.get(Calendar.MONTH) + 1}/${it.get(Calendar.YEAR)}"
         }
     }
 

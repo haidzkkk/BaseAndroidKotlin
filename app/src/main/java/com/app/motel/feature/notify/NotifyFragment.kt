@@ -45,7 +45,7 @@ class NotifyFragment @Inject constructor() : AppBaseFragment<FragmentNotifyBindi
     private fun listenStateViewModel() {
         viewModel.liveData.complaints.observe(viewLifecycleOwner){
             val complaints = it ?: arrayListOf()
-            adapter.updateData(complaints)
+            adapter.updateData(complaints.reversed())
             views.tvEmpty.isVisible = complaints.isEmpty()
         }
     }

@@ -37,7 +37,7 @@ interface ContractDAO {
     LEFT JOIN KhuTro ON Phong.MaKhuTro = KhuTro.ID
     WHERE KhuTro.ID = :boardingHouseId OR HopDong.MaPhong IS NULL
 """)
-    suspend fun getContractsByUserId(boardingHouseId: String): List<HopDongEntity>
+    suspend fun getContractsByBoardingId(boardingHouseId: String): List<HopDongEntity>
 
 
     @Query("UPDATE HopDong SET MaPhong = NULL WHERE MaPhong = :roomId")

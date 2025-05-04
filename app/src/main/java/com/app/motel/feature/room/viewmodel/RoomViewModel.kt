@@ -237,7 +237,7 @@ class RoomViewModel @Inject constructor(
                     liveData.rentRoom.postValue(Resource.Error(message = "Phòng đang có người thuê"))
                     return@launch
                 }
-                contractRepository.getContractActiveByTenantId(currentUser.id) == null -> {
+                contractRepository.getContractActiveByTenantId(currentUser.id) != null -> {
                     liveData.rentRoom.postValue(Resource.Error(message = "Hiện bạn đang thuê phòng khác"))
                     return@launch
                 }
