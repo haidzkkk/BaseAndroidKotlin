@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
@@ -56,13 +57,18 @@ fun Activity.startActivityWithTransition(intent: Intent) {
     startActivity(intent, options.toBundle())
 }
 
-fun Activity.startActivityWithSlide(intent: Intent) {
+fun Activity.startActivityWithSlide(intent: Intent, launcher: ActivityResultLauncher<Intent>? = null) {
     val options = ActivityOptions.makeCustomAnimation(
         this,
         R.anim.slide_in_right,
         R.anim.slide_out_left
     )
-    startActivity(intent, options.toBundle())
+
+    if(launcher != null){
+        launcher.launch(intent)
+    }else{
+        startActivity(intent, options.toBundle())
+    }
 }
 
 fun Activity.finishActivityWithTransition() {

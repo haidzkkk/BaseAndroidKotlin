@@ -39,4 +39,7 @@ interface ComplaintDAO {
 
     @Query("SELECT * FROM KhieuNai WHERE NguoiNop = :userId ORDER BY NgayTao DESC")
     suspend fun getByTenantId(userId: String): List<KhieuNaiEntity>
+
+    @Query("UPDATE KhieuNai SET TrangThai = :state WHERE ID = :id")
+    suspend fun updateStateComplaint(id: String, state: String)
 }

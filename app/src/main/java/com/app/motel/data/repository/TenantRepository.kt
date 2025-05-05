@@ -64,10 +64,10 @@ class TenantRepository @Inject constructor(
         }
     }
 
-    suspend fun updateTenantRentToRoom(tenant: Tenant, roomId: String, status: NguoiThueEntity.Status = NguoiThueEntity.Status.ACTIVE): Resource<Tenant>{
+    suspend fun updateTenantRentToRoom(tenantId: String, roomId: String, status: NguoiThueEntity.Status = NguoiThueEntity.Status.ACTIVE): Resource<Tenant>{
         return try {
-            tenantDAO.updateRent(tenant.id, roomId, status.value)
-            Resource.Success(tenant.copy(roomId = roomId, status = status.value), message = "Cập nhật thành công")
+            tenantDAO.updateRent(tenantId, roomId, status.value)
+            Resource.Success(null, message = "Cập nhật thành công")
         }catch (e: Exception) {
             Resource.Error(message = e.toString())
         }

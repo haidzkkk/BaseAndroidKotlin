@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.data.model.Room
@@ -57,6 +58,20 @@ class CreateContractListFragment @Inject constructor() : AppBaseFragment<Fragmen
                 val rooms = viewModel.liveData.roomsNotRented
                 adapter.updateData(rooms)
                 views.tvEmpty.isVisible = rooms.isEmpty()
+
+                handleRoomSelected(rooms)
+            }
+        }
+    }
+
+    private fun handleRoomSelected(rooms: List<Room>) {
+        if(viewModel.liveData.currentRoomId != null){
+            val item = rooms.firstOrNull{it.id == viewModel.liveData.currentRoomId}
+            viewModel.liveData.currentRoomId = null
+            if(item != null){
+                navigateFragmentWithSlide(R.id.creatContractFormFragment, args = Bundle().apply { putString(CreateContractFormFragment.ITEM_KEY, Gson().toJson(item)) })
+            }else{
+                requireActivity().showToast("Không tìm thấy phòng")
             }
         }
     }

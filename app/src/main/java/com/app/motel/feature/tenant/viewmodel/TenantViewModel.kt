@@ -145,7 +145,7 @@ class TenantViewModel @Inject constructor(
             }
         }
         viewModelScope.launch {
-            val result = tenantRepository.updateTenantRentToRoom(tenant, room!!.id)
+            val result = tenantRepository.updateTenantRentToRoom(tenant.id, room!!.id)
             liveData.updateTenant.postValue(result)
         }
     }

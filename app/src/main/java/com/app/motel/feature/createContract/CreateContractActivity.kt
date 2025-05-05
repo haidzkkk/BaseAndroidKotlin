@@ -10,12 +10,21 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.core.AppBaseActivity
+import com.app.motel.data.model.BoardingHouse
 import com.app.motel.databinding.ActivityCreateContractBinding
+import com.app.motel.feature.boardingHouse.BoardingHouseActivity.Companion.KEY_BOARDING_HOUSE
+import com.app.motel.feature.complaint.viewmodel.ComplaintViewModel
 import com.app.motel.feature.createContract.viewmodel.CreateContractViewModel
+import com.google.gson.Gson
 import javax.inject.Inject
 
 
 class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>() {
+
+    companion object{
+        const val KEY_TENANT_ID = "KEY_TENANT_ID"
+        const val KEY_ROOM_ID = "KEY_ROOM_ID"
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -47,6 +56,10 @@ class CreateContractActivity() : AppBaseActivity<ActivityCreateContractBinding>(
             val isHomeFragment = destination.id == R.id.creatContractListFragment
             supportActionBar?.setDisplayShowTitleEnabled(isHomeFragment)
         }
+
+        val roomId: String? = intent.getStringExtra(KEY_ROOM_ID)
+        val tenantId: String? = intent.getStringExtra(KEY_TENANT_ID)
+        viewModel.initForm(roomId, tenantId)
     }
 
     private fun setupToolBar(){

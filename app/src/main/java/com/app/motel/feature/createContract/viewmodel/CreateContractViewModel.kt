@@ -25,7 +25,14 @@ class CreateContractViewModel @Inject constructor(
     override fun handle(action: CreateContractViewAction) {
     }
 
-    fun clearStateCreate(){
+    fun initForm(roomId: String?, tenantId: String?){
+        liveData.currentRoomId = roomId
+        liveData.currentTenantId = tenantId
+    }
+
+    fun clearForm(){
+        liveData.currentRoomId = null
+
         liveData.createContract.postValue(Resource.Initialize())
         liveData.tenantNotRented.postValue(Resource.Initialize())
     }
@@ -54,8 +61,8 @@ class CreateContractViewModel @Inject constructor(
     }
 
     fun createContact(
-        room: Room?,
-        tenant: Tenant?,
+        roomId: String?,
+        tenantId: String?,
         nameContract: String?,
         createdDate: String?,
         startDate: String?,
@@ -70,11 +77,11 @@ class CreateContractViewModel @Inject constructor(
                 liveData.createContract.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
-            room?.id.isNullOrBlank() -> {
+            roomId.isNullOrBlank() -> {
                 liveData.createContract.postValue(Resource.Error(message = "Không tìm thấy phòng thuê"))
                 return
             }
-            tenant?.id.isNullOrBlank() -> {
+            tenantId.isNullOrBlank() -> {
                 liveData.createContract.postValue(Resource.Error(message = "Không tìm thấy người đại diện thuê phòng"))
                 return
             }
@@ -102,9 +109,9 @@ class CreateContractViewModel @Inject constructor(
 
         viewModelScope.launch {
             val newContract = Contract(
-                roomId = room!!.id,
+                roomId = roomId,
                 name = nameContract,
-                customerId = tenant!!.id,
+                customerId = tenantId,
                 createdDate = createdDate,
                 startDate = startDate,
                 endDate = endDate,
@@ -114,8 +121,8 @@ class CreateContractViewModel @Inject constructor(
 
             val contractCreated = repository.createContract(newContract)
             if(contractCreated.isSuccess()){
-                repository.updateStateRoom(room.id, PhongEntity.Status.RENTED.value)
-                tenantRepository.updateTenantRentToRoom(tenant, room.id)
+                repository.updateStateRoom(roomId!!, PhongEntity.Status.RENTED.value)
+                tenantRepository.updateTenantRentToRoom(tenantId!!, roomId)
             }
             liveData.createContract.postValue(contractCreated)
         }

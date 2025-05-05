@@ -53,4 +53,13 @@ class ComplaintRepository @Inject constructor(
         }
     }
 
+    suspend fun updateStateComplaint(id: String, state: String): Resource<Complaint> {
+        return try {
+            complaintDAO.updateStateComplaint(id, state)
+            Resource.Success(complaintDAO.getComplaintById(id)?.toModel())
+        }catch (e: Exception){
+            Resource.Error(message = e.toString())
+        }
+    }
+
 }

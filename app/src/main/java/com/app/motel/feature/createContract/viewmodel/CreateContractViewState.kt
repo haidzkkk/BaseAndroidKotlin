@@ -9,6 +9,9 @@ import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
 
 class CreateContractViewState: AppViewLiveData {
+
+    var currentRoomId: String? = null
+    var currentTenantId: String? = null
     val createContract = MutableLiveData<Resource<Contract>>()
     val rooms = MutableLiveData<Resource<List<Room>>>()
     val tenantNotRented = MutableLiveData<Resource<List<Tenant>>>()

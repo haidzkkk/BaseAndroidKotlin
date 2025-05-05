@@ -63,6 +63,7 @@ data class KhieuNaiEntity(
         }
     }
     enum class Type(val value: Int) {
+        APPLICATION(999),
         COMPLAINT(0),
         RENT_ROOM(1),;
 
@@ -82,6 +83,7 @@ data class KhieuNaiEntity(
         createdDate = createdDate,
         submittedBy = submittedBy,
         roomId = roomId,
-        status = status
+        status = status,
+        type = type
     )
 }

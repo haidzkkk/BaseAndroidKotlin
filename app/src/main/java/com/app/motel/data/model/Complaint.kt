@@ -18,6 +18,9 @@ data class Complaint(
     var room: Room? = null
     var tenant: Tenant? = null
 
+    val isRentRoom get() = type == KhieuNaiEntity.Type.RENT_ROOM.value
+    val isComplaint get() = type == KhieuNaiEntity.Type.COMPLAINT.value
+
     fun toEntity() = KhieuNaiEntity(
         id = id,
         title = title,

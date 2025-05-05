@@ -1,5 +1,7 @@
 package com.app.motel.feature.createContract
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.service.DateConverter
+import com.app.motel.common.ultis.finishActivityWithTransition
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.common.ultis.toStringMoney
@@ -64,8 +67,8 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
                 else null
 
             mViewModel.createContact(
-                item,
-                currentTenant,
+                item.id,
+                currentTenant?.id,
                 views.txtName.text.toString(),
                 views.txtCreateDate.text.toString(),
                 views.txtStartDate.text.toString(),
@@ -79,20 +82,27 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
     private fun listenerViewModelState() {
         mViewModel.liveData.tenantNotRented.observe(viewLifecycleOwner){
             if(it.isSuccess()){
+                val tenants = mViewModel.liveData.tenantNotRented.value?.data ?: arrayListOf()
                 val adapter = ArrayAdapter(
                     requireContext(), // Context
                     R.layout.item_spinner_text, // Layout
-                    mViewModel.liveData.tenantNotRented.value?.data?.map { tenant: Tenant ->  tenant.fullName} ?: arrayListOf()
+                    tenants.map { tenant: Tenant ->  tenant.fullName}
                 )
 
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 views.spinnerCustomer.adapter = adapter
+
+                handleTenantSelected(tenants)
             }
         }
         mViewModel.liveData.createContract.observe(viewLifecycleOwner){
             when(it.status){
                 Status.SUCCESS -> {
-                    activity?.showToast("Tao hợp đồng thành công")
+                    requireActivity().showToast("Tạo hợp đồng thành công")
+                    if(mViewModel.liveData.currentTenantId != null){
+                        requireActivity().setResult(Activity.RESULT_OK, Intent())
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
                 Status.ERROR -> {
@@ -103,8 +113,21 @@ class CreateContractFormFragment @Inject constructor() : AppBaseFragment<Fragmen
         }
     }
 
+    private fun handleTenantSelected(tenants: List<Tenant>) {
+        if(mViewModel.liveData.currentTenantId != null){
+            (tenants.indexOfFirst { tenant: Tenant ->  tenant.id == mViewModel.liveData.currentTenantId  }).let { position ->
+                if(position != -1){
+                    views.spinnerCustomer.setSelection(position)
+                }else{
+                    mViewModel.liveData.currentTenantId = null
+                    requireActivity().showToast("Không tìm thấy người muốn thuê")
+                }
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        mViewModel.clearStateCreate()
+        mViewModel.clearForm()
     }
 }

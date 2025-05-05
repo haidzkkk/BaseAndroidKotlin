@@ -3,7 +3,6 @@ package com.app.motel.feature.rules.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.entity.QuyDinhEntity
-import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Rules
 import com.app.motel.data.repository.RulesRepository
@@ -13,7 +12,7 @@ import javax.inject.Inject
 
 class RulesViewModel @Inject constructor(
     private val rulesRepository: RulesRepository,
-    private val userController: UserController,
+    val userController: UserController,
 ): AppBaseViewModel<RulesViewState, RulesViewAction, RulesViewEvent>(
     RulesViewState()
 ) {
@@ -24,8 +23,14 @@ class RulesViewModel @Inject constructor(
     fun getRules(){
         viewModelScope.launch {
            try {
-               val boardingRules = rulesRepository.getRulesByUserId(userController.state.currentBoardingHouseId)
-                liveData.rules.postValue(Resource.Success(boardingRules))
+               val rules = userController.state.isAdmin.let {
+                   if(it){
+                       rulesRepository.getRulesByBoardingHouseId(userController.state.currentBoardingHouseId)
+                   }else{
+                       rulesRepository.getRulesByTenantId(userController.state.currentUserId)
+                   }
+               }
+                liveData.rules.postValue(Resource.Success(rules))
            }catch (e: Exception){
                liveData.rules.postValue(Resource.Error(message = e.message ?: "Unknown error"))
            }
