@@ -20,6 +20,8 @@ data class Room(
     var tenants: List<Tenant>? = null
     var listService: List<Service>? = null
     var contract: Contract? = null
+    @Transient
+    var boardingHouse: BoardingHouse? = null
 
     fun toEntity(): PhongEntity {
         return PhongEntity(

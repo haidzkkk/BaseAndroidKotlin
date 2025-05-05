@@ -21,9 +21,7 @@ class HomeViewModel @Inject constructor(
     ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     override fun handle(action: HomeViewAction) {
-//        when(action){
-//            is HomeViewAction.GetMotelViewAction -> getMotel()
-//        }
+
     }
 
     fun getBoardingById(boardingHouseId: String?) {

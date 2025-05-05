@@ -16,6 +16,7 @@ interface BoardingHouseDAO {
     @Query("SELECT * FROM KhuTro WHERE MaChuNha = :userId")
     suspend fun getByUserId(userId: String): List<KhuTroEntity>
 
+
     @Query("SELECT * FROM KhuTro " +
             "LEFT JOIN Phong ON KhuTro.ID = Phong.MaKhuTro " +
             "LEFT JOIN HopDong ON Phong.ID = HopDong.MaPhong " +

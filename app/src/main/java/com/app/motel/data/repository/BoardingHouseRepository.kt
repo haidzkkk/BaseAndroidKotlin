@@ -64,6 +64,15 @@ class BoardingHouseRepository @Inject constructor(
         }
     }
 
+    suspend fun getBoardingHouseById(id: String): Resource<BoardingHouse>{
+        return try {
+            val boardingHouseEntity: KhuTroEntity? = boardingHouseDAO.getById(id)
+            Resource.Success(boardingHouseEntity?.toModel())
+        }catch (e: Exception){
+            Resource.Error(message = e.toString())
+        }
+    }
+
     suspend fun getBoardingHouseByUserId(userId: String): Resource<List<BoardingHouse>>{
         return try {
             val boardingHouse = boardingHouseDAO.getByUserId(userId).map {

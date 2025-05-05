@@ -128,6 +128,7 @@ object AppModule {
         db: AppDatabase,
     ): NotificationRepository = NotificationRepository(
         roomDAO = db.roomDao(),
+        boardingHouseDAO = db.boardingHouseDao(),
         notificationDAO = db.notificationDao(),
     )
 

@@ -108,11 +108,6 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
             enableForm = it.data?.isAdmin == true
             initUI()
         }
-        viewModel.userController.state.currentBoardingHouse.observe(viewLifecycleOwner){
-            if(it != null){
-                views.tvNameBoardingHouse.text = it.data?.name
-            }
-        }
         viewModel.liveData.updateRoom.observe(viewLifecycleOwner){
              if(it.isSuccess()){
                 activity?.showToast("Cập nhật phòng thành công")
@@ -131,6 +126,8 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
         viewModel.liveData.currentRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 it.data?.also { currentRoom: Room? ->
+                    views.tvNameBoardingHouse.text = currentRoom?.boardingHouse?.name
+                    views.tvStatusBoardingHouse.text = currentRoom?.boardingHouse?.address
                     views.txtNameRoom.setText(currentRoom?.roomName)
                     views.txtArea.setText(currentRoom?.area?.toString())
                     views.txtMaxTenant.setText(currentRoom?.maxOccupants?.toString())

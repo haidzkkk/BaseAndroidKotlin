@@ -10,7 +10,7 @@ import com.app.motel.data.entity.KhieuNaiEntity
 import com.app.motel.data.model.Complaint
 import com.app.motel.databinding.ItemComplaintBinding
 
-class NotificationAdapter(
+class NotificationAdminAdapter(
     val listener: AppBaseAdapter.AppListener<Complaint>
 ): AppBaseAdapter<Complaint, ItemComplaintBinding>() {
     override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemComplaintBinding {

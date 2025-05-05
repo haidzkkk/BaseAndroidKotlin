@@ -7,12 +7,14 @@ import com.app.motel.data.entity.KhieuNaiEntity
 import com.app.motel.data.model.Complaint
 import com.app.motel.data.model.Resource
 import com.app.motel.data.repository.ComplaintRepository
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NotifyViewModel @Inject constructor(
     private val complaintRepository: ComplaintRepository,
+    private val notificationRepository: NotificationRepository,
     val userController: UserController,
 ): AppBaseViewModel<NotifyViewState, NotifyViewAction, NotifyViewEvent>(NotifyViewState()) {
     override fun handle(action: NotifyViewAction) {
@@ -20,19 +22,41 @@ class NotifyViewModel @Inject constructor(
     }
 
     fun setCurrentType(position: Int){
-        when(position){
-            0 -> liveData.currentType.postValue(KhieuNaiEntity.Type.APPLICATION)
-            1 -> liveData.currentType.postValue(KhieuNaiEntity.Type.COMPLAINT)
-            2 -> liveData.currentType.postValue(KhieuNaiEntity.Type.RENT_ROOM)
-            else -> liveData.currentType.postValue(KhieuNaiEntity.Type.APPLICATION)
+        if(liveData.isAdmin){
+            when(position){
+                0 -> liveData.currentTabType.postValue(KhieuNaiEntity.Type.APPLICATION)
+                1 -> liveData.currentTabType.postValue(KhieuNaiEntity.Type.COMPLAINT)
+                2 -> liveData.currentTabType.postValue(KhieuNaiEntity.Type.RENT_ROOM)
+                else -> liveData.currentTabType.postValue(KhieuNaiEntity.Type.APPLICATION)
+            }
+            return
         }
+
+        when(position){
+            0 -> liveData.currentTabGeneral.postValue(true)
+            1 -> liveData.currentTabGeneral.postValue(false)
+            else -> liveData.currentTabGeneral.postValue(true)
+        }
+
     }
 
-    fun getComplaint(){
+    fun getNotificationAdmin(){
         viewModelScope.launch {
             try {
                 val complaints = complaintRepository.getComplaintAdmin(userController.state.currentBoardingHouseId)
                 liveData.complaints.postValue(complaints)
+            }catch (e: Exception){
+                Log.e("NotifyViewModel", "lỗi: complaints: ${e.message}")
+            }
+        }
+    }
+
+    fun getNotificationUser(){
+        viewModelScope.launch {
+            try {
+                val notifications = notificationRepository.getNotificationByTenantId(userController.state.currentUserId)
+                Log.e("NotifyViewModel", "complaints: $notifications")
+                liveData.notifications.postValue(notifications)
             }catch (e: Exception){
                 Log.e("NotifyViewModel", "lỗi: complaints: ${e.message}")
             }
@@ -63,49 +87,18 @@ class NotifyViewModel @Inject constructor(
             }
             (complaint.status == KhieuNaiEntity.Status.RESOLVED.value
              || complaint.status == KhieuNaiEntity.Status.REJECTED.value
-                    ) && (state == KhieuNaiEntity.Status.PENDING.value
-                    || state == KhieuNaiEntity.Status.NEW.value) -> {
+                    ) && (state == KhieuNaiEntity.Status.NEW.value
+                    || state == KhieuNaiEntity.Status.PENDING.value
+                    || state == KhieuNaiEntity.Status.RESOLVED.value
+                    || state == KhieuNaiEntity.Status.REJECTED.value) -> {
                 liveData.updateComplaint.postValue(Resource.Error(message = " Khiếu nại đã được xử lý rồi"))
                 return
             }
         }
         viewModelScope.launch {
             complaintRepository.updateStateComplaint(complaint.id, state)
-            getComplaint()
+            getNotificationAdmin()
         }
     }
 
-//    fun addNews(title: String, content: String, roomId: String?){
-//
-//        when{
-//            !userController.state.isAdmin -> {
-//                liveData.addNews.postValue(Resource.Error(message = "Bạn không có quyền thêm tin tức"))
-//                return
-//            }
-//            userController.state.currentBoardingHouseId.isBlank() -> {
-//                liveData.addNews.postValue(Resource.Error(message = "Bạn chưa chọn khu trọ"))
-//                return
-//            }
-//            title.isBlank() -> {
-//                liveData.addNews.postValue(Resource.Error(message = "Tiêu đề không được đẻ trống"))
-//                return
-//            }
-//            content.isBlank() -> {
-//                liveData.addNews.postValue(Resource.Error(message = "Nội dung không được đẻ trống"))
-//                return
-//            }
-//        }
-//
-//        val news = Notification(
-//            title = title,
-//            content = content,
-//            khuTroId = userController.state.currentBoardingHouseId,
-//            phongId = roomId,
-//        )
-//
-//        viewModelScope.launch {
-//            val newsAdd = notificationRepository.addNews(news)
-//            liveData.addNews.postValue(newsAdd)
-//        }
-//    }
 }

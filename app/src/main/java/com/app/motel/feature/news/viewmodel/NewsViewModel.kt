@@ -23,7 +23,7 @@ class NewsViewModel @Inject constructor(
     fun getNews(){
         viewModelScope.launch {
             try {
-                val news = notificationRepository.getNews(userController.state.currentBoardingHouseId)
+                val news = notificationRepository.getNotificationByBoardingHouseId(userController.state.currentBoardingHouseId)
                 liveData.news.postValue(news)
             }catch (e: Exception){
                 Log.e("NotifyViewModel", "lỗi: getNews: ${e.message}")

@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
 import com.app.motel.AppApplication
 import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.entity.HoaDonEntity
 import com.app.motel.databinding.FragmentHomeBinding
 import com.app.motel.feature.home.viewmodel.HomeViewModel
 import com.app.motel.ui.adapter.ViewPagerAdapter
@@ -48,8 +49,12 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     private fun setup(isAdmin: Boolean) {
         views.tabBar.isVisible = isAdmin
         if(isAdmin){
+            views.tabBar.post {
+                views.tabBar.setTabSelected(mViewModel.liveData.currentTab.value ?: 0)
+            }
             views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
                 override fun onTabSelected(position: Int) {
+                    mViewModel.liveData.currentTab.postValue(position)
                     views.viewPager.currentItem = position
                 }
             })

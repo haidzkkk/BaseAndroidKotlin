@@ -5,12 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.app.motel.common.ultis.toStringMoney
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.entity.PhongEntity
+import com.app.motel.data.model.BoardingHouse
 import com.app.motel.data.model.Complaint
 import com.app.motel.data.model.Contract
 import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Service
 import com.app.motel.data.model.Tenant
+import com.app.motel.data.repository.BoardingHouseRepository
 import com.app.motel.data.repository.ComplaintRepository
 import com.app.motel.data.repository.ContractRepository
 import com.app.motel.data.repository.RoomRepository
@@ -26,6 +28,7 @@ class RoomViewModel @Inject constructor(
     private val contractRepository: ContractRepository,
     private val tenantRepository: TenantRepository,
     private val complaintRepository: ComplaintRepository,
+    private val boardingHouseRepository: BoardingHouseRepository,
     val userController: UserController,
 ): AppBaseViewModel<RoomViewState, RoomViewAction, RoomViewEvent>(
     RoomViewState()
@@ -50,9 +53,11 @@ class RoomViewModel @Inject constructor(
             val contract: Contract? = contractRepository.getContractActiveByRoomId(roomFind.id)
             val services: Resource<List<Service>> = serviceRepository.getServiceByRoom(roomFind.areaId ?: "", roomFind.id)
             val tenants: List<Tenant> = tenantRepository.getTenantsByRoomId(roomFind.id)
+            val boardingHouse: Resource<BoardingHouse> = boardingHouseRepository.getBoardingHouseById(roomFind.areaId ?: "")
             Log.e("RoomViewModel", "tenants: ${tenants}")
             roomFind.listService = services.data
             roomFind.contract = contract
+            roomFind.boardingHouse = boardingHouse.data
             roomFind.tenants = tenants.map {
                 it.room = roomFind
                 it.contract = contract

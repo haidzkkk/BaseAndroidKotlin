@@ -1,6 +1,7 @@
 package com.app.motel.data.local
 
 import androidx.room.*
+import com.app.motel.data.entity.HopDongEntity
 import com.app.motel.data.entity.ThongBaoEntity
 
 @Dao
@@ -28,7 +29,19 @@ interface NotificationDAO {
     suspend fun getByPhong(phongId: String): List<ThongBaoEntity>
 
     @Query("SELECT * FROM ThongBao LEFT JOIN KhuTro ON ThongBao.MaKhuTro = KhuTro.ID WHERE KhuTro.ID = :boardingHouseId ORDER BY NgayTao DESC")
-    suspend fun getNewByPhongByUserId(boardingHouseId: String): List<ThongBaoEntity>
+    suspend fun getAdminNotification(boardingHouseId: String): List<ThongBaoEntity>
+
+
+//    @Query("SELECT * FROM ThongBao " +
+//            "WHERE ThongBao.MaPhong IS NULL " +
+//            "   OR ThongBao.MaPhong IN ( SELECT MaPhong FROM HopDong " +
+//            "       WHERE HieuLuc = ${HopDongEntity.ACTIVE} AND MaKhach = :tenantId )")
+    @Query("SELECT * FROM ThongBao " +
+            "LEFT JOIN Phong ON (ThongBao.MaPhong = Phong.ID OR ThongBao.MaPhong IS NULL) AND ThongBao.MaKhuTro = Phong.MaKhuTro " +
+            "LEFT JOIN HopDong ON Phong.ID = HopDong.MaPhong AND HopDong.HieuLuc = ${HopDongEntity.ACTIVE} " +
+            "WHERE HopDong.MaKhach = :tenantId")
+    suspend fun getUserNotification(tenantId: String): List<ThongBaoEntity>
+
 
     @Query("UPDATE ThongBao SET DaDoc = 1 WHERE ID = :id")
     suspend fun markAsRead(id: String)

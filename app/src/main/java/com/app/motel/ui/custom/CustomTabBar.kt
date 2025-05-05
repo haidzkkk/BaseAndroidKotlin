@@ -36,6 +36,11 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
         setupUI()
     }
 
+    fun setTabs(tabs: List<String>) {
+        listTabName = tabs
+        setupUI()
+    }
+
     private fun setupAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(
             attrs, R.styleable.CustomTabBar,
@@ -51,6 +56,9 @@ class CustomTabBar(context: Context?, attrs: AttributeSet?) :
     }
 
     private fun setupUI() {
+        // Clear old tabs
+        binding.viewTabsWrapper.removeAllViews()
+
         //textview
         listTabTv = listTabName.mapIndexed { position, tabName ->
             initTabTv(tabName, position)

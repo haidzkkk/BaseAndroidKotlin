@@ -3,6 +3,7 @@ package com.app.motel.feature.notify
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,12 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.common.ultis.showDialogConfirm
-import com.app.motel.common.ultis.showToast
 import com.app.motel.common.ultis.startActivityWithSlide
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.data.entity.KhieuNaiEntity
 import com.app.motel.data.model.Complaint
-import com.app.motel.data.model.Resource
-import com.app.motel.data.model.Status
+import com.app.motel.data.model.Notification
 import com.app.motel.databinding.FragmentNotifyBinding
 import com.app.motel.feature.createContract.CreateContractActivity
 import com.app.motel.feature.notify.viewmodel.NotifyViewModel
@@ -41,10 +40,10 @@ class NotifyFragment @Inject constructor() : AppBaseFragment<FragmentNotifyBindi
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
         super.onViewCreated(view, savedInstanceState)
-        init()
         listenStateViewModel()
     }
-    val adapter = NotificationAdapter(object : AppBaseAdapter.AppListener<Complaint>(){
+
+    val adapterNotificationAdmin = NotificationAdminAdapter(object : AppBaseAdapter.AppListener<Complaint>(){
         override fun onClickItem(item: Complaint, action: AppBaseAdapter.ItemAction) {
             if(action == AppBaseAdapter.ItemAction.LONG_CLICK){
                 requireActivity().showDialogConfirm(
@@ -74,6 +73,14 @@ class NotifyFragment @Inject constructor() : AppBaseFragment<FragmentNotifyBindi
         }
     })
 
+    val adapterNotificationUser = NotificationUserAdapter(object : AppBaseAdapter.AppListener<Notification>(){
+        override fun onClickItem(item: Notification, action: AppBaseAdapter.ItemAction) {
+//            if(action == AppBaseAdapter.ItemAction.LONG_CLICK){
+//
+//            }
+        }
+    })
+
     val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 
         val currentHandleComplaint = viewModel.liveData.currentHandleComplaint.value
@@ -86,20 +93,41 @@ class NotifyFragment @Inject constructor() : AppBaseFragment<FragmentNotifyBindi
         viewModel.setCurrentHandleComplaint(null)
     }
 
-    private fun init() {
-        viewModel.getComplaint()
+    private fun initUI(isAdmin: Boolean) {
+        viewModel.liveData.isAdmin = isAdmin
+        if (isAdmin){
+            views.tabBar.setTabs(arrayListOf("THÔNG BÁO ỨNG DỤNG", "KHIẾU NẠI TỪ KHÁCH HÀNG", "YÊU CẦU THUÊ PHÒNG"))
 
-        views.rcv.adapter = adapter
+            viewModel.getNotificationAdmin()
+            views.rcv.adapter = adapterNotificationAdmin
+            views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
+                override fun onTabSelected(position: Int) {
+                    viewModel.setCurrentType(position)
+                }
+            })
+            views.tabBar.post {
+                views.tabBar.setTabSelected(when(viewModel.liveData.currentTabType.value){
+                    KhieuNaiEntity.Type.APPLICATION -> 0
+                    KhieuNaiEntity.Type.COMPLAINT -> 1
+                    KhieuNaiEntity.Type.RENT_ROOM -> 2
+                    else -> 0
+                })
+            }
+            return
+        }
+
+        views.tabBar.setTabs(arrayListOf("THÔNG BÁO CHUNG", "THÔNG BÁO TỪ CHỦ NHÀ"))
+        viewModel.getNotificationUser()
+        views.rcv.adapter = adapterNotificationUser
         views.tabBar.setOnTabSelectedListener(object: CustomTabBar.OnTabSelectedListener{
             override fun onTabSelected(position: Int) {
                 viewModel.setCurrentType(position)
             }
         })
         views.tabBar.post {
-            views.tabBar.setTabSelected(when(viewModel.liveData.currentType.value){
-                KhieuNaiEntity.Type.APPLICATION -> 0
-                KhieuNaiEntity.Type.COMPLAINT -> 1
-                KhieuNaiEntity.Type.RENT_ROOM -> 2
+            views.tabBar.setTabSelected(when(viewModel.liveData.currentTabGeneral.value){
+                true -> 0
+                false -> 1
                 else -> 0
             })
         }
@@ -107,15 +135,38 @@ class NotifyFragment @Inject constructor() : AppBaseFragment<FragmentNotifyBindi
     }
 
     private fun listenStateViewModel() {
+        viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            val isAdmin = it.data?.isAdmin == true
+            initUI(isAdmin)
+        }
+
+        // data admin
         viewModel.liveData.complaints.observe(viewLifecycleOwner){
+            if(!viewModel.liveData.isAdmin) return@observe
             val complaints = viewModel.liveData.getNotifyAdmin
-            adapter.updateData(complaints)
+            adapterNotificationAdmin.updateData(complaints)
             views.tvEmpty.isVisible = complaints.isEmpty()
         }
-        viewModel.liveData.currentType.observe(viewLifecycleOwner){
+        viewModel.liveData.currentTabType.observe(viewLifecycleOwner){
+            if(!viewModel.liveData.isAdmin) return@observe
+            Log.e("NotifyFragment", "complaints: ${viewModel.liveData.complaints.value}")
             val complaints = viewModel.liveData.getNotifyAdmin
-            adapter.updateData(complaints)
+            adapterNotificationAdmin.updateData(complaints)
             views.tvEmpty.isVisible = complaints.isEmpty()
+        }
+
+        // data user
+        viewModel.liveData.notifications.observe(viewLifecycleOwner){
+            if(viewModel.liveData.isAdmin) return@observe
+            val notifications = viewModel.liveData.getNotifyUser
+            adapterNotificationUser.updateData(notifications)
+            views.tvEmpty.isVisible = notifications.isEmpty()
+        }
+        viewModel.liveData.currentTabGeneral.observe(viewLifecycleOwner){
+            if(viewModel.liveData.isAdmin) return@observe
+            val notifications = viewModel.liveData.getNotifyUser
+            adapterNotificationUser.updateData(notifications)
+            views.tvEmpty.isVisible = notifications.isEmpty()
         }
     }
 
