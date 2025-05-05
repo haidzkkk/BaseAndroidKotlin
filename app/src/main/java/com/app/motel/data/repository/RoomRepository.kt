@@ -33,8 +33,8 @@ class RoomRepository @Inject constructor(
         }
     }
 
-    suspend fun geRoomByTenantId(tenantId: String, status: PhongEntity.Status? = null): List<Room> {
-        val roomEntities = roomDAO.getRoomRentingByTenantId(tenantId, status?.value)
+    suspend fun getCurrentRoomRentByTenantId(tenantId: String, status: PhongEntity.Status? = null): List<Room> {
+        val roomEntities = roomDAO.getCurrentRoomRentByTenantId(tenantId, status?.value)
         return roomEntities.map {
             it.toModel().apply {
                 tenants = tenantRepository.getTenantsByRoomId(this.id)

@@ -79,21 +79,23 @@ class RoomViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val rooms = userController.state.getCurrentUser.let {
-                // get room to the admin
+                    // get room to the admin
                     if(it?.isAdmin == true){
                         val boardingHouseId = userController.state.currentBoardingHouseId
                         val roomState = liveData.currentRoomState.value?.data
-                        return@let roomRepository.geRoomBytBoardingHouseId(boardingHouseId, roomState)
+                        roomRepository.geRoomBytBoardingHouseId(boardingHouseId, roomState)
+
+                    // get room to the user
+                    }else{
+                        val roomState = liveData.currentRoomState.value?.data
+                        if(roomState == PhongEntity.Status.EMPTY){ // get all room empty -> user want rent
+                            return@let roomRepository.getRoomByStatus(PhongEntity.Status.EMPTY)
+                        }
+                        // get current room by tenant id
+                        val userId = userController.state.currentUserId
+                        roomRepository.getCurrentRoomRentByTenantId(userId)
                     }
 
-                // get room to the user
-                    val roomState = liveData.currentRoomState.value?.data
-                    // if is user and the status is room empty it means get all room empty -> user want rent
-                    if(roomState == PhongEntity.Status.EMPTY){
-                        return@let roomRepository.getRoomByStatus(PhongEntity.Status.EMPTY)
-                    }
-                    val userId = userController.state.currentUserId
-                    roomRepository.geRoomByTenantId(userId)
                 }
 
                 liveData.rooms.postValue(Resource.Success(rooms))

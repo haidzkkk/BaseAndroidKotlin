@@ -21,7 +21,9 @@ interface ContractDAO {
     @Query("SELECT * FROM HopDong")
     suspend fun getAll(): List<HopDongEntity>
 
-    @Query("SELECT * FROM HopDong WHERE MaKhach = :customerId ORDER BY HieuLuc DESC")
+    @Query("SELECT * FROM HopDong " +
+            "LEFT JOIN NguoiThue ON HopDong.MaPhong = NguoiThue.MaPhong " +
+            "WHERE NguoiThue.ID = :customerId ORDER BY HieuLuc DESC")
     suspend fun getByTenantId(customerId: String): List<HopDongEntity>
 
     @Query("SELECT * FROM HopDong WHERE MaPhong = :roomId")

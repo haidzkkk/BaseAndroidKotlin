@@ -30,5 +30,10 @@ class TenantAdapter(
         binding.root.setOnClickListener {
             listener.onClickItem(item, ItemAction.CLICK)
         }
+        binding.root.setOnLongClickListener {
+            listener.onClickItem(item, ItemAction.LONG_CLICK)
+            true
+        }
+
     }
 }

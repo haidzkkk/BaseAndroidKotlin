@@ -64,8 +64,9 @@ class TenantRepository @Inject constructor(
         }
     }
 
-    suspend fun updateTenantRentToRoom(tenantId: String, roomId: String, status: NguoiThueEntity.Status = NguoiThueEntity.Status.ACTIVE): Resource<Tenant>{
+    suspend fun updateTenantRentToRoom(tenantId: String, roomId: String?): Resource<Tenant>{
         return try {
+            val status = if(roomId != null) NguoiThueEntity.Status.ACTIVE else NguoiThueEntity.Status.INACTIVE
             tenantDAO.updateRent(tenantId, roomId, status.value)
             Resource.Success(null, message = "Cập nhật thành công")
         }catch (e: Exception) {

@@ -139,13 +139,9 @@ class TenantViewModel @Inject constructor(
                 liveData.updateTenant.postValue(Resource.Error(message = "Bạn không có quyền tạo"))
                 return
             }
-            room?.id.isNullOrBlank() -> {
-                liveData.updateTenant.postValue(Resource.Error(message = "Phòng không tồn tại"))
-                return
-            }
         }
         viewModelScope.launch {
-            val result = tenantRepository.updateTenantRentToRoom(tenant.id, room!!.id)
+            val result = tenantRepository.updateTenantRentToRoom(tenant.id, room?.id)
             liveData.updateTenant.postValue(result)
         }
     }

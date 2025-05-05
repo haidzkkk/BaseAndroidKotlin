@@ -19,8 +19,9 @@ interface BoardingHouseDAO {
 
     @Query("SELECT * FROM KhuTro " +
             "LEFT JOIN Phong ON KhuTro.ID = Phong.MaKhuTro " +
-            "LEFT JOIN HopDong ON Phong.ID = HopDong.MaPhong " +
-            "WHERE HopDong.MaKhach = :tenantId AND HopDong.HieuLuc = ${HopDongEntity.ACTIVE} ")
+            "LEFT JOIN NguoiThue ON Phong.ID = NguoiThue.MaPhong " +
+            "LEFT JOIN HopDong ON Phong.ID = HopDong.MaPhong AND HopDong.HieuLuc = ${HopDongEntity.ACTIVE} " +
+            "WHERE NguoiThue.ID = :tenantId ")
     suspend fun getByTenantId(tenantId: String): List<KhuTroEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

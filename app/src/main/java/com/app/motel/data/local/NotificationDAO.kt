@@ -38,8 +38,9 @@ interface NotificationDAO {
 //            "       WHERE HieuLuc = ${HopDongEntity.ACTIVE} AND MaKhach = :tenantId )")
     @Query("SELECT * FROM ThongBao " +
             "LEFT JOIN Phong ON (ThongBao.MaPhong = Phong.ID OR ThongBao.MaPhong IS NULL) AND ThongBao.MaKhuTro = Phong.MaKhuTro " +
-            "LEFT JOIN HopDong ON Phong.ID = HopDong.MaPhong AND HopDong.HieuLuc = ${HopDongEntity.ACTIVE} " +
-            "WHERE HopDong.MaKhach = :tenantId")
+            "LEFT JOIN NguoiThue ON Phong.ID = NguoiThue.MaPhong " +
+            " JOIN HopDong ON Phong.ID = HopDong.MaPhong AND HopDong.HieuLuc = ${HopDongEntity.ACTIVE} " +
+            "WHERE NguoiThue.ID = :tenantId")
     suspend fun getUserNotification(tenantId: String): List<ThongBaoEntity>
 
 

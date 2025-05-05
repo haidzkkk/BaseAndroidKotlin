@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.app.motel.R
 import com.app.motel.common.service.DateConverter
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.data.entity.KhieuNaiEntity
@@ -27,7 +28,15 @@ class ComplaintAdapter constructor(
         binding.tvCreateDate.text = DateConverter.stringToDate(item.createdDate ?: "")?.let {
            DateConverter.dateToLocalString2(it)
         }
+
         binding.tvState.text = item.status
+        binding.tvState.backgroundTintList = binding.root.context.getColorStateList(when{
+            KhieuNaiEntity.Status.NEW.value == item.status
+                    || KhieuNaiEntity.Status.PENDING.value == item.status -> R.color.primary
+            KhieuNaiEntity.Status.RESOLVED.value == item.status -> R.color.green
+            KhieuNaiEntity.Status.REJECTED.value == item.status -> R.color.red
+            else -> R.color.primary
+        })
 
         binding.tvComplaintUserName.isVisible = false
         binding.lyCb.isVisible = true
