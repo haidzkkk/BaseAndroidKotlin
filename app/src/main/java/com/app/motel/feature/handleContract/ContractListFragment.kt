@@ -54,7 +54,7 @@ class ContractListFragment : AppBaseFragment<FragmentContractListBinding>() {
                 when(action){
                     AppBaseAdapter.ItemAction.CLICK -> {
                         DetailContractBottomSheet(item).show(
-                            parentFragmentManager, DetailContractBottomSheet::class.java.simpleName
+                            childFragmentManager, DetailContractBottomSheet::class.java.simpleName
                         )
                     }
                     else -> {}

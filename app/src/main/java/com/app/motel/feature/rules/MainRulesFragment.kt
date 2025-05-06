@@ -47,7 +47,7 @@ class MainRulesFragment @Inject constructor() : AppBaseFragment<FragmentMainRule
 
         val adapter= ViewPagerAdapter(
             fragments,
-            requireActivity().supportFragmentManager,
+            childFragmentManager,
             lifecycle
         )
 

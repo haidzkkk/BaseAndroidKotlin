@@ -9,6 +9,7 @@ import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Tenant
 import com.app.motel.data.repository.BillRepository
 import com.app.motel.data.repository.ContractRepository
+import com.app.motel.data.repository.RoomRepository
 import com.app.motel.data.repository.TenantRepository
 import com.app.motel.feature.profile.UserController
 import kotlinx.coroutines.launch
@@ -60,23 +61,26 @@ class HandleBillViewModel @Inject constructor(
     }
 
     fun payingBill(bill: Bill?){
-        val currentUser = userController.state.getCurrentUser
-        when{
-            bill == null -> {
-                liveData.updateBill.postValue(Resource.Error(message = "Hóa đơn không tồn tại"))
-                return
-            }
-            currentUser?.id != bill.tenant?.id -> {
-                liveData.updateBill.postValue(Resource.Error(message = "Bạn không có quyền thanh toán hóa đơn này"))
-                return
-            }
-            bill.status == HoaDonEntity.STATUS_PAID -> {
-                liveData.updateBill.postValue(Resource.Error(message = "Hóa đơn đã được thanh toán"))
-                return
-            }
-        }
-
         viewModelScope.launch {
+            val currentUser = userController.state.getCurrentUser
+            when{
+                bill == null -> {
+                    liveData.updateBill.postValue(Resource.Error(message = "Hóa đơn không tồn tại"))
+                    return@launch
+                }
+                // only Contract Owner can pay bill
+//                currentUser?.id != bill.tenant?.id -> {
+                // member in room can pay bill
+                !tenantRepository.getTenantsByRoomId(bill.roomId ?: "").any { it.id == currentUser?.id } -> {
+                    liveData.updateBill.postValue(Resource.Error(message = "Bạn không có quyền thanh toán hóa đơn này"))
+                    return@launch
+                }
+                bill.status == HoaDonEntity.STATUS_PAID -> {
+                    liveData.updateBill.postValue(Resource.Error(message = "Hóa đơn đã được thanh toán"))
+                    return@launch
+                }
+            }
+
             val billUpdate = bill!!.copy(
                 status = HoaDonEntity.STATUS_PAID
             )

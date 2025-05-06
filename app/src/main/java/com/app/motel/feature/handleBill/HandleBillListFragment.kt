@@ -53,7 +53,7 @@ class HandleBillListFragment : AppBaseFragment<FragmentHandleBillListBinding>() 
 
         adapter = BillAdapter(object: AppBaseAdapter.AppListener<Bill>(){
             override fun onClickItem(item: Bill, action: AppBaseAdapter.ItemAction) {
-                HandleDetailBillBottomSheet(item).show(parentFragmentManager, HandleDetailBillBottomSheet::class.java.simpleName)
+                HandleDetailBillBottomSheet(item).show(childFragmentManager, HandleDetailBillBottomSheet::class.java.simpleName)
             }
         })
         views.rcv.adapter = adapter

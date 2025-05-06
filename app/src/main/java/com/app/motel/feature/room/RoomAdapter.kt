@@ -33,6 +33,8 @@ class RoomAdapter (
         }
 
         binding.tvName.text = item.roomName
+        binding.tvNameBoardingHouse.isVisible = showBtnRentRoom
+        binding.tvNameBoardingHouse.text = "Khu ${item.boardingHouse?.name?.replace("Khu", "")?.replace("khu", "") ?: "Không rõ"}"
         binding.tvQuantity.text = "Số lượng người tối đa: ${item.maxOccupants ?: 0} \tSố người đang ở: ${item.tenants?.size ?: 0}"
         binding.tvPrice.text = item.rentalPrice.toStringMoney()
         binding.cbEmpty.isChecked = item.isEmpty

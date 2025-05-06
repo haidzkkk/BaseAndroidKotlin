@@ -57,7 +57,7 @@ class RoomDetailFragment @Inject constructor() : AppBaseFragment<FragmentRoomDet
 
         val adapter = ViewPagerAdapter(
             fragments,
-            requireActivity().supportFragmentManager,
+            childFragmentManager,
             lifecycle
         )
 

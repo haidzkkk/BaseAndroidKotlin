@@ -58,22 +58,6 @@ abstract class AppBaseFragment <VB: ViewBinding> : Fragment(), HasScreenInjector
         uiDisposables.add(this)
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        listenStateViewModel()
-//    }
-//
-//    override fun onResume() {
-//        hasObserverBeenSet = false
-//        super.onResume()
-//    }
-//
-//    private var hasObserverBeenSet = false
-//    open fun listenStateViewModel() {
-//        if (hasObserverBeenSet) return
-//        hasObserverBeenSet = true
-//    }
-
     protected fun <T : AppViewEvent> AppBaseViewModel<*, *, T>.observeViewEvents(observer: (T) -> Unit) {
         viewEvents
             .observe()

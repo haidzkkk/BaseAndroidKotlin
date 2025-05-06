@@ -15,6 +15,7 @@ import com.app.motel.common.ultis.showDialogConfirm
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Tenant
 import com.app.motel.databinding.FragmentRoomDetailTenantBinding
 import com.app.motel.feature.createContract.CreateContractFormFragment
@@ -94,12 +95,7 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
             }
         }
     )
-
-    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
-        if (hasObserverBeenSet) return
-        hasObserverBeenSet = true
-
         viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
             enableForm = it.data?.isAdmin == true
             initUI()
@@ -120,6 +116,7 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
             }else if(it.isError()){
                 requireContext().showToast(it.message ?: "Có lỗi xảy ra")
             }
+            tenantViewModel.liveData.updateTenant.postValue(Resource.Initialize())
         }
     }
 

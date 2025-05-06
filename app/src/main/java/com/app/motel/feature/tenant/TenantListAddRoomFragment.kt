@@ -13,6 +13,7 @@ import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.data.entity.NguoiThueEntity
+import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Tenant
 import com.app.motel.databinding.FragmentTenantListAddRoomBinding
@@ -62,11 +63,7 @@ class TenantListAddRoomFragment : AppBaseFragment<FragmentTenantListAddRoomBindi
         views.rcv.adapter = adapter
     }
 
-    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
-        if(hasObserverBeenSet) return
-        hasObserverBeenSet = true
-
         viewModel.liveData.tenants.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 val tenants = (viewModel.liveData.tenants.value?.data ?: arrayListOf()).filter{ tenant ->
@@ -85,6 +82,7 @@ class TenantListAddRoomFragment : AppBaseFragment<FragmentTenantListAddRoomBindi
             }else if(it.isError()){
                 requireContext().showToast(it.message ?: "Có lỗi xảy ra")
             }
+            viewModel.liveData.updateTenant.postValue(Resource.Initialize())
         }
     }
 

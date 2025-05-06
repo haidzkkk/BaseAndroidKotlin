@@ -85,6 +85,8 @@ class ProfileDetailFragment : AppBaseFragment<FragmentProfileDetailBinding>() {
                 txtPassword.setText(currentUser?.password)
 
                 tilEmail.isVisible = it.data?.isAdmin == true
+                tilBank.isVisible = it.data?.isAdmin == true
+                tilNumberBank.isVisible = it.data?.isAdmin == true
                 tilHomeTown.isVisible = it.data?.isAdmin == false
                 tilIdCard.isVisible = it.data?.isAdmin == false
             }

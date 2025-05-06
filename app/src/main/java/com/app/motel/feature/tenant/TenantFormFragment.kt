@@ -91,11 +91,7 @@ class TenantFormFragment : AppBaseFragment<FragmentTenantFormBinding>() {
             )
         }
     }
-    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
-        if(hasObserverBeenSet) return
-        hasObserverBeenSet = true
-
         viewModel.liveData.currentTenant.observe(viewLifecycleOwner){
             views.lyAdd.isVisible = it == null
             views.lyUpdate.isVisible = it != null

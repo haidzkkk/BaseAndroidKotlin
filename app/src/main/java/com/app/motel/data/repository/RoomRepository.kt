@@ -46,6 +46,7 @@ class RoomRepository @Inject constructor(
         val roomEntities = roomDAO.getPhongsByStatus(status?.value)
         return roomEntities.map {
             it.toModel().apply {
+                boardingHouse = boardingHouseDAO.getById(this.areaId ?: "")?.toModel()
                 tenants = tenantRepository.getTenantsByRoomId(this.id)
             }
         }

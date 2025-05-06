@@ -52,11 +52,7 @@ class RoomFormFragment @Inject constructor() : AppBaseFragment<FragmentRoomFormB
         listenStateViewModel()
     }
 
-    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
-        if (hasObserverBeenSet) return
-        hasObserverBeenSet = true
-
         viewModel.liveData.createRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 popFragmentWithSlide()

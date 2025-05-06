@@ -60,12 +60,12 @@ class HandleContractListFragment @Inject constructor() : AppBaseFragment<Fragmen
                 when(action){
                     AppBaseAdapter.ItemAction.CLICK -> {
                         DetailContractBottomSheet(item).show(
-                            parentFragmentManager, DetailContractBottomSheet::class.java.simpleName
+                            childFragmentManager, DetailContractBottomSheet::class.java.simpleName
                         )
                     }
                     AppBaseAdapter.ItemAction.EDIT -> {
                         RefreshContractBottomSheet(item).show(
-                            parentFragmentManager, RefreshContractBottomSheet::class.java.simpleName
+                            childFragmentManager, RefreshContractBottomSheet::class.java.simpleName
                         )
                     }
                     AppBaseAdapter.ItemAction.DELETE -> {

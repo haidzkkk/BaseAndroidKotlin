@@ -39,6 +39,15 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_name_boarding_house"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Khu tân trào"
+                    android:visibility="gone"
+                    android:textSize="@dimen/TEXT_SIZE_SMALL"/>
+
+                <TextView
                     android:id="@+id/tv_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

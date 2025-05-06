@@ -17,6 +17,7 @@ import com.app.motel.common.ultis.showDialogConfirm
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseFragment
+import com.app.motel.data.model.Resource
 import com.app.motel.data.model.Room
 import com.app.motel.data.model.Service
 import com.app.motel.databinding.FragmentRoomDetailBinding
@@ -104,11 +105,7 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
         }
     )
 
-    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
-        if (hasObserverBeenSet) return
-        hasObserverBeenSet = true
-
         viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
             enableForm = it.data?.isAdmin == true
             initUI()
@@ -119,6 +116,7 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
             }else if(it.isError()){
                  requireActivity().showToast(it.message ?: "Có lỗi xảy ra")
             }
+            viewModel.liveData.updateRoom.postValue(Resource.Initialize())
         }
         viewModel.liveData.deleteRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){

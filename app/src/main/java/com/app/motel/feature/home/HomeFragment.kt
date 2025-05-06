@@ -68,7 +68,7 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
 
         val adapter = ViewPagerAdapter(
             fragments,
-            requireActivity().supportFragmentManager,
+            childFragmentManager,
             lifecycle
         )
 
