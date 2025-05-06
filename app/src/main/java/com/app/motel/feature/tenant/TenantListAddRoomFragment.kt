@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
@@ -61,8 +62,11 @@ class TenantListAddRoomFragment : AppBaseFragment<FragmentTenantListAddRoomBindi
         views.rcv.adapter = adapter
     }
 
-
+    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
+        if(hasObserverBeenSet) return
+        hasObserverBeenSet = true
+
         viewModel.liveData.tenants.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 val tenants = (viewModel.liveData.tenants.value?.data ?: arrayListOf()).filter{ tenant ->

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showDialogConfirm
 import com.app.motel.common.ultis.showToast
@@ -103,24 +104,28 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
         }
     )
 
+    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
+        if (hasObserverBeenSet) return
+        hasObserverBeenSet = true
+
         viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
             enableForm = it.data?.isAdmin == true
             initUI()
         }
         viewModel.liveData.updateRoom.observe(viewLifecycleOwner){
              if(it.isSuccess()){
-                activity?.showToast("Cập nhật phòng thành công")
+                requireActivity().showToast("Cập nhật phòng thành công")
             }else if(it.isError()){
-                 activity?.showToast(it.message ?: "Có lỗi xảy ra")
+                 requireActivity().showToast(it.message ?: "Có lỗi xảy ra")
             }
         }
         viewModel.liveData.deleteRoom.observe(viewLifecycleOwner){
-             if(it.isSuccess()){
-                 activity?.showToast("Xóa phòng thành công")
-                 popFragmentWithSlide()
+            if(it.isSuccess()){
+                requireActivity().showToast("Xóa phòng thành công")
+                popFragmentWithSlide()
             }else if(it.isError()){
-                 activity?.showToast(it.message ?: "Có lỗi xảy ra")
+                requireActivity().showToast(it.message ?: "Có lỗi xảy ra")
             }
         }
         viewModel.liveData.currentRoom.observe(viewLifecycleOwner){
@@ -141,7 +146,7 @@ class RoomDetailInformationFragment @Inject constructor() : AppBaseFragment<Frag
         }
     }
 
-    fun setEnableEdittext(txtView: TextInputEditText, enable: Boolean){
+    private fun setEnableEdittext(txtView: TextInputEditText, enable: Boolean){
         txtView.isEnabled = enable
         txtView.backgroundTintList = resources.getColorStateList(if(enable) R.color.background1 else R.color.background3, requireContext().theme)
     }

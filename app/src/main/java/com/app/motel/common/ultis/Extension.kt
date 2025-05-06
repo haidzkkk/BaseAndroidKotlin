@@ -13,6 +13,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.app.motel.core.AppBaseDialog
+import com.app.motel.data.model.Resource
 import com.app.motel.databinding.DialogConfirmBinding
 import com.app.motel.databinding.DialogDatePickerBinding
 import java.text.DecimalFormat
@@ -20,6 +21,15 @@ import java.text.DecimalFormatSymbols
 import java.text.Normalizer
 import java.util.Locale
 import java.util.regex.Pattern
+
+inline fun <T> LiveData<Resource<T>>.observe(
+    owner: LifecycleOwner,
+    crossinline onChanged: (Resource<T>) -> Unit
+) {
+    observe(owner) { resource ->
+        resource.getDataIfNotHandled()?.let { onChanged(it) }
+    }
+}
 
 fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: Observer<T>) {
     observe(owner, object : Observer<T> {

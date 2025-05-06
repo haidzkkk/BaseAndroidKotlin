@@ -12,6 +12,7 @@ import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.service.DateConverter
 import com.app.motel.common.ultis.finishActivityWithTransition
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.common.ultis.toStringMoney

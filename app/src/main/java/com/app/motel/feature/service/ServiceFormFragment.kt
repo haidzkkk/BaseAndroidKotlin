@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.motel.AppApplication
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.common.ultis.toStringMoney

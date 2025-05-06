@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.require
 import com.app.motel.common.ultis.showToast

@@ -101,12 +101,12 @@ class RegisterFragment @Inject constructor() : AppBaseFragment<FragmentRegisterB
 
         }
 
-        val calendar: Calendar = Calendar.getInstance()
-        DateConverter.getCurrentStringDateTime()
+        val calendar: Calendar = Calendar.getInstance().apply {
+            time = DateConverter.localStringToDate(views.txtBirthDay.text.toString())
+                ?: DateConverter.localStringToDate("1/1/2000")
+                        ?: DateConverter.getCurrentDateTime()
+        }
 
-        val currentDate = DateConverter.localStringToDate(views.txtBirthDay.text.toString())
-        if (currentDate != null) calendar.time = currentDate
-        else views.txtBirthDay.setText(DateConverter.dateToLocalString(calendar.time))
         dialog.binding.datePickerDob.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
         ) { view, year, monthOfYear, dayOfMonth ->
             calendar.set(year, monthOfYear, dayOfMonth)

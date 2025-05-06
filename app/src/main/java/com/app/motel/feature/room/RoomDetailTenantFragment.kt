@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showDialogConfirm
 import com.app.motel.common.ultis.showToast
@@ -93,7 +94,12 @@ class RoomDetailTenantFragment @Inject constructor() : AppBaseFragment<FragmentR
             }
         }
     )
+
+    private var hasObserverBeenSet = false
     private fun listenStateViewModel() {
+        if (hasObserverBeenSet) return
+        hasObserverBeenSet = true
+
         viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
             enableForm = it.data?.isAdmin == true
             initUI()

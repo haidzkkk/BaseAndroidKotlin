@@ -141,6 +141,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="dd/mm/yyyy"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:gravity="start|top"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -167,6 +169,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Nhập lý do kết thúc"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:gravity="start|top"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -256,6 +260,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="0 VND"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:gravity="start|top"
                         android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                         tools:ignore="SpUsage" />
@@ -319,6 +325,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="0 VND"
+                    android:imeOptions="actionNext"
                     android:gravity="start|top"
                     android:inputType="number"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
@@ -355,6 +362,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Nhập lý do (nếu có)"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:gravity="start|top"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -416,6 +425,8 @@
                 android:id="@+id/txt_note"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:imeOptions="actionDone"
+                android:inputType="text"
                 android:hint="Nhập ghi chú nếu có"
                 android:gravity="start|top"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"

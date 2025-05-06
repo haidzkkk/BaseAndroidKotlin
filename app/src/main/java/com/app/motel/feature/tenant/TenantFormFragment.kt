@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.common.service.DateConverter
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.setOnEndDrawableClick
 import com.app.motel.common.ultis.showToast
@@ -45,7 +46,7 @@ class TenantFormFragment : AppBaseFragment<FragmentTenantFormBinding>() {
         (requireActivity().application as AppApplication).appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
-        listenDataViewModel()
+        listenStateViewModel()
 
         val tenant: Tenant? = Gson().fromJson(arguments?.getString(ITEM_KEY), Tenant::class.java)
         viewModel.initForm(tenant)
@@ -90,8 +91,11 @@ class TenantFormFragment : AppBaseFragment<FragmentTenantFormBinding>() {
             )
         }
     }
+    private var hasObserverBeenSet = false
+    private fun listenStateViewModel() {
+        if(hasObserverBeenSet) return
+        hasObserverBeenSet = true
 
-    private fun listenDataViewModel() {
         viewModel.liveData.currentTenant.observe(viewLifecycleOwner){
             views.lyAdd.isVisible = it == null
             views.lyUpdate.isVisible = it != null

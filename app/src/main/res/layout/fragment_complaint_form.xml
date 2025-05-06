@@ -36,6 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Nhập tiêu đề"
+                android:imeOptions="actionNext"
+android:inputType="text"
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                 tools:ignore="SpUsage" />
@@ -64,6 +66,8 @@
                 android:layout_height="match_parent"
                 android:gravity="top|start"
                 android:hint="Nhập nội dung"
+                android:imeOptions="actionDone"
+                android:inputType="text"
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                 tools:ignore="SpUsage" />

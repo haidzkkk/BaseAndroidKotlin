@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.popFragmentWithSlide
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseFragment
@@ -48,6 +49,14 @@ class RoomFormFragment @Inject constructor() : AppBaseFragment<FragmentRoomFormB
             )
         }
 
+        listenStateViewModel()
+    }
+
+    private var hasObserverBeenSet = false
+    private fun listenStateViewModel() {
+        if (hasObserverBeenSet) return
+        hasObserverBeenSet = true
+
         viewModel.liveData.createRoom.observe(viewLifecycleOwner){
             if(it.isSuccess()){
                 popFragmentWithSlide()
@@ -57,8 +66,7 @@ class RoomFormFragment @Inject constructor() : AppBaseFragment<FragmentRoomFormB
             }
         }
     }
-
-    override fun onDestroy() {
+        override fun onDestroy() {
         super.onDestroy()
         viewModel.liveData.createRoom.postValue(Resource.Initialize())
     }

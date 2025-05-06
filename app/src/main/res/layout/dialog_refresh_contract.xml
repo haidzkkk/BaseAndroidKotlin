@@ -78,6 +78,7 @@
             android:id="@+id/txt_time_new_contract"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             android:inputType="number"
             tools:ignore="SpUsage" />

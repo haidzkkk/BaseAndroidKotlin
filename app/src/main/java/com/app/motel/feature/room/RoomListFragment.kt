@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.R
 import com.app.motel.common.ultis.navigateFragmentWithSlide
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.showDialogConfirm
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
@@ -100,6 +101,7 @@ class RoomListFragment @Inject constructor() : AppBaseFragment<FragmentListRoomB
 
         }
         viewModel.liveData.currentRoomState.observe(viewLifecycleOwner){
+            Log.e("RoomListFragment", "currentRoomState: ${it.data}")
             if(it.isSuccess()){
                 viewModel.getRoom()
             }

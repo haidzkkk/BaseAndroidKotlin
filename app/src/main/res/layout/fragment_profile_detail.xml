@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.profile.ProfileDetailFragment">
 
@@ -11,7 +12,6 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
         android:orientation="vertical"
-        android:background="@color/background2"
         android:gravity="center_horizontal">
 
         <TextView
@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin đại diện chủ nhà"
+            android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="@dimen/PADDING_SIZE_LARGE"/>
@@ -44,6 +45,8 @@
                     android:id="@+id/txt_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -64,6 +67,8 @@
                     android:id="@+id/txt_birth_day"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -85,6 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
+                    android:imeOptions="actionNext"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -104,6 +110,8 @@
                     android:id="@+id/txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -122,6 +130,28 @@
                     android:id="@+id/txt_home_town"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+android:inputType="text"
+                    android:backgroundTint="@color/background2"
+                    android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+                    tools:ignore="SpUsage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_id_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CCCD"
+                android:layout_marginTop="@dimen/PADDING_SIZE_SMALL"
+                style="@style/InputLayoutStyle1"
+                app:startIconDrawable="@drawable/baseline_credit_card_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_id_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -140,6 +170,8 @@
                     android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -160,6 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:imeOptions="actionNext"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -178,6 +211,8 @@
                     android:id="@+id/txt_bank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />
@@ -195,6 +230,8 @@
                     android:id="@+id/txt_number_bank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
                     android:backgroundTint="@color/background2"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     tools:ignore="SpUsage" />

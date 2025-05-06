@@ -34,7 +34,6 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
-        mViewModel
         listenStateViewModel()
 
         super.onViewCreated(view, savedInstanceState)

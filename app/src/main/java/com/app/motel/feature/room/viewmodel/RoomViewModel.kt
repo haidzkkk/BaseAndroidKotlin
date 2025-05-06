@@ -54,7 +54,7 @@ class RoomViewModel @Inject constructor(
             val services: Resource<List<Service>> = serviceRepository.getServiceByRoom(roomFind.areaId ?: "", roomFind.id)
             val tenants: List<Tenant> = tenantRepository.getTenantsByRoomId(roomFind.id)
             val boardingHouse: Resource<BoardingHouse> = boardingHouseRepository.getBoardingHouseById(roomFind.areaId ?: "")
-            Log.e("RoomViewModel", "tenants: ${tenants}")
+            Log.e("RoomViewModel", "contract: ${contract}")
             roomFind.listService = services.data
             roomFind.contract = contract
             roomFind.boardingHouse = boardingHouse.data
@@ -170,6 +170,7 @@ class RoomViewModel @Inject constructor(
                 return
             }
         }
+
         viewModelScope.launch {
             val roomDeleted = roomRepository.deleteRoom(roomDelete!!)
 

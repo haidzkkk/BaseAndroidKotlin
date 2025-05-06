@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.app.motel.AppApplication
 import com.app.motel.di.DaggerAppComponent
 import com.app.motel.di.HasScreenInjector
 import com.app.motel.di.AppComponent
@@ -56,6 +57,22 @@ abstract class AppBaseFragment <VB: ViewBinding> : Fragment(), HasScreenInjector
     protected fun Disposable.disposeOnDestroyView() {
         uiDisposables.add(this)
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        listenStateViewModel()
+//    }
+//
+//    override fun onResume() {
+//        hasObserverBeenSet = false
+//        super.onResume()
+//    }
+//
+//    private var hasObserverBeenSet = false
+//    open fun listenStateViewModel() {
+//        if (hasObserverBeenSet) return
+//        hasObserverBeenSet = true
+//    }
 
     protected fun <T : AppViewEvent> AppBaseViewModel<*, *, T>.observeViewEvents(observer: (T) -> Unit) {
         viewEvents

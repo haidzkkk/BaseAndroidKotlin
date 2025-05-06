@@ -43,6 +43,7 @@ class BillRepository @Inject constructor(
                 val rightDate = DateConverter.localStringToDate(contractEntity.ngayKetThuc)?.toCalendar()
                 if(leftDate != null && rightDate != null){
                     while (leftDate!!.before(rightDate)){
+                        Log.e("getBillByTenantRentedRoom", "leftDate ${leftDate.time}")
                         val bill = billDAO.getByRoomAndMonth(
                             contractEntity.maPhong ?: "",
                             leftDate.get(Calendar.MONTH),

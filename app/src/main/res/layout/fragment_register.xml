@@ -30,6 +30,8 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:hint="Tên đăng nhập"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
@@ -50,6 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ngày sinh"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -67,6 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Số điện thoại"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -84,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:imeOptions="actionNext"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             android:inputType="textEmailAddress"
             tools:ignore="SpUsage" />
@@ -102,6 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tên đăng nhập"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -120,6 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
+            android:imeOptions="actionDone"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             android:inputType="textPassword"
             tools:ignore="SpUsage"/>

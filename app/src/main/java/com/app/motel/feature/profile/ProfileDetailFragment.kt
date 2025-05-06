@@ -1,11 +1,14 @@
 package com.app.motel.feature.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseFragment
 import com.app.motel.databinding.FragmentProfileDetailBinding
@@ -51,6 +54,7 @@ class ProfileDetailFragment : AppBaseFragment<FragmentProfileDetailBinding>() {
                 val phone = txtPhone.text.toString()
                 val email = txtEmail.text.toString()
                 val homeTown = txtHomeTown.text.toString()
+                val idCard = txtIdCard.text.toString()
                 viewmodel.updateCurrentUser(
                     currentUser = profileController.state.getCurrentUser,
                     fullName = fullName,
@@ -58,6 +62,7 @@ class ProfileDetailFragment : AppBaseFragment<FragmentProfileDetailBinding>() {
                     phoneNumber = phone,
                     email = email,
                     homeTown = homeTown,
+                    idCard = idCard,
                     password = txtPassword.text.toString(),
                     username = txtUsername.text.toString(),
                 )
@@ -74,14 +79,19 @@ class ProfileDetailFragment : AppBaseFragment<FragmentProfileDetailBinding>() {
                 txtBirthDay.setText(currentUser?.birthDate)
                 txtPhone.setText(currentUser?.phone)
                 txtEmail.setText(currentUser?.email)
+                txtIdCard.setText(currentUser?.idCard)
                 txtHomeTown.setText(currentUser?.homeTown)
                 txtUsername.setText(currentUser?.username)
                 txtPassword.setText(currentUser?.password)
 
+                tilEmail.isVisible = it.data?.isAdmin == true
+                tilHomeTown.isVisible = it.data?.isAdmin == false
+                tilIdCard.isVisible = it.data?.isAdmin == false
             }
         }
 
         viewmodel.liveData.updateCurrentUser.observe(viewLifecycleOwner){
+            if(it.isLoading() || it.isInitialize()) return@observe
             requireActivity().showToast(it.message ?: if(it.isSuccess()) "Thành công" else "Thất bại")
             if(it.isSuccess()) {
                 profileController.getCurrentUser()

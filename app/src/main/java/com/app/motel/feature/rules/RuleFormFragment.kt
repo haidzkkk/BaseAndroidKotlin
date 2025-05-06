@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.common.service.IDManager
+import com.app.motel.common.ultis.observe
 import com.app.motel.common.ultis.showToast
 import com.app.motel.core.AppBaseAdapter
 import com.app.motel.core.AppBaseDialog

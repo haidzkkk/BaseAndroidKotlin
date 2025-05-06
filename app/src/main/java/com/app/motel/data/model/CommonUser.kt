@@ -9,6 +9,7 @@ sealed class CommonUser {
     abstract val password: String
     abstract val birthDate: String?
     abstract val homeTown: String?
+    abstract val idCard: String?
     abstract val email: String?
 
     abstract val role: Role
@@ -26,6 +27,7 @@ sealed class CommonUser {
         override val password = child.password
         override val birthDate = child.birthDate
         override val homeTown = null
+        override val idCard = null
         override val email = child.email
 
         override val role = Role.admin
@@ -41,6 +43,7 @@ sealed class CommonUser {
         override val password = child.password
         override val birthDate = child.birthDay
         override val email = null
+        override val idCard = child.idCard
         override val homeTown = child.homeTown
 
         override val role = Role.user
@@ -51,6 +54,7 @@ sealed class CommonUser {
         birthDay: String?,
         phoneNumber: String?,
         email: String?,
+        idCard: String?,
         homeTown: String?,
         password: String?,
         username: String?,
@@ -65,6 +69,7 @@ sealed class CommonUser {
         )) else NormalUser(child = (child as Tenant).copy(
             fullName = fullName,
             phoneNumber = phoneNumber,
+            idCard = idCard,
             birthDay = birthDay,
             homeTown = homeTown,
             username = username ?: this.username,

@@ -46,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tên đăng nhập"
+            android:imeOptions="actionNext"
+            android:inputType="text"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
+            android:imeOptions="actionDone"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             android:inputType="textPassword"
             tools:ignore="SpUsage"/>

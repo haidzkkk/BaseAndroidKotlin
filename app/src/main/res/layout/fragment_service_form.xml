@@ -28,6 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Tên dịch vụ"
+                android:imeOptions="actionNext"
+                android:inputType="text"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                 tools:ignore="SpUsage" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -46,6 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Giá dịch vụ"
+                android:inputType="number"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                 tools:ignore="SpUsage" />
         </com.google.android.material.textfield.TextInputLayout>

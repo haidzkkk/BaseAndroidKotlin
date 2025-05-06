@@ -1,5 +1,6 @@
 package com.app.motel.feature.auth.viewmodel
 
+import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.model.Resource
@@ -46,6 +47,10 @@ class AuthViewModel @Inject constructor(
             }
             phoneNumber.isNullOrBlank() -> {
                 liveData.register.postValue(Resource.Error(message = "Số điện thoại không được để trống"))
+                return
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches()-> {
+                liveData.register.postValue(Resource.Error(message = "Lỗi định dạng email"))
                 return
             }
         }

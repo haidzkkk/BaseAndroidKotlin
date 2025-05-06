@@ -1,5 +1,6 @@
 package com.app.motel.feature.tenant.viewmodel
 
+import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.app.motel.core.AppBaseViewModel
 import com.app.motel.data.entity.NguoiThueEntity
@@ -153,25 +154,34 @@ class TenantViewModel @Inject constructor(
         phoneNumber: String?,
         email: String?,
         homeTown: String?,
+        idCard: String?,
         username: String?,
         password: String?,
     ){
         liveData.updateCurrentUser.postValue(Resource.Loading())
         when {
             currentUser?.child !is User && currentUser?.child !is Tenant -> {
-                liveData.updateTenant.postValue(Resource.Error(message = "Không tìm thấy thông tin hiện tại của bạn"))
+                liveData.updateCurrentUser.postValue(Resource.Error(message = "Không tìm thấy thông tin hiện tại của bạn"))
                 return
             }
             fullName.isNullOrBlank() -> {
-                liveData.updateTenant.postValue(Resource.Error(message = "Họ tên là bắt buộc"))
+                liveData.updateCurrentUser.postValue(Resource.Error(message = "Họ tên là bắt buộc"))
+                return
+            }
+            currentUser.isAdmin && email.isNullOrBlank() -> {
+                liveData.updateCurrentUser.postValue(Resource.Error(message = "Email không được để trống"))
+                return
+            }
+            currentUser.isAdmin && !email!!.let { Patterns.EMAIL_ADDRESS.matcher(it).matches() } -> {
+                liveData.updateCurrentUser.postValue(Resource.Error(message = "Lỗi định dạng email"))
                 return
             }
             username.isNullOrBlank() -> {
-                liveData.updateTenant.postValue(Resource.Error(message = "Tên đăng nhập là bắt buộc"))
+                liveData.updateCurrentUser.postValue(Resource.Error(message = "Tên đăng nhập là bắt buộc"))
                 return
             }
             password.isNullOrBlank() -> {
-                liveData.updateTenant.postValue(Resource.Error(message = "Mật khẩu là bắt buộc"))
+                liveData.updateCurrentUser.postValue(Resource.Error(message = "Mật khẩu là bắt buộc"))
                 return
             }
         }
@@ -185,6 +195,7 @@ class TenantViewModel @Inject constructor(
                 email = email,
                 username = username,
                 password = password,
+                idCard = idCard
             )
 
             val result = profileRepository.updateCurrentUser(userUpdate)

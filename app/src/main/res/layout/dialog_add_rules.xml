@@ -29,6 +29,8 @@
             android:id="@+id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:imeOptions="actionNext"
+android:inputType="text"
             android:hint="Tiêu đề"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />
@@ -46,6 +48,8 @@
             android:id="@+id/txt_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:hint="Nội dung"
             android:textSize="@dimen/TEXT_SIZE_DEFAULT"
             tools:ignore="SpUsage" />

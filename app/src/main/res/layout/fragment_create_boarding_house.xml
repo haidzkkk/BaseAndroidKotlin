@@ -48,6 +48,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tên khu trọ"
+                    android:imeOptions="actionNext"
+android:inputType="text"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     style="@style/InputLayoutStyle1"
                     tools:ignore="SpUsage" />
@@ -85,6 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tổng số phòng"
+                    android:imeOptions="actionNext"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     android:inputType="number"
                     style="@style/InputLayoutStyle1"
@@ -121,6 +124,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Địa chỉ"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
                     android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                     style="@style/InputLayoutStyle1"
                     tools:ignore="SpUsage" />
