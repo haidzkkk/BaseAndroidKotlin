@@ -47,9 +47,9 @@ abstract class AppBaseFragment <VB: ViewBinding> : Fragment(), HasScreenInjector
         uiDisposables.dispose()
     }
 
-/* ==========================================================================================
- * Disposable
- * ========================================================================================== */
+    /* ==========================================================================================
+     * Disposable
+     * ========================================================================================== */
 
     private val uiDisposables = CompositeDisposable()
 
@@ -67,7 +67,7 @@ abstract class AppBaseFragment <VB: ViewBinding> : Fragment(), HasScreenInjector
             .disposeOnDestroyView()
     }
 
-    protected fun <L: AppViewLiveData> AppBaseViewModel<L, *, *>.observerLivedata() = liveData
+    protected fun <L: AppState> AppBaseViewModel<L, *, *>.observerLivedata() = liveData
 
 
     override fun injector(): AppComponent {

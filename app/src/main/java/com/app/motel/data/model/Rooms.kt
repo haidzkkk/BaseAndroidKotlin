@@ -11,19 +11,6 @@ data class Rooms(
     val image: List<String>?,
     ) {
 
-    companion object{
-        fun fromEntity(entity: RoomEntity): Rooms {
-            return Rooms(
-                id = entity.id,
-                name = entity.name,
-                country = entity.country,
-                location = entity.location,
-                image = entity.image,
-                follow = entity.follow
-            )
-        }
-    }
-
     fun toEntity(): RoomEntity {
         return RoomEntity(
             id = id,

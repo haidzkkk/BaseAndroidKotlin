@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Motel" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.Motel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#E21A5E</item>
-        <item name="colorPrimaryVariant">#EC4880</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -20,7 +20,7 @@
         <item name="android:textColorPrimary">@color/textColor1</item>
 
         <!--  Background-->
-        <item name="android:colorBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background1</item>
     </style>
 
 
@@ -44,21 +44,53 @@
         <item name="android:windowEnterTransition">@transition/slide_in</item>
         <item name="android:windowExitTransition">@transition/slide_out</item>
     </style>
+
     <style name="RoundedDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:background">@drawable/background_border_radius_1</item>
     </style>
 
-    <style name="InputLayoutChat" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxCornerRadiusTopStart">24dp</item>
-        <item name="boxCornerRadiusTopEnd">24dp</item>
-        <item name="boxCornerRadiusBottomStart">24dp</item>
-        <item name="boxCornerRadiusBottomEnd">24dp</item>
-        <item name="boxBackgroundColor">@color/background</item>
-        <item name="boxStrokeColor">@color/primaryVariant</item>
+    <!--    text input layout-->
+    <style name="InputLayoutStyle1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+        <item name="boxCornerRadiusTopStart">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/RADIUS_SMALL</item>
+
+        <item name="boxBackgroundColor">@color/background2</item>
+
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
+    <style name="InputLayoutStyle2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+        <item name="boxCornerRadiusTopStart">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/RADIUS_SMALL</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/RADIUS_SMALL</item>
+
+        <item name="boxBackgroundColor">@color/background2</item>
+
+        <item name="boxStrokeColor">@color/background3</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
     </style>
 
     <style name="roundedCorners" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">3%</item>
     </style>
+
+    <!--    toolbar title style-->
+    <style name="ToolbarTitleStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/TEXT_SIZE_LARGE</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="titleCentered">true</item>
+    </style>
+
 </resources>

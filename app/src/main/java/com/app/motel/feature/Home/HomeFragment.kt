@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.AppApplication
 import com.app.motel.core.AppBaseFragment
-import com.app.motel.data.model.Status
+import com.app.motel.data.model.Resource
 import com.app.motel.databinding.FragmentHomeBinding
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
         mViewModel.liveData.apply {
             this.motelsLiveData.observe(requireActivity()) {
                 when(it.status){
-                    Status.SUCCESS ->{
+                    Resource.Status.SUCCESS ->{
                         Log.e("TAG", "frg liveData: ${it.data}", )
 
                         val adapter = ArrayAdapter(

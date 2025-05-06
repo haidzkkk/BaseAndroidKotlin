@@ -10,7 +10,7 @@ interface RoomDAO {
     suspend fun insertRoom(roomEntity: RoomEntity)
 
     @Query("SELECT * FROM room")
-    fun getAllRooms(): Flow<List<RoomEntity>>
+    fun getAllRooms(): List<RoomEntity>
 
     @Delete
     suspend fun deleteRoom(roomEntity: RoomEntity)

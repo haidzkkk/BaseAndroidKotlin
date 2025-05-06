@@ -13,7 +13,7 @@ import kotlin.random.Random
 
 class HomeViewModel @Inject constructor(
     private val repo: HomeRepository
-    ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>() {
+    ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     init {
         test()
@@ -29,15 +29,15 @@ class HomeViewModel @Inject constructor(
         _viewEvents.post(HomeViewEvent.ReturnTestViewEvent)
     }
 
-    private fun test() = _liveData.testString.postValue("test viewModel: ${Random.nextInt()}")
+    private fun test() = liveData.testString.postValue("test viewModel: ${Random.nextInt()}")
 
     private fun getMotel() {
-        _liveData.motelsLiveData.postValue(Resource.Loading(null))
+        liveData.motelsLiveData.postValue(Resource.Loading(null))
         viewModelScope.launch {
             try {
                 val response = repo.getRoomsNetwork()
                 Log.e("TAG", "getMotel: $response", )
-                _liveData.motelsLiveData.postValue(Resource.Success(response))
+                liveData.motelsLiveData.postValue(Resource.Success(response))
                 repo.setRoomToLocal(response)
 
             } catch (e: HttpException) {
@@ -54,10 +54,10 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val response = repo.getRoomsLocal()
-                _liveData.motelsLiveData.postValue(Resource.Success(response))
+                liveData.motelsLiveData.postValue(Resource.Success(response))
             } catch (e: Exception) {
                 Log.e("TAG", "getRoomsLocal: $message", )
-                _liveData.motelsLiveData.postValue(Resource.Error(message = message))
+                liveData.motelsLiveData.postValue(Resource.Error(message = message))
             }
         }
     }

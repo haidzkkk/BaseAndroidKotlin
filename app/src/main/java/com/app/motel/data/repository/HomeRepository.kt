@@ -19,9 +19,7 @@ class HomeRepository @Inject constructor(
     suspend fun getRoomsNetwork() : List<Rooms> = api.getMotel()
 
     suspend fun getRoomsLocal(): List<Rooms> {
-        return roomDAO.getAllRooms()
-            .first()
-            .map { Rooms.fromEntity(it) }
+        return roomDAO.getAllRooms().map { it.toModel() }
     }
 
     suspend fun setRoomToLocal(rooms: List<Rooms>){

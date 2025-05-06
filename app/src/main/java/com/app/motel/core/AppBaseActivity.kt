@@ -6,15 +6,12 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.app.motel.di.HasScreenInjector
 import com.app.motel.di.AppComponent
 import com.app.motel.di.DaggerAppComponent
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.coroutines.launch
 
 abstract class AppBaseActivity <VB : ViewBinding> : AppCompatActivity(), HasScreenInjector
 {
@@ -57,7 +54,7 @@ abstract class AppBaseActivity <VB : ViewBinding> : AppCompatActivity(), HasScre
             }
     }
 
-    protected fun <L: AppViewLiveData> AppBaseViewModel<L, *, *>.liveData() = liveData
+    protected fun <L: AppState> AppBaseViewModel<L, *, *>.liveData() = liveData
     /**
      * use when create instance of fragment
      */

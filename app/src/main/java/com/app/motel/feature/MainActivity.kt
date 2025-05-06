@@ -3,6 +3,9 @@ package com.app.motel.feature
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -14,6 +17,7 @@ import com.app.motel.core.AppBaseDialog
 import com.app.motel.databinding.ActivityMainBinding
 import com.app.motel.feature.Home.HomeViewEvent
 import com.app.motel.feature.Home.HomeViewModel
+import com.app.motel.ultis.navigateFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import java.util.LinkedList
@@ -51,8 +55,30 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
     private fun setUpBottomNav() {
         val navController = this.findNavController(R.id.fragment_view)
         views.navBottom.setupWithNavController(navController)
+
+        views.navBottom.menu.clear()
+        views.navBottom.inflateMenu(R.menu.menu_bottom)
+        this.findNavController(R.id.fragment_view).currentDestination?.id?.apply {
+            views.navBottom.selectedItemId = this
+        }
+//        this.findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
+//            views.navBottom.isVisible =
+//        }
     }
 
+    private fun setupToolBar(){
+        (views.toolbar.context as AppCompatActivity).setSupportActionBar(views.toolbar)
+        views.toolbar.setNavigationIcon(R.drawable.ic_launcher_background)
+        views.toolbar.navigationIcon?.setTint(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.setTitleTextColor(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.setSubtitleTextColor(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.overflowIcon?.setTint(ContextCompat.getColor(baseContext, R.color.white))
+        views.toolbar.setTitleTextAppearance(baseContext, R.style.ToolbarTitleStyle)
+        views.toolbar.isTitleCentered = true
+        views.toolbar.setNavigationOnClickListener {
+            navigateFragment(R.id.fragment_view, R.id.nav_home,)
+        }
+    }
 
 
     private fun showBottomSheet(isCorrect: Boolean) {

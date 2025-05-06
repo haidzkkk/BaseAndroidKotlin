@@ -1,8 +1,15 @@
 package com.app.motel.data.model
 
-class Resource<out T> (val status: Status, val data: T?, val message: String?) {
-
+class Resource<out T> (val status: Status, val data: T?, var message: String?) {
+    private var hasBeenHandled = false
+    fun getDataIfNotHandled(): Resource<T>? =
+        if (hasBeenHandled) null else {
+            hasBeenHandled = true
+            this
+        }
     companion object{
+        fun <T> Initialize(data: T? = null,message: String? = null): Resource<T> = Resource<T>(Status.INITIALIZE, data, message)
+
         fun <T> Loading(data: T? = null,message: String? = null): Resource<T> = Resource<T>(Status.LOADING, data, message)
 
         fun <T> Success(data: T?, message: String? = null): Resource<T> = Resource<T>(Status.SUCCESS, data, message)
@@ -10,7 +17,15 @@ class Resource<out T> (val status: Status, val data: T?, val message: String?) {
         fun <T> Error(data: T? = null, message: String?): Resource<T> = Resource<T>(Status.ERROR, data, message)
     }
 
+    fun isInitialize() = status == Status.INITIALIZE
     fun isLoading() = status == Status.LOADING
     fun isSuccess() = status == Status.SUCCESS
     fun isError() = status == Status.ERROR
+
+    enum class Status {
+        INITIALIZE,
+        SUCCESS,
+        ERROR,
+        LOADING
+    }
 }

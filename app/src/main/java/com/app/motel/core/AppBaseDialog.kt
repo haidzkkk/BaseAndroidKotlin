@@ -11,26 +11,27 @@ import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.viewbinding.ViewBinding
 import com.app.motel.R
 
-open class AppBaseDialog<VB: ViewBinding>(
+class AppBaseDialog<VB: ViewBinding>(
     private val context: Context,                               // context
     val binding: VB,                                            // binding
     private val isBorderRadius: Boolean,                        // bo góc
     private val isTransparent: Boolean,                         // trong suốt
     private val isWidthMatchParent: Boolean,                    // chieu rộng
     private val isHeightMatchParent: Boolean,                   // chieeu cao, đừng để RelativeLayout nó sẽ kh wrapcontent dưuoc
-    private val layoutGravity: Int,                             // vị trí
-) : Dialog(context) {
+    private val layoutGravity: Int,
+) : Dialog(context), LifecycleOwner {
 
     companion object{
         const val GRAVITY_TOP: Int = Gravity.TOP
         const val GRAVITY_CENTER: Int = Gravity.CENTER
         const val GRAVITY_BOTTOM: Int = Gravity.BOTTOM
     }
-
-    val viewsDialog get () = binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.setContentView(binding.root)
@@ -70,6 +71,22 @@ open class AppBaseDialog<VB: ViewBinding>(
         super.onCreate(savedInstanceState)
     }
 
+    // observe livedata with lifecycle dialog
+    private val lifecycleRegistry = LifecycleRegistry(this)
+    override val lifecycle: Lifecycle = lifecycleRegistry
+
+    override fun show() {
+        super.show()
+        lifecycleRegistry.currentState = Lifecycle.State.CREATED
+        lifecycleRegistry.currentState = Lifecycle.State.STARTED
+    }
+
+    override fun dismiss() {
+        lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+        super.dismiss()
+    }
+
+    // builder
     interface IBuilder<VB: ViewBinding>{
         var isBorderRadius: Boolean
         var isWidthMatchParent: Boolean
@@ -87,7 +104,7 @@ open class AppBaseDialog<VB: ViewBinding>(
 
     class Builder<VB: ViewBinding>(private val context: Context, val binding: VB) : IBuilder<VB>{
         // mặc định nó là như này
-        override var isBorderRadius: Boolean = true
+        override var isBorderRadius: Boolean = false
         override var isWidthMatchParent: Boolean = true
         override var isHeightMatchParent: Boolean = false
         override var isTransparent: Boolean = true
@@ -117,7 +134,15 @@ open class AppBaseDialog<VB: ViewBinding>(
             return this
         }
 
-        override fun build(): AppBaseDialog<VB> = AppBaseDialog(context, binding, isBorderRadius, isTransparent, isWidthMatchParent, isHeightMatchParent, layoutGravity)
+        override fun build(): AppBaseDialog<VB> = AppBaseDialog(
+            context,
+            binding,
+            isBorderRadius,
+            isTransparent,
+            isWidthMatchParent,
+            isHeightMatchParent,
+            layoutGravity,
+        )
     }
 }
 
