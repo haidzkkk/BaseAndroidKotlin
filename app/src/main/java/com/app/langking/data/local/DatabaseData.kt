@@ -85,222 +85,285 @@ object DatabaseData {
         return listOf(
             Word(
                 lessonId = 1,
-                english = "Present Simple Tense",
-                vietnamese = "S + V1 + ...",
-                description = "I play football every day",
-                descriptionVietnamese = "Tôi chơi bóng đá mỗi ngày"
+                english = "I drink coffee every morning",
+                vietnamese = "Tôi uống cà phê mỗi sáng",
+                description = "Present Simple Tense: S + V1 + ...",
+                descriptionVietnamese = "Dùng để diễn tả thói quen, sự thật hiển nhiên hoặc lịch trình cố định."
             ),
             Word(
                 lessonId = 1,
-                english = "Present continuous tense",
-                vietnamese = "S + am/is/are + V-ing",
-                description = "She walks to school every day",
-                descriptionVietnamese = "Cô ấy đi bộ đến trường mỗi ngày"
+                english = "She is reading a book now",
+                vietnamese = "Cô ấy đang đọc sách bây giờ",
+                description = "Present Continuous Tense: S + am/is/are + V-ing",
+                descriptionVietnamese = "Dùng để diễn tả hành động đang xảy ra ngay lúc nói hoặc xung quanh thời điểm nói."
             ),
             Word(
                 lessonId = 1,
-                english = "Present Perfect Tense",
-                vietnamese = "S + has/have + V3 + ...",
-                description = "She walks to school every day",
-                descriptionVietnamese = "Cô ấy đi bộ đến trường mỗi ngày"
+                english = "They have finished their homework",
+                vietnamese = "Họ đã hoàn thành bài tập về nhà",
+                description = "Present Perfect Tense: S + has/have + V3 + ...",
+                descriptionVietnamese = "Dùng để diễn tả hành động đã xảy ra trong quá khứ nhưng vẫn còn liên quan đến hiện tại."
             ),
             Word(
                 lessonId = 1,
-                english = "Present perfect continuous Tense",
-                vietnamese = "S + has/have + been + V-ing",
-                description = "She has been studying all day",
-                descriptionVietnamese = "Cô ấy đã học cả ngày"
+                english = "He has been working all morning",
+                vietnamese = "Anh ấy đã làm việc suốt cả buổi sáng",
+                description = "Present Perfect Continuous Tense: S + has/have + been + V-ing",
+                descriptionVietnamese = "Dùng để nhấn mạnh hành động bắt đầu trong quá khứ và vẫn còn đang tiếp diễn đến hiện tại."
             ),
             Word(
                 lessonId = 1,
-                english = "Past Simple Tense",
-                vietnamese = "S + V2/V-ed + ...",
-                description = "She walked to school every day",
-                descriptionVietnamese = "Cô ấy đi bộ đến trường mỗi ngày"
+                english = "I visited my grandparents last weekend",
+                vietnamese = "Tôi đã thăm ông bà vào cuối tuần trước",
+                description = "Past Simple Tense: S + V2/V-ed + ...",
+                descriptionVietnamese = "Dùng để diễn tả hành động đã xảy ra và kết thúc trong quá khứ, với thời gian xác định."
             ),
             Word(
                 lessonId = 1,
-                english = "Past Continuous Tense",
-                vietnamese = "S + was/were + V-ing + ...",
-                description = "She was walking to school every day",
-                descriptionVietnamese = "Cô ấy đang đi bộ đến trường mỗi ngày"
+                english = "She was cooking dinner when I arrived",
+                vietnamese = "Cô ấy đang nấu ăn khi tôi đến",
+                description = "Past Continuous Tense: S + was/were + V-ing + ...",
+                descriptionVietnamese = "Dùng để diễn tả hành động đang xảy ra tại một thời điểm trong quá khứ hoặc bị gián đoạn bởi hành động khác."
             ),
             Word(
                 lessonId = 1,
-                english = "Past Perfect Tense",
-                vietnamese = "S + had + V3/ed + ...",
-                description = "She had walked to school every day",
-                descriptionVietnamese = "Cô ấy đã đi bộ đến trường mỗi ngày"
+                english = "We had left before it started raining",
+                vietnamese = "Chúng tôi đã rời đi trước khi trời bắt đầu mưa",
+                description = "Past Perfect Tense: S + had + V3/ed + ...",
+                descriptionVietnamese = "Dùng để diễn tả hành động đã xảy ra trước một hành động khác trong quá khứ."
             ),
             Word(
                 lessonId = 1,
-                english = "Past perfect continuous Tense",
-                vietnamese = "S + had + been + V-ing + ...",
-                description = "She had been walking to school every day",
-                descriptionVietnamese = "Cô ấy đã đi bộ đến trường mỗi ngày"
+                english = "He had been waiting for two hours",
+                vietnamese = "Anh ấy đã đợi suốt hai tiếng",
+                description = "Past Perfect Continuous Tense: S + had + been + V-ing + ...",
+                descriptionVietnamese = "Dùng để nhấn mạnh hành động kéo dài liên tục đến một thời điểm cụ thể trong quá khứ."
             ),
             Word(
                 lessonId = 1,
-                english = "Future Simple Tense",
-                vietnamese = "S + will/shall + V1 + ...",
-                description = "She will walk to school every day",
-                descriptionVietnamese = "Cô ấy sẽ đi bộ đến trường mỗi ngày"
+                english = "They will travel to Japan next month",
+                vietnamese = "Họ sẽ đi Nhật vào tháng sau",
+                description = "Future Simple Tense: S + will/shall + V1 + ...",
+                descriptionVietnamese = "Dùng để diễn tả hành động sẽ xảy ra trong tương lai, không có kế hoạch cụ thể."
             ),
             Word(
                 lessonId = 1,
-                english = "Future Continuous Tense",
-                vietnamese = "S + will/ shall + be + V-ing + ...",
-                description = "She will be walking to school every day",
-                descriptionVietnamese = "Cô ấy sẽ đi bộ đến trường mỗi ngày"
+                english = "I will be staying at a hotel this weekend",
+                vietnamese = "Tôi sẽ ở khách sạn vào cuối tuần này",
+                description = "Future Continuous Tense: S + will/shall + be + V-ing + ...",
+                descriptionVietnamese = "Dùng để nói về hành động sẽ đang xảy ra tại một thời điểm cụ thể trong tương lai."
             ),
             Word(
                 lessonId = 1,
-                english = "Future Perfect Tense",
-                vietnamese = "S + will + have + V3/ed + ...",
-                description = "She will have walked to school every day",
-                descriptionVietnamese = "Cô ấy sẽ đã đi bộ đến trường mỗi ngày"
+                english = "She will have graduated by next year",
+                vietnamese = "Cô ấy sẽ đã tốt nghiệp vào năm sau",
+                description = "Future Perfect Tense: S + will + have + V3/ed + ...",
+                descriptionVietnamese = "Dùng để diễn tả hành động sẽ hoàn thành trước một thời điểm trong tương lai."
             ),
             Word(
                 lessonId = 1,
-                english = "Future Perfect Continuous Tense",
-                vietnamese = "S + will + have + been + V-ing + ...",
-                description = "She will have been walking to school every day",
-                descriptionVietnamese = "Cô ấy sẽ đã đi bộ đến trường mỗi ngày"
+                english = "By this time next week, I will have been working here for a year",
+                vietnamese = "Vào thời điểm này tuần sau, tôi sẽ đã làm việc ở đây được một năm",
+                description = "Future Perfect Continuous Tense: S + will + have + been + V-ing + ...",
+                descriptionVietnamese = "Dùng để nhấn mạnh khoảng thời gian của hành động sẽ kéo dài đến một thời điểm trong tương lai."
             ),
 
             Word(
                 lessonId = 2,
-                english = "Zero Conditional",
-                vietnamese = "If + S + V1, S + V1",
-                description = "If it rains, the ground gets wet",
-                descriptionVietnamese = "Nếu trời mưa, mặt đất sẽ ướt"
+                english = "If water reaches 100 degrees Celsius, it boils",
+                vietnamese = "Nếu nước đạt 100 độ C, nó sẽ sôi",
+                description = "Zero Conditional: If + S + V1, S + V1",
+                descriptionVietnamese = "Dùng để diễn tả sự thật hiển nhiên hoặc quy luật trong tự nhiên."
             ),
             Word(
                 lessonId = 2,
-                english = "Conditional Type 1",
-                vietnamese = "If + S + V, S + will + V",
-                description = "If you stay out late, get a taxi home",
-                descriptionVietnamese = "Nếu bạn ra ngoài khuya, hãy bắt taxi về nhà"
+                english = "If you heat ice, it melts.",
+                vietnamese = "Nếu bạn đun nóng đá, nó sẽ tan chảy.",
+                description = "Zero Conditional: If + S + V1, S + V1",
+                descriptionVietnamese = "Dùng khi kết quả luôn xảy ra nếu điều kiện xảy ra."
             ),
             Word(
                 lessonId = 2,
-                english = "Conditional Type 2",
-                vietnamese = "If + S + V-ed, S + would + V",
-                description = "If he were buying a new computer, I would send him a promotional code.",
-                descriptionVietnamese = "Nếu anh ấy định mua một chiếc máy tính mới thì tôi sẽ gửi anh ấy mã giảm giá."
+                english = "If you study hard, you will pass the exam",
+                vietnamese = "Nếu bạn học chăm chỉ, bạn sẽ vượt qua kỳ thi",
+                description = "First Conditional: If + S + V1, S + will + V",
+                descriptionVietnamese = "Dùng để diễn tả tình huống có thể xảy ra trong tương lai nếu điều kiện được đáp ứng."
             ),
             Word(
                 lessonId = 2,
-                english = "Conditional Type 3",
-                vietnamese = "If + S + had + V-ed, S + would + have + V-ed",
-                description = "If he had stayed at home last night, he wouldn’t have met her",
-                descriptionVietnamese = "Nếu tối qua anh ấy ở nhà, anh ấy đã không gặp cô ấy."
+                english = "If I see her, I will tell her the news.",
+                vietnamese = "Nếu tôi gặp cô ấy, tôi sẽ nói cho cô ấy biết tin tức.",
+                description = "First Conditional: If + S + V1, S + will + V",
+                descriptionVietnamese = "Nói về một khả năng thực tế trong tương lai."
             ),
             Word(
                 lessonId = 2,
-                english = "Mixed conditional",
-                vietnamese = "If + S + had + V-ed, S + would + V",
-                description = "Last night, if our son had gone to bed lately, he would feel exhausted now",
-                descriptionVietnamese = "Tối qua, nếu con trai chúng tôi đã đi ngủ muộn, anh ấy sẽ cảm thấy mệt mỏi bây giờ.",
+                english = "If I had more free time, I would learn Spanish",
+                vietnamese = "Nếu tôi có nhiều thời gian rảnh hơn, tôi sẽ học tiếng Tây Ban Nha",
+                description = "Second Conditional: If + S + V2, S + would + V",
+                descriptionVietnamese = "Dùng để nói về điều không có thật hoặc ít khả năng xảy ra ở hiện tại hoặc tương lai."
             ),
             Word(
                 lessonId = 2,
-                english = "Mixed conditional",
-                vietnamese = "If + V-ed, S + would + have + V-ed",
-                description = "If I were taller, I could have helped you paint the window yesterday",
-                descriptionVietnamese = "Nếu tôi cao hơn, tôi có thể giu bạn sơn cửa sổ hôm qua.",
+                english = "If I won the lottery, I would buy a house.",
+                vietnamese = "Nếu tôi trúng xổ số, tôi sẽ mua một căn nhà.",
+                description = "Second Conditional: If + S + V2, S + would + V",
+                descriptionVietnamese = "Nói về điều tưởng tượng hoặc không thật ở hiện tại."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If she had remembered his birthday, he wouldn’t have been upset",
+                vietnamese = "Nếu cô ấy nhớ sinh nhật anh ấy, anh ấy đã không buồn",
+                description = "Third Conditional: If + S + had + V3, S + would have + V3",
+                descriptionVietnamese = "Dùng để nói về điều không xảy ra trong quá khứ và hậu quả giả định."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If you had studied harder, you would have passed the exam.",
+                vietnamese = "Nếu bạn học chăm hơn, bạn đã vượt qua kỳ thi.",
+                description = "Third Conditional: If + S + had + V3, S + would have + V3",
+                descriptionVietnamese = "Nói về sự tiếc nuối với điều đã không xảy ra."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If I had gone to bed earlier, I wouldn’t be so tired now",
+                vietnamese = "Nếu tôi đi ngủ sớm hơn, bây giờ tôi đã không mệt như vậy",
+                description = "Mixed Conditional (Past → Present): If + had + V3, S + would + V",
+                descriptionVietnamese = "Nói về nguyên nhân quá khứ dẫn đến kết quả hiện tại không như ý."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If I had taken that job, I would be rich now.",
+                vietnamese = "Nếu tôi đã nhận công việc đó, bây giờ tôi đã giàu.",
+                description = "Mixed Conditional (Third + Second): If + had + V3, would + V",
+                descriptionVietnamese = "Dùng khi hành động trong quá khứ ảnh hưởng đến hiện tại."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If I were rich, I would have bought that car last week",
+                vietnamese = "Nếu tôi giàu, tôi đã mua chiếc xe đó vào tuần trước",
+                description = "Mixed Conditional (Present → Past): If + V2, S + would have + V3",
+                descriptionVietnamese = "Giả định điều kiện hiện tại không có thật dẫn đến kết quả trong quá khứ không xảy ra."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If she were smarter, she would have avoided the mistake.",
+                vietnamese = "Nếu cô ấy thông minh hơn, cô ấy đã tránh được sai lầm đó.",
+                description = "Mixed Conditional (Second + Third): If + V2, would have + V3",
+                descriptionVietnamese = "Tưởng tượng điều kiện hiện tại không có thật gây ra hậu quả trong quá khứ."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If I were you, I wouldn’t do that.",
+                vietnamese = "Nếu tôi là bạn, tôi sẽ không làm điều đó.",
+                description = "Unreal Conditional (Present): If + S + were, S + would + V",
+                descriptionVietnamese = "Dùng để đưa ra lời khuyên hoặc giả định không thực ở hiện tại."
+            ),
+            Word(
+                lessonId = 2,
+                english = "If only I had listened to her advice!",
+                vietnamese = "Giá mà tôi đã nghe lời khuyên của cô ấy!",
+                description = "If only (regret): If only + S + had + V3",
+                descriptionVietnamese = "Dùng để diễn tả sự tiếc nuối về một điều trong quá khứ."
+            ),
+            Word(
+                lessonId = 2,
+                english = "Suppose you lost your job, what would you do?",
+                vietnamese = "Giả sử bạn mất việc, bạn sẽ làm gì?",
+                description = "Suppose/Supposing: Suppose (that) + S + V2, S + would + V",
+                descriptionVietnamese = "Dùng để đặt giả định không có thật ở hiện tại để đưa ra kịch bản hoặc tình huống tưởng tượng."
             ),
 
             Word(
                 lessonId = 3,
-                english = "Passive voice",
-                vietnamese = "O + be + V-ed + ...",
-                description = "The homework is done by my sister everyday",
-                descriptionVietnamese = "Bài tập được làm bởi chị tôi mỗi ngày",
+                english = "The cake should be made before the guests arrive.",
+                vietnamese = "Chiếc bánh nên được làm trước khi khách đến.",
+                description = "Passive voice with modal verb: S + modal verb + be + P2 + (by + O)",
+                descriptionVietnamese = "Dùng để nói hành động nên, cần hoặc phải được thực hiện bởi ai đó, không cần nêu rõ chủ thể."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Present Simple",
-                vietnamese = "S+ is/am/are + P2 + (by + O)",
-                description = "English is studied by Mary everyday",
-                descriptionVietnamese = "Hàng ngày, tiếng Anh được học bởi Mary.",
+                english = "The documents must be signed today.",
+                vietnamese = "Tài liệu phải được ký hôm nay.",
+                description = "Passive voice with modal verb: S + must/can/should + be + P2 + (by + O)",
+                descriptionVietnamese = "Dùng khi muốn nhấn mạnh nghĩa vụ hoặc khả năng thực hiện hành động mà không cần nêu rõ người thực hiện."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Present Continuous",
-                vietnamese = "S + is/am/are + being + P2 + (by + O)",
-                description = "Some trees are being planted by him now.",
-                descriptionVietnamese = "Bây giờ một vài cái cây đang trồng bởi anh ấy.",
+                english = "The rules can be changed if necessary.",
+                vietnamese = "Các quy tắc có thể được thay đổi nếu cần thiết.",
+                description = "Passive voice with modal verb: S + can + be + P2",
+                descriptionVietnamese = "Diễn tả khả năng hành động được thực hiện mà không cần nêu rõ ai làm."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Present Perfect",
-                vietnamese = "S + will + be + P2 + (by + O)",
-                description = "English exercises have been done by my friend for two hours.",
-                descriptionVietnamese = "Bài tập tiếng Anh đã được bạn tôi làm trong hai giờ.",
+                english = "Mistakes should be avoided at all costs.",
+                vietnamese = "Những sai lầm nên được tránh bằng mọi giá.",
+                description = "Passive voice with modal verb: S + should + be + P2",
+                descriptionVietnamese = "Dùng để đưa ra lời khuyên về hành động nên tránh mà không cần nêu ai thực hiện."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Present Perfect Continuous",
-                vietnamese = "S + have/ has + been + being + P2 + (by + O)",
-                description = "This car has been being repaired by John for 2 hours.",
-                descriptionVietnamese = "Chiếc xe ô tô đã đang được sửa bởi John trong vòng hai tiếng rồi.",
+                english = "The room needs to be cleaned.",
+                vietnamese = "Căn phòng cần được dọn dẹp.",
+                description = "Passive with 'need to be': S + need(s) + to be + P2",
+                descriptionVietnamese = "Dùng để nói điều gì đó cần được thực hiện, thường áp dụng với vật thể."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Past Simple",
-                vietnamese = "S + was/were + P2 + (by + O)",
-                description = "A letter was written by her yesterday.",
-                descriptionVietnamese = "Ngày hôm qua, một lá thư đã được viết bởi cô ấy.",
+                english = "The house was going to be sold.",
+                vietnamese = "Căn nhà đã định được bán.",
+                description = "Passive voice with 'be going to': S + was/were going to be + P2",
+                descriptionVietnamese = "Dùng để diễn tả kế hoạch bị động trong quá khứ."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Past Continuous",
-                vietnamese = "S + was/were + being + P2 + (by + O)",
-                description = "A car was being bought at 9 am yesterday.",
-                descriptionVietnamese = "Vào lúc 9 giờ sáng ngày hôm qua, một chiếc ô tô đang được mua.",
+                english = "The problem needs to be solved immediately.",
+                vietnamese = "Vấn đề cần được giải quyết ngay lập tức.",
+                description = "Passive with 'need to be': S + need(s) + to be + P2",
+                descriptionVietnamese = "Thể hiện nhu cầu cần giải quyết một việc gì đó mà không nói rõ ai làm."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Past Perfect",
-                vietnamese = "S + had + been + P2 + (by + O)",
-                description = "His report had been finished before 10 p.m yesterday.",
-                descriptionVietnamese = "Bản báo cáo của anh ấy đã được hoàn thành trước 10 giờ tối ngày hôm qua.",
+                english = "The book is being read by many students.",
+                vietnamese = "Cuốn sách đang được nhiều sinh viên đọc.",
+                description = "Passive voice of Present Continuous: S + is/am/are + being + P2 + (by + O)",
+                descriptionVietnamese = "Dùng để mô tả hành động đang xảy ra và được thực hiện bởi người khác."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Past Perfect Continuous",
-                vietnamese = "S + had + been + being + P2 + (by + O)",
-                description = "The essay had been being typed for 3 hours before you came yesterday.",
-                descriptionVietnamese = "Bài văn đã đang được gõ trong vòng 3 tiếng trước khi bạn đến ngày hôm qua.",
+                english = "A new road is being built in my town.",
+                vietnamese = "Một con đường mới đang được xây dựng trong thị trấn của tôi.",
+                description = "Passive voice of Present Continuous: S + is/am/are + being + P2",
+                descriptionVietnamese = "Dùng để diễn tả hành động đang diễn ra ở hiện tại trong thể bị động."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Future Simple",
-                vietnamese = "S + will + be + P2 + (by + O)",
-                description = "A lot of things will be done tomorrow.",
-                descriptionVietnamese = "Rất nhiều việc sẽ được làm vào ngày mai.",
+                english = "It is said that she is a good teacher.",
+                vietnamese = "Người ta nói rằng cô ấy là một giáo viên giỏi.",
+                description = "Passive with reporting verbs: It + be + said/believed/known + that + S + V",
+                descriptionVietnamese = "Dùng khi trích dẫn ý kiến hoặc thông tin chung mà không cần nêu rõ nguồn."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Future Continuous",
-                vietnamese = "S + will + be + being + P2 + (by + O)",
-                description = "Her children will be being taken care of at this time tomorrow.",
-                descriptionVietnamese = "Con của ấy sẽ đang được chăm sóc vào thời điểm này ngày mai.",
+                english = "She is believed to be living in Paris.",
+                vietnamese = "Người ta tin rằng cô ấy đang sống ở Paris.",
+                description = "Passive infinitive with reporting verbs: S + be + believed/thought + to V / to be V-ing",
+                descriptionVietnamese = "Cách viết bị động của câu gián tiếp với động từ tường thuật, dùng để diễn tả hành động đang diễn ra."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Future Perfect",
-                vietnamese = "S + will + have + been + P2 + (by + O)",
-                description = "Her studying will have been finished by the end of this year.",
-                descriptionVietnamese = "Việc học của cô ấy sẽ được hoàn thành trức cuối năm nay.",
+                english = "He is known to have won several awards.",
+                vietnamese = "Anh ấy được biết là đã giành được vài giải thưởng.",
+                description = "Passive perfect infinitive: S + be + known/supposed + to have + P2",
+                descriptionVietnamese = "Dùng để nói về hành động đã hoàn thành trong quá khứ với dạng bị động và động từ tường thuật."
             ),
             Word(
                 lessonId = 3,
-                english = "Passive voice of Future Perfect Continuous",
-                vietnamese = "S + will + have +been + being + P2 + (by + O)",
-                description = "English will have been being taught for 5 years by next week.",
-                descriptionVietnamese = "Tiếng Anh sẽ đang dạy được năm năm vào trước tuần sau.",
+                english = "She is thought to have left the city.",
+                vietnamese = "Người ta cho rằng cô ấy đã rời khỏi thành phố.",
+                description = "Passive perfect infinitive: S + be + thought + to have + P2",
+                descriptionVietnamese = "Thể hiện một giả định hoặc thông tin về hành động trong quá khứ dưới dạng bị động."
             ),
 
             Word(

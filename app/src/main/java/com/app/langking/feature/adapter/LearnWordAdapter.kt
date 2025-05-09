@@ -101,7 +101,7 @@ class LearnWordAdapter(
                 binding.icVolumeVietnamese.setOnClickListener {
                     onSpeech(Speak(
                         word,
-                        language = Locale.forLanguageTag("vi"),
+                        voice = Speak.voiceVietnamese,
                         typeSpeak = TypeSpeak(isVietnamese = true)
                     ))
                 }

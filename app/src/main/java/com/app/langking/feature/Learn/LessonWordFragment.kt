@@ -4,6 +4,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.speech.tts.Voice
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,9 @@ import com.app.langking.feature.Learn.viewmodel.LearnViewModel
 import com.app.langking.feature.adapter.LearnWordAdapter
 import com.app.langking.ultis.navigateFragmentWithSlide
 import com.app.langking.ultis.popFragmentWithSlide
+import java.util.Locale
 import javax.inject.Inject
+
 
 class LessonWordFragment @Inject constructor() : AppBaseFragment<FragmentLessonBinding>() {
 
@@ -51,7 +54,9 @@ class LessonWordFragment @Inject constructor() : AppBaseFragment<FragmentLessonB
     }
 
     private fun init() {
-        textToSpeech = TextToSpeech(requireContext()) {}
+        textToSpeech = TextToSpeech(requireContext(), {
+
+        }, "com.google.android.tts")
 
         adapter = LearnWordAdapter(
             onItemClick = {
@@ -133,7 +138,7 @@ class LessonWordFragment @Inject constructor() : AppBaseFragment<FragmentLessonB
     private fun speckText(speak: Speak){
         val content = speak.content;
         textToSpeech.setSpeechRate(speak.speed)
-        textToSpeech.language = speak.language
+        textToSpeech.voice = speak.voice
         textToSpeech.speak(content, speak.queueMode, null,"")
     }
 

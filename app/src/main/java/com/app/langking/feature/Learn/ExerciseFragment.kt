@@ -235,7 +235,7 @@ class ExerciseFragment @Inject constructor() : AppBaseFragment<FragmentExerciseB
     private fun speckText(speak: Speak){
         val content = speak.content;
         textToSpeech.setSpeechRate(speak.speed)
-        textToSpeech.language = speak.language
+        textToSpeech.voice = speak.voice
         textToSpeech.speak(content, speak.queueMode, null,"")
     }
 

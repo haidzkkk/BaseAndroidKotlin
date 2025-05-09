@@ -50,16 +50,31 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvEnglish"
+            <LinearLayout
+                android:id="@+id/lyEnglish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
-                android:textColor="@color/black"
                 android:layout_toEndOf="@+id/lyVolume"
-                android:text="Big"
-                android:textStyle="bold" />
+                android:gravity="top"
+                android:layout_toStartOf="@+id/lySetting">
 
+                <TextView
+                    android:id="@+id/tvEnglish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Big"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iconShow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
+                    android:src="@drawable/icons8_show"/>
+
+            </LinearLayout>
             <TextView
                 android:id="@+id/tvPronunciation"
                 android:layout_width="wrap_content"
@@ -69,15 +84,8 @@
                 android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
                 android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
                 android:layout_toEndOf="@+id/lyVolume"
-                android:layout_below="@+id/tvEnglish"
+                android:layout_below="@+id/lyEnglish"
                 />
-
-            <ImageView
-                android:id="@+id/iconShow"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_toEndOf="@+id/tvEnglish"
-                android:src="@drawable/icons8_show"/>
 
             <LinearLayout
                 android:layout_below="@+id/lyVolume"
@@ -96,7 +104,8 @@
 
                 <TextView
                     android:id="@+id/tvVietnamese"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Lớn"
                     android:textStyle="bold"

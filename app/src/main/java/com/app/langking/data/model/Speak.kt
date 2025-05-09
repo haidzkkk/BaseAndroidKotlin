@@ -1,11 +1,13 @@
 package com.app.langking.data.model
 
 import android.speech.tts.TextToSpeech
+import android.speech.tts.Voice
 import java.util.Locale
+import java.util.Random
 
 data class Speak(
     val word: Word,
-    var language: Locale = Locale.US,
+    var voice: Voice = if (Random().nextBoolean()) voiceMale else voiceFeMale,
     var speed: Float = 1f,
     val queueMode: Int = TextToSpeech.QUEUE_FLUSH,
     var durationMillisecond: Int = 0,
@@ -13,11 +15,11 @@ data class Speak(
 ) {
 
     private var speedCore: Float = speed
-    private var languageCore: Locale = language
+    private var voiceCore: Voice = voice
 
     private fun handleGetContent(): String?{
         speed = speedCore
-        language = languageCore
+        voice = voiceCore
 
         return (if(typeSpeak.isEnglish) {
             typeSpeak.isEnglish = false
@@ -27,14 +29,14 @@ data class Speak(
             speed = 0.3f
             word.english
         }else if(typeSpeak.isVietnamese) {
-            language = Locale.forLanguageTag("vi")
+            voice = voiceVietnamese
             typeSpeak.isVietnamese = false
             word.vietnamese
         }else if(typeSpeak.isEnglishDesc) {
             typeSpeak.isEnglishDesc = false
             word.description ?: ""
         }else if(typeSpeak.isVietnameseDesc) {
-            language = Locale.forLanguageTag("vi")
+            voice = voiceVietnamese
             typeSpeak.isVietnameseDesc = false
             word.descriptionVietnamese ?: ""
         }else{
@@ -58,5 +60,9 @@ data class Speak(
         }
 
 
-
+    companion object{
+        val voiceMale = Voice("hi-in-x-hie-local", Locale("hi_IN"), 400, 200, false, setOf())
+        val voiceFeMale = Voice( "en-us-x-sfg#female_1-local", Locale.US,400,200,false, setOf())
+        val voiceVietnamese = Voice("en-us-x-sfg#female_1-local", Locale.forLanguageTag("vi"),400,200,false, setOf())
+    }
 }
