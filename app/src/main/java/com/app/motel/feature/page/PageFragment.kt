@@ -1,50 +1,79 @@
-package com.app.motel.feature.historicalFigure
+package com.app.motel.feature.page
 
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.app.motel.data.model.HistoricalEvent
 import com.app.motel.data.model.HistoricalFigure
-import com.app.motel.feature.historicalFigure.adapter.DynastyAdapter
-import com.app.motel.feature.historicalFigure.menu.HistoricalFigureCommentFragment
-import com.app.motel.feature.historicalFigure.menu.HistoricalFigureContentFragment
-import com.app.motel.feature.historicalFigure.menu.HistoricalFigureCustomBottomFragment
-import com.app.motel.feature.historicalFigure.menu.HistoricalFigureHomeFragment
+import com.app.motel.data.model.PageInfo
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.app.motel.ui.adapter.ViewPagerAdapter
 import com.google.gson.Gson
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseFragment
-import com.history.vietnam.databinding.FragmentHistoricalFigureBinding
-import com.history.vietnam.databinding.FragmentHistoricalFigureTimelineBinding
+import com.history.vietnam.databinding.FragmentPageBinding
 import javax.inject.Inject
 
-class HistoricalFigureFragment : AppBaseFragment<FragmentHistoricalFigureBinding>() {
+class PageFragment : AppBaseFragment<FragmentPageBinding>() {
 
     companion object{
-        const val KEY_ITEM_FIGURE = "KEY_ITEM_FIGURE"
+        const val KEY_ITEM = "KEY_ITEM"
+
+        fun getPageInfo(figure: HistoricalFigure): Bundle {
+            val pageInfo = PageInfo(
+                name = figure.name,
+                wikiPageId = figure.wikiPageId,
+                firebaseId = figure.id?.toString(),
+                firebasePath = "sadsadsad/đá/${figure.id}",
+                info = mapOf(
+                    "Sinh" to (figure.birthYear ?: ""),
+                    "Mất" to (figure.deathDate ?: ""),
+                    "Vợ" to (figure.spouse ?: ""),
+                    "Tước hiệu" to (figure.title ?: ""),
+                    "Triều đại" to (figure.dynasty ?: ""),
+                ),
+            )
+
+            return Bundle().apply {
+                putString(KEY_ITEM, Gson().toJson(pageInfo))
+            }
+        }
+
+        fun getPageInfo(event: HistoricalEvent): Bundle {
+            val pageInfo = PageInfo(
+                name = event.name,
+                wikiPageId = event.wikiPageId,
+                firebaseId = event.id?.toString(),
+                firebasePath = "sadsadsad/đá/${event.id}",
+                info = mapOf(
+                    "Thời gian" to (event.birthYear ?: ""),
+                    "Triều đại" to (event.dynasty ?: ""),
+                    "Triều đại" to (event.dynasty ?: ""),
+                ),
+            )
+
+            return Bundle().apply {
+                putString(KEY_ITEM, Gson().toJson(pageInfo))
+            }
+        }
     }
 
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentHistoricalFigureBinding {
-        return FragmentHistoricalFigureBinding.inflate(inflater, container, false)
+    ): FragmentPageBinding {
+        return FragmentPageBinding.inflate(inflater, container, false)
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel : HistoricalFigureViewModel by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory).get(HistoricalFigureViewModel::class.java)
+    private val viewModel : PageViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(PageViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,15 +89,15 @@ class HistoricalFigureFragment : AppBaseFragment<FragmentHistoricalFigureBinding
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private fun init() {
-        val figure: HistoricalFigure? = arguments?.getString(KEY_ITEM_FIGURE)?.let {
-            Gson().fromJson(it, HistoricalFigure::class.java)
+        val pageInfo: PageInfo? = arguments?.getString(KEY_ITEM)?.let {
+            Gson().fromJson(it, PageInfo::class.java)
         }
-        viewModel.initFigure(figure)
+        viewModel.initFigure(pageInfo)
 
         val fragments = arrayListOf(
-            HistoricalFigureHomeFragment(),
-            HistoricalFigureCommentFragment(),
-            HistoricalFigureContentFragment()
+            PageHomeFragment(),
+            CommentFragment(),
+            IndexFragment()
         )
         viewPagerAdapter = ViewPagerAdapter(fragments, childFragmentManager, lifecycle)
         views.viewPager.adapter = viewPagerAdapter
@@ -84,7 +113,7 @@ class HistoricalFigureFragment : AppBaseFragment<FragmentHistoricalFigureBinding
                 R.id.nav_comment -> views.viewPager.setCurrentItem(1, true)
                 R.id.nav_content -> views.viewPager.setCurrentItem(2, true)
                 R.id.nav_custom -> {
-                    HistoricalFigureCustomBottomFragment().show(childFragmentManager, HistoricalFigureCustomBottomFragment::class.java.name)
+                    SettingBottomFragment().show(childFragmentManager, SettingBottomFragment::class.java.name)
                 }
             }
             true

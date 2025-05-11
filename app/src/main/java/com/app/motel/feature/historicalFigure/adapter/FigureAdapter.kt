@@ -9,12 +9,7 @@ import androidx.core.content.ContextCompat
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.feature.setting.SettingController
 import com.app.motel.ui.show
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.databinding.ItemFigureBinding
@@ -45,6 +40,11 @@ class FigureAdapter constructor(
         binding.tvDate.text = "(${item.birthYear} - ${item.deathDate})"
         binding.tvName.text = item.name ?: "Không rõ"
 
+        binding.imgAvatar.setColorFilter(
+            ContextCompat.getColor(binding.root.context, R.color.primary),
+            PorterDuff.Mode.SRC_IN)
+        binding.imgAvatar.setPadding(24, 24, 24, 24)
+
         binding.imgAvatar.show(
             url = item.image,
             placeholder = R.drawable.icon_user,
@@ -54,7 +54,7 @@ class FigureAdapter constructor(
                     ContextCompat.getColor(binding.root.context, R.color.primary),
                     PorterDuff.Mode.SRC_IN
                 )
-                binding.imgAvatar.setPadding(24, 24, 24, 24) // ví dụ: 24px padding
+                binding.imgAvatar.setPadding(24, 24, 24, 24)
             },
             onLoadSuccess = {
                 binding.imgAvatar.clearColorFilter()

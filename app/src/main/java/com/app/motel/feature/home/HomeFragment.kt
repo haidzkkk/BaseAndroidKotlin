@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.network.FirebaseManager
+import com.app.motel.feature.historicalEvent.HistoricalEventActivity
+import com.app.motel.feature.historicalEvent.HistoricalEventTimeLineFragment
 import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,6 +38,9 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
+        views.btnTimeLineHistoryVietnam.setOnClickListener {
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), HistoricalEventActivity::class.java))
+        }
         views.btnHistoryCharacter.setOnClickListener {
             requireActivity().startActivityWithSlide(Intent(requireActivity(), HistoricalFigureActivity::class.java))
         }

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:id="@+id/ly_root"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.app.motel.feature.historicalFigure.HistoricalFigureFragment">
+    tools:context="com.app.motel.feature.page.PageFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

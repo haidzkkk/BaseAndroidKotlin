@@ -31,8 +31,8 @@ class HomeViewModel @Inject constructor(
 
     private fun setupData() {
         viewModelScope.launch {
-            repo.pushFigures()
-            repo.pushEvent()
+//            repo.pushFigures()
+//            repo.pushEvent()
         }
     }
 }

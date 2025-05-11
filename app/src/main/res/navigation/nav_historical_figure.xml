@@ -11,16 +11,16 @@
         android:label="fragment_historical_figure_timeline"
         tools:layout="@layout/fragment_historical_figure_timeline" >
         <action
-            android:id="@+id/action_historicalFigureTimelineFragment_to_historicalFigureFragment"
-            app:destination="@id/historicalFigureFragment" />
+            android:id="@+id/action_historicalFigureTimelineFragment_to_pageFragment"
+            app:destination="@id/pageFragmentFigure" />
     </fragment>
     <fragment
-        android:id="@+id/historicalFigureFragment"
-        android:name="com.app.motel.feature.historicalFigure.HistoricalFigureFragment"
-        android:label="fragment_historical_figure"
-        tools:layout="@layout/fragment_historical_figure" >
+        android:id="@+id/pageFragmentFigure"
+        android:name="com.app.motel.feature.page.PageFragment"
+        android:label="fragment_page"
+        tools:layout="@layout/fragment_page" >
         <action
-            android:id="@+id/action_historicalFigureFragment_to_historicalFigureTimelineFragment"
+            android:id="@+id/action_pageFragment_to_historicalFigureTimelineFragment"
             app:destination="@id/historicalFigureTimelineFragment" />
     </fragment>
 </navigation>

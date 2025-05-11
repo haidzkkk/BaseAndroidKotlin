@@ -1,7 +1,6 @@
-package com.app.motel.feature.historicalFigure.menu
+package com.app.motel.feature.page
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +10,15 @@ import com.app.motel.feature.setting.TextFont
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseBottomSheet
-import com.history.vietnam.databinding.DialogCustomTextBinding
+import com.history.vietnam.databinding.DialogSettingBinding
 import javax.inject.Inject
 
-class HistoricalFigureCustomBottomFragment: AppBaseBottomSheet<DialogCustomTextBinding>() {
+class SettingBottomFragment: AppBaseBottomSheet<DialogSettingBinding>() {
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): DialogCustomTextBinding {
-         return DialogCustomTextBinding.inflate(inflater, container, false)
+    ): DialogSettingBinding {
+         return DialogSettingBinding.inflate(inflater, container, false)
     }
 
     override val isBorderRadiusTop: Boolean

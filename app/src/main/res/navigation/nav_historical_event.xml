@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_historical_event"
+    app:startDestination="@id/historicalEventTimeLineFragment">
+
+    <fragment
+        android:id="@+id/historicalEventTimeLineFragment"
+        android:name="com.app.motel.feature.historicalEvent.HistoricalEventTimeLineFragment"
+        android:label="fragment_historical_event_time_line"
+        tools:layout="@layout/fragment_historical_event_time_line" >
+        <action
+            android:id="@+id/action_historicalEventTimeLineFragment_to_pageFragment2"
+            app:destination="@id/pageFragmentEvent" />
+    </fragment>
+    <fragment
+        android:id="@+id/pageFragmentEvent"
+        android:name="com.app.motel.feature.page.PageFragment"
+        android:label="fragment_page"
+        tools:layout="@layout/fragment_page" >
+        <action
+            android:id="@+id/action_pageFragment2_to_historicalEventTimeLineFragment"
+            app:destination="@id/historicalEventTimeLineFragment" />
+    </fragment>
+</navigation>

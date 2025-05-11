@@ -53,7 +53,7 @@ class DynastyAdapter constructor(
             adapter.updateData(item.figures)
         }
 
-        binding.lySelect.setOnClickListener {
+        binding.root.setOnClickListener {
             val previous = selectedPosition
             selectedPosition = if (selectedPosition == position) -1 else position
 

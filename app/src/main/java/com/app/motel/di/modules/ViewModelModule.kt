@@ -2,7 +2,9 @@ package com.history.vietnam.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewModel
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.history.vietnam.feature.Home.HomeViewModel
 import com.history.vietnam.di.factory.AppViewModelFactory
 import dagger.Binds
@@ -20,12 +22,22 @@ interface ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    fun bindSearchViewModel(homeViewModel: HomeViewModel): ViewModel
+    fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HistoricalEventViewModel::class)
+    fun bindHistoricalEventViewModel(viewmodel: HistoricalEventViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(HistoricalFigureViewModel::class)
-    fun bindHistoricalFigureViewModel(homeViewModel: HistoricalFigureViewModel): ViewModel
+    fun bindHistoricalFigureViewModel(viewmodel: HistoricalFigureViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PageViewModel::class)
+    fun bindPageViewModel(viewmodel: PageViewModel): ViewModel
 
 }
 

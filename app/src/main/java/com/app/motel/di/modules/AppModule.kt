@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.app.motel.data.network.ApiWiki
 import com.app.motel.data.network.FirebaseManager
 import com.app.motel.data.repository.HistoricalFigureRepository
+import com.app.motel.data.repository.PageRepository
 import com.app.motel.data.repository.SettingRepository
 import com.app.motel.feature.setting.SettingController
 import com.history.vietnam.data.local.AppDatabase
@@ -74,6 +75,15 @@ object AppModule {
         api: ApiWiki,
         firebaseManager: FirebaseManager,
     ): HistoricalFigureRepository = HistoricalFigureRepository(
+        firebaseManager = firebaseManager,
+        wikiApi = api,
+    )
+
+    @Provides
+    fun providerPageRepository(
+        api: ApiWiki,
+        firebaseManager: FirebaseManager,
+    ): PageRepository = PageRepository(
         firebaseManager = firebaseManager,
         wikiApi = api,
     )

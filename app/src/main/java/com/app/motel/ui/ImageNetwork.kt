@@ -7,14 +7,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
 @SuppressLint("CheckResult")
 fun ImageView.show(
     url: String?,
-    scaleType: BitmapTransformation = FitCenter(),
+    scaleType: BitmapTransformation = CenterCrop(),
     placeholder: Int? = null,
     onLoadFailed: (() -> Unit)? = null,
     onLoadSuccess: (() -> Unit)? = null

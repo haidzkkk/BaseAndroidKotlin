@@ -1,4 +1,4 @@
-package com.app.motel.feature.historicalFigure.menu
+package com.app.motel.feature.page
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
@@ -9,33 +9,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.model.Section
-import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.app.motel.ui.show
+import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.google.android.material.divider.MaterialDivider
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseFragment
-import com.history.vietnam.databinding.FragmentHistorycalFigureHomeBinding
-import com.history.vietnam.ui.showToast
+import com.history.vietnam.databinding.FragmentPageHomeBinding
 import javax.inject.Inject
-import kotlin.random.Random
 
-class HistoricalFigureHomeFragment : AppBaseFragment<FragmentHistorycalFigureHomeBinding>() {
+class PageHomeFragment : AppBaseFragment<FragmentPageHomeBinding>() {
 
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentHistorycalFigureHomeBinding {
-        return FragmentHistorycalFigureHomeBinding.inflate(inflater, container, false)
+    ): FragmentPageHomeBinding {
+        return FragmentPageHomeBinding.inflate(inflater, container, false)
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel : HistoricalFigureViewModel by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory).get(HistoricalFigureViewModel::class.java)
+    private val viewModel : PageViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(PageViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,15 +46,14 @@ class HistoricalFigureHomeFragment : AppBaseFragment<FragmentHistorycalFigureHom
     }
 
     private fun init() {
-
     }
 
     private fun listenStateViewModel() {
-        viewModel.liveData.figure.observe(viewLifecycleOwner){
+        viewModel.liveData.pageInfo.observe(viewLifecycleOwner){
             setUpInformationView()
         }
         viewModel.liveData.figureSummary.observe(viewLifecycleOwner){
-            views.imgOriginImage.show(it?.data?.originalImage?.source)
+            views.imgOriginImage.show(it?.data?.originalImage?.source, scaleType = FitCenter())
             views.tvName.text = it?.data?.titles?.normalized
             views.tvDesc.text = it?.data?.description
 
@@ -109,7 +106,7 @@ class HistoricalFigureHomeFragment : AppBaseFragment<FragmentHistorycalFigureHom
 
     @SuppressLint("SetTextI18n")
     private fun setUpInformationView(){
-        val figure = viewModel.liveData.figure.value
+        val info = viewModel.liveData.pageInfo.value
 
         views.lyInformationList.removeAllViews()
         val textSize = viewModel.settingRepository.state.getTextSize(requireContext())
@@ -117,15 +114,7 @@ class HistoricalFigureHomeFragment : AppBaseFragment<FragmentHistorycalFigureHom
         val textColor = viewModel.settingRepository.state.getTextColor(requireContext())
         val hintTextColor = viewModel.settingRepository.state.getHintTextColor(requireContext())
 
-        val infoMap: Map<String, String?> = mapOf(
-            "Sinh" to figure?.birthYear,
-            "Mất" to figure?.deathDate,
-            "Vợ" to figure?.spouse,
-            "Tước hiệu" to figure?.title,
-            "Triều đại" to figure?.dynasty
-        )
-
-        infoMap.forEach { (key, value) ->
+        info?.info?.forEach { (key, value) ->
             val itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_info_row, views.root, false)
 
             val keyText = itemView.findViewById<TextView>(R.id.keyText)

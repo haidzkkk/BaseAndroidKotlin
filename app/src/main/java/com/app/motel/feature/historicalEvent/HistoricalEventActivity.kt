@@ -1,41 +1,39 @@
-package com.app.motel.feature.historicalFigure
+package com.app.motel.feature.historicalEvent
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
-import com.google.android.material.snackbar.Snackbar
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.app.motel.data.model.Dynasty
-import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewEvent
+import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewEvent
+import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewModel
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
-import com.app.motel.feature.page.viewmodel.PageViewEvent
-import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
+import com.history.vietnam.databinding.ActivityHistoricalEventBinding
 import com.history.vietnam.databinding.ActivityHistoricalFigureBinding
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
 
-class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding>() {
+class HistoricalEventActivity : AppBaseActivity<ActivityHistoricalEventBinding>() {
 
     companion object{
-        const val ITEM_FIGURE_KEY = "ITEM_FIGURE_KEY"
+        const val ITEM_EVENT_KEY = "ITEM_EVENT_KEY"
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel : HistoricalFigureViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(HistoricalFigureViewModel::class.java)
+    private val viewModel : HistoricalEventViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(HistoricalEventViewModel::class.java)
     }
 
-    override fun getBinding(): ActivityHistoricalFigureBinding {
-        return ActivityHistoricalFigureBinding.inflate(layoutInflater)
+    override fun getBinding(): ActivityHistoricalEventBinding {
+        return ActivityHistoricalEventBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +52,7 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
             }
         })
         findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
-            val isHomeFragment = destination.id == R.id.historicalFigureTimelineFragment
+            val isHomeFragment = destination.id == R.id.historicalEventTimeLineFragment
             supportActionBar?.setDisplayShowTitleEnabled(isHomeFragment)
         }
     }
@@ -74,17 +72,6 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
         }
     }
 
-    private fun handleBackWithAnimation() {
-        val navController = findNavController(R.id.fragment_view)
-
-        if (navController.currentDestination?.id == R.id.historicalFigureTimelineFragment) {
-            finish()
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-        } else {
-            popFragmentWithSlide(R.id.fragment_view)
-        }
-    }
-
     private fun listenStateViewModel() {
         viewModel.settingRepository.state.backgroundColor.observe(this){
             val backgroundColor = viewModel.settingRepository.state.getBackgroundColor(this)
@@ -96,19 +83,31 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
         }
     }
 
-    private fun listenEventViewModel(){
+    private fun handleBackWithAnimation() {
+        val navController = findNavController(R.id.fragment_view)
+
+        if (navController.currentDestination?.id == R.id.historicalEventTimeLineFragment) {
+            finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        } else {
+            popFragmentWithSlide(R.id.fragment_view)
+        }
+    }
+
+    private fun listenEventViewModel() {
         viewModel.observeViewEvents {
             when(it){
-                is HistoricalFigureViewEvent.SetCurrentDynasty -> {
-                    val dynasty = Dynasty.getDynasty(it.historyDynasty.fromDate)
+                is HistoricalEventViewEvent.SetCurrentEvent -> {
+                    val dynasty = Dynasty.getDynasty(it.historicalEvent.birthYear)
                     supportActionBar?.title = dynasty.first
                     supportActionBar?.subtitle = dynasty.second
                     views.toolbar.invalidate()
                 }
-                else -> {
+                else ->{
 
                 }
             }
         }
     }
+
 }

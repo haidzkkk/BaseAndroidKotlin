@@ -12,11 +12,4 @@ import com.history.vietnam.data.model.Resource
 class HistoricalFigureState: AppState {
     val historyDynasty = MutableLiveData<List<HistoryDynasty>?>()
 
-    val figure = MutableLiveData<HistoricalFigure?>()
-    val figureSummary = MutableLiveData<Resource<WikiSummary>>()
-    val figureDetail = MutableLiveData<Resource<WikiDetail>>()
-    var figureContentSections: List<Section> = arrayListOf()
-
-    var selectContent = MutableLiveData<Int>(0)
-
 }

@@ -3,17 +3,18 @@ package com.app.motel.feature.historicalFigure
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.feature.historicalFigure.adapter.DynastyAdapter
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.PageFragment
 import com.google.gson.Gson
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
@@ -52,14 +53,12 @@ class HistoricalFigureTimelineFragment: AppBaseFragment<FragmentHistoricalFigure
             adapter = DynastyAdapter(viewModel.settingRepository,
                 object : AppBaseAdapter.AppListener<HistoryDynasty>(){
                     override fun onClickItem(item: HistoryDynasty, action: AppBaseAdapter.ItemAction) {
-                        viewModel.postCurrentDynasty(item)
+
                     }
                 },
                 object : AppBaseAdapter.AppListener<HistoricalFigure>(){
                     override fun onClickItem(item: HistoricalFigure, action: AppBaseAdapter.ItemAction) {
-                        navigateFragmentWithSlide(R.id.historicalFigureFragment, Bundle().apply {
-                            putString(HistoricalFigureFragment.KEY_ITEM_FIGURE, Gson().toJson(item))
-                        })
+                        navigateFragmentWithSlide(R.id.pageFragmentFigure, PageFragment.getPageInfo(item))
                     }
                 },
             )
@@ -67,6 +66,21 @@ class HistoricalFigureTimelineFragment: AppBaseFragment<FragmentHistoricalFigure
 
         views.rcv.adapter = adapter
         viewModel.getHistoryFigure()
+
+
+        views.rcv.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                try {
+                    val items = viewModel.liveData.historyDynasty.value ?: arrayListOf()
+                    val position = (views.rcv.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: -1
+                    val item = items[position]
+                    viewModel.postCurrentDynasty(item)
+                }catch (e: Exception){
+                }
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")

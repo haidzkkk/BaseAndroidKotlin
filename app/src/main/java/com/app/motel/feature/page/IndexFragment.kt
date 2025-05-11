@@ -1,4 +1,4 @@
-package com.app.motel.feature.historicalFigure.menu
+package com.app.motel.feature.page
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,26 +9,26 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.model.Section
 import com.app.motel.feature.historicalFigure.adapter.FigureTitleAdapter
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.history.vietnam.AppApplication
 import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.core.AppBaseFragment
-import com.history.vietnam.databinding.FragmentHistorycalFigureContentBinding
+import com.history.vietnam.databinding.FragmentIndexBinding
 import javax.inject.Inject
-import kotlin.random.Random
 
-class HistoricalFigureContentFragment : AppBaseFragment<FragmentHistorycalFigureContentBinding>() {
+class IndexFragment : AppBaseFragment<FragmentIndexBinding>() {
 
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentHistorycalFigureContentBinding {
-        return FragmentHistorycalFigureContentBinding.inflate(inflater, container, false)
+    ): FragmentIndexBinding {
+        return FragmentIndexBinding.inflate(inflater, container, false)
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel : HistoricalFigureViewModel by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory).get(HistoricalFigureViewModel::class.java)
+    private val viewModel : PageViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(PageViewModel::class.java)
     }
 
     private var adapter: FigureTitleAdapter? = null
@@ -62,7 +62,7 @@ class HistoricalFigureContentFragment : AppBaseFragment<FragmentHistorycalFigure
         viewModel.liveData.figureDetail.observe(viewLifecycleOwner){
             val titles = viewModel.liveData.figureContentSections as ArrayList<Section>
 
-            viewModel.liveData.figure.value?.apply {
+            viewModel.liveData.pageInfo.value?.apply {
                 titles.add(0, Section(
                     title = this.name ?: "Giới thiệu",
                     content = "",

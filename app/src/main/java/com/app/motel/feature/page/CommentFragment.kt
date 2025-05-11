@@ -1,26 +1,23 @@
-package com.app.motel.feature.historicalFigure.menu
+package com.app.motel.feature.page
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
 import com.history.vietnam.AppApplication
-import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseFragment
-import com.history.vietnam.databinding.FragmentHistorycalFigureCommentBinding
-import com.history.vietnam.databinding.FragmentHistorycalFigureHomeBinding
+import com.history.vietnam.databinding.FragmentCommentBinding
 import javax.inject.Inject
 
-class HistoricalFigureCommentFragment : AppBaseFragment<FragmentHistorycalFigureCommentBinding>() {
+class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
 
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentHistorycalFigureCommentBinding {
-        return FragmentHistorycalFigureCommentBinding.inflate(inflater, container, false)
+    ): FragmentCommentBinding {
+        return FragmentCommentBinding.inflate(inflater, container, false)
     }
 
     @Inject

@@ -27,38 +27,6 @@ class HistoricalFigureViewModel @Inject constructor(
         }
     }
 
-    fun initFigure(figure: HistoricalFigure?){
-        liveData.figure.postValue(figure)
-
-        viewModelScope.launch {
-            val summary = try {
-                Resource.Success(historicalFigureRepository.getFigureSummary(figure?.wikiPageId ?: ""))
-            }catch (e: Exception){
-                Resource.Error(e.toString())
-            }
-            liveData.figureSummary.postValue(summary)
-
-            val pageId = summary.data?.pageId ?: -1
-            val detail = try {
-                Resource.Success(historicalFigureRepository.getFigureDetail(pageId))
-            }catch (e: Exception){
-                Resource.Error(e.toString())
-            }
-            val sectionDesc = Section.parseSections(detail.data?.query?.pages?.get(pageId.toString())?.extract ?: "")
-
-            liveData.figureDetail.postValue(detail)
-            liveData.figureContentSections = sectionDesc
-        }
-    }
-
-    fun clearFigure(){
-        liveData.figure.postValue(null)
-        liveData.figureSummary.postValue(null)
-        liveData.figureDetail.postValue(null)
-        liveData.figureContentSections = listOf()
-        liveData.selectContent.postValue(0)
-    }
-
     fun postCurrentDynasty(historyDynasty: HistoryDynasty){
         _viewEvents.post(HistoricalFigureViewEvent.SetCurrentDynasty(historyDynasty))
     }
