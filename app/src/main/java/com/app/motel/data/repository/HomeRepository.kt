@@ -1,32 +1,25 @@
-package com.app.motel.data.repository
+package com.history.vietnam.data.repository
 
-import com.app.motel.data.entity.RoomEntity
-import com.app.motel.data.local.RoomDAO
-import com.app.motel.data.model.Rooms
-import com.app.motel.data.network.ApiMock
-import kotlinx.coroutines.flow.first
+import com.app.motel.data.network.Data
+import com.app.motel.data.network.DatabasePath
+import com.app.motel.data.network.FirebaseManager
+import com.history.vietnam.data.local.RoomDAO
+import com.history.vietnam.data.model.Rooms
+import com.history.vietnam.data.model.User
+import com.history.vietnam.data.network.ApiMock
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(
     private val api: ApiMock,
-    private val roomDAO: RoomDAO
+    private val roomDAO: RoomDAO,
+    private val firebaseManager: FirebaseManager
 ) {
-    fun test() {
-        roomDAO.getAllRooms()
-        "test 123"
+
+    suspend fun pushEvent(){
+        firebaseManager.push(DatabasePath.HISTORY_EVENT.dbPath(), Data.historicalEvents())
     }
 
-    suspend fun getRoomsNetwork() : List<Rooms> = api.getMotel()
-
-    suspend fun getRoomsLocal(): List<Rooms> {
-        return roomDAO.getAllRooms().map { it.toModel() }
+    suspend fun pushFigures(){
+        firebaseManager.push(DatabasePath.HISTORY_DYNASTY.dbPath(), Data.historicalDynasties())
     }
-
-    suspend fun setRoomToLocal(rooms: List<Rooms>){
-        rooms.forEach {
-            roomDAO.insertRoom(it.toEntity())
-        }
-    }
-
-
 }

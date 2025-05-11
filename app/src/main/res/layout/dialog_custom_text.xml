@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/background2"
+    android:padding="@dimen/PADDING_SIZE_DEFAULT">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cỡ chữ"
+        android:textStyle="bold"
+        android:textColor="@color/textColor4"/>
+
+    <LinearLayout
+        android:id="@+id/numberContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+        >
+
+        <TextView
+            android:id="@+id/tv_text_size_10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="10"/>
+
+        <TextView
+            android:id="@+id/tv_text_size_11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="11"/>
+
+        <TextView
+            android:id="@+id/tv_text_size_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="12"/>
+
+        <TextView
+            android:id="@+id/tv_text_size_13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="13"/>
+
+        <TextView
+            android:id="@+id/tv_text_size_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="14"/>
+
+        <TextView
+            android:id="@+id/tv_text_size_15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="15"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Font chữ"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/PADDING_SIZE_SMALL"
+        android:textColor="@color/textColor4"/>
+
+    <LinearLayout
+        android:id="@+id/fontTextContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+        >
+
+        <TextView
+            android:id="@+id/tv_font_poppin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:fontFamily="@font/poppins"
+            android:text="Poppin"/>
+
+        <TextView
+            android:id="@+id/tv_font_arimo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:fontFamily="@font/arimos"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="Arimo"/>
+
+        <TextView
+            android:id="@+id/tv_font_times_new_romen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:fontFamily="@font/times_new_romans"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_default"
+            android:text="Times New Roman"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Màu nền"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/PADDING_SIZE_SMALL"
+        android:textColor="@color/textColor4"/>
+
+    <LinearLayout
+        android:id="@+id/backgroundContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+        >
+
+        <FrameLayout
+            android:id="@+id/tv_white_background"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:padding="1.5dp"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_border_default"
+                android:backgroundTint="@color/background1"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tv_grey_background"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:padding="1.5dp"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_border_default"
+                android:backgroundTint="#FFE7C3"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tv_black_background"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:padding="1.5dp"
+            android:layout_margin="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_border_default"
+                android:backgroundTint="@color/background_permanent_1"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.app.motel.ultis
+package com.history.vietnam.ultis
 
 import android.content.Context
 import android.graphics.Color
@@ -8,7 +8,7 @@ import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.app.motel.data.model.Resource
+import com.history.vietnam.data.model.Resource
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.Normalizer

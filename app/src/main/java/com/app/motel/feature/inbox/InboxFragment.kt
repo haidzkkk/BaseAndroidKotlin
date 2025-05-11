@@ -1,9 +1,9 @@
-package com.app.motel.feature.inbox
+package com.history.vietnam.feature.inbox
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.app.motel.core.AppBaseFragment
-import com.app.motel.databinding.FragmentInboxBinding
+import com.history.vietnam.core.AppBaseFragment
+import com.history.vietnam.databinding.FragmentInboxBinding
 
 
 class InboxFragment : AppBaseFragment<FragmentInboxBinding>() {

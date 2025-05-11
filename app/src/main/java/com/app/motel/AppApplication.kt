@@ -1,8 +1,8 @@
-package com.app.motel
+package com.history.vietnam
 
 import android.app.Application
-import com.app.motel.di.DaggerAppComponent
-import com.app.motel.di.AppComponent
+import com.history.vietnam.di.DaggerAppComponent
+import com.history.vietnam.di.AppComponent
 
 class AppApplication : Application() {
 

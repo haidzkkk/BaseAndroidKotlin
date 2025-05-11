@@ -1,4 +1,4 @@
-package com.app.motel.ultis
+package com.history.vietnam.ultis
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

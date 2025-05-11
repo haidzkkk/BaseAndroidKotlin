@@ -1,0 +1,63 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scroll_view"
+    android:overScrollMode="never"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.app.motel.feature.historicalFigure.menu.HistoricalFigureHomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_origin_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:adjustViewBounds="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trần Hưng Đạo"
+                android:textColor="@color/textColor1"
+                android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
+                android:textSize="@dimen/TEXT_SIZE_OVER_OVER_LARGE"/>
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhà chính trị, qquan sự thời thân"
+                android:textColor="@color/textColor2"
+                android:textSize="@dimen/TEXT_SIZE_DEFAULT"/>
+
+            <LinearLayout
+                android:id="@+id/ly_information_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ly_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+
+ </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

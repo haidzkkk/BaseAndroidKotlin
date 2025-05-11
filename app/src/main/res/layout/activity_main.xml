@@ -6,21 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".feature.MainActivity">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="Quản lý trọ"
-        android:background="@color/primary"
-        />
-
     <fragment
         android:id="@+id/fragment_view"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/nav_bottom"
-        android:layout_below="@+id/toolbar"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_main"/>
 
@@ -29,10 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        app:itemIconSize="30dp"
         android:background="@color/background1"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/textColor3"
+        style="@style/BottomNavNoRipple"
+        app:itemIconSize="@dimen/ICON_SIZE_DEFAULT"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
         />
 
 </RelativeLayout>

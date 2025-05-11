@@ -1,4 +1,4 @@
-package com.app.motel.di.factory
+package com.history.vietnam.di.factory
 
 import android.util.Log
 import androidx.fragment.app.Fragment

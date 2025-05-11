@@ -1,9 +1,9 @@
-package com.app.motel.data.network
+package com.history.vietnam.data.network
 
 import android.content.Context
 import android.util.Log
-import com.app.motel.ultis.AppConstants
-import com.app.motel.ultis.NetworkUtil
+import com.history.vietnam.ultis.AppConstants
+import com.history.vietnam.ultis.NetworkUtil
 import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

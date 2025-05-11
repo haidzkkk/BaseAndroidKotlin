@@ -1,4 +1,4 @@
-package com.app.motel.core
+package com.history.vietnam.core
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,11 +11,11 @@ abstract class AppBaseAdapter<T, VB : ViewBinding>(
     abstract fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): VB
     abstract fun bind(binding: VB, item: T, position: Int)
 
-    private var items: List<T> = listOf()
+    protected var items: List<T> = listOf()
 
     @Suppress("NotifyDataSetChanged")
-    open fun updateData(newItems: List<T>) {
-        items = newItems
+    open fun updateData(newItems: List<T>?) {
+        items = newItems ?: arrayListOf()
         notifyDataSetChanged()
     }
 

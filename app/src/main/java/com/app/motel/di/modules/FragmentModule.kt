@@ -1,9 +1,9 @@
-package com.app.motel.di.modules
+package com.history.vietnam.di.modules
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.app.motel.di.factory.AppFragmentFactory
-import com.app.motel.feature.Home.HomeFragment
+import com.history.vietnam.di.factory.AppFragmentFactory
+import com.history.vietnam.feature.Home.HomeFragment
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

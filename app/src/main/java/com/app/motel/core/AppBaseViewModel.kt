@@ -1,8 +1,8 @@
-package com.app.motel.core
+package com.history.vietnam.core
 
 import androidx.lifecycle.ViewModel
-import com.app.motel.ultis.DataSource
-import com.app.motel.ultis.PublishDataSource
+import com.history.vietnam.ultis.DataSource
+import com.history.vietnam.ultis.PublishDataSource
 
 abstract class AppBaseViewModel <S : AppState, VA : AppViewActions, VE : AppViewEvent>(
     val liveData: S

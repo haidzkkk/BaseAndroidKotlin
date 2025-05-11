@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/baseline_search_24"
-        android:title="@string/explore"
+        android:icon="@drawable/icon_knowledge"
+        android:title="Kiến thức"
         />
 
     <item
         android:id="@+id/nav_inbox"
-        android:icon="@drawable/baseline_chat_bubble_outline_24"
-        android:title="@string/inbox"/>
+        android:icon="@drawable/icon_practice"
+        android:title="Luyện tập"/>
 
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/baseline_person_outline_24"
-        android:title="@string/profile"/>
+        android:icon="@drawable/icon_user"
+        android:title="Người dùng"/>
 
 </menu>

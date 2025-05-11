@@ -1,6 +1,6 @@
-package com.app.motel.data.model
+package com.history.vietnam.data.model
 
-import com.app.motel.data.entity.RoomEntity
+import com.history.vietnam.data.entity.RoomEntity
 
 data class Rooms(
     val id: String,

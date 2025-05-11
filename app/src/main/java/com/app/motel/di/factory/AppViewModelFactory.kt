@@ -1,4 +1,4 @@
-package com.app.motel.di.factory
+package com.history.vietnam.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

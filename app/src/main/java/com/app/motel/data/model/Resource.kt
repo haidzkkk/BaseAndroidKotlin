@@ -1,4 +1,4 @@
-package com.app.motel.data.model
+package com.history.vietnam.data.model
 
 class Resource<out T> (val status: Status, val data: T?, var message: String?) {
     private var hasBeenHandled = false
@@ -14,7 +14,7 @@ class Resource<out T> (val status: Status, val data: T?, var message: String?) {
 
         fun <T> Success(data: T?, message: String? = null): Resource<T> = Resource<T>(Status.SUCCESS, data, message)
 
-        fun <T> Error(data: T? = null, message: String?): Resource<T> = Resource<T>(Status.ERROR, data, message)
+        fun <T> Error(message: String?, data: T? = null): Resource<T> = Resource<T>(Status.ERROR, data, message)
     }
 
     fun isInitialize() = status == Status.INITIALIZE

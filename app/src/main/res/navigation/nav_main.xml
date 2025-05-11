@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.app.motel.feature.Home.HomeFragment"
+        android:name="com.history.vietnam.feature.Home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.app.motel.feature.profile.ProfileFragment"
+        android:name="com.history.vietnam.feature.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_inbox"
-        android:name="com.app.motel.feature.inbox.InboxFragment"
+        android:name="com.history.vietnam.feature.inbox.InboxFragment"
         android:label="fragment_inbox"
         tools:layout="@layout/fragment_inbox" >
         <action

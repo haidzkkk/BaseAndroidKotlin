@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Trần Hưng Đạo"
+        android:textAlignment="textEnd"
+        android:textSize="@dimen/TEXT_SIZE_EXTRA_LARGE"
+        android:layout_marginVertical="@dimen/PADDING_SIZE_LARGE"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_LARGE"
+        android:layout_marginEnd="@dimen/PADDING_SIZE_SUPPER_EXTRA_LARGE"
+        android:layout_gravity="center">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@color/black"/>
+
+        <View
+            android:layout_centerInParent="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/background_circle"
+            android:backgroundTint="@color/primary"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

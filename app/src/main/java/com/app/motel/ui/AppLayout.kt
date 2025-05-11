@@ -1,4 +1,4 @@
-package com.app.motel.ui
+package com.history.vietnam.ui
 
 import android.app.Dialog
 import android.content.Context
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.app.motel.core.AppBaseDialog
-import com.app.motel.databinding.DialogConfirmBinding
-import com.app.motel.databinding.DialogLoadingBinding
+import com.history.vietnam.core.AppBaseDialog
+import com.history.vietnam.databinding.DialogConfirmBinding
+import com.history.vietnam.databinding.DialogLoadingBinding
 
 fun Context.showToast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()

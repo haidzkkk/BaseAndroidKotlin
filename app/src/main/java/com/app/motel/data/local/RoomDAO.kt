@@ -1,7 +1,7 @@
-package com.app.motel.data.local
+package com.history.vietnam.data.local
 
 import androidx.room.*
-import com.app.motel.data.entity.RoomEntity
+import com.history.vietnam.data.entity.RoomEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

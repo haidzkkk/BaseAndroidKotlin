@@ -1,4 +1,4 @@
-package com.app.motel.core
+package com.history.vietnam.core
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.app.motel.di.HasScreenInjector
-import com.app.motel.di.AppComponent
-import com.app.motel.di.DaggerAppComponent
+import com.history.vietnam.di.HasScreenInjector
+import com.history.vietnam.di.AppComponent
+import com.history.vietnam.di.DaggerAppComponent
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 abstract class AppBaseActivity <VB : ViewBinding> : AppCompatActivity(), HasScreenInjector

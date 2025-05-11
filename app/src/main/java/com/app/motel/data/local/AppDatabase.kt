@@ -1,4 +1,4 @@
-package com.app.motel.data.local
+package com.history.vietnam.data.local
 
 import android.content.Context
 import android.util.Log
@@ -7,9 +7,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.app.motel.data.entity.RoomEntity
-import com.app.motel.ultis.AppConstants
-import com.app.motel.ultis.StringListConverter
+import com.history.vietnam.data.entity.RoomEntity
+import com.history.vietnam.ultis.AppConstants
+import com.history.vietnam.ultis.StringListConverter
 
 @Database(entities = [RoomEntity::class], version = 1)
 @TypeConverters(StringListConverter::class)

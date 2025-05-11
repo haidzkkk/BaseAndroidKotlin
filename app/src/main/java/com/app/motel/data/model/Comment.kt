@@ -1,4 +1,4 @@
-package com.app.motel.data.model
+package com.history.vietnam.data.model
 
 data class omment(
     val idUser: String,

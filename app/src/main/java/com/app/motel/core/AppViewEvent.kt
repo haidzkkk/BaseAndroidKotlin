@@ -1,4 +1,4 @@
-package com.app.motel.core
+package com.history.vietnam.core
 
 
 interface AppViewEvent

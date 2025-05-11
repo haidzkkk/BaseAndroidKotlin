@@ -1,6 +1,7 @@
-package com.app.motel.feature.Home
+package com.history.vietnam.feature.Home
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,10 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
-import com.app.motel.AppApplication
-import com.app.motel.core.AppBaseFragment
-import com.app.motel.data.model.Resource
-import com.app.motel.databinding.FragmentHomeBinding
+import com.app.motel.data.network.FirebaseManager
+import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.history.vietnam.AppApplication
+import com.history.vietnam.core.AppBaseFragment
+import com.history.vietnam.data.model.Resource
+import com.history.vietnam.databinding.FragmentHomeBinding
+import com.history.vietnam.ultis.startActivityWithSlide
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>() {
@@ -29,32 +36,15 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
+        views.btnHistoryCharacter.setOnClickListener {
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), HistoricalFigureActivity::class.java))
+        }
+
         mViewModel.sendEventTest()
         mViewModel.handle(HomeViewAction.getMotelViewAction)
 
         mViewModel.liveData.apply {
-            this.motelsLiveData.observe(requireActivity()) {
-                when(it.status){
-                    Resource.Status.SUCCESS ->{
-                        Log.e("TAG", "frg liveData: ${it.data}", )
 
-                        val adapter = ArrayAdapter(
-                            requireContext(),
-                            R.layout.simple_list_item_1,
-                            it.data?.map { item -> item.name } ?: arrayListOf()
-                        )
-
-                        views.listView.adapter = adapter
-                        adapter.notifyDataSetChanged()
-
-                    }
-                    else -> {}
-                }
-            }
-
-            testString.observe(requireActivity()){
-                Log.e("TAG", "test viewModel: ${it}", )
-            }
         }
 
         super.onViewCreated(view, savedInstanceState)

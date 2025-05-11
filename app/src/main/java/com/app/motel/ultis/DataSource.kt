@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.app.motel.ultis
+package com.history.vietnam.ultis
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay

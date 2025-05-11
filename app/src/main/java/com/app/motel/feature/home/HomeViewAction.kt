@@ -1,6 +1,6 @@
-package com.app.motel.feature.Home
+package com.history.vietnam.feature.Home
 
-import com.app.motel.core.AppViewActions
+import com.history.vietnam.core.AppViewActions
 
 sealed class HomeViewAction : AppViewActions {
     object getMotelViewAction : HomeViewAction()

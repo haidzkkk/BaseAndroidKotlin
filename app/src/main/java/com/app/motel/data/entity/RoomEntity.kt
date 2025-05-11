@@ -1,10 +1,10 @@
-package com.app.motel.data.entity
+package com.history.vietnam.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.app.motel.data.model.Rooms
-import com.app.motel.ultis.StringListConverter
+import com.history.vietnam.data.model.Rooms
+import com.history.vietnam.ultis.StringListConverter
 
 @Entity(tableName = "room")
 data class RoomEntity(

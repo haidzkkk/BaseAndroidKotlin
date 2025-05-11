@@ -1,4 +1,4 @@
-package com.app.motel
+package com.history.vietnam
 
 import org.junit.Test
 

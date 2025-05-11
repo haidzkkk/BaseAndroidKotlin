@@ -1,6 +1,6 @@
-package com.app.motel.feature.Home
+package com.history.vietnam.feature.Home
 
-import com.app.motel.core.AppViewEvent
+import com.history.vietnam.core.AppViewEvent
 
 sealed class HomeViewEvent : AppViewEvent {
     object ReturnTestViewEvent : HomeViewEvent()

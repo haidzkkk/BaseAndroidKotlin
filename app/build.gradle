@@ -3,14 +3,15 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.app.motel'
+    namespace 'com.history.vietnam'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.app.motel"
+        applicationId "com.history.vietnam"
         minSdk 24
         targetSdk 35
         versionCode 1
@@ -40,7 +41,6 @@ android {
 
 
 dependencies {
-
 
     def daggerVersion = '2.51'
     def room_version = "2.7.0"
@@ -105,4 +105,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
 
     ksp "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+
+    implementation 'com.google.firebase:firebase-database:21.0.0'
 }

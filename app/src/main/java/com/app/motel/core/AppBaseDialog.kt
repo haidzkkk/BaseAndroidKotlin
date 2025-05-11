@@ -1,4 +1,4 @@
-package com.app.motel.core
+package com.history.vietnam.core
 
 import android.app.Activity
 import android.app.Dialog
@@ -15,7 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.viewbinding.ViewBinding
-import com.app.motel.R
+import com.history.vietnam.R
 
 class AppBaseDialog<VB: ViewBinding>(
     private val context: Context,                               // context

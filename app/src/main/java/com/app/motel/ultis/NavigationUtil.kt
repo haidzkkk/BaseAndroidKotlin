@@ -1,4 +1,4 @@
-package com.app.motel.ultis
+package com.history.vietnam.ultis
 
 import android.app.Activity
 import android.app.ActivityOptions
@@ -12,7 +12,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.app.motel.R
+import com.history.vietnam.R
 
 // navigate fragment
 fun Fragment.navigateFragmentWithSlide(fragmentId: Int, args: Bundle? = null) {

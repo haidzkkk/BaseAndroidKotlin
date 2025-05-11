@@ -1,4 +1,4 @@
-package com.app.motel.di
+package com.history.vietnam.di
 
 interface HasScreenInjector {
 

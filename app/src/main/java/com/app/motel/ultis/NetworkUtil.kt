@@ -1,4 +1,4 @@
-package com.app.motel.ultis
+package com.history.vietnam.ultis
 
 import android.annotation.SuppressLint
 import android.content.Context
