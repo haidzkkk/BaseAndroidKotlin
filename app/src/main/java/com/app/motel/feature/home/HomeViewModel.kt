@@ -33,6 +33,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
 //            repo.pushFigures()
 //            repo.pushEvent()
+//            repo.pushTerritory()
         }
     }
 }

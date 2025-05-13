@@ -7,8 +7,8 @@ import androidx.core.view.isVisible
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.feature.setting.SettingController
-import com.app.motel.ui.setCollapseAnimation
-import com.app.motel.ui.setExpandAnimation
+import com.app.motel.ui.setHeightCollapseAnimation
+import com.app.motel.ui.setHeightExpandAnimation
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.databinding.ItemDynastyBinding
@@ -59,9 +59,9 @@ class DynastyAdapter constructor(
 
             // expand collapse item with animation
             if (selectedPosition == position) {
-                binding.rcv.setCollapseAnimation()
+                binding.rcv.setHeightCollapseAnimation()
             } else {
-                binding.rcv.setExpandAnimation()
+                binding.rcv.setHeightExpandAnimation()
             }
 
             // update item

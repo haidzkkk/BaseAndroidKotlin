@@ -13,6 +13,7 @@ import com.app.motel.data.network.FirebaseManager
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity
 import com.app.motel.feature.historicalEvent.HistoricalEventTimeLineFragment
 import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
+import com.app.motel.feature.territory.TerritoryActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -38,6 +39,9 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
 
+        views.btnDainastiTerritory.setOnClickListener {
+            requireActivity().startActivityWithSlide(Intent(requireActivity(), TerritoryActivity::class.java))
+        }
         views.btnTimeLineHistoryVietnam.setOnClickListener {
             requireActivity().startActivityWithSlide(Intent(requireActivity(), HistoricalEventActivity::class.java))
         }

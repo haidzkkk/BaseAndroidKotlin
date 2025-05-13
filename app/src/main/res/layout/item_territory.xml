@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <LinearLayout
+        android:id="@+id/ly_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="@dimen/TEXT_SIZE_EXTRA_OVER_LARGE"
+            android:text="Văn lang"/>
+
+        <TextView
+            android:id="@+id/tv_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:text="Văn lang"
+            android:layout_marginBottom="@dimen/PADDING_SIZE_SMALL"/>
+
+        <ImageView
+            android:id="@+id/img_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:maxHeight="400dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_territory1"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+            android:text="Nước Văn Lang thuộc bộ tộc Lạc Việt đã hình thành trên vùng bình nguyên bao gồm đồng bằng sông Hồng, đồng bằng sông Mã và đồng bằng Sông Lam."
+            android:layout_marginVertical="@dimen/PADDING_SIZE_DEFAULT"/>
+
+    </LinearLayout>
+</LinearLayout>

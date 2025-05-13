@@ -9,7 +9,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.app.motel.data.model.HistoricalEvent
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.PageInfo
-import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
 import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.app.motel.ui.adapter.ViewPagerAdapter
 import com.google.gson.Gson
@@ -105,7 +104,7 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
 
     private fun setUpBottomNav() {
         views.navBottom.menu.clear()
-        views.navBottom.inflateMenu(R.menu.menu_bottom_figure)
+        views.navBottom.inflateMenu(R.menu.menu_page)
 
         views.navBottom.setOnItemSelectedListener { item ->
             when (item.itemId) {

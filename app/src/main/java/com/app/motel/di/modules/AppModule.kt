@@ -7,6 +7,7 @@ import com.app.motel.data.network.FirebaseManager
 import com.app.motel.data.repository.HistoricalFigureRepository
 import com.app.motel.data.repository.PageRepository
 import com.app.motel.data.repository.SettingRepository
+import com.app.motel.data.repository.TerritoryRepository
 import com.app.motel.feature.setting.SettingController
 import com.history.vietnam.data.local.AppDatabase
 import com.history.vietnam.data.local.RoomDAO
@@ -101,5 +102,12 @@ object AppModule {
         settingRepository: SettingRepository
     ): SettingController = SettingController(
         settingRepository = settingRepository
+    )
+
+    @Provides
+    fun providerTerritoryRepository(
+        firebaseManager: FirebaseManager,
+    ): TerritoryRepository = TerritoryRepository(
+        firebaseManager = firebaseManager
     )
 }

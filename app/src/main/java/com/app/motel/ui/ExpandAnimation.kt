@@ -1,11 +1,12 @@
 package com.app.motel.ui
 
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
-fun View.setExpandAnimation() {
+fun View.setHeightExpandAnimation() {
     if (visibility == View.VISIBLE) return
 
     measure(
@@ -14,7 +15,7 @@ fun View.setExpandAnimation() {
     )
     val targetHeight = measuredHeight.takeIf { it > 0 } ?: run {
         // Nếu measuredHeight = 0, đợi 1 frame để đo lại
-        post { setExpandAnimation() }
+        post { setHeightExpandAnimation() }
         return
     }
 
@@ -42,7 +43,7 @@ fun View.setExpandAnimation() {
     startAnimation(a)
 }
 
-fun View.setCollapseAnimation() {
+fun View.setHeightCollapseAnimation() {
     if (visibility != View.VISIBLE) return
 
     val initialHeight = measuredHeight
@@ -67,4 +68,57 @@ fun View.setCollapseAnimation() {
     a.duration =
         (initialHeight / context.resources.displayMetrics.density).toInt().toLong()
     startAnimation(a)
+}
+
+fun View.setWidthExpandWidthAnimation() {
+    if (visibility == View.VISIBLE) return
+
+    measure(
+        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+        View.MeasureSpec.makeMeasureSpec((parent as View).height, View.MeasureSpec.EXACTLY)
+    )
+    val targetWidth = measuredWidth.takeIf { it > 0 } ?: run {
+        post { setWidthExpandWidthAnimation() }
+        return
+    }
+
+    layoutParams.width = 1
+    visibility = View.VISIBLE
+
+    val anim = object : Animation() {
+        override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
+            layoutParams.width = if (interpolatedTime == 1f)
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            else
+                (targetWidth * interpolatedTime).toInt()
+            requestLayout()
+        }
+
+        override fun willChangeBounds(): Boolean = true
+    }
+
+    anim.duration = (targetWidth / context.resources.displayMetrics.density).toInt().toLong()
+    startAnimation(anim)
+}
+
+fun View.setWidthCollapseWidthAnimation() {
+    if (visibility != View.VISIBLE) return
+
+    val initialWidth = measuredWidth
+
+    val anim = object : Animation() {
+        override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
+            if (interpolatedTime == 1f) {
+                visibility = View.GONE
+            } else {
+                layoutParams.width = initialWidth - (initialWidth * interpolatedTime).toInt()
+                requestLayout()
+            }
+        }
+
+        override fun willChangeBounds(): Boolean = true
+    }
+
+    anim.duration = (initialWidth / context.resources.displayMetrics.density).toInt().toLong()
+    startAnimation(anim)
 }

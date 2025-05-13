@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.app.motel.data.model.HistoricalEvent
-import com.app.motel.data.model.HistoricalFigure
-import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.feature.setting.SettingController
-import com.app.motel.ui.setCollapseAnimation
-import com.app.motel.ui.setExpandAnimation
+import com.app.motel.ui.setHeightCollapseAnimation
+import com.app.motel.ui.setHeightExpandAnimation
 import com.app.motel.ui.show
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
-import com.history.vietnam.databinding.ItemDynastyBinding
 import com.history.vietnam.databinding.ItemEventBinding
 
 class EventAdapter constructor(
@@ -81,9 +78,9 @@ class EventAdapter constructor(
             selectedPosition = position
 
             if (previous != position) {
-                binding.cvImage.setCollapseAnimation()
+                binding.cvImage.setHeightCollapseAnimation()
             } else {
-                binding.cvImage.setExpandAnimation()
+                binding.cvImage.setHeightExpandAnimation()
             }
 
             if(previous == position){

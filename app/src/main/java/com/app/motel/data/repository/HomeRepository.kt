@@ -22,4 +22,7 @@ class HomeRepository @Inject constructor(
     suspend fun pushFigures(){
         firebaseManager.push(DatabasePath.HISTORY_DYNASTY.dbPath(), Data.historicalDynasties())
     }
+    suspend fun pushTerritory(){
+        firebaseManager.push(DatabasePath.HISTORY_TERRITORY.dbPath(), Data.historyTerritory())
+    }
 }

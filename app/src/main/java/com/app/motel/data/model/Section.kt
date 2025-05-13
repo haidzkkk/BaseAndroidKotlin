@@ -1,17 +1,17 @@
 package com.app.motel.data.model
 
 data class Section(
-    val level: Int,       // 2 = ==, 3 = ===, 4 = ====
-    val title: String,
-    val content: String
-){
-    val isLevel1: Boolean get() = level <= 2
-    val isLevel2: Boolean get() = level == 3
-    val isLevel3: Boolean get() = level >= 4
+    override val id: Int? = null,
+    val level: Int? = null,       // 2 = ==, 3 = ===, 4 = ====
+    val title: String? = null,
+    val content: String? = null
+): RealTimeId{
+    val isLevel1: Boolean get() = (level ?: 4) <= 2
+    val isLevel2: Boolean get() = (level ?: 4) == 3
+    val isLevel3: Boolean get() = (level ?: 4) >= 4
 
     companion object{
         fun parseSections(text: String): List<Section> {
-            // ==Tiêu đề 1==, ===Tiêu đề 2===, ====Tiêu đề 3====
             val regex = Regex("""(={2,4})([^=]+?)\1""")
 
             val result = mutableListOf<Section>()
@@ -25,7 +25,7 @@ data class Section(
                 val end = if (index + 1 < matches.size) matches[index + 1].range.first else text.length
                 val content = text.substring(start, end).trim()
 
-                result.add(Section(level, title, content))
+                result.add(Section(null, level, title, content))
             }
 
             return result

@@ -7,6 +7,7 @@ object AppConstants {
     const val FIREBASE_ACCOUNT_PATH: String = "Account"
     const val FIREBASE_HISTORY_DYNASTY_PATH: String = "HistoryDynasty"
     const val FIREBASE_HISTORY_EVENT_PATH: String = "HistoryEvent"
+    const val FIREBASE_HISTORY_TERRITORY_PATH: String = "Territory"
 
     const val SHARED_PREFERENCES_NAME: String = "SHARED_PREFERENCES_NAME"
     const val SHARED_PREFERENCES_TEXT_SIZE_KEY: String = "TEXT_SIZE"

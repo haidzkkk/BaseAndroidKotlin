@@ -3,6 +3,8 @@ package com.app.motel.data.network
 import com.app.motel.data.model.HistoricalEvent
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.HistoryDynasty
+import com.app.motel.data.model.Territory
+import com.app.motel.data.model.Section
 
 object Data {
     fun historicalDynasties(): List<HistoryDynasty> = listOf(
@@ -102,7 +104,7 @@ object Data {
         HistoricalEvent(
             id = 0,
             name = "Nền văn hóa Phùng Nguyên",
-            birthYear = "Khoảng 4000 - 1500 TCN",
+            birthYear = "4000 - 1500 TCN",
             description = "Nền văn hóa khảo cổ thời đại đồ đồng, phân bố chủ yếu ở vùng Bắc Bộ Việt Nam.",
             image = "https://xuongducdongnd.com/wp-content/uploads/2023/04/thoi-ky-vua-hung.jpg",
             wikiPageId = "Văn_hóa_Phùng_Nguyên",
@@ -111,7 +113,7 @@ object Data {
         HistoricalEvent(
             id = 1,
             name = "Nền văn hóa Đông Sơn",
-            birthYear = "Khoảng 700 TCN - thế kỷ 3 CN",
+            birthYear = "700 TCN - thế kỷ 3 CN",
             description = "Nền văn hóa kim khí phát triển rực rỡ, đặc trưng bởi trống đồng Đông Sơn.",
             image = "https://xuongducdongnd.com/wp-content/uploads/2023/04/thoi-ky-vua-hung.jpg",
             wikiPageId = "Văn_hóa_Đông_Sơn",
@@ -122,7 +124,7 @@ object Data {
             id = 2,
             name = "Truyền thuyết Hùng Vương dựng nước Văn Lang",
             dynasty = "Hồng Bàng",
-            birthYear = "Khoảng 2879 TCN",
+            birthYear = "2879 TCN",
             description = "Truyền thuyết về các vua Hùng, những người được coi là tổ tiên của dân tộc Việt.",
             image = "https://xuongducdongnd.com/wp-content/uploads/2023/04/thoi-ky-vua-hung.jpg",
             wikiPageId = "Hùng_Vương",
@@ -132,7 +134,7 @@ object Data {
             id = 3,
             name = "Nhà nước Văn Lang",
             dynasty = "Hồng Bàng",
-            birthYear = "Khoảng 2879 - 258 TCN",
+            birthYear = "2879 - 258 TCN",
             description = "Nhà nước sơ khai đầu tiên của người Việt, tồn tại qua 18 đời Hùng Vương (theo các nghiên cứu gần đây).",
             wikiPageId = "Văn_Lang",
             level = 1
@@ -648,5 +650,95 @@ object Data {
             wikiPageId = "Việt_Nam_và_WTO",
             level = 2
         )
+    )
+
+    fun historyTerritory() = arrayListOf(
+        Territory(
+            id = 0,
+            title = "Văn Lang",
+            period = "VII - III TCN",
+            description = "Nước Văn Lang của bộ tộc Lạc Việt hình thành trên vùng đồng bằng sông Hồng, sông Mã và sông Lam.",
+            image = "img_territory1",
+            timelineEntries = listOf(
+                Section(id = 0, title = "700 TCN - 650 TCN", content = "Hình thành các cộng đồng Lạc Việt ban đầu"),
+                Section(id = 1, title = "650 TCN - 550 TCN", content = "Giai đoạn củng cố các bộ lạc"),
+                Section(id = 2, title = "550 TCN - 450 TCN", content = "Phát triển các trung tâm văn hóa sơ khai"),
+                Section(id = 3, title = "450 TCN - 350 TCN", content = "Mở rộng ảnh hưởng ra các vùng lân cận"),
+                Section(id = 4, title = "350 TCN - 300 TCN", content = "Giao thương và trao đổi văn hóa"),
+                Section(id = 5, title = "300 TCN - 280 TCN", content = "Sự hình thành các liên minh bộ lạc mạnh mẽ hơn"),
+                Section(id = 6, title = "280 TCN - 260 TCN", content = "Giai đoạn cuối của nhà nước Văn Lang"),
+                Section(id = 0, title = "700 TCN - 650 TCN", content = "Hình thành các cộng đồng Lạc Việt ban đầu"),
+                Section(id = 1, title = "650 TCN - 550 TCN", content = "Giai đoạn củng cố các bộ lạc"),
+                Section(id = 2, title = "550 TCN - 450 TCN", content = "Phát triển các trung tâm văn hóa sơ khai"),
+                Section(id = 3, title = "450 TCN - 350 TCN", content = "Mở rộng ảnh hưởng ra các vùng lân cận"),
+                Section(id = 4, title = "350 TCN - 300 TCN", content = "Giao thương và trao đổi văn hóa"),
+                Section(id = 5, title = "300 TCN - 280 TCN", content = "Sự hình thành các liên minh bộ lạc mạnh mẽ hơn"),
+                Section(id = 6, title = "280 TCN - 260 TCN", content = "Giai đoạn cuối của nhà nước Văn Lang"),
+                Section(id = 0, title = "700 TCN - 650 TCN", content = "Hình thành các cộng đồng Lạc Việt ban đầu"),
+                Section(id = 1, title = "650 TCN - 550 TCN", content = "Giai đoạn củng cố các bộ lạc"),
+                Section(id = 2, title = "550 TCN - 450 TCN", content = "Phát triển các trung tâm văn hóa sơ khai"),
+                Section(id = 3, title = "450 TCN - 350 TCN", content = "Mở rộng ảnh hưởng ra các vùng lân cận"),
+                Section(id = 4, title = "350 TCN - 300 TCN", content = "Giao thương và trao đổi văn hóa"),
+                Section(id = 5, title = "300 TCN - 280 TCN", content = "Sự hình thành các liên minh bộ lạc mạnh mẽ hơn"),
+                Section(id = 6, title = "280 TCN - 260 TCN", content = "Giai đoạn cuối của nhà nước Văn Lang"),
+                Section(id = 7, title = "260 TCN - 258 TCN", content = "Suy yếu và xung đột nội bộ"),
+                Section(id = 8, title = "257 TCN - 257 TCN", content = "Sự kiện Thục Phán và kết thúc Văn Lang"),
+            )
+        ),
+        Territory(
+            id = 1,
+            title = "Âu Lạc",
+            period = "257 - 207 TCN",
+            description = "Nước Âu Lạc được Thục Phán An Dương Vương thành lập sau khi thống nhất Văn Lang, kinh đô tại Cổ Loa.",
+            image = "img_territory2",
+            timelineEntries = listOf(
+                Section(id = 0, title = "257 TCN - 240 TCN", content = "Thành lập nhà nước và xây dựng kinh đô Cổ Loa"),
+                Section(id = 1, title = "240 TCN - 230 TCN", content = "Củng cố quyền lực và mở rộng lãnh thổ"),
+                Section(id = 2, title = "230 TCN - 220 TCN", content = "Phát triển nông nghiệp và thủ công nghiệp"),
+                Section(id = 3, title = "220 TCN - 218 TCN", content = "Giao thương với các vùng lân cận và phòng thủ"),
+                Section(id = 4, title = "218 TCN - 215 TCN", content = "Những căng thẳng đầu tiên với Nam Việt"),
+                Section(id = 5, title = "215 TCN - 208 TCN", content = "Giai đoạn phòng thủ và chuẩn bị chiến tranh"),
+                Section(id = 6, title = "208 TCN - 208 TCN", content = "Cuộc xâm lược đầu tiên của Triệu Đà (bất thành)"),
+                Section(id = 7, title = "207 TCN - 207 TCN", content = "Cuộc xâm lược thứ hai và thất bại của An Dương Vương"),
+                Section(id = 8, title = "207 TCN - 207 TCN", content = "Âu Lạc bị sáp nhập vào Nam Việt"),
+                Section(id = 9, title = "207 TCN - 207 TCN", content = "Ảnh hưởng văn hóa và chính trị từ Nam Việt"),
+            )
+        ),
+        Territory(
+            id = 2,
+            title = "Việt Nam\nxâm lược và đô hộ",
+            period = "",
+            description = "Lãnh thổ Âu Lạc cũ bị sáp nhập vào nước Nam Việt của Triệu Đà, chịu sự cai trị và đồng hóa văn hóa.",
+            image = "img_territory3",
+            timelineEntries = listOf(
+                Section(id = 0, title = "207 TCN - 190 TCN", content = "Thiết lập bộ máy cai trị của Nam Việt"),
+                Section(id = 1, title = "190 TCN - 170 TCN", content = "Giai đoạn ổn định và khai thác tài nguyên"),
+                Section(id = 2, title = "170 TCN - 150 TCN", content = "Sự giao thoa văn hóa Hán - Việt"),
+                Section(id = 3, title = "150 TCN - 137 TCN", content = "Thời kỳ cai trị của Triệu Hồ"),
+                Section(id = 4, title = "137 TCN - 125 TCN", content = "Tiếp tục chính sách đồng hóa"),
+                Section(id = 5, title = "125 TCN - 115 TCN", content = "Những dấu hiệu bất ổn và kháng cự ngầm"),
+                Section(id = 6, title = "115 TCN - 112 TCN", content = "Chuẩn bị cho cuộc xâm lược của nhà Hán"),
+                Section(id = 7, title = "112 TCN - 111 TCN", content = "Chiến dịch xâm lược của nhà Hán"),
+                Section(id = 8, title = "111 TCN - 111 TCN", content = "Ảnh hưởng sâu rộng của văn hóa Hán"),
+            )
+        ),
+        Territory(
+            id = 3,
+            title = "Nhà Hán\nxâm lược và đô hộ",
+            period = "",
+            description = "Nước Văn Lang thuộc bộ tộc Lạc Việt đã hình thành trên vùng bình nguyên bao gồm đồng bằng sông Hồng, đồng bằng sông Mã và đồng bằng Sông Lam.",
+            image = "img_territory4",
+            timelineEntries = listOf(
+                Section(id = 0, title = "111 TCN - 90 TCN", content = "Thiết lập các quận và bộ máy cai trị Hán"),
+                Section(id = 1, title = "90 TCN - 50 TCN", content = "Áp đặt luật pháp và thuế khóa nặng nề"),
+                Section(id = 2, title = "50 TCN - 0", content = "Du nhập văn hóa và giáo dục Hán"),
+                Section(id = 3, title = "0 - 20", content = "Các cuộc nổi dậy nhỏ lẻ của người Việt"),
+                Section(id = 4, title = "20 - 25", content = "Ảnh hưởng của sự thay đổi triều đại nhà Hán"),
+                Section(id = 5, title = "25 - 35", content = "Củng cố lại ách đô hộ dưới thời Đông Hán"),
+                Section(id = 6, title = "35 - 40", content = "Tăng cường áp bức, dẫn đến mâu thuẫn sâu sắc"),
+                Section(id = 7, title = "Năm 40 - 43", content = "Khởi nghĩa Hai Bà Trưng và thời kỳ tự chủ ngắn ngủi"),
+                Section(id = 8, title = "Năm 43 - 43", content = "Tái thiết lập ách đô hộ của nhà Hán"),
+            )
+        ),
     )
 }

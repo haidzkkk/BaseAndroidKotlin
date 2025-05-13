@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.model.Section
-import com.app.motel.feature.historicalFigure.adapter.FigureTitleAdapter
-import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
 import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.history.vietnam.AppApplication
 import com.history.vietnam.core.AppBaseAdapter
@@ -31,7 +29,7 @@ class IndexFragment : AppBaseFragment<FragmentIndexBinding>() {
         ViewModelProvider(requireActivity(), viewModelFactory).get(PageViewModel::class.java)
     }
 
-    private var adapter: FigureTitleAdapter? = null
+    private var adapter: PageIndexAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
@@ -45,11 +43,11 @@ class IndexFragment : AppBaseFragment<FragmentIndexBinding>() {
 
     private fun init() {
         if(adapter == null){
-            adapter = FigureTitleAdapter(viewModel.settingRepository, object : AppBaseAdapter.AppListener<Int>(){
+            adapter = PageIndexAdapter(object : AppBaseAdapter.AppListener<Int>(){
                 override fun onClickItem(item: Int, action: AppBaseAdapter.ItemAction) {
                     viewModel.liveData.selectContent.postValue(item)
                 }
-            })
+            }, viewModel.settingRepository, )
         }
         views.rcv.adapter = adapter
     }

@@ -113,7 +113,8 @@ class FirebaseManager {
 enum class DatabasePath(private val base: String) {
     ACCOUNT(AppConstants.FIREBASE_ACCOUNT_PATH),
     HISTORY_DYNASTY(AppConstants.FIREBASE_HISTORY_DYNASTY_PATH),
-    HISTORY_EVENT(AppConstants.FIREBASE_HISTORY_EVENT_PATH);
+    HISTORY_EVENT(AppConstants.FIREBASE_HISTORY_EVENT_PATH),
+    HISTORY_TERRITORY(AppConstants.FIREBASE_HISTORY_TERRITORY_PATH);
 
     fun dbPath(id: String): DbPath {
         return DbPath("$base/$id")

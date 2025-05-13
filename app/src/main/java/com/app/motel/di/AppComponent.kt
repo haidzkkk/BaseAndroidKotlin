@@ -12,6 +12,10 @@ import com.app.motel.feature.page.CommentFragment
 import com.app.motel.feature.page.IndexFragment
 import com.app.motel.feature.page.SettingBottomFragment
 import com.app.motel.feature.page.PageHomeFragment
+import com.app.motel.feature.territory.TerritoryActivity
+import com.app.motel.feature.territory.TerritoryCommentFragment
+import com.app.motel.feature.territory.TerritoryContentFragment
+import com.app.motel.feature.territory.TerritoryHomeFragment
 import com.history.vietnam.AppApplication
 import com.history.vietnam.di.modules.FragmentModule
 import com.history.vietnam.di.modules.AppModule
@@ -35,6 +39,7 @@ interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: HistoricalFigureActivity)
     fun inject(activity: HistoricalEventActivity)
+    fun inject(activity: TerritoryActivity)
 
     fun inject(fragment: HomeFragment)
     fun inject(fragment: PageFragment)
@@ -44,6 +49,9 @@ interface AppComponent {
     fun inject(fragment: IndexFragment)
     fun inject(fragment: SettingBottomFragment)
     fun inject(fragment: HistoricalEventTimeLineFragment)
+    fun inject(fragment: TerritoryHomeFragment)
+    fun inject(fragment: TerritoryCommentFragment)
+    fun inject(fragment: TerritoryContentFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

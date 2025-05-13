@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewModel
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
 import com.app.motel.feature.page.viewmodel.PageViewModel
+import com.app.motel.feature.territory.viewmodel.TerritoryViewModel
 import com.history.vietnam.feature.Home.HomeViewModel
 import com.history.vietnam.di.factory.AppViewModelFactory
 import dagger.Binds
@@ -38,6 +39,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(PageViewModel::class)
     fun bindPageViewModel(viewmodel: PageViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TerritoryViewModel::class)
+    fun bindTerritoryViewModel(viewmodel: TerritoryViewModel): ViewModel
 
 }
 

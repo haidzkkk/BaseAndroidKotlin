@@ -96,6 +96,14 @@
         <item name="titleCentered">true</item>
         <item name="subtitleCentered">true</item>
     </style>
+    <style name="ToolbarTitleStyle2" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/TEXT_SIZE_LARGE</item>
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:subtitleTextColor">@color/textColor2</item>
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+    </style>
     <!-- Base application theme. -->
     <style name="Base.Theme.Motel" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
