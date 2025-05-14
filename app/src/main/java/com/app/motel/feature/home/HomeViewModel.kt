@@ -30,10 +30,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun setupData() {
-        viewModelScope.launch {
+//        viewModelScope.launch {
 //            repo.pushFigures()
 //            repo.pushEvent()
 //            repo.pushTerritory()
-        }
+//        }
     }
 }

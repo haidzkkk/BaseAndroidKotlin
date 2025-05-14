@@ -2,6 +2,7 @@ package com.history.vietnam.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewModel
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
 import com.app.motel.feature.page.viewmodel.PageViewModel
@@ -44,6 +45,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(TerritoryViewModel::class)
     fun bindTerritoryViewModel(viewmodel: TerritoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AuthViewModel::class)
+    fun bindAuthViewModel(viewmodel: AuthViewModel): ViewModel
 
 }
 

@@ -48,7 +48,10 @@ abstract class AppBaseAdapter<T, VB : ViewBinding>(
         DELETE,
         SHARE,
         DOWNLOAD,
-        CUSTOM
+        CUSTOM,
+        ACTION1,
+        ACTION2,
+        ACTION3,
     }
 
 }

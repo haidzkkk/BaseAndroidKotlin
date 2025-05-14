@@ -1,14 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+        android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_welcome"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/TEXT_SIZE_OVER_LARGE"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:layout_width="@dimen/ICON_SIZE_LARGE"
+                android:layout_height="@dimen/ICON_SIZE_LARGE"
+                android:src="@drawable/icon_notification"
+                android:tint="@color/icon1"
+                tools:ignore="UseAppTint" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/PADDING_SIZE_DEFAULT"
+            app:cardCornerRadius="1000dp"
+            android:elevation="0dp"
+            android:background="@drawable/background_circle"
+            android:backgroundTint="@color/background2">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_user"
+                android:tint="@color/primary"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                tools:ignore="UseAppTint" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cá nhân"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/item_info"
+            layout="@layout/item_feature"/>
+
+        <include
+            android:id="@+id/item_saved"
+            layout="@layout/item_feature"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chính sách"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/item_policy"
+            layout="@layout/item_feature"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cộng đồng"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/item_community"
+            layout="@layout/item_feature"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cài đặt"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/item_setting"
+            layout="@layout/item_feature"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/item_logout"
+            layout="@layout/item_feature"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

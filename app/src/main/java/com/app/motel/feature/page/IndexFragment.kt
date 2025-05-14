@@ -47,7 +47,7 @@ class IndexFragment : AppBaseFragment<FragmentIndexBinding>() {
                 override fun onClickItem(item: Int, action: AppBaseAdapter.ItemAction) {
                     viewModel.liveData.selectContent.postValue(item)
                 }
-            }, viewModel.settingRepository, )
+            }, viewModel.settingController, )
         }
         views.rcv.adapter = adapter
     }
@@ -58,7 +58,7 @@ class IndexFragment : AppBaseFragment<FragmentIndexBinding>() {
             adapter?.setCurrentPosition(it)
         }
         viewModel.liveData.figureDetail.observe(viewLifecycleOwner){
-            val titles = viewModel.liveData.figureContentSections as ArrayList<Section>
+            val titles = ArrayList(viewModel.liveData.figureContentSections)
 
             viewModel.liveData.pageInfo.value?.apply {
                 titles.add(0, Section(
@@ -69,10 +69,10 @@ class IndexFragment : AppBaseFragment<FragmentIndexBinding>() {
             }
             adapter?.updateData(titles)
         }
-        viewModel.settingRepository.state.textFont.observe(viewLifecycleOwner){
+        viewModel.settingController.state.textFont.observe(viewLifecycleOwner){
             adapter?.notifyDataSetChanged()
         }
-        viewModel.settingRepository.state.backgroundColor.observe(viewLifecycleOwner){
+        viewModel.settingController.state.backgroundColor.observe(viewLifecycleOwner){
             adapter?.notifyDataSetChanged()
         }
     }

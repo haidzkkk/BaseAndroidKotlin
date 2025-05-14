@@ -33,6 +33,7 @@ class DynastyAdapter constructor(
 
     private val adapter = FigureAdapter(settingController, listenerFigure)
     private var selectedPosition = 0
+    val getCurrentDynasty: HistoryDynasty? get() = if(selectedPosition >= 0 && selectedPosition < items.size) items[selectedPosition] else null
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun bind(binding: ItemDynastyBinding, item: HistoryDynasty, position: Int) {

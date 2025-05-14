@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/TEXT_SIZE_OVER_LARGE"
                 android:textStyle="bold"
-                android:text="Hôm nay bạn muốn tìm hiểu gì, XXX?"
+                android:text="Chào mừng đến với sử sách!"
                 tools:ignore="HardcodedText" />
 
             <ImageView

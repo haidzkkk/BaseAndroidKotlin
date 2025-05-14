@@ -58,7 +58,7 @@ class HistoricalFigureTimelineFragment: AppBaseFragment<FragmentHistoricalFigure
                 },
                 object : AppBaseAdapter.AppListener<HistoricalFigure>(){
                     override fun onClickItem(item: HistoricalFigure, action: AppBaseAdapter.ItemAction) {
-                        navigateFragmentWithSlide(R.id.pageFragmentFigure, PageFragment.getPageInfo(item))
+                        navigateFragmentWithSlide(R.id.pageFragmentFigure, PageFragment.getPageInfo(item, adapter?.getCurrentDynasty?.id))
                     }
                 },
             )

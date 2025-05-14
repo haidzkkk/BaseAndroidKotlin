@@ -78,23 +78,23 @@ class PageHomeFragment : AppBaseFragment<FragmentPageHomeBinding>() {
         }
 
         // custom text
-        viewModel.settingRepository.state.textSize.observe(viewLifecycleOwner){
+        viewModel.settingController.state.textSize.observe(viewLifecycleOwner){
             views.tvDesc.textSize = it.toFloat()
 
             setUpInformationView()
             setupContentWiki()
         }
 
-        viewModel.settingRepository.state.textFont.observe(viewLifecycleOwner){
-            val fontTypeface = viewModel.settingRepository.state.getTextFont(requireContext())
+        viewModel.settingController.state.textFont.observe(viewLifecycleOwner){
+            val fontTypeface = viewModel.settingController.state.getTextFont(requireContext())
             views.tvDesc.typeface  = fontTypeface
 
             setUpInformationView()
             setupContentWiki()
         }
-        viewModel.settingRepository.state.backgroundColor.observe(viewLifecycleOwner){
-            val textColor = viewModel.settingRepository.state.getTextColor(requireContext())
-            val hintTextColor = viewModel.settingRepository.state.getHintTextColor(requireContext())
+        viewModel.settingController.state.backgroundColor.observe(viewLifecycleOwner){
+            val textColor = viewModel.settingController.state.getTextColor(requireContext())
+            val hintTextColor = viewModel.settingController.state.getHintTextColor(requireContext())
 
             views.tvName.setTextColor(textColor)
             views.tvDesc.setTextColor(hintTextColor)
@@ -109,10 +109,10 @@ class PageHomeFragment : AppBaseFragment<FragmentPageHomeBinding>() {
         val info = viewModel.liveData.pageInfo.value
 
         views.lyInformationList.removeAllViews()
-        val textSize = viewModel.settingRepository.state.getTextSize(requireContext())
-        val fontTypeface = viewModel.settingRepository.state.getTextFont(requireContext())
-        val textColor = viewModel.settingRepository.state.getTextColor(requireContext())
-        val hintTextColor = viewModel.settingRepository.state.getHintTextColor(requireContext())
+        val textSize = viewModel.settingController.state.getTextSize(requireContext())
+        val fontTypeface = viewModel.settingController.state.getTextFont(requireContext())
+        val textColor = viewModel.settingController.state.getTextColor(requireContext())
+        val hintTextColor = viewModel.settingController.state.getHintTextColor(requireContext())
 
         info?.info?.forEach { (key, value) ->
             val itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_info_row, views.root, false)
@@ -148,9 +148,10 @@ class PageHomeFragment : AppBaseFragment<FragmentPageHomeBinding>() {
 
         views.lyContent.removeAllViews()
         sectionTextViewList.clear()
-        val currentTextSize = viewModel.settingRepository.state.getTextSize(requireContext())
-        val fontTypeface = viewModel.settingRepository.state.getTextFont(requireContext())
-        val textColor = viewModel.settingRepository.state.getTextColor(requireContext())
+        val currentTextSize = viewModel.settingController.state.getTextSize(requireContext())
+        val fontTypeface = viewModel.settingController.state.getTextFont(requireContext())
+        val fontTypefaceBold = Typeface.create(fontTypeface, Typeface.BOLD)
+        val textColor = viewModel.settingController.state.getTextColor(requireContext())
 
         sections.forEachIndexed { index, section ->
 
@@ -170,14 +171,14 @@ class PageHomeFragment : AppBaseFragment<FragmentPageHomeBinding>() {
                         textSize = 18f
                         setTypeface(null, Typeface.BOLD)
                         setTextColor(textColor)
-                        typeface = fontTypeface
+                        typeface = fontTypefaceBold
                         setPadding(16, 8, 16, 8)
                     }
                     section.isLevel3 -> {
                         setTypeface(null, Typeface.BOLD)
                         textSize = 15f
                         setTextColor(textColor)
-                        typeface = fontTypeface
+                        typeface = fontTypefaceBold
                         setPadding(16, 8, 16, 8)
                     }
                 }

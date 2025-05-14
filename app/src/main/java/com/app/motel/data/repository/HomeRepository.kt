@@ -1,12 +1,10 @@
 package com.history.vietnam.data.repository
 
-import com.app.motel.data.network.Data
-import com.app.motel.data.network.DatabasePath
+import com.app.motel.data.network.DataSources
 import com.app.motel.data.network.FirebaseManager
 import com.history.vietnam.data.local.RoomDAO
-import com.history.vietnam.data.model.Rooms
-import com.history.vietnam.data.model.User
 import com.history.vietnam.data.network.ApiMock
+import com.history.vietnam.ultis.AppConstants
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(
@@ -16,13 +14,13 @@ class HomeRepository @Inject constructor(
 ) {
 
     suspend fun pushEvent(){
-        firebaseManager.push(DatabasePath.HISTORY_EVENT.dbPath(), Data.historicalEvents())
+        firebaseManager.push(AppConstants.FIREBASE_HISTORY_EVENT_PATH, DataSources.historicalEvents())
     }
 
     suspend fun pushFigures(){
-        firebaseManager.push(DatabasePath.HISTORY_DYNASTY.dbPath(), Data.historicalDynasties())
+        firebaseManager.push(AppConstants.FIREBASE_HISTORY_DYNASTY_PATH, DataSources.historicalDynasties())
     }
     suspend fun pushTerritory(){
-        firebaseManager.push(DatabasePath.HISTORY_TERRITORY.dbPath(), Data.historyTerritory())
+        firebaseManager.push(AppConstants.FIREBASE_HISTORY_TERRITORY_PATH, DataSources.historyTerritory())
     }
 }

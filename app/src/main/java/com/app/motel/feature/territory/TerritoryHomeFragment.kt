@@ -84,8 +84,9 @@ class TerritoryHomeFragment : AppBaseFragment<FragmentTerritoryHomeBinding>() {
         viewModel.liveData.selectContent.observe(viewLifecycleOwner){
             val position = viewModel.findTerritoryIndexFromFlatPosition(it ?: 0)
             if(position == -1) return@observe
-
-            views.rcv.scrollToPosition(position)
+            views.rcv.post {
+                views.rcv.smoothScrollToPosition(position)
+            }
         }
     }
 

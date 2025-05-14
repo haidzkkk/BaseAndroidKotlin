@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.MainActivity">
+    tools:context="com.app.motel.feature.home.MainActivity">
 
     <fragment
         android:id="@+id/fragment_view"
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/background1"
+        android:background="@color/background2"
         style="@style/BottomNavNoRipple"
         app:itemIconSize="@dimen/ICON_SIZE_DEFAULT"
         app:labelVisibilityMode="labeled"

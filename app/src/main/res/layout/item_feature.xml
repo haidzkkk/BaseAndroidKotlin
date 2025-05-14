@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="@dimen/PADDING_SIZE_SMALL">
+
+    <ImageView
+        android:id="@+id/start_icon"
+        android:layout_width="@dimen/ICON_SIZE_DEFAULT"
+        android:layout_height="@dimen/ICON_SIZE_DEFAULT"
+        android:src="@drawable/icon_instagram"/>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
+        android:textSize="@dimen/TEXT_SIZE_LARGE"
+        android:textStyle="bold"
+        android:textColor="@color/textColor1"
+        android:text="Cộng đồng"/>
+
+    <ImageView
+        android:id="@+id/end_icon"
+        android:layout_width="@dimen/ICON_SIZE_SMALL"
+        android:layout_height="@dimen/ICON_SIZE_SMALL"
+        android:src="@drawable/icon_right"/>
+
+</LinearLayout>

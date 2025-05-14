@@ -49,7 +49,6 @@ class EventAdapter constructor(
             binding.image.show(item.image,
                 scaleType = CenterCrop(),
                 onLoadFailed = {
-                    listener.onClickItem(items[selectedPosition])
                     binding.cvImage.isVisible = false
                 })
         }

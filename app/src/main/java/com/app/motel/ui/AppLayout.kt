@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.history.vietnam.core.AppBaseDialog
@@ -46,25 +47,38 @@ fun Context.showDialogConfirm(
     }
 }
 
-fun showLoadingDialog(context: Context, layoutInflater: android.view.LayoutInflater, content: String? = null, isCancelable: Boolean = false): Dialog {
+fun showLoadingDialog(
+    context: Context,
+    layoutInflater: LayoutInflater,
+    content: String? = null,
+    isCancelable: Boolean = false
+): Dialog {
     val dialog = AppBaseDialog.Builder(context, DialogLoadingBinding.inflate(layoutInflater))
-        .isWidthMatchParent(false)
+        .isWidthMatchParent(true)
         .build()
+
     dialog.show()
     dialog.setCancelable(isCancelable)
 
+    dialog.window?.setLayout(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.MATCH_PARENT
+    )
+    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
+
     val paramsProcessIndicator = dialog.binding.processIndicator.layoutParams as ViewGroup.MarginLayoutParams
     val paramsTvContent = dialog.binding.tvContent.layoutParams as ViewGroup.MarginLayoutParams
-    if(content != null){
-        dialog.binding.tvContent.text = content
-        paramsProcessIndicator.setMargins(300, 300, 300, 150)
-        paramsTvContent.setMargins(0, 0, 0, 150)
 
-    }else{
+    if (content != null) {
+        dialog.binding.tvContent.text = content
+        paramsTvContent.setMargins(0, 150, 0, 0)
+    } else {
         dialog.binding.tvContent.isVisible = false
-        paramsProcessIndicator.setMargins(300, 300, 300, 300)
         paramsTvContent.setMargins(0, 0, 0, 0)
     }
+
     dialog.binding.processIndicator.layoutParams = paramsProcessIndicator
     dialog.binding.tvContent.layoutParams = paramsTvContent
 

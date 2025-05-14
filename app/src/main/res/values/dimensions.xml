@@ -23,6 +23,8 @@
 
     <dimen name="ICON_SIZE_EXTRA_SMALL">10dp</dimen>
     <dimen name="ICON_SIZE_SMALL">15dp</dimen>
+    <dimen name="ICON_SIZE_OVER_SMALL">20dp</dimen>
     <dimen name="ICON_SIZE_DEFAULT">25dp</dimen>
+    <dimen name="ICON_SIZE_UNDER_LARGE">35dp</dimen>
     <dimen name="ICON_SIZE_LARGE">35dp</dimen>
 </resources>

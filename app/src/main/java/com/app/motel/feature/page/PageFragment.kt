@@ -16,6 +16,7 @@ import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.databinding.FragmentPageBinding
+import com.history.vietnam.ultis.AppConstants
 import javax.inject.Inject
 
 class PageFragment : AppBaseFragment<FragmentPageBinding>() {
@@ -23,12 +24,12 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
     companion object{
         const val KEY_ITEM = "KEY_ITEM"
 
-        fun getPageInfo(figure: HistoricalFigure): Bundle {
+        fun getPageInfo(figure: HistoricalFigure, dynastyId: String? = null): Bundle {
             val pageInfo = PageInfo(
                 name = figure.name,
                 wikiPageId = figure.wikiPageId,
-                firebaseId = figure.id?.toString(),
-                firebasePath = "sadsadsad/đá/${figure.id}",
+                firebaseId = figure.id,
+                firebasePath = "${AppConstants.FIREBASE_HISTORY_DYNASTY_PATH}/${dynastyId}/${AppConstants.FIREBASE_HISTORY_DYNASTY_FIGURE_NODE}/${figure.id}",
                 info = mapOf(
                     "Sinh" to (figure.birthYear ?: ""),
                     "Mất" to (figure.deathDate ?: ""),
@@ -47,8 +48,8 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
             val pageInfo = PageInfo(
                 name = event.name,
                 wikiPageId = event.wikiPageId,
-                firebaseId = event.id?.toString(),
-                firebasePath = "sadsadsad/đá/${event.id}",
+                firebaseId = event.id,
+                firebasePath = "${AppConstants.FIREBASE_HISTORY_EVENT_PATH}/${event.id}",
                 info = mapOf(
                     "Thời gian" to (event.birthYear ?: ""),
                     "Triều đại" to (event.dynasty ?: ""),
@@ -130,9 +131,9 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
             views.viewPager.setCurrentItem(0, true)
         }
 
-        viewModel.settingRepository.state.backgroundColor.observe(viewLifecycleOwner){
-            val backgroundColor = viewModel.settingRepository.state.getBackgroundColor(requireContext())
-            val isDarkMode = viewModel.settingRepository.state.isDarkMode
+        viewModel.settingController.state.backgroundColor.observe(viewLifecycleOwner){
+            val backgroundColor = viewModel.settingController.state.getBackgroundColor(requireContext())
+            val isDarkMode = viewModel.settingController.state.isDarkMode
 
             views.navBottom.setBackgroundColor(backgroundColor)
             if(isDarkMode){

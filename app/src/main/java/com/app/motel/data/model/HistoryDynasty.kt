@@ -1,7 +1,7 @@
 package com.app.motel.data.model
 
 data class HistoryDynasty(
-    override val id: Int? = null,
+    override val id: String? = null,
     val name: String? = null,
     val fromDate: String? = null,
     val toDate: String? = null,

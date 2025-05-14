@@ -1,7 +1,7 @@
 package com.app.motel.data.model
 
 data class HistoricalFigure(
-    override val id: Int? = null,
+    override val id: String? = null,
     val name: String? = null,
     val birthYear: String? = null,      // sinh: "1228"
     val deathDate: String? = null,      // mất: "3-10-1300"

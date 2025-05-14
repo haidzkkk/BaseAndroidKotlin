@@ -1,7 +1,7 @@
 package com.app.motel.data.model
 
 data class Section(
-    override val id: Int? = null,
+    override val id: String? = null,
     val level: Int? = null,       // 2 = ==, 3 = ===, 4 = ====
     val title: String? = null,
     val content: String? = null

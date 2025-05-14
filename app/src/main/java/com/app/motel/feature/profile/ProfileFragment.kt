@@ -1,60 +1,109 @@
 package com.history.vietnam.feature.profile
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import com.app.motel.feature.auth.AuthActivity
+import com.app.motel.feature.auth.viewmodel.AuthViewModel
+import com.app.motel.feature.profile.UserController
+import com.history.vietnam.AppApplication
 import com.history.vietnam.R
+import com.history.vietnam.core.AppBaseFragment
+import com.history.vietnam.databinding.FragmentLoginBinding
+import com.history.vietnam.databinding.FragmentProfileBinding
+import com.history.vietnam.ui.showDialogConfirm
+import com.history.vietnam.ultis.navigateFragmentWithSlide
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ProfileFragment : AppBaseFragment<FragmentProfileBinding>() {
+    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentProfileBinding {
+        return FragmentProfileBinding.inflate(inflater, container, false)
+    }
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    @Inject
+    lateinit var userController: UserController
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (requireActivity().application as AppApplication).appComponent.inject(this)
+        super.onViewCreated(view, savedInstanceState)
+
+        init()
+        listenStateViewModel()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun init(){
+        views.itemInfo.apply {
+            startIcon.setImageResource(R.drawable.icon_info)
+            label.text = "Thông tin tài khoản"
+            root.setOnClickListener {
+                navigateFragmentWithSlide(R.id.informationFragment)
+            }
+        }
+        views.itemSaved.apply {
+            startIcon.setImageResource(R.drawable.icon_save)
+            label.text = "Đã lưu"
+            root.setOnClickListener {
+
+            }
+        }
+        views.itemPolicy.apply {
+            startIcon.setImageResource(R.drawable.icon_lock)
+            label.text = "Chính sách và điều khoản"
+            root.setOnClickListener {
+
+            }
+        }
+        views.itemCommunity.apply {
+            startIcon.setImageResource(R.drawable.icon_instagram)
+            label.text = "Instagram"
+            root.setOnClickListener {
+
+            }
+        }
+        views.itemSetting.apply {
+            startIcon.setImageResource(R.drawable.icon_setting)
+            label.text = "Cài đặt"
+            root.setOnClickListener {
+
+            }
+        }
+        views.itemLogout.apply {
+            startIcon.setImageResource(R.drawable.icon_logout)
+            label.text = "Đăng xuất tài khoản"
+            root.setOnClickListener {
+                if(userController.state.currentUser.value?.data == null){
+                    userController.logout()
+                    requireActivity().startActivity(Intent(requireActivity(), AuthActivity::class.java))
+                    return@setOnClickListener
+                }
+                requireActivity().showDialogConfirm(
+                    title = "Đăng xuất",
+                    content = "Bạn có chắc muốn đăng xuất tài khoản này?",
+                    buttonConfirm = "Đăng xuất",
+                    buttonCancel = "Hủy",
+                    confirm = {
+                        userController.logout()
+                        requireActivity().startActivity(Intent(requireActivity(), AuthActivity::class.java))
+                    },
+                )
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun listenStateViewModel(){
+        userController.state.currentUser.observe(viewLifecycleOwner){
+            views.itemInfo.root.isVisible = it.data != null
+            views.itemLogout.label.text = if(it.data != null) "Đăng xuất tài khoản" else "Đăng nhập"
+            views.tvWelcome.text = it.data.let { user ->
+                "Xin chào${if(user != null) ", ${user.getUserName}" else ""}"
             }
+        }
     }
 }

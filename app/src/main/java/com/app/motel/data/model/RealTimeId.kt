@@ -1,5 +1,5 @@
 package com.app.motel.data.model
 
 interface RealTimeId {
-    val id: Int?
+    val id: String?
 }

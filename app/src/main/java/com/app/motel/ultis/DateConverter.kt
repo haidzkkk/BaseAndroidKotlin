@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
 
@@ -134,4 +135,37 @@ object DateConverter {
         val date = this
         return Calendar.getInstance().apply {time = date}
     }
+
+    fun getTimeAgo(timeString: String?): String {
+        try {
+            if(timeString.isNullOrEmpty()) return "Không rõ"
+
+            val format = SimpleDateFormat(PATTERN_DATE_FORMAT, Locale.getDefault())
+            format.timeZone = TimeZone.getDefault()
+            val time = format.parse(timeString) ?: return "Không rõ"
+            val now = Date()
+
+            val diff = now.time - time.time
+            val seconds = diff / 1000
+            val minutes = seconds / 60
+            val hours = minutes / 60
+            val days = hours / 24
+            val weeks = days / 7
+            val months = days / 30
+            val years = days / 365
+
+            return when {
+                seconds < 60 -> "vừa xong"
+                minutes < 60 -> "$minutes phút"
+                hours < 24 -> "$hours giờ"
+                days < 7 -> "$days ngày"
+                weeks < 4 -> "$weeks tuần"
+                months < 12 -> "$months tháng"
+                else -> "$years năm"
+            }
+        } catch (e: Exception) {
+            return "Lỗi định dạng thời gian"
+        }
+    }
+
 }

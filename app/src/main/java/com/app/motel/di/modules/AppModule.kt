@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import com.app.motel.data.network.ApiWiki
 import com.app.motel.data.network.FirebaseManager
+import com.app.motel.data.repository.AuthRepository
 import com.app.motel.data.repository.HistoricalFigureRepository
 import com.app.motel.data.repository.PageRepository
+import com.app.motel.data.repository.UserRepository
 import com.app.motel.data.repository.SettingRepository
 import com.app.motel.data.repository.TerritoryRepository
+import com.app.motel.feature.profile.UserController
 import com.app.motel.feature.setting.SettingController
 import com.history.vietnam.data.local.AppDatabase
 import com.history.vietnam.data.local.RoomDAO
@@ -110,4 +113,32 @@ object AppModule {
     ): TerritoryRepository = TerritoryRepository(
         firebaseManager = firebaseManager
     )
+
+    @Provides
+    fun providerAuthRepository(
+        firebaseManager: FirebaseManager,
+    ): AuthRepository = AuthRepository(
+        firebaseManager = firebaseManager
+    )
+
+    @Provides
+    fun providerProfileRepository(
+        context: Context,
+        firebaseManager: FirebaseManager,
+    ): UserRepository = UserRepository(
+        prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE),
+        firebaseManager = firebaseManager
+    )
+
+    @Provides
+    @Singleton
+    fun provideProfileController(
+        repository: UserRepository,
+        firebaseManager: FirebaseManager,
+    ): UserController {
+        return UserController(
+            firebaseManager = firebaseManager,
+            repo = repository,
+        )
+    }
 }

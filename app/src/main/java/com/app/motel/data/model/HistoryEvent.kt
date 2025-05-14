@@ -1,10 +1,11 @@
 package com.app.motel.data.model
 
+import com.history.vietnam.data.model.Comment
 import java.util.Locale
 import kotlin.random.Random
 
 data class HistoricalEvent(
-    override val id: Int? = null,
+    override val id: String? = null,
     val name: String? = null,
     val birthYear: String? = null,
     val title: String? = null,
@@ -14,6 +15,7 @@ data class HistoricalEvent(
     val wikiPageId: String? = null,
     val level: Int? = 2,
 ) : RealTimeId{
+
     val getLevel get() = Level.fromValue(level)
     enum class Level(val value: Int){
         IMPORTANT(1),

@@ -1,0 +1,156 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.app.motel.feature.auth.LoginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/PADDING_SIZE_LARGE"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/PADDING_SIZE_SUPPER_EXTRA_LARGE"
+            app:cardCornerRadius="1000dp"
+            android:elevation="0dp"
+            android:background="@drawable/background_circle"
+            android:backgroundTint="@color/background2">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_user"
+                android:tint="@color/primary"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+                tools:ignore="UseAppTint" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Tài khoản"
+            app:boxStrokeColor="#000000"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Mật khẩu"
+            app:boxStrokeColor="#000000"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_marginHorizontal="@dimen/PADDING_SIZE_SUPPER_EXTRA_LARGE"
+            android:text="Đăng nhập"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:elevation="0dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:stateListAnimator="@null"
+            android:backgroundTint="@color/background2"
+            android:background="@drawable/background_border_radius_2"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
+            android:layout_marginHorizontal="@dimen/PADDING_SIZE_SUPPER_EXTRA_LARGE"
+            android:text="Đăng ký"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:elevation="0dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:stateListAnimator="@null"
+            android:backgroundTint="@color/background2"
+            android:background="@drawable/background_border_radius_2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoặc"
+            android:textStyle="bold"
+            android:textColor="@color/textColor1"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/PADDING_SIZE_LARGE"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:dividerColor="@color/black"
+                android:layout_marginVertical="@dimen/PADDING_SIZE_LARGE"
+                />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                app:cardCornerRadius="1000dp"
+                android:elevation="0dp"
+                android:backgroundTint="@color/black">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_google"
+                    android:layout_gravity="center"
+                    android:tint="@color/white"
+                    tools:ignore="UseAppTint" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_invite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/PADDING_SIZE_DEFAULT"
+            android:text="Bạn cũng có thể tiếp tục với khach moi"
+            android:textColor="@color/textColor1"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

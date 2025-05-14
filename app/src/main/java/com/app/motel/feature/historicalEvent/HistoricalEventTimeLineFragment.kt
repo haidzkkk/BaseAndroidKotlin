@@ -81,15 +81,5 @@ class HistoricalEventTimeLineFragment: AppBaseFragment<FragmentHistoricalEventTi
             adapter?.updateData(it)
             views.tvEmpty.isVisible = it.isNullOrEmpty()
         }
-//
-//        viewModel.settingRepository.state.textSize.observe(viewLifecycleOwner){
-//            adapter?.notifyDataSetChanged()
-//        }
-//        viewModel.settingRepository.state.textFont.observe(viewLifecycleOwner){
-//            adapter?.notifyDataSetChanged()
-//        }
-//        viewModel.settingRepository.state.backgroundColor.observe(viewLifecycleOwner){
-//            adapter?.notifyDataSetChanged()
-//        }
     }
 }

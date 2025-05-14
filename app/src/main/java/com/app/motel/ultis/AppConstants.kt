@@ -4,15 +4,20 @@ object AppConstants {
     const val DATABASE_NAME: String = "app_database"
 
     const val FIREBASE_ROOT_DB: String = "VietNamHistoryData"
-    const val FIREBASE_ACCOUNT_PATH: String = "Account"
     const val FIREBASE_HISTORY_DYNASTY_PATH: String = "HistoryDynasty"
-    const val FIREBASE_HISTORY_EVENT_PATH: String = "HistoryEvent"
     const val FIREBASE_HISTORY_TERRITORY_PATH: String = "Territory"
+    const val FIREBASE_HISTORY_EVENT_PATH: String = "HistoryEvent"
+    const val FIREBASE_USER_PATH: String = "User"
+    const val FIREBASE_COMMENT_TERRITORY_PATH: String = "TerritoryComment"
+    const val FIREBASE_HISTORY_DYNASTY_FIGURE_NODE: String = "figures"
+    const val FIREBASE_COMMENT_NODE: String = "comments"
+    const val FIREBASE_LIKE_NODE: String = "likes"
 
     const val SHARED_PREFERENCES_NAME: String = "SHARED_PREFERENCES_NAME"
     const val SHARED_PREFERENCES_TEXT_SIZE_KEY: String = "TEXT_SIZE"
     const val SHARED_PREFERENCES_TEXT_FONT_KEY: String = "TEXT_FONT_KEY"
     const val SHARED_PREFERENCES_BACKGROUND_COLOR_KEY: String = "BACKGROUND_COLOR_KEY"
+    const val SHARED_PREFERENCES_USER_ID_KEY_KEY: String = "USER_ID_KEY"
 
     const val PREFS_NAME: String = "prefs_name"
     const val TOKEN_KEY: String = "token_key"

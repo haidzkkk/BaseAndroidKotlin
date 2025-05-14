@@ -1,7 +1,7 @@
 package com.app.motel.data.model
 
 data class Territory(
-    override val id: Int? = null,
+    override val id: String? = null,
     val title: String? = null,
     val period: String? = null,
     val description: String? = null,

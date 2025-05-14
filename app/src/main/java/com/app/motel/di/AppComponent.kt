@@ -3,6 +3,10 @@ package com.history.vietnam.di
 import android.content.Context
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
+import com.app.motel.feature.auth.AuthActivity
+import com.app.motel.feature.auth.LoginFragment
+import com.app.motel.feature.auth.RegisterFragment
+import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity
 import com.app.motel.feature.historicalEvent.HistoricalEventTimeLineFragment
 import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
@@ -21,7 +25,9 @@ import com.history.vietnam.di.modules.FragmentModule
 import com.history.vietnam.di.modules.AppModule
 import com.history.vietnam.di.modules.ViewModelModule
 import com.history.vietnam.feature.Home.HomeFragment
-import com.history.vietnam.feature.MainActivity
+import com.app.motel.feature.home.MainActivity
+import com.app.motel.feature.profile.InformationFragment
+import com.history.vietnam.feature.profile.ProfileFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -40,6 +46,7 @@ interface AppComponent {
     fun inject(activity: HistoricalFigureActivity)
     fun inject(activity: HistoricalEventActivity)
     fun inject(activity: TerritoryActivity)
+    fun inject(activity: AuthActivity)
 
     fun inject(fragment: HomeFragment)
     fun inject(fragment: PageFragment)
@@ -52,6 +59,10 @@ interface AppComponent {
     fun inject(fragment: TerritoryHomeFragment)
     fun inject(fragment: TerritoryCommentFragment)
     fun inject(fragment: TerritoryContentFragment)
+    fun inject(fragment: LoginFragment)
+    fun inject(fragment: RegisterFragment)
+    fun inject(fragment: ProfileFragment)
+    fun inject(fragment: InformationFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory
