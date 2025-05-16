@@ -4,11 +4,17 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.app.motel.data.model.Dynasty
+import com.app.motel.data.model.PageInfo
+import com.app.motel.feature.historicalEvent.HistoricalEventActivity
+import com.app.motel.feature.historicalEvent.HistoricalEventActivity.Companion
+import com.app.motel.feature.page.PageFragment
 import com.app.motel.feature.territory.viewmodel.TerritoryViewEvent
 import com.app.motel.feature.territory.viewmodel.TerritoryViewModel
 import com.app.motel.ui.adapter.ViewPagerAdapter
+import com.google.gson.Gson
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
@@ -18,7 +24,7 @@ import javax.inject.Inject
 class TerritoryActivity : AppBaseActivity<ActivityTerritoryBinding>() {
 
     companion object{
-        const val ITEM_FIGURE_KEY = "ITEM_FIGURE_KEY"
+        const val ITEM_INFO_KEY = "ITEM_INFO_KEY"
     }
 
     @Inject
@@ -44,6 +50,9 @@ class TerritoryActivity : AppBaseActivity<ActivityTerritoryBinding>() {
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private fun init(){
+        val item: PageInfo? = intent.getStringExtra(HistoricalEventActivity.ITEM_INFO_KEY)?.let { Gson().fromJson(it, PageInfo::class.java) }
+        viewModel.setInfoSelect(item)
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 handleBackWithAnimation()

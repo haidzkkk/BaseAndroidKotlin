@@ -2,6 +2,7 @@ package com.app.motel.feature.territory.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Territory
 import com.app.motel.data.repository.TerritoryRepository
 import com.app.motel.data.repository.UserRepository
@@ -24,6 +25,10 @@ class TerritoryViewModel @Inject constructor(
 ): AppBaseViewModel<TerritoryState, TerritoryViewAction, TerritoryViewEvent>(TerritoryState()) {
     override fun handle(action: TerritoryViewAction) {
 
+    }
+
+    fun setInfoSelect(infoSelect: PageInfo?){
+        liveData.infoSelect.value = infoSelect
     }
 
     fun getTerritories() {

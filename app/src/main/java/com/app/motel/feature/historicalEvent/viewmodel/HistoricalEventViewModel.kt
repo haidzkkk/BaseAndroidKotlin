@@ -2,6 +2,7 @@ package com.app.motel.feature.historicalEvent.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.app.motel.data.model.HistoricalEvent
+import com.app.motel.data.model.PageInfo
 import com.app.motel.data.repository.HistoricalEventRepository
 import com.app.motel.feature.setting.SettingController
 import com.history.vietnam.core.AppBaseViewModel
@@ -24,5 +25,9 @@ class HistoricalEventViewModel @Inject constructor(
 
     fun postCurrentEvent(historicalEvent: HistoricalEvent){
         _viewEvents.post(HistoricalEventViewEvent.SetCurrentEvent(historicalEvent))
+    }
+
+    fun setInfoSelect(infoSelect: PageInfo?){
+        liveData.infoSelect.value = infoSelect
     }
 }

@@ -1,10 +1,13 @@
 package com.app.motel.feature.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.app.motel.feature.profile.UserController
 import com.history.vietnam.R
@@ -46,8 +49,9 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
                 else -> {}
             }
         }
-
-        setUpBottomNav()
+        Handler(Looper.getMainLooper()).post {
+            setUpBottomNav()
+        }
     }
 
     private fun setUpBottomNav() {

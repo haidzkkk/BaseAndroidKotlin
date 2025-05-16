@@ -31,8 +31,15 @@ class DynastyAdapter constructor(
         listenerDynasty.onClickItem(items[selectedPosition])
     }
 
-    private val adapter = FigureAdapter(settingController, listenerFigure)
+    val figureAdapter = FigureAdapter(settingController, listenerFigure)
     private var selectedPosition = 0
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setSelectPosition(position: Int){
+        selectedPosition = position
+        notifyDataSetChanged()
+    }
+
     val getCurrentDynasty: HistoryDynasty? get() = if(selectedPosition >= 0 && selectedPosition < items.size) items[selectedPosition] else null
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
@@ -50,8 +57,8 @@ class DynastyAdapter constructor(
         )
 
         if (isSelected) {
-            binding.rcv.adapter = adapter
-            adapter.updateData(item.figures)
+            binding.rcv.adapter = figureAdapter
+            figureAdapter.updateData(item.figures)
         }
 
         binding.root.setOnClickListener {

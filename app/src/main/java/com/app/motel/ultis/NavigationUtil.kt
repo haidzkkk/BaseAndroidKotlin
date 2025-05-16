@@ -9,13 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.history.vietnam.R
 
 // navigate fragment
-fun Fragment.navigateFragmentWithSlide(fragmentId: Int, args: Bundle? = null) {
+fun Fragment.navigateFragmentWithSlide(fragmentId: Int, args: Bundle? = null, navigatorExtras: Navigator.Extras? = null) {
+
     val navOptions = NavOptions.Builder()
         .setEnterAnim(R.anim.slide_in_right)
         .setExitAnim(R.anim.slide_out_left)
@@ -23,7 +26,7 @@ fun Fragment.navigateFragmentWithSlide(fragmentId: Int, args: Bundle? = null) {
         .setPopExitAnim(R.anim.slide_out_right)
         .build()
 
-    findNavController().navigate(fragmentId, args, navOptions)
+    findNavController().navigate(fragmentId, args, navOptions, navigatorExtras)
 }
 
 fun Fragment.popFragmentWithSlide() {

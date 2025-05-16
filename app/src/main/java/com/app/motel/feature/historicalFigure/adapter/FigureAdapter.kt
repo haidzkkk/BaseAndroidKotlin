@@ -1,6 +1,7 @@
 package com.app.motel.feature.historicalFigure.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -20,6 +21,13 @@ class FigureAdapter constructor(
 ): AppBaseAdapter<HistoricalFigure, ItemFigureBinding>() {
     override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemFigureBinding {
          return ItemFigureBinding.inflate(inflater, parent, false)
+    }
+
+    private var currentFigureSelectId: String? = null
+    @SuppressLint("NotifyDataSetChanged")
+    fun setCurrentFigureSelectId(id: String?){
+        currentFigureSelectId = id
+        notifyDataSetChanged()
     }
 
     @SuppressLint("SetTextI18n")
@@ -44,6 +52,14 @@ class FigureAdapter constructor(
             ContextCompat.getColor(binding.root.context, R.color.primary),
             PorterDuff.Mode.SRC_IN)
         binding.imgAvatar.setPadding(24, 24, 24, 24)
+
+        if(currentFigureSelectId == item.id){
+            binding.tvName.setShadowLayer(10f, 0f, 0f, Color.YELLOW)
+            binding.tvDate.setShadowLayer(10f, 0f, 0f, Color.YELLOW)
+        } else {
+            binding.tvName.setShadowLayer(0f, 0f, 0f, Color.TRANSPARENT)
+            binding.tvDate.setShadowLayer(0f, 0f, 0f, Color.TRANSPARENT)
+        }
 
         binding.imgAvatar.show(
             url = item.image,

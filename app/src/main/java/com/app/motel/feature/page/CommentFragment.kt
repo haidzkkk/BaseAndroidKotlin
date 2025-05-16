@@ -14,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.page.viewmodel.PageViewModel
+import com.app.motel.ultis.focus
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
@@ -121,6 +122,7 @@ class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
             views.tvUserReply.text = it?.user?.getUserName
             views.lyReply.isVisible = it != null
             views.txtComment.setText(it?.user?.getUserName ?: "")
+            views.txtComment.focus()
         }
         viewModel.userController.state.loginUser.observe(viewLifecycleOwner){
             if(it && viewModel.userController.state.getCurrentUser == null){

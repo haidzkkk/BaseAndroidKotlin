@@ -18,8 +18,8 @@
                 android:id="@+id/btn_back"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/baseline_arrow_back_24"
-                android:padding="7dp"
+                android:src="@drawable/icon_back"
+                android:padding="@dimen/PADDING_SIZE_OVER_SMALL"
                 android:tint="@color/icon2"
                 tools:ignore="UseAppTint" />
 

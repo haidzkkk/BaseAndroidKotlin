@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_inbox"
             app:destination="@id/nav_inbox" />
+        <action
+            android:id="@+id/action_nav_home_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
@@ -52,5 +55,14 @@
         <action
             android:id="@+id/action_informationFragment_to_nav_profile"
             app:destination="@id/nav_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.app.motel.feature.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
 </navigation>

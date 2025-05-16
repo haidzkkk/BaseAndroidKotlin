@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="@dimen/PADDING_SIZE_EXTRA_SMALL"
+    android:layout_marginBottom="@dimen/PADDING_SIZE_SMALL">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:text="Chiến dịch điện biên phủ"
+            android:textColor="@color/textColor1"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+            android:text="1923"
+            android:textColor="@color/textColor2"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_to"
+        android:layout_width="@dimen/ICON_SIZE_LARGE"
+        android:layout_height="@dimen/ICON_SIZE_LARGE"
+        android:paddingVertical="7dp"
+        android:src="@drawable/icon_right_android"
+        android:tint="@color/primary"
+        tools:ignore="UseAppTint" />
+
+    <ImageView
+        android:id="@+id/btn_post"
+        android:layout_width="@dimen/ICON_SIZE_LARGE"
+        android:layout_height="@dimen/ICON_SIZE_LARGE"
+        android:paddingVertical="7dp"
+        android:src="@drawable/icon_to"
+        android:tint="@color/textColor1"
+        tools:ignore="UseAppTint" />
+
+</LinearLayout>

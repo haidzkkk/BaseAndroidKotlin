@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.HistoryDynasty
+import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Section
 import com.app.motel.data.repository.HistoricalFigureRepository
 import com.app.motel.feature.setting.SettingController
@@ -29,5 +30,9 @@ class HistoricalFigureViewModel @Inject constructor(
 
     fun postCurrentDynasty(historyDynasty: HistoryDynasty){
         _viewEvents.post(HistoricalFigureViewEvent.SetCurrentDynasty(historyDynasty))
+    }
+
+    fun setInfoSelect(infoSelect: PageInfo?){
+        liveData.infoSelect.value = infoSelect
     }
 }

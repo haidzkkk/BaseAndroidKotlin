@@ -24,6 +24,9 @@
 
         <!--  Font -->
         <item name="android:fontFamily">@font/arimos</item>
+
+        <!-- Cho phép transition animation -->
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
 

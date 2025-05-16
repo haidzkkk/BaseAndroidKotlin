@@ -1,9 +1,11 @@
 package com.app.motel.feature.historicalEvent
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.app.motel.data.model.HistoricalEvent
@@ -32,6 +34,11 @@ class EventAdapter constructor(
     }
 
     private var selectedPosition = 0
+    @SuppressLint("NotifyDataSetChanged")
+    fun setSelectItem(position: Int){
+        selectedPosition = position
+        notifyDataSetChanged()
+    }
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged", "ResourceAsColor")
     override fun bind(binding: ItemEventBinding, item: HistoricalEvent, position: Int) {
@@ -44,6 +51,14 @@ class EventAdapter constructor(
 
         binding.cvImage.isVisible = isSelected
         binding.lySelect.isVisible = item.getLevel == HistoricalEvent.Level.IMPORTANT
+
+        if(isSelected){
+            binding.tvTitle.setShadowLayer(10f, 0f, 0f, Color.YELLOW)
+            binding.tvContent.setShadowLayer(10f, 0f, 0f, Color.YELLOW)
+        } else {
+            binding.tvTitle.setShadowLayer(0f, 0f, 0f, Color.TRANSPARENT)
+            binding.tvContent.setShadowLayer(0f, 0f, 0f, Color.TRANSPARENT)
+        }
 
         if(isSelected){
             binding.image.show(item.image,

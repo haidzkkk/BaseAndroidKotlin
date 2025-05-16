@@ -58,6 +58,7 @@ class HistoricalFigureTimelineFragment: AppBaseFragment<FragmentHistoricalFigure
                 },
                 object : AppBaseAdapter.AppListener<HistoricalFigure>(){
                     override fun onClickItem(item: HistoricalFigure, action: AppBaseAdapter.ItemAction) {
+                        viewModel.setInfoSelect(null)
                         navigateFragmentWithSlide(R.id.pageFragmentFigure, PageFragment.getPageInfo(item, adapter?.getCurrentDynasty?.id))
                     }
                 },
@@ -89,6 +90,17 @@ class HistoricalFigureTimelineFragment: AppBaseFragment<FragmentHistoricalFigure
         viewModel.liveData.historyDynasty.observe(viewLifecycleOwner){
             adapter?.updateData(it)
            views.tvEmpty.isVisible = it.isNullOrEmpty()
+
+            adapter?.figureAdapter?.setCurrentFigureSelectId(viewModel.liveData.getSelectInfoId)
+            viewModel.liveData.getSelectTimeLineId?.apply {
+                it?.forEachIndexed { index, historicalEvent ->
+                    if(historicalEvent.id == this){
+                        adapter?.setSelectPosition(index)
+                        views.rcv.smoothScrollToPosition(index)
+                        return@forEachIndexed
+                    }
+                }
+            }
         }
 
         viewModel.settingRepository.state.textSize.observe(viewLifecycleOwner){

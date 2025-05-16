@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Territory
 import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.app.motel.feature.territory.viewmodel.TerritoryViewModel
@@ -79,8 +80,8 @@ class TerritoryHomeFragment : AppBaseFragment<FragmentTerritoryHomeBinding>() {
         viewModel.liveData.territories.observe(viewLifecycleOwner){
             adapter?.updateData(it)
             views.tvEmpty.isVisible = it.isNullOrEmpty()
+            handleSelectInfo()
         }
-
         viewModel.liveData.selectContent.observe(viewLifecycleOwner){
             val position = viewModel.findTerritoryIndexFromFlatPosition(it ?: 0)
             if(position == -1) return@observe
@@ -90,5 +91,20 @@ class TerritoryHomeFragment : AppBaseFragment<FragmentTerritoryHomeBinding>() {
         }
     }
 
-
+    private fun handleSelectInfo(){
+        val info = viewModel.liveData.infoSelect.value ?: return
+        if(info.type == PageInfo.Type.TERRITORY || info.type == PageInfo.Type.TERRITORY_TIMELINE_ENTRY){
+            val position = viewModel.liveData.getTerritoryInfoSelectIndex
+            if(position != null){
+                views.rcv.smoothScrollToPosition(position)
+            }
+        }
+        if(info.type == PageInfo.Type.TERRITORY_TIMELINE_ENTRY){
+            adapter?.setCurrentTerritoryId(
+                viewModel.liveData.getTerritoryInfoSelectId,
+                viewModel.liveData.getTimeLineInfoSelectId,
+            )
+        }
+        viewModel.setInfoSelect(null)
+    }
 }

@@ -9,9 +9,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.app.motel.data.model.Dynasty
+import com.app.motel.data.model.PageInfo
 import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewEvent
 import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewModel
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.PageFragment
+import com.google.gson.Gson
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
@@ -23,7 +26,7 @@ import javax.inject.Inject
 class HistoricalEventActivity : AppBaseActivity<ActivityHistoricalEventBinding>() {
 
     companion object{
-        const val ITEM_EVENT_KEY = "ITEM_EVENT_KEY"
+        const val ITEM_INFO_KEY = "ITEM_INFO_KEY"
     }
 
     @Inject
@@ -45,7 +48,21 @@ class HistoricalEventActivity : AppBaseActivity<ActivityHistoricalEventBinding>(
         listenStateViewModel()
         listenEventViewModel()
     }
+
     private fun init(){
+        val item: PageInfo? = intent.getStringExtra(ITEM_INFO_KEY)?.let { Gson().fromJson(it, PageInfo::class.java) }
+        viewModel.setInfoSelect(item)
+
+        if(viewModel.liveData.isSelectInfoDetail && viewModel.liveData.infoSelect.value != null){
+            val navController = findNavController(R.id.fragment_view)
+            val navInflater = navController.navInflater
+            val graph = navInflater.inflate(R.navigation.nav_historical_event)
+            graph.setStartDestination(R.id.pageFragmentEvent)
+
+            val bundle = PageFragment.getBundle(viewModel.liveData.infoSelect.value!!)
+            navController.setGraph(graph, bundle)
+        }
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 handleBackWithAnimation()
@@ -86,11 +103,10 @@ class HistoricalEventActivity : AppBaseActivity<ActivityHistoricalEventBinding>(
     private fun handleBackWithAnimation() {
         val navController = findNavController(R.id.fragment_view)
 
-        if (navController.currentDestination?.id == R.id.historicalEventTimeLineFragment) {
+        val popped = navController.popBackStack()
+        if (!popped) {
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-        } else {
-            popFragmentWithSlide(R.id.fragment_view)
         }
     }
 

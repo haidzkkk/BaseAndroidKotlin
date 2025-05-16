@@ -12,6 +12,7 @@ object AppConstants {
     const val FIREBASE_HISTORY_DYNASTY_FIGURE_NODE: String = "figures"
     const val FIREBASE_COMMENT_NODE: String = "comments"
     const val FIREBASE_LIKE_NODE: String = "likes"
+    const val FIREBASE_TIMELINE_ENTRY_NODE: String = "timelineEntries"
 
     const val SHARED_PREFERENCES_NAME: String = "SHARED_PREFERENCES_NAME"
     const val SHARED_PREFERENCES_TEXT_SIZE_KEY: String = "TEXT_SIZE"

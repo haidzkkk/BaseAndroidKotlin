@@ -11,10 +11,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.app.motel.data.model.Dynasty
+import com.app.motel.data.model.PageInfo
+import com.app.motel.feature.historicalEvent.HistoricalEventActivity
+import com.app.motel.feature.historicalEvent.HistoricalEventActivity.Companion
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewEvent
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
+import com.app.motel.feature.page.PageFragment
 import com.app.motel.feature.page.viewmodel.PageViewEvent
 import com.app.motel.feature.page.viewmodel.PageViewModel
+import com.google.gson.Gson
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
@@ -25,7 +30,7 @@ import javax.inject.Inject
 class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding>() {
 
     companion object{
-        const val ITEM_FIGURE_KEY = "ITEM_FIGURE_KEY"
+        const val ITEM_INFO_KEY = "ITEM_INFO_KEY"
     }
 
     @Inject
@@ -48,6 +53,20 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
         listenEventViewModel()
     }
     private fun init(){
+        val item: PageInfo? = intent.getStringExtra(HistoricalEventActivity.ITEM_INFO_KEY)?.let { Gson().fromJson(it, PageInfo::class.java) }
+        viewModel.setInfoSelect(item)
+
+        if(viewModel.liveData.isSelectFigure && viewModel.liveData.infoSelect.value != null){
+            val navController = findNavController(R.id.fragment_view)
+            val navInflater = navController.navInflater
+            val graph = navInflater.inflate(R.navigation.nav_historical_figure)
+            graph.setStartDestination(R.id.pageFragmentFigure)
+
+            val bundle = PageFragment.getBundle(viewModel.liveData.infoSelect.value!!)
+            navController.setGraph(graph, bundle)
+        }
+
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 handleBackWithAnimation()
@@ -77,11 +96,10 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
     private fun handleBackWithAnimation() {
         val navController = findNavController(R.id.fragment_view)
 
-        if (navController.currentDestination?.id == R.id.historicalFigureTimelineFragment) {
+        val popped = navController.popBackStack()
+        if (!popped) {
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-        } else {
-            popFragmentWithSlide(R.id.fragment_view)
         }
     }
 

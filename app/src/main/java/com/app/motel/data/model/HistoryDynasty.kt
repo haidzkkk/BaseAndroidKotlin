@@ -5,6 +5,6 @@ data class HistoryDynasty(
     val name: String? = null,
     val fromDate: String? = null,
     val toDate: String? = null,
-    val figures: List<HistoricalFigure>? = null,
+    var figures: List<HistoricalFigure>? = null,
 ) : RealTimeId{
 }

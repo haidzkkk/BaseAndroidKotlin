@@ -51,6 +51,7 @@ class HistoricalEventTimeLineFragment: AppBaseFragment<FragmentHistoricalEventTi
             adapter = EventAdapter(viewModel.settingRepository,
                 object : AppBaseAdapter.AppListener<HistoricalEvent>(){
                     override fun onClickItem(item: HistoricalEvent, action: AppBaseAdapter.ItemAction) {
+                        viewModel.setInfoSelect(null)
                         navigateFragmentWithSlide(R.id.pageFragmentEvent, PageFragment.getPageInfo(item))
                     }
                 }
@@ -80,6 +81,16 @@ class HistoricalEventTimeLineFragment: AppBaseFragment<FragmentHistoricalEventTi
         viewModel.liveData.historyEvents.observe(viewLifecycleOwner){
             adapter?.updateData(it)
             views.tvEmpty.isVisible = it.isNullOrEmpty()
+
+            viewModel.liveData.getSelectTimeLine?.apply {
+                it?.forEachIndexed { index, historicalEvent ->
+                    if(historicalEvent.wikiPageId == this){
+                        adapter?.setSelectItem(index)
+                        views.rcv.smoothScrollToPosition(index)
+                        return@forEachIndexed
+                    }
+                }
+            }
         }
     }
 }

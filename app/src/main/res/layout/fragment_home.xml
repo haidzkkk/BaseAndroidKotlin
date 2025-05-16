@@ -31,6 +31,7 @@
                 tools:ignore="HardcodedText" />
 
             <ImageView
+                android:id="@+id/icon_notification"
                 android:layout_width="@dimen/ICON_SIZE_LARGE"
                 android:layout_height="@dimen/ICON_SIZE_LARGE"
                 android:src="@drawable/icon_notification"
@@ -39,29 +40,25 @@
 
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_title"
+        <LinearLayout
+            android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/InputLayoutStyle2"
-            android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL"
-            app:boxBackgroundColor="@color/background1"
-            app:startIconDrawable="@drawable/baseline_search_24"
-            app:startIconTint="@color/icon1"
-            app:hintEnabled="false">
+            android:orientation="horizontal"
+            android:layout_marginVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:background="@drawable/background_border_search_unfocus"
+            android:transitionName="searchTextInput">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txt_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Hai bà trưng"
-                android:imeOptions="actionNext"
-                android:enabled="false"
-                android:inputType="text"
-                android:textSize="@dimen/TEXT_SIZE_DEFAULT"
-                tools:ignore="SpUsage" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/btn_search"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+                android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/icon_search"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

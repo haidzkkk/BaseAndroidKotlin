@@ -25,38 +25,20 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
         const val KEY_ITEM = "KEY_ITEM"
 
         fun getPageInfo(figure: HistoricalFigure, dynastyId: String? = null): Bundle {
-            val pageInfo = PageInfo(
-                name = figure.name,
-                wikiPageId = figure.wikiPageId,
-                firebaseId = figure.id,
-                firebasePath = "${AppConstants.FIREBASE_HISTORY_DYNASTY_PATH}/${dynastyId}/${AppConstants.FIREBASE_HISTORY_DYNASTY_FIGURE_NODE}/${figure.id}",
-                info = mapOf(
-                    "Sinh" to (figure.birthYear ?: ""),
-                    "Mất" to (figure.deathDate ?: ""),
-                    "Vợ" to (figure.spouse ?: ""),
-                    "Tước hiệu" to (figure.title ?: ""),
-                    "Triều đại" to (figure.dynasty ?: ""),
-                ),
-            )
-
+            val pageInfo = PageInfo.fromHistoricalFigure(figure, dynastyId)
             return Bundle().apply {
                 putString(KEY_ITEM, Gson().toJson(pageInfo))
             }
         }
 
         fun getPageInfo(event: HistoricalEvent): Bundle {
-            val pageInfo = PageInfo(
-                name = event.name,
-                wikiPageId = event.wikiPageId,
-                firebaseId = event.id,
-                firebasePath = "${AppConstants.FIREBASE_HISTORY_EVENT_PATH}/${event.id}",
-                info = mapOf(
-                    "Thời gian" to (event.birthYear ?: ""),
-                    "Triều đại" to (event.dynasty ?: ""),
-                    "Triều đại" to (event.dynasty ?: ""),
-                ),
-            )
+            val pageInfo = PageInfo.fromHistoricalEvent(event)
+            return Bundle().apply {
+                putString(KEY_ITEM, Gson().toJson(pageInfo))
+            }
+        }
 
+        fun getBundle(pageInfo: PageInfo): Bundle{
             return Bundle().apply {
                 putString(KEY_ITEM, Gson().toJson(pageInfo))
             }
