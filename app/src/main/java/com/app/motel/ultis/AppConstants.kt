@@ -13,6 +13,7 @@ object AppConstants {
     const val FIREBASE_COMMENT_TERRITORY_PATH: String = "TerritoryComment"
     const val FIREBASE_TIMELINE_ENTRY_NODE: String = "timelineEntries"
     const val FIREBASE_USER_PATH: String = "User"
+    const val FIREBASE_NOTIFICATION_NODE: String = "notifications"
     const val FIREBASE_QUIZ_PATH: String = "Quiz"
     const val FIREBASE_RANKING_NODE: String = "rankings"
 

@@ -21,6 +21,7 @@ class Resource<out T> (val status: Status, val data: T?, var message: String?) {
     fun isLoading() = status == Status.LOADING
     fun isSuccess() = status == Status.SUCCESS
     fun isError() = status == Status.ERROR
+    fun hasData() = data != null
 
     enum class Status {
         INITIALIZE,

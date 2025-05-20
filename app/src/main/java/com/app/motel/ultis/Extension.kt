@@ -6,6 +6,9 @@ import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -83,4 +86,33 @@ fun String.containsSearch(str: String): Boolean {
         .lowercase(Locale.getDefault())
 
     return text1String.contains(text2String)
+}
+
+
+@SuppressLint("DefaultLocale")
+fun Int.formatTopPosition(): String{
+    return String.format("%02d", this)
+}
+
+fun String.removeAccents(): String {
+    val normalized = Normalizer.normalize(this, Normalizer.Form.NFD)
+    return normalized.replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+        .lowercase()
+}
+
+fun String?.containsRemoveAccents(other: String?, ignoreCase: Boolean = false): Boolean{
+    if(this.isNullOrEmpty() || other.isNullOrEmpty()) return false
+    return this.removeAccents().contains(other.removeAccents(), ignoreCase)
+}
+
+fun View.focus(){
+    this.requestFocus()
+    val imm = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun View.setWeight(weight: Float){
+    val params = this.layoutParams as LinearLayout.LayoutParams
+    params.weight = weight
+    this.layoutParams = params
 }

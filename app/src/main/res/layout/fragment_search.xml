@@ -81,7 +81,7 @@
         android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL">
 
         <LinearLayout
-            android:id="@+id/btn_random"
+            android:id="@+id/btn_year"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -89,19 +89,49 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tìm kiếm: "
+                android:text="Giai đoạn: "
+                android:ellipsize="start"
+                android:maxLines="1"
                 android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+                tools:ignore="NestedWeights" />
+
+            <TextView
+                android:id="@+id/tv_year_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:background="@color/primary"/>
+
+            <TextView
+                android:id="@+id/tv_year_defaul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:text="-"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/textColor1"
                 android:textStyle="bold"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"/>
 
             <TextView
+                android:id="@+id/tv_year_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
-                android:text="Bất kỳ"
-                android:textColor="@color/textColor2"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="@dimen/TEXT_SIZE_DEFAULT"/>
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+                android:background="@color/primary"/>
 
         </LinearLayout>
 
@@ -117,14 +147,18 @@
                 android:text="Sắp xếp: "
                 android:textColor="@color/primary"
                 android:textStyle="bold"
+                android:maxLines="1"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"
                 tools:ignore="HardcodedText" />
 
             <TextView
+                android:id="@+id/tv_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/PADDING_SIZE_EXTRA_SMALL"
                 android:text="Lượt xem"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/textColor2"
                 android:textStyle="bold"
                 android:textSize="@dimen/TEXT_SIZE_DEFAULT"

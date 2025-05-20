@@ -12,7 +12,6 @@ import com.app.motel.data.model.AnswerQuestion
 import com.app.motel.data.model.Question
 import com.app.motel.feature.quiz.viewmodel.QuizViewModel
 import com.app.motel.ui.show
-import com.app.motel.ultis.formatTopPosition
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
@@ -23,6 +22,7 @@ import com.history.vietnam.databinding.FragmentQuizRecheckBinding
 import com.history.vietnam.databinding.ItemRadioButtonBinding
 import com.history.vietnam.databinding.ItemRecheckQuizBinding
 import com.history.vietnam.ui.showToast
+import com.history.vietnam.ultis.formatTopPosition
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
 

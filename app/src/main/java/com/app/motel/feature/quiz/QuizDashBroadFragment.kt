@@ -15,6 +15,7 @@ import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.databinding.FragmentQuizDashBroadBinding
 import com.history.vietnam.databinding.FragmentQuizFinalBinding
+import com.history.vietnam.ui.showToast
 import com.history.vietnam.ultis.navigateFragmentWithSlide
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
@@ -47,6 +48,10 @@ class QuizDashBroadFragment : AppBaseFragment<FragmentQuizDashBroadBinding>() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         views.btnStart.setOnClickListener {
+            if(viewModel.liveData.currentQuiz.value?.hasData() != true){
+                requireActivity().showToast("Không tìm thấy quiz")
+                return@setOnClickListener
+            }
             navigateFragmentWithSlide(R.id.quizTestFragment)
         }
     }
@@ -61,6 +66,9 @@ class QuizDashBroadFragment : AppBaseFragment<FragmentQuizDashBroadBinding>() {
                     views.tvPeriod.text = it.data?.period
                     views.tvTotalQuestion.text = "Số câu hỏi: ${it.data?.questionCount}"
                     views.tvTime.text = "Thời gian: ${it.data?.durationMinutes}"
+                }
+                it.isError() -> {
+                    requireActivity().showToast(it.message ?: "Có lỗi xảy ra")
                 }
                 else -> {}
             }

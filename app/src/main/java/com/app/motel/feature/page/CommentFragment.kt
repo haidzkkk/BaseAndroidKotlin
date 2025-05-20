@@ -14,7 +14,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.page.viewmodel.PageViewModel
-import com.app.motel.ultis.focus
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
@@ -22,6 +21,7 @@ import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.data.model.Comment
 import com.history.vietnam.databinding.FragmentCommentBinding
 import com.history.vietnam.ui.showDialogConfirm
+import com.history.vietnam.ultis.focus
 import javax.inject.Inject
 
 class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {

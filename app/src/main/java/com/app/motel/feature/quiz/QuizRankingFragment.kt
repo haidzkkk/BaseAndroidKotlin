@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.model.Ranking
 import com.app.motel.feature.quiz.viewmodel.QuizViewModel
 import com.app.motel.ui.custom.CustomTabBar
-import com.app.motel.ultis.formatTopPosition
 import com.google.android.material.divider.MaterialDivider
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
@@ -18,6 +17,7 @@ import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.databinding.FragmentQuizRankingBinding
 import com.history.vietnam.databinding.ItemRankingBinding
+import com.history.vietnam.ultis.formatTopPosition
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
 

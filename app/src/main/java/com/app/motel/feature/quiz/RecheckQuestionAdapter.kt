@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.app.motel.data.model.AnswerQuestion
-import com.app.motel.data.model.Question
 import com.app.motel.ui.show
-import com.app.motel.ultis.formatTopPosition
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.databinding.ItemQuestionBinding
 import com.history.vietnam.databinding.ItemRadioButtonBinding
 import com.history.vietnam.databinding.ItemRecheckQuizBinding
+import com.history.vietnam.ultis.formatTopPosition
 
 class RecheckQuestionAdapter (
     private val listener: AppBaseAdapter.AppListener<AnswerQuestion>

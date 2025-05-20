@@ -8,30 +8,30 @@ import android.widget.LinearLayout
 import androidx.core.content.ContentProviderCompat.requireContext
 import java.text.Normalizer
 
-@SuppressLint("DefaultLocale")
-fun Int.formatTopPosition(): String{
-    return String.format("%02d", this)
+// ex: period = 2213 TCN - 253 TCN
+fun getFromYear(period: String?): Int? {
+    if (period.isNullOrEmpty()) return null
+    val elements = period.split(" ")
+    val from = elements.getOrNull(0)?.toIntOrNull()
+    val isNegative = elements.getOrNull(1) == "TCN"
+    return if (from != null) {
+        if (isNegative) -from else from
+    } else null
 }
 
-fun String.removeAccents(): String {
-    val normalized = Normalizer.normalize(this, Normalizer.Form.NFD)
-    return normalized.replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
-        .lowercase()
-}
+fun getToYear(period: String?): Int? {
+    if (period.isNullOrEmpty()) return null
 
-fun String?.containsRemoveAccents(other: String?, ignoreCase: Boolean = false): Boolean{
-    if(this.isNullOrEmpty() || other.isNullOrEmpty()) return false
-    return this.removeAccents().contains(other.removeAccents(), ignoreCase)
-}
+    val parts = period.split("-").map { it.trim() }
+    if (parts.size < 2) return null
 
-fun View.focus(){
-    this.requestFocus()
-    val imm = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-}
+    val toPart = parts[1] // "253 TCN"
+    val toElements = toPart.split(" ")
 
-fun View.setWeight(weight: Float){
-    val params = this.layoutParams as LinearLayout.LayoutParams
-    params.weight = weight
-    this.layoutParams = params
+    val toYear = toElements.firstOrNull { it.toIntOrNull() != null }?.toIntOrNull()
+    val isTCN = toElements.any { it.equals("TCN", ignoreCase = true) }
+
+    return if (toYear != null) {
+        if (isTCN) -toYear else toYear
+    } else null
 }

@@ -2,20 +2,18 @@ package com.history.vietnam.feature.Home
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.data.model.PageInfo
-import com.app.motel.data.model.Section
-import com.app.motel.ultis.containsRemoveAccents
+import com.app.motel.data.repository.QuizRepository
 import com.history.vietnam.core.AppBaseViewModel
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.data.repository.HomeRepository
+import com.history.vietnam.ultis.containsRemoveAccents
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val repo: HomeRepository
+    private val repo: HomeRepository,
+    private val quizRepository: QuizRepository,
     ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     init {
@@ -42,7 +40,15 @@ class HomeViewModel @Inject constructor(
             val dynasties = repo.getDynasty().data ?: arrayListOf()
             val territories = repo.getTerritory().data ?: arrayListOf()
             val events = repo.getEvents().data ?: arrayListOf()
+            val quizzes = quizRepository.getQuizzes().data ?: arrayListOf()
 
+            quizzes.forEach {
+                if(it.title?.containsRemoveAccents(keyword, true) == true
+                    || it.period?.containsRemoveAccents(keyword, true) == true
+                    ){
+                    searchSection.add(PageInfo.fromQuiz(it))
+                }
+            }
             events.forEach {
                 if(it.name?.containsRemoveAccents(keyword, true) == true
                     || it.birthYear?.containsRemoveAccents(keyword, true) == true

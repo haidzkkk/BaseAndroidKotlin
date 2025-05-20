@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.model.Question
 import com.app.motel.feature.quiz.viewmodel.QuizViewModel
 import com.app.motel.ui.show
-import com.app.motel.ultis.setWeight
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseFragment
@@ -22,6 +21,7 @@ import com.history.vietnam.databinding.ItemQuestionBinding
 import com.history.vietnam.ui.showToast
 import com.history.vietnam.ultis.navigateFragmentWithSlide
 import com.history.vietnam.ultis.popFragmentWithSlide
+import com.history.vietnam.ultis.setWeight
 import javax.inject.Inject
 
 class QuizTestFragment : AppBaseFragment<FragmentQuizTestBinding>() {

@@ -13,6 +13,9 @@ import javax.inject.Inject
 class QuizRepository @Inject constructor(
     private val firebaseManager: FirebaseManager
 ) {
+
+    suspend fun getQuiz(quizId: String) = firebaseManager.getObject("${AppConstants.FIREBASE_QUIZ_PATH}/${quizId}", Quiz::class.java)
+
     suspend fun getQuizzes() = firebaseManager.getList(AppConstants.FIREBASE_QUIZ_PATH, Quiz::class.java)
 
     suspend fun getRankQuizzes(quizId: String) = firebaseManager.getList("${AppConstants.FIREBASE_QUIZ_PATH}/$quizId/${AppConstants.FIREBASE_RANKING_NODE}", Ranking::class.java)

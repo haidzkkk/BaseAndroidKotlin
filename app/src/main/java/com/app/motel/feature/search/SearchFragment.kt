@@ -17,9 +17,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.motel.data.model.PageInfo
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity
 import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
-import com.app.motel.feature.historicalFigure.adapter.DynastyAdapter
+import com.app.motel.feature.quiz.QuizActivity
 import com.app.motel.feature.territory.TerritoryActivity
-import com.app.motel.ultis.focus
+import com.app.motel.ui.PickDate
 import com.google.gson.Gson
 import com.history.vietnam.AppApplication
 import com.history.vietnam.core.AppBaseAdapter
@@ -27,9 +27,11 @@ import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.databinding.FragmentSearchBinding
 import com.history.vietnam.feature.Home.HomeViewModel
+import com.history.vietnam.ultis.focus
 import com.history.vietnam.ultis.popFragmentWithSlide
 import com.history.vietnam.ultis.startActivityWithSlide
 import javax.inject.Inject
+import kotlin.math.abs
 
 class SearchFragment : AppBaseFragment<FragmentSearchBinding>() {
 
@@ -74,6 +76,9 @@ class SearchFragment : AppBaseFragment<FragmentSearchBinding>() {
                         putExtra(TerritoryActivity.ITEM_INFO_KEY, Gson().toJson(item))
                     })
                 }
+                PageInfo.Type.QUIZ -> {
+                    QuizActivity.startActivity(requireActivity(), item.firebaseId ?: "")
+                }
                 else -> {}
             }
         }
@@ -106,6 +111,14 @@ class SearchFragment : AppBaseFragment<FragmentSearchBinding>() {
             viewModel.search(keyword)
         }
 
+        views.btnYear.setOnClickListener {
+            pickYear()
+        }
+        views.btnSort.setOnClickListener {
+            viewModel.liveData.typeSort.apply {
+                postValue(this.value?.next())
+            }
+        }
         views.txtSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
                 val keyword = views.txtSearch.text.toString()
@@ -128,15 +141,57 @@ class SearchFragment : AppBaseFragment<FragmentSearchBinding>() {
                     views.tvEmpty.isVisible = true
                 }
                 it.isSuccess() -> {
-                    val data = it.data ?: arrayListOf()
-                    adapter.updateData(data)
-                    views.tvEmpty.isVisible = data.isEmpty()
-                    views.tvEmpty.text = if(data.isEmpty()) "Không tìm thấy kết quả" else "Có kết quả"
+                    updateListData()
                 }
                 else ->{
                     views.tvEmpty.isVisible = false
                 }
             }
         }
+        viewModel.liveData.formYear.observe(viewLifecycleOwner){
+            updateListData()
+
+            val from = viewModel.liveData.formYear.value
+            val to = viewModel.liveData.toYear.value
+            views.tvYearFrom.text = from?.let { it1 ->  "${abs(it1)}${if(it1 < 0) "TCN" else ""}"  } ?: ""
+            views.tvYearDefaul.text = if(from == null && to == null) "Bất kỳ" else "-"
+        }
+        viewModel.liveData.toYear.observe(viewLifecycleOwner){
+            updateListData()
+
+            val from = viewModel.liveData.formYear.value
+            val to = viewModel.liveData.toYear.value
+
+            views.tvYearTo.text = to?.let { it1 ->  "${abs(it1)}${if(it1 < 0) "TCN" else ""}"  } ?: ""
+            views.tvYearDefaul.text = if(from == null && to == null) "Bất kỳ" else "-"
+        }
+        viewModel.liveData.typeSort.observe(viewLifecycleOwner){
+            updateListData()
+
+            views.tvSort.text = it?.value ?: ""
+        }
+    }
+
+    private fun updateListData(){
+        val data = viewModel.liveData.filterListSearchInfo
+        adapter.updateData(data)
+        views.tvEmpty.isVisible = data.isEmpty()
+        views.tvEmpty.text = if(data.isEmpty()) "Không tìm thấy kết quả" else "Có kết quả"
+    }
+
+    private fun pickYear(){
+        PickDate.pickFormToYear(
+            requireContext(),
+            from = viewModel.liveData.formYear.value,
+            to = viewModel.liveData.toYear.value,
+            onConfirm = { from, to ->
+                viewModel.liveData.formYear.postValue(from)
+                viewModel.liveData.toYear.postValue(to)
+            },
+            onRemove = { _, _ ->
+                viewModel.liveData.formYear.postValue(null)
+                viewModel.liveData.toYear.postValue(null)
+            }
+        )
     }
 }

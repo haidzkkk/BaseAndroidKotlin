@@ -75,6 +75,16 @@ data class PageInfo(
                 type = Type.TERRITORY_TIMELINE_ENTRY,
             )
         }
+
+        fun fromQuiz(quiz: Quiz): PageInfo {
+            return PageInfo(
+                name = quiz.title,
+                year = quiz.period,
+                firebaseId = quiz.id,
+                firebasePath = "${AppConstants.FIREBASE_QUIZ_PATH}/${quiz.id}",
+                type = Type.QUIZ,
+            )
+        }
     }
 
     enum class Type{
@@ -82,6 +92,7 @@ data class PageInfo(
         HISTORICAL_EVENT,
         TERRITORY,
         TERRITORY_TIMELINE_ENTRY,
+        QUIZ,
         DYNASTY
     }
 

@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.app.motel.data.model.Ranking
-import com.app.motel.ultis.formatTopPosition
 import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.databinding.ItemRankingBinding
+import com.history.vietnam.ultis.formatTopPosition
 
 class RankingAdapter(
     private val listener: AppBaseAdapter.AppListener<Ranking>

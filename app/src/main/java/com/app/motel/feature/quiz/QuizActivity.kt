@@ -25,11 +25,11 @@ import javax.inject.Inject
 class QuizActivity: AppBaseActivity<ActivityQuizBinding>() {
 
     companion object{
-        const val QUIZ_KEY = "QUIZ_KEY"
+        const val QUIZ_ID_KEY = "QUIZ_ID_KEY"
 
-        fun startActivity(activity: Activity, quiz: Quiz){
+        fun startActivity(activity: Activity, quizId: String){
             activity.startActivityWithSlide(Intent(activity.baseContext, QuizActivity::class.java).apply {
-                putExtra(QUIZ_KEY, Gson().toJson(quiz))
+                putExtra(QUIZ_ID_KEY, quizId)
             })
         }
     }
@@ -54,8 +54,8 @@ class QuizActivity: AppBaseActivity<ActivityQuizBinding>() {
     }
 
     private fun init() {
-        val quiz: Quiz? = intent.getStringExtra(QUIZ_KEY)?.let { Gson().fromJson(it, Quiz::class.java) }
-        viewModel.initQuiz(quiz)
+        val quizId: String? = intent.getStringExtra(QUIZ_ID_KEY)
+        viewModel.initQuiz(quizId)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

@@ -41,9 +41,14 @@ class QuizViewModel @Inject constructor(
         }
     }
 
-    fun initQuiz(quiz: Quiz?){
-        if(quiz != null){
-            liveData.currentQuiz.postValue(Resource.Success(quiz))
+    fun initQuiz(quizId: String?){
+        viewModelScope.launch {
+            if(quizId.isNullOrEmpty()){
+                liveData.currentQuiz.postValue(Resource.Error("Quiz không tồn tại"))
+                return@launch
+            }
+            val quiz = quizRepository.getQuiz(quizId)
+            liveData.currentQuiz.postValue(quiz)
         }
     }
 
