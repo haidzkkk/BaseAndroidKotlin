@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/PADDING_SIZE_DEFAULT">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="3"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:paddingStart="@dimen/PADDING_SIZE_DEFAULT"
+            tools:ignore="RtlSymmetry">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhà tền lê"
+                android:textSize="@dimen/TEXT_SIZE_LARGE"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/primary"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(425 - 921)"
+                android:textSize="@dimen/TEXT_SIZE_LARGE"
+                android:textColor="@color/textColor2"
+                android:layout_below="@+id/tv_name"
+                />
+
+            <TextView
+                android:id="@+id/tv_total_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20 câu hỏi - 10 phút"
+                android:textSize="@dimen/TEXT_SIZE_LARGE"
+                android:textColor="@color/textColor2"
+                android:layout_above="@+id/tv_play_count"
+                android:maxLines="1"
+                />
+
+            <TextView
+                android:id="@+id/tv_play_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="32132 lượt chơi"
+                android:textSize="@dimen/TEXT_SIZE_LARGE"
+                android:textColor="@color/textColor3"
+                android:maxLines="1"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/icon_favourite"
+                />
+
+            <ImageView
+                android:id="@+id/icon_favourite"
+                android:layout_width="@dimen/ICON_SIZE_LARGE"
+                android:layout_height="@dimen/ICON_SIZE_LARGE"
+                android:paddingTop="@dimen/PADDING_SIZE_OVER_SMALL"
+                android:paddingStart="@dimen/PADDING_SIZE_OVER_SMALL"
+                android:src="@drawable/icon_heart"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

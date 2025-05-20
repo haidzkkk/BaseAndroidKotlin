@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingVertical="@dimen/PADDING_SIZE_SMALL"
+    android:paddingHorizontal="@dimen/PADDING_SIZE_EXTRA_SMALL"
+    android:background="@color/background1"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        android:text="04"
+        android:textColor="@color/textColor1"
+        android:textSize="@dimen/TEXT_SIZE_LARGE"/>
+
+    <LinearLayout
+        android:id="@+id/ly_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="1000dp"
+        android:layout_marginEnd="@dimen/PADDING_SIZE_EXTRA_SMALL"
+        android:background="@drawable/background_circle"
+        android:backgroundTint="@color/background2">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_user"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+            tools:ignore="UseAppTint" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:text="Name 3"
+        android:textColor="@color/textColor1"
+        android:layout_marginStart="@dimen/PADDING_SIZE_DEFAULT"
+        android:textSize="@dimen/TEXT_SIZE_DEFAULT"/>
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="0dp"
+        android:layout_weight="2.5"
+        android:layout_height="wrap_content"
+        android:text="231pt"
+        android:textColor="@color/textColor1"
+        android:textAlignment="center"
+        android:background="@drawable/background_border_radius_2"
+        android:backgroundTint="@color/primaryVariant"
+        android:layout_marginStart="@dimen/PADDING_SIZE_DEFAULT"
+        android:textSize="@dimen/TEXT_SIZE_DEFAULT"/>
+
+</LinearLayout>

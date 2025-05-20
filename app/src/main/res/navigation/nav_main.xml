@@ -14,11 +14,11 @@
             android:id="@+id/action_nav_home_to_nav_profile"
             app:destination="@id/nav_profile" />
         <action
-            android:id="@+id/action_nav_home_to_nav_inbox"
-            app:destination="@id/nav_inbox" />
-        <action
             android:id="@+id/action_nav_home_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_quizListFragment"
+            app:destination="@id/nav_quiz" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
@@ -26,26 +26,14 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_nav_profile_to_nav_inbox"
-            app:destination="@id/nav_inbox" />
-        <action
             android:id="@+id/action_nav_profile_to_nav_home"
             app:destination="@id/nav_home" />
         <action
             android:id="@+id/action_nav_profile_to_informationFragment"
             app:destination="@id/informationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_inbox"
-        android:name="com.history.vietnam.feature.inbox.InboxFragment"
-        android:label="fragment_inbox"
-        tools:layout="@layout/fragment_inbox" >
         <action
-            android:id="@+id/action_nav_inbox_to_nav_profile"
-            app:destination="@id/nav_profile" />
-        <action
-            android:id="@+id/action_nav_inbox_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_profile_to_quizListFragment"
+            app:destination="@id/nav_quiz" />
     </fragment>
     <fragment
         android:id="@+id/informationFragment"
@@ -64,5 +52,17 @@
         <action
             android:id="@+id/action_searchFragment_to_nav_home"
             app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_quiz"
+        android:name="com.app.motel.feature.quiz.QuizListFragment"
+        android:label="fragment_quiz_list"
+        tools:layout="@layout/fragment_quiz_list" >
+        <action
+            android:id="@+id/action_quizListFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_quizListFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
     </fragment>
 </navigation>

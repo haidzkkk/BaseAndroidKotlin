@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/PADDING_SIZE_DEFAULT"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    android:background="@drawable/background_border_radius_1">
+
+    <LinearLayout
+        android:id="@+id/ly_position_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL">
+
+        <TextView
+            android:id="@+id/tv_position_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Câu 12"
+            android:textSize="@dimen/TEXT_SIZE_LARGE"
+            android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"/>
+
+        <ImageView
+            android:id="@+id/icon_status"
+            android:layout_width="@dimen/ICON_SIZE_DEFAULT"
+            android:layout_height="@dimen/ICON_SIZE_DEFAULT"
+            android:src="@drawable/icon_true"/>
+
+        <TextView
+            android:id="@+id/tv_position_question_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Chưa trả lời)"
+            android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+            android:textStyle="italic"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/ly_status"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/red"
+            android:background="@drawable/background_border_radius_2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/PADDING_SIZE_SMALL">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:id="@+id/tv_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13."
+                    android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"/>
+
+                <TextView
+                    android:id="@+id/tv_question"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hãy chọn vũ khí để đội quân của Ngô Quyền đánh giáp lá cà tại trận Bạch Đằng?"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerColor="@color/grey"
+                android:layout_marginVertical="@dimen/PADDING_SIZE_SMALL"/>
+
+            <RadioGroup
+                android:id="@+id/group_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/PADDING_SIZE_DEFAULT"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/PADDING_SIZE_LARGE">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:scaleType="fitEnd"
+            android:src="@drawable/button_back_with"/>
+
+        <View
+            android:layout_width="@dimen/PADDING_SIZE_LARGE"
+            android:layout_height="0dp"/>
+
+        <ImageView
+            android:id="@+id/btn_continue"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:scaleType="fitStart"
+            android:src="@drawable/button_continue_with"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

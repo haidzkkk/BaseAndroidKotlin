@@ -12,6 +12,11 @@
     <color name="green">#4CAF50</color>
     <color name="blue">#2196F3</color>
     <color name="blueDark">#3F51B5</color>
+    <color name="redPink">#CF484A</color>
+
+    <color name="gold">#FFD700</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="bronze">#CD7F32</color>
 
     <color name="primary">#FF630C</color>
     <color name="primaryVariant">#C6FF630C</color>
@@ -30,6 +35,7 @@
     <color name="textColor4">#DE6D2E</color>
     <color name="textColor_permanent_1">#FFFFFF</color>
     <color name="textColor_permanent_2">#C4C4C4</color>
+    <color name="textColor_permanent_3">#45FFFFFF</color>
 
     <color name="icon1">#FF630C</color>
     <color name="icon2">#525252</color>

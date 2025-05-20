@@ -27,6 +27,13 @@ import com.history.vietnam.feature.Home.HomeFragment
 import com.app.motel.feature.home.MainActivity
 import com.app.motel.feature.search.SearchFragment
 import com.app.motel.feature.profile.InformationFragment
+import com.app.motel.feature.quiz.QuizActivity
+import com.app.motel.feature.quiz.QuizDashBroadFragment
+import com.app.motel.feature.quiz.QuizFinalFragment
+import com.app.motel.feature.quiz.QuizListFragment
+import com.app.motel.feature.quiz.QuizTestFragment
+import com.app.motel.feature.quiz.QuizRankingFragment
+import com.app.motel.feature.quiz.QuizRecheckFragment
 import com.history.vietnam.feature.profile.ProfileFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -47,6 +54,7 @@ interface AppComponent {
     fun inject(activity: HistoricalEventActivity)
     fun inject(activity: TerritoryActivity)
     fun inject(activity: AuthActivity)
+    fun inject(activity: QuizActivity)
 
     fun inject(fragment: HomeFragment)
     fun inject(fragment: PageFragment)
@@ -64,6 +72,13 @@ interface AppComponent {
     fun inject(fragment: RegisterFragment)
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: InformationFragment)
+    fun inject(fragment: QuizListFragment)
+
+    fun inject(fragment: QuizFinalFragment)
+    fun inject(fragment: QuizTestFragment)
+    fun inject(fragment: QuizDashBroadFragment)
+    fun inject(fragment: QuizRecheckFragment)
+    fun inject(fragment: QuizRankingFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

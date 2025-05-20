@@ -20,6 +20,7 @@ import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
 import com.history.vietnam.databinding.ActivityHistoricalEventBinding
 import com.history.vietnam.databinding.ActivityHistoricalFigureBinding
+import com.history.vietnam.ultis.finishActivityWithSlide
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
 
@@ -105,8 +106,7 @@ class HistoricalEventActivity : AppBaseActivity<ActivityHistoricalEventBinding>(
 
         val popped = navController.popBackStack()
         if (!popped) {
-            finish()
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            finishActivityWithSlide()
         }
     }
 

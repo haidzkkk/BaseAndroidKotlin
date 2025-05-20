@@ -8,7 +8,7 @@
         />
 
     <item
-        android:id="@+id/nav_inbox"
+        android:id="@+id/nav_quiz"
         android:icon="@drawable/icon_practice"
         android:title="Luyện tập"/>
 

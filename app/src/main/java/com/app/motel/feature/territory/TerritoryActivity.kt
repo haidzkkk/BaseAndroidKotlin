@@ -19,6 +19,7 @@ import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
 import com.history.vietnam.databinding.ActivityTerritoryBinding
+import com.history.vietnam.ultis.finishActivityWithSlide
 import javax.inject.Inject
 
 class TerritoryActivity : AppBaseActivity<ActivityTerritoryBinding>() {
@@ -103,8 +104,7 @@ class TerritoryActivity : AppBaseActivity<ActivityTerritoryBinding>() {
     }
 
     private fun handleBackWithAnimation() {
-        finish()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finishActivityWithSlide()
     }
 
     private fun listenStateViewModel() {

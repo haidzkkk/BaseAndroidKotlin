@@ -49,28 +49,28 @@ class EventAdapter constructor(
         binding.tvTitle.text = item.birthYear
         binding.tvContent.text = item.name
 
-        binding.cvImage.isVisible = isSelected
+        binding.image.isVisible = isSelected
         binding.lySelect.isVisible = item.getLevel == HistoricalEvent.Level.IMPORTANT
 
         if(isSelected){
             binding.tvTitle.setShadowLayer(10f, 0f, 0f, Color.YELLOW)
-            binding.tvContent.setShadowLayer(10f, 0f, 0f, Color.YELLOW)
+            binding.lyDot.backgroundTintList = ContextCompat.getColorStateList(binding.root.context, R.color.secondary)
         } else {
+            binding.lyDot.backgroundTintList = ContextCompat.getColorStateList(binding.root.context, R.color.primary)
             binding.tvTitle.setShadowLayer(0f, 0f, 0f, Color.TRANSPARENT)
-            binding.tvContent.setShadowLayer(0f, 0f, 0f, Color.TRANSPARENT)
         }
 
         if(isSelected){
             binding.image.show(item.image,
                 scaleType = CenterCrop(),
+                borderRadius = 1000,
                 onLoadFailed = {
-                    binding.cvImage.isVisible = false
+                    binding.image.isVisible = false
                 })
         }
 
         when (item.getLevel) {
             HistoricalEvent.Level.IMPORTANT, HistoricalEvent.Level.SUB_IMPORTANT -> {
-
                 binding.tvTitle.setTextColor(ContextCompat.getColor(binding.root.context, R.color.primary))
                 binding.tvContent.setTextColor(ContextCompat.getColor(binding.root.context, R.color.primary))
                 binding.tvTitle.setTypeface(null, Typeface.NORMAL)
@@ -92,9 +92,9 @@ class EventAdapter constructor(
             selectedPosition = position
 
             if (previous != position) {
-                binding.cvImage.setHeightCollapseAnimation()
+                binding.image.setHeightCollapseAnimation()
             } else {
-                binding.cvImage.setHeightExpandAnimation()
+                binding.image.setHeightExpandAnimation()
             }
 
             if(previous == position){

@@ -1,0 +1,184 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.app.motel.feature.quiz.QuizTestFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="43dp"
+            android:layout_height="50dp"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:paddingEnd="@dimen/PADDING_SIZE_OVER_SMALL"
+            android:src="@drawable/icon_back"
+            android:tint="@color/icon2"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            tools:ignore="RtlSymmetry,UseAppTint" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/btn_clear"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:paddingVertical="@dimen/PADDING_SIZE_OVER_SMALL"
+                android:paddingHorizontal="@dimen/PADDING_SIZE_EXTRA_SMALL"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/icon_time"
+                />
+
+            <TextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:30"
+                android:textSize="@dimen/TEXT_SIZE_LARGE"
+                android:textColor="@color/primary"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/PADDING_SIZE_SMALL"
+        android:backgroundTint="@color/background2"
+        android:background="@drawable/background_border_radius_2">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/PADDING_SIZE_DEFAULT"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="false"
+                app:cardCornerRadius="@dimen/RADIUS_DEFAULT">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/PADDING_SIZE_DEFAULT"
+                    android:paddingBottom="@dimen/PADDING_SIZE_DEFAULT">
+
+                    <LinearLayout
+                        android:id="@+id/ly_process"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_question_correct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="05"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/TEXT_SIZE_LARGE"
+                            android:textColor="@color/green"
+                            />
+
+                        <View
+                            android:id="@+id/process_correct"
+                            android:layout_width="0dp"
+                            android:layout_height="10dp"
+                            android:backgroundTint="@color/green"
+                            android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
+                            android:background="@drawable/background_circle"/>
+
+                        <View
+                            android:id="@+id/process_empty"
+                            android:layout_width="0dp"
+                            android:layout_height="10dp"/>
+
+                        <View
+                            android:id="@+id/process_incorrect"
+                            android:layout_width="0dp"
+                            android:layout_height="10dp"
+                            android:backgroundTint="@color/red"
+                            android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"
+                            android:background="@drawable/background_circle"/>
+
+                        <TextView
+                            android:id="@+id/tv_question_incorrect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="07"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/TEXT_SIZE_LARGE"
+                            android:textColor="@color/red"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_current_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Câu hỏi 13/20"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+                        android:textColor="@color/primary"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_question"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:text="hãy chọn vũ khí để đội quân của Ngô Quyền đánh giáp lá cà tại trận Bạch Đằng"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/TEXT_SIZE_LARGE"
+                        android:textColor="@color/textColor1"
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_question"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5.5"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
+            android:paddingHorizontal="@dimen/PADDING_SIZE_SUPPER_EXTRA_LARGE"
+            />
+
+    </LinearLayout>
+</LinearLayout>

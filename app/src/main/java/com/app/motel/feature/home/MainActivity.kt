@@ -65,7 +65,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         }
         this.findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
             destination.id.let { currentLayoutId ->
-                views.navBottom.isVisible = currentLayoutId == R.id.nav_home || currentLayoutId == R.id.nav_profile || currentLayoutId == R.id.nav_inbox
+                views.navBottom.isVisible = currentLayoutId == R.id.nav_home || currentLayoutId == R.id.nav_profile || currentLayoutId == R.id.nav_quiz
             }
         }
     }

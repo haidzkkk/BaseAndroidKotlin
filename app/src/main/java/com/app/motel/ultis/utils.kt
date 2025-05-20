@@ -1,11 +1,17 @@
 package com.app.motel.ultis
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import androidx.core.content.ContentProviderCompat.requireContext
 import java.text.Normalizer
 
+@SuppressLint("DefaultLocale")
+fun Int.formatTopPosition(): String{
+    return String.format("%02d", this)
+}
 
 fun String.removeAccents(): String {
     val normalized = Normalizer.normalize(this, Normalizer.Form.NFD)
@@ -22,4 +28,10 @@ fun View.focus(){
     this.requestFocus()
     val imm = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun View.setWeight(weight: Float){
+    val params = this.layoutParams as LinearLayout.LayoutParams
+    params.weight = weight
+    this.layoutParams = params
 }

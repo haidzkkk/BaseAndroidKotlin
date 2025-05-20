@@ -33,6 +33,7 @@
                 android:background="@drawable/background_circle_boder"/>
 
             <View
+                android:id="@+id/ly_dot"
                 android:layout_centerInParent="true"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -66,22 +67,13 @@
             android:text="1932"
             />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_image"
-            android:visibility="gone"
+        <ImageView
+            android:id="@+id/image"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            app:cardCornerRadius="1000dp"
+            android:visibility="gone"
             android:layout_gravity="end"
-            android:elevation="0dp">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher"/>
-
-        </androidx.cardview.widget.CardView>
+            android:src="@mipmap/ic_launcher"/>
 
     </LinearLayout>
 

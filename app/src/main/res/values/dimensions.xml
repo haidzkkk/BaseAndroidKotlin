@@ -13,6 +13,7 @@
     <dimen name="RADIUS_DEFAULT">10dp</dimen>
     <dimen name="RADIUS_LARGE">15dp</dimen>
     <dimen name="RADIUS_EXTRA_LARGE">20dp</dimen>
+    <dimen name="RADIUS_SUPER_EXTRA_LARGE">40dp</dimen>
 
     <dimen name="TEXT_SIZE_EXTRA_SMALL">8sp</dimen>
     <dimen name="TEXT_SIZE_SMALL">10sp</dimen>

@@ -8,6 +8,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
@@ -15,13 +16,14 @@ import com.bumptech.glide.request.target.Target
 fun ImageView.show(
     url: String?,
     scaleType: BitmapTransformation = CenterCrop(),
+    borderRadius: Int = 1,
     placeholder: Int? = null,
     onLoadFailed: (() -> Unit)? = null,
     onLoadSuccess: (() -> Unit)? = null
 ){
     Glide.with(this.context)
         .load(url)
-        .transform(scaleType)
+        .transform(scaleType, RoundedCorners(borderRadius))
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                 onLoadFailed?.invoke()

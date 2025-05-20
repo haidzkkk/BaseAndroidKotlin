@@ -16,10 +16,21 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.history.vietnam.R
 
-// navigate fragment
-fun Fragment.navigateFragmentWithSlide(fragmentId: Int, args: Bundle? = null, navigatorExtras: Navigator.Extras? = null) {
+fun Fragment.navigateFragmentWithSlide(
+    fragmentId: Int,
+    args: Bundle? = null,
+    navigatorExtras: Navigator.Extras? = null,
+    replace: Boolean? = false,
+    clearBackStack: Boolean? = false
+) {
+    if(replace == true){
+        findNavController().popBackStack()
+    }
 
     val navOptions = NavOptions.Builder()
+        .apply {
+            if (clearBackStack == true) setPopUpTo(findNavController().graph.startDestinationId, true)
+        }
         .setEnterAnim(R.anim.slide_in_right)
         .setExitAnim(R.anim.slide_out_left)
         .setPopEnterAnim(R.anim.slide_in_left)
@@ -60,6 +71,10 @@ fun Activity.startActivityWithTransition(intent: Intent) {
     startActivity(intent, options.toBundle())
 }
 
+fun Activity.finishActivityWithTransition() {
+    finishAfterTransition()
+}
+
 fun Activity.startActivityWithSlide(intent: Intent, launcher: ActivityResultLauncher<Intent>? = null) {
     val options = ActivityOptions.makeCustomAnimation(
         this,
@@ -74,6 +89,7 @@ fun Activity.startActivityWithSlide(intent: Intent, launcher: ActivityResultLaun
     }
 }
 
-fun Activity.finishActivityWithTransition() {
-    finishAfterTransition()
+fun Activity.finishActivityWithSlide() {
+    finish()
+    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 }

@@ -15,7 +15,7 @@
             android:id="@+id/btn_back"
             android:layout_width="43dp"
             android:layout_height="50dp"
-            android:paddingVertical="@dimen/PADDING_SIZE_OVER_SMALL"
+            android:paddingVertical="@dimen/PADDING_SIZE_DEFAULT"
             android:paddingEnd="@dimen/PADDING_SIZE_OVER_SMALL"
             android:src="@drawable/icon_back"
             android:tint="@color/icon2"

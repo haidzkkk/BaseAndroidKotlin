@@ -67,7 +67,6 @@ class FirebaseManager {
         rootRef.child(path).removeEventListener(listener)
     }
 
-    // Ghi đè dữ liệu tại path
     suspend fun <T> overwrite(path: String, data: T): Resource<T> = suspendCancellableCoroutine { cont ->
         val ref = rootRef.child(path)
 

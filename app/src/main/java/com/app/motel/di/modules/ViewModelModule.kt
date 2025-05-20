@@ -6,6 +6,7 @@ import com.app.motel.feature.auth.viewmodel.AuthViewModel
 import com.app.motel.feature.historicalEvent.viewmodel.HistoricalEventViewModel
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewModel
 import com.app.motel.feature.page.viewmodel.PageViewModel
+import com.app.motel.feature.quiz.viewmodel.QuizViewModel
 import com.app.motel.feature.territory.viewmodel.TerritoryViewModel
 import com.history.vietnam.feature.Home.HomeViewModel
 import com.history.vietnam.di.factory.AppViewModelFactory
@@ -50,6 +51,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
     fun bindAuthViewModel(viewmodel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(QuizViewModel::class)
+    fun bindQuizViewModel(viewmodel: QuizViewModel): ViewModel
 
 }
 

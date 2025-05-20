@@ -22,7 +22,8 @@ class PageRepository @Inject constructor(
         firebaseManager.removeListener("$objectPath/${AppConstants.FIREBASE_COMMENT_NODE}", listener)
 
     suspend fun likeComment(objectPath: String, comment: Comment){
-        val commentPath = if(comment.parentCommentId != null){
+        val isReplyComment = comment.parentCommentId != null
+        val commentPath = if(isReplyComment){
             "$objectPath/${AppConstants.FIREBASE_COMMENT_NODE}/${comment.parentCommentId}/${AppConstants.FIREBASE_COMMENT_NODE}/${comment.id}/${AppConstants.FIREBASE_LIKE_NODE}"
         }else{
             "$objectPath/${AppConstants.FIREBASE_COMMENT_NODE}/${comment.id}/${AppConstants.FIREBASE_LIKE_NODE}"

@@ -27,6 +27,9 @@ class HomeRepository @Inject constructor(
     suspend fun pushTerritory(){
         firebaseManager.push(AppConstants.FIREBASE_HISTORY_TERRITORY_PATH, DataSources.historyTerritory())
     }
+    suspend fun pushQuiz(){
+        firebaseManager.push(AppConstants.FIREBASE_QUIZ_PATH, DataSources.quizzes())
+    }
 
     suspend fun getEvents(): Resource<List<HistoricalEvent>>{
         return firebaseManager.getList(AppConstants.FIREBASE_HISTORY_EVENT_PATH, HistoricalEvent::class.java)

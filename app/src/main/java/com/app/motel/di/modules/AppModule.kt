@@ -7,6 +7,7 @@ import com.app.motel.data.network.FirebaseManager
 import com.app.motel.data.repository.AuthRepository
 import com.app.motel.data.repository.HistoricalFigureRepository
 import com.app.motel.data.repository.PageRepository
+import com.app.motel.data.repository.QuizRepository
 import com.app.motel.data.repository.UserRepository
 import com.app.motel.data.repository.SettingRepository
 import com.app.motel.data.repository.TerritoryRepository
@@ -139,6 +140,15 @@ object AppModule {
         return UserController(
             firebaseManager = firebaseManager,
             repo = repository,
+        )
+    }
+
+    @Provides
+    fun provideQuizRepository(
+        firebaseManager: FirebaseManager,
+    ): QuizRepository {
+        return QuizRepository(
+            firebaseManager = firebaseManager,
         )
     }
 }

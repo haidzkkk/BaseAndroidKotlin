@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_quiz"
+    app:startDestination="@id/quizDashBroadFragment">
+
+    <fragment
+        android:id="@+id/quizDashBroadFragment"
+        android:name="com.app.motel.feature.quiz.QuizDashBroadFragment"
+        android:label="fragment_quiz_dash_broad"
+        tools:layout="@layout/fragment_quiz_dash_broad" >
+        <action
+            android:id="@+id/action_quizDashBroadFragment_to_quizTestFragment"
+            app:destination="@id/quizTestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizTestFragment"
+        android:name="com.app.motel.feature.quiz.QuizTestFragment"
+        android:label="fragment_quiz_test"
+        tools:layout="@layout/fragment_quiz_test" >
+        <action
+            android:id="@+id/action_quizTestFragment_to_quizDashBroadFragment"
+            app:destination="@id/quizDashBroadFragment" />
+        <action
+            android:id="@+id/action_quizTestFragment_to_quizFinalFragment"
+            app:destination="@id/quizFinalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFinalFragment"
+        android:name="com.app.motel.feature.quiz.QuizFinalFragment"
+        android:label="fragment_quiz_final"
+        tools:layout="@layout/fragment_quiz_final" >
+        <action
+            android:id="@+id/action_quizFinalFragment_to_quizTestFragment"
+            app:destination="@id/quizTestFragment" />
+        <action
+            android:id="@+id/action_quizFinalFragment_to_quizRankingFragment"
+            app:destination="@id/quizRankingFragment" />
+        <action
+            android:id="@+id/action_quizFinalFragment_to_quizRecheckFragment"
+            app:destination="@id/quizRecheckFragment" />
+        <action
+            android:id="@+id/action_quizFinalFragment_to_quizDashBroadFragment"
+            app:destination="@id/quizDashBroadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizRankingFragment"
+        android:name="com.app.motel.feature.quiz.QuizRankingFragment"
+        android:label="fragment_quiz_ranking"
+        tools:layout="@layout/fragment_quiz_ranking" >
+        <action
+            android:id="@+id/action_quizRankingFragment_to_quizFinalFragment"
+            app:destination="@id/quizFinalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizRecheckFragment"
+        android:name="com.app.motel.feature.quiz.QuizRecheckFragment"
+        android:label="fragment_quiz_recheck"
+        tools:layout="@layout/fragment_quiz_recheck" >
+        <action
+            android:id="@+id/action_quizRecheckFragment_to_quizFinalFragment"
+            app:destination="@id/quizFinalFragment" />
+    </fragment>
+</navigation>

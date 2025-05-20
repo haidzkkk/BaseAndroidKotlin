@@ -1,5 +1,6 @@
 package com.history.vietnam.ultis
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.text.Spannable
@@ -68,6 +69,7 @@ fun Int.formatRoomName(): String {
 }
 
 
+@SuppressLint("SuspiciousIndentation")
 fun String.containsSearch(str: String): Boolean {
     val normalized1 = Normalizer.normalize(this, Normalizer.Form.NFD)
     val normalized2 = Normalizer.normalize(str, Normalizer.Form.NFD)

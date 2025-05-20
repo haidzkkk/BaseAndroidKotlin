@@ -131,9 +131,14 @@ object DateConverter {
         return calendar
     }
 
-    fun Date.toCalendar(): Calendar{
-        val date = this
-        return Calendar.getInstance().apply {time = date}
+    fun Date.toCalendar(): Calendar = Calendar.getInstance().apply { time = this@toCalendar }
+
+    fun Date.isToday(): Boolean {
+        val now = Calendar.getInstance()
+        val target = this.toCalendar()
+        return now.get(Calendar.YEAR) == target.get(Calendar.YEAR) &&
+                now.get(Calendar.MONTH) == target.get(Calendar.MONTH) &&
+                now.get(Calendar.DAY_OF_MONTH) == target.get(Calendar.DAY_OF_MONTH)
     }
 
     fun getTimeAgo(timeString: String?): String {
