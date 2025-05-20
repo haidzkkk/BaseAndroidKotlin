@@ -22,7 +22,8 @@ class EventAdapter constructor(
     private val settingController: SettingController,
     private val listener: AppBaseAdapter.AppListener<HistoricalEvent>,
 ): AppBaseAdapter<HistoricalEvent, ItemEventBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemEventBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemEventBinding {
          return ItemEventBinding.inflate(inflater, parent, false)
     }
 

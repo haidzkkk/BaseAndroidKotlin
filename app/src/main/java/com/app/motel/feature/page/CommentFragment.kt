@@ -125,7 +125,7 @@ class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
             views.txtComment.focus()
         }
         viewModel.userController.state.loginUser.observe(viewLifecycleOwner){
-            if(it && viewModel.userController.state.getCurrentUser == null){
+            if(it && !viewModel.userController.state.isLogin){
                 requireContext().showDialogConfirm(
                     title = "Opps!",
                     content = "Hãy đăng nhập để thực hiện chức năng này?",

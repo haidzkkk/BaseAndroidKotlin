@@ -2,11 +2,13 @@ package com.app.motel.feature.historicalFigure.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.app.motel.data.model.HistoricalEvent
 import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Section
 import com.app.motel.data.repository.HistoricalFigureRepository
+import com.app.motel.feature.profile.UserController
 import com.app.motel.feature.setting.SettingController
 import com.history.vietnam.core.AppBaseViewModel
 import com.history.vietnam.data.model.Resource
@@ -16,6 +18,7 @@ import javax.inject.Inject
 class HistoricalFigureViewModel @Inject constructor(
     private val historicalFigureRepository: HistoricalFigureRepository,
     val settingRepository: SettingController,
+    val userController: UserController,
 ): AppBaseViewModel<HistoricalFigureState, HistoricalFigureViewAction, HistoricalFigureViewEvent>(HistoricalFigureState()) {
     override fun handle(action: HistoricalFigureViewAction) {
 
@@ -34,5 +37,13 @@ class HistoricalFigureViewModel @Inject constructor(
 
     fun setInfoSelect(infoSelect: PageInfo?){
         liveData.infoSelect.value = infoSelect
+    }
+
+    fun setCurrentDynasty(dynasty: HistoryDynasty?){
+        liveData.currentDynasty.value = dynasty
+    }
+
+    fun setCurrentFigure(figure: HistoricalFigure?){
+        liveData.currentFigure.value = figure
     }
 }

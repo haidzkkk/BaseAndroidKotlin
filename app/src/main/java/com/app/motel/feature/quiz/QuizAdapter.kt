@@ -11,7 +11,8 @@ import com.history.vietnam.databinding.ItemQuizBinding
 class QuizAdapter (
     private val listener: AppBaseAdapter.AppListener<Quiz>
 ): AppBaseAdapter<Quiz, ItemQuizBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemQuizBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemQuizBinding {
          return ItemQuizBinding.inflate(inflater, parent, false)
     }
 

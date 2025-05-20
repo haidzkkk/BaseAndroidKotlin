@@ -16,10 +16,12 @@ class PageIndexAdapter constructor(
 ): AppBaseAdapter<Section, ItemFigureContentBinding>() {
     override fun inflateBinding(
         inflater: LayoutInflater,
-        parent: ViewGroup
+        parent: ViewGroup,
+        viewType: Int
     ): ItemFigureContentBinding {
          return ItemFigureContentBinding.inflate(inflater, parent, false)
     }
+
 
     private var currentPosition = 0
     @SuppressLint("NotifyDataSetChanged")

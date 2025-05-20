@@ -15,7 +15,8 @@ import com.history.vietnam.databinding.ItemTerritoryBinding
 class TerritoryAdapter (
     private val listener: AppBaseAdapter.AppListener<Territory>
 ): AppBaseAdapter<Territory, ItemTerritoryBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemTerritoryBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemTerritoryBinding {
          return ItemTerritoryBinding.inflate(inflater, parent, false)
     }
 

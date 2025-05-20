@@ -48,17 +48,24 @@ class HistoricalFigureTimelineFragment: AppBaseFragment<FragmentHistoricalFigure
         listenStateViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.setCurrentFigure(null)
+    }
+
+
     private fun init() {
         if(adapter == null){
             adapter = DynastyAdapter(viewModel.settingRepository,
                 object : AppBaseAdapter.AppListener<HistoryDynasty>(){
                     override fun onClickItem(item: HistoryDynasty, action: AppBaseAdapter.ItemAction) {
-
+                        viewModel.setCurrentDynasty(item)
                     }
                 },
                 object : AppBaseAdapter.AppListener<HistoricalFigure>(){
                     override fun onClickItem(item: HistoricalFigure, action: AppBaseAdapter.ItemAction) {
                         viewModel.setInfoSelect(null)
+                        viewModel.setCurrentFigure(item)
                         navigateFragmentWithSlide(R.id.pageFragmentFigure, PageFragment.getPageInfo(item, adapter?.getCurrentDynasty?.id))
                     }
                 },

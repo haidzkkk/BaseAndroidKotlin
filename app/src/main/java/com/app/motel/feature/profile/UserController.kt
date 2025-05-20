@@ -1,5 +1,6 @@
 package com.app.motel.feature.profile
 
+import com.app.motel.data.model.PageInfo
 import com.app.motel.data.network.FirebaseManager
 import com.app.motel.data.repository.UserRepository
 import com.history.vietnam.data.model.Resource
@@ -66,6 +67,17 @@ class UserController @Inject constructor(
                 state.currentUser.postValue(updateUser)
             }
             state.updateCurrentUser.postValue(updateUser)
+        }
+    }
+
+    fun savePage(pageInfo: PageInfo, save: Boolean){
+        if(state.getCurrentUser == null) {
+            state.loginUser.postValue(true)
+            return
+        }
+        scope.launch {
+            repo.savePage(pageInfo, save)
+            getCurrentUser()
         }
     }
 }

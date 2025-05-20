@@ -28,7 +28,7 @@ import javax.inject.Inject
 class QuizViewModel @Inject constructor(
     private val quizRepository: QuizRepository,
     private val userRepository: UserRepository,
-    private val userController: UserController,
+    val userController: UserController,
 ): AppBaseViewModel<QuizState, QuizViewAction, QuizViewEvent>(QuizState()) {
     override fun handle(action: QuizViewAction) {
 
@@ -54,7 +54,9 @@ class QuizViewModel @Inject constructor(
 
     fun initQuizTest(){
         val currentQuiz = liveData.currentQuiz.value?.data
-        val listQuestion = currentQuiz?.questions?.shuffled() ?: arrayListOf()
+        val listQuestion = currentQuiz?.questions?.map {
+            it.copy(image = it.image ?: currentQuiz.image)
+        }?.shuffled() ?: arrayListOf()
 
         liveData.questions.postValue(LinkedList(listQuestion))
         liveData.answers.postValue(arrayListOf())

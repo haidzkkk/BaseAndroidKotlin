@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.repository.QuizRepository
+import com.app.motel.feature.profile.UserController
 import com.history.vietnam.core.AppBaseViewModel
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.data.repository.HomeRepository
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repo: HomeRepository,
     private val quizRepository: QuizRepository,
+    val userController: UserController,
     ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     init {

@@ -18,7 +18,8 @@ class CommentAdapter(
     private val userController: UserController,
     private val settingController: SettingController? = null,
 ): AppBaseAdapter<Comment, ItemCommentBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemCommentBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemCommentBinding {
          return ItemCommentBinding.inflate(inflater, parent, false)
     }
 

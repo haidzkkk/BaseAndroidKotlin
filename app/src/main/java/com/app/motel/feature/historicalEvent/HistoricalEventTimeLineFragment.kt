@@ -46,12 +46,18 @@ class HistoricalEventTimeLineFragment: AppBaseFragment<FragmentHistoricalEventTi
         listenStateViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.setCurrentEvent(null)
+    }
+
     private fun init() {
         if(adapter == null){
             adapter = EventAdapter(viewModel.settingRepository,
                 object : AppBaseAdapter.AppListener<HistoricalEvent>(){
                     override fun onClickItem(item: HistoricalEvent, action: AppBaseAdapter.ItemAction) {
                         viewModel.setInfoSelect(null)
+                        viewModel.setCurrentEvent(item)
                         navigateFragmentWithSlide(R.id.pageFragmentEvent, PageFragment.getPageInfo(item))
                     }
                 }

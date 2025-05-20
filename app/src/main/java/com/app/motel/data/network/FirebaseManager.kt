@@ -97,36 +97,17 @@ class FirebaseManager {
             }
     }
 
+    suspend fun <T> remove(path: String, data: T): Resource<T> = suspendCancellableCoroutine { cont ->
+        rootRef.child(path).removeValue()
+            .addOnSuccessListener {
+                cont.resume(Resource.Success(data))
+            }
+            .addOnFailureListener { e ->
+                cont.resume(Resource.Error(e.message ?: "Unknown error"))
+            }
+    }
 
     fun getReference(path: String): DatabaseReference {
         return rootRef.child(path)
     }
 }
-
-//enum class DatabasePath(private val base: String) {
-//    HISTORY_DYNASTY(AppConstants.FIREBASE_HISTORY_DYNASTY_PATH),
-//    HISTORY_EVENT(AppConstants.FIREBASE_HISTORY_EVENT_PATH),
-//    HISTORY_TERRITORY(AppConstants.FIREBASE_HISTORY_TERRITORY_PATH),
-//    USER(AppConstants.FIREBASE_USER_PATH);
-//
-//    fun dbPath(id: String): DbPath {
-//        return DbPath("$base/$id")
-//    }
-//
-//    fun dbPath(): DbPath {
-//        return DbPath(base)
-//    }
-//
-//    companion object{
-//
-//        // ex: HistoryEvent/0 + /comments
-//        fun getCommentPath(objectPath: String): DbPath {
-//            return DbPath("$objectPath/${AppConstants.FIREBASE_COMMENT_NODE}")
-//        }
-//
-//        // ex: HistoryEvent/0/comments + /likes
-//        fun getLikeCommentPath(objectPath: String): DbPath {
-//            return DbPath("$objectPath/${AppConstants.FIREBASE_LIKE_NODE}")
-//        }
-//    }
-//}

@@ -18,7 +18,8 @@ class DynastyAdapter constructor(
     private val listenerDynasty: AppBaseAdapter.AppListener<HistoryDynasty>,
     private val listenerFigure: AppBaseAdapter.AppListener<HistoricalFigure>,
 ): AppBaseAdapter<HistoryDynasty, ItemDynastyBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemDynastyBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemDynastyBinding {
          return ItemDynastyBinding.inflate(inflater, parent, false)
     }
 

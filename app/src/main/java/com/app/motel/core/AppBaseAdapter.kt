@@ -8,7 +8,7 @@ import androidx.viewbinding.ViewBinding
 abstract class AppBaseAdapter<T, VB : ViewBinding>(
 ): RecyclerView.Adapter<AppBaseAdapter.BaseViewHolder<VB>>() {
 
-    abstract fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): VB
+    abstract fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): VB
     abstract fun bind(binding: VB, item: T, position: Int)
 
     protected var items: List<T> = listOf()
@@ -20,7 +20,7 @@ abstract class AppBaseAdapter<T, VB : ViewBinding>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<VB> {
-        val binding = inflateBinding(LayoutInflater.from(parent.context), parent)
+        val binding = inflateBinding(LayoutInflater.from(parent.context), parent, viewType)
         return BaseViewHolder(binding)
     }
 

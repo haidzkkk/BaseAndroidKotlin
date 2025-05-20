@@ -11,7 +11,8 @@ import com.history.vietnam.ultis.formatTopPosition
 class RankingAdapter(
     private val listener: AppBaseAdapter.AppListener<Ranking>
 ): AppBaseAdapter<Ranking, ItemRankingBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemRankingBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemRankingBinding {
          return ItemRankingBinding.inflate(inflater, parent, false)
     }
 

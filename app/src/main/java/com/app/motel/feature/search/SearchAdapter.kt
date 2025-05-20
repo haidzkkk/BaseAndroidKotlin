@@ -10,7 +10,8 @@ import com.history.vietnam.databinding.ItemSearchBinding
 class SearchAdapter (
     private val listener: AppBaseAdapter.AppListener<PageInfo>
 ): AppBaseAdapter<PageInfo, ItemSearchBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemSearchBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemSearchBinding {
          return ItemSearchBinding.inflate(inflater, parent, false)
     }
 

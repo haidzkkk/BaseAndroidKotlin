@@ -23,7 +23,7 @@
                 android:src="@drawable/icon_back"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/PADDING_SIZE_OVER_SMALL"
+                android:padding="@dimen/PADDING_SIZE_DEFAULT"
                 android:tint="@color/icon2"
                 tools:ignore="UseAppTint" />
 
@@ -40,7 +40,6 @@
                 android:textStyle="bold"/>
 
         </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="150dp"

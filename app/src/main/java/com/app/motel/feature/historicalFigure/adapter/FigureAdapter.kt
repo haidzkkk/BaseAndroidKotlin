@@ -19,7 +19,8 @@ class FigureAdapter constructor(
     private val settingController: SettingController,
     private val listener: AppBaseAdapter.AppListener<HistoricalFigure>
 ): AppBaseAdapter<HistoricalFigure, ItemFigureBinding>() {
-    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup): ItemFigureBinding {
+    override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
+        viewType: Int): ItemFigureBinding {
          return ItemFigureBinding.inflate(inflater, parent, false)
     }
 

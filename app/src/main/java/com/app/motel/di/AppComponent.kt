@@ -27,6 +27,7 @@ import com.history.vietnam.feature.Home.HomeFragment
 import com.app.motel.feature.home.MainActivity
 import com.app.motel.feature.search.SearchFragment
 import com.app.motel.feature.profile.InformationFragment
+import com.app.motel.feature.profile.SavedFragment
 import com.app.motel.feature.quiz.QuizActivity
 import com.app.motel.feature.quiz.QuizDashBroadFragment
 import com.app.motel.feature.quiz.QuizFinalFragment
@@ -79,6 +80,7 @@ interface AppComponent {
     fun inject(fragment: QuizDashBroadFragment)
     fun inject(fragment: QuizRecheckFragment)
     fun inject(fragment: QuizRankingFragment)
+    fun inject(fragment: SavedFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

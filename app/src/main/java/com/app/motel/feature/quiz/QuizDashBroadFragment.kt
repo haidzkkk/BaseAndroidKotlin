@@ -1,12 +1,16 @@
 package com.app.motel.feature.quiz
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.app.motel.data.model.PageInfo
+import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.quiz.viewmodel.QuizViewModel
 import com.app.motel.ui.show
 import com.history.vietnam.AppApplication
@@ -15,6 +19,7 @@ import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.databinding.FragmentQuizDashBroadBinding
 import com.history.vietnam.databinding.FragmentQuizFinalBinding
+import com.history.vietnam.ui.showDialogConfirm
 import com.history.vietnam.ui.showToast
 import com.history.vietnam.ultis.navigateFragmentWithSlide
 import com.history.vietnam.ultis.popFragmentWithSlide
@@ -54,6 +59,12 @@ class QuizDashBroadFragment : AppBaseFragment<FragmentQuizDashBroadBinding>() {
             }
             navigateFragmentWithSlide(R.id.quizTestFragment)
         }
+        views.btnSave.setOnClickListener {
+            viewModel.liveData.currentQuiz.value?.data?.apply {
+                val isSaved = viewModel.userController.state.checkIsSaved(this.id, PageInfo.Type.QUIZ) == true
+                viewModel.userController.savePage(PageInfo.fromQuiz(this), !isSaved)
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,6 +72,8 @@ class QuizDashBroadFragment : AppBaseFragment<FragmentQuizDashBroadBinding>() {
         viewModel.liveData.currentQuiz.observe(viewLifecycleOwner){
             when{
                 it.isSuccess() -> {
+                    checkStatusSaveQuiz()
+
                     views.img.show(it.data?.image, borderRadius = 10)
                     views.tvTvName.text = it.data?.title
                     views.tvPeriod.text = it.data?.period
@@ -72,6 +85,32 @@ class QuizDashBroadFragment : AppBaseFragment<FragmentQuizDashBroadBinding>() {
                 }
                 else -> {}
             }
+        }
+
+        viewModel.userController.state.loginUser.observe(viewLifecycleOwner){
+            if(it && !viewModel.userController.state.isLogin){
+                requireContext().showDialogConfirm(
+                    title = "Opps!",
+                    content = "Hãy đăng nhập để thực hiện chức năng này?",
+                    buttonConfirm = "Đăng nhập",
+                    buttonCancel = "Đóng",
+                    confirm = {
+                        requireActivity().startActivity(Intent(requireActivity(), AuthActivity::class.java))
+                    }
+                )
+            }
+            viewModel.userController.state.loginUser.postValue(false)
+        }
+
+        viewModel.userController.state.currentUser.observe(viewLifecycleOwner){
+            checkStatusSaveQuiz()
+        }
+    }
+
+    private fun checkStatusSaveQuiz(){
+        viewModel.userController.state.checkIsSaved(viewModel.liveData.currentQuiz.value?.data?.id, PageInfo.Type.QUIZ)?.apply {
+            views.btnSave.setImageResource(if(this) R.drawable.icon_save_select else R.drawable.icon_save)
+            views.btnSave.setColorFilter(if(this) ContextCompat.getColor(requireContext(), R.color.gold) else ContextCompat.getColor(requireContext(), R.color.black))
         }
     }
 }

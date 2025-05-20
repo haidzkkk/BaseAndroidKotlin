@@ -7,10 +7,11 @@ import com.app.motel.data.model.PageInfo
 import com.history.vietnam.core.AppState
 
 class HistoricalEventState: AppState {
-    val isSelectInfoDetail get() = infoSelect.value?.action == PageInfo.Action.DETAIL && infoSelect.value?.type == PageInfo.Type.HISTORICAL_EVENT
+    val isSelectInfoDetail get() = infoSelect.value?.action != PageInfo.Action.TIME_LINE && infoSelect.value?.type == PageInfo.Type.HISTORICAL_EVENT
     val getSelectTimeLine get() = infoSelect.value?.wikiPageId
 
     val infoSelect = MutableLiveData<PageInfo?>()
+    val currentEvent = MutableLiveData<HistoricalEvent?>(null)
 
     val historyEvents = MutableLiveData<List<HistoricalEvent>?>()
 }

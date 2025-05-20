@@ -50,7 +50,7 @@ class ProfileFragment : AppBaseFragment<FragmentProfileBinding>() {
             startIcon.setImageResource(R.drawable.icon_save)
             label.text = "Đã lưu"
             root.setOnClickListener {
-
+                navigateFragmentWithSlide(R.id.savedFragment)
             }
         }
         views.itemPolicy.apply {

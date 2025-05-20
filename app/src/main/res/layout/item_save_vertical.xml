@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:backgroundTint="@color/background2"
+    android:layout_marginBottom="@dimen/PADDING_SIZE_DEFAULT"
+    android:background="@drawable/background_border_radius_1">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="Nhà đinh"
+        android:textSize="@dimen/TEXT_SIZE_LARGE"
+        android:padding="@dimen/PADDING_SIZE_LARGE"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="232 - 592"
+        android:textSize="@dimen/TEXT_SIZE_LARGE"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingVertical="2dp"
+        android:backgroundTint="@color/primary"
+        android:background="@drawable/background_border_radius_bottom_1"/>
+
+</LinearLayout>

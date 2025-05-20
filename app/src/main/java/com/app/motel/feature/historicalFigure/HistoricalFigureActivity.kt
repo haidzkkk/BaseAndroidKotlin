@@ -1,10 +1,12 @@
 package com.app.motel.feature.historicalFigure
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.app.motel.data.model.Dynasty
 import com.app.motel.data.model.PageInfo
+import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity.Companion
 import com.app.motel.feature.historicalFigure.viewmodel.HistoricalFigureViewEvent
@@ -24,6 +27,7 @@ import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseActivity
 import com.history.vietnam.databinding.ActivityHistoricalFigureBinding
+import com.history.vietnam.ui.showDialogConfirm
 import com.history.vietnam.ultis.finishActivityWithSlide
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
@@ -75,23 +79,29 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
         })
         findNavController(R.id.fragment_view).addOnDestinationChangedListener { controller, destination, arguments ->
             val isHomeFragment = destination.id == R.id.historicalFigureTimelineFragment
-            supportActionBar?.setDisplayShowTitleEnabled(isHomeFragment)
+            views.tvTitle.isVisible = isHomeFragment
+            views.tvSubTitle.isVisible = isHomeFragment
+            views.btnSave.isVisible = !isHomeFragment
         }
     }
 
     private fun setupToolBar(){
-        setSupportActionBar(views.toolbar)
-        (views.toolbar.context as AppCompatActivity).setSupportActionBar(views.toolbar)
-        views.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24)
-        views.toolbar.setTitleTextAppearance(this, R.style.ToolbarTitleStyle)
-        views.toolbar.setSubtitleTextAppearance(this, R.style.ToolbarTitleStyle)
-        views.toolbar.isTitleCentered = true
-        views.toolbar.isSubtitleCentered = true
-        supportActionBar?.title = "Thời kỳ quân chủ"
-        supportActionBar?.subtitle = ""
-        views.toolbar.setNavigationOnClickListener {
+        views.tvTitle.text = "Thời kỳ quân chủ"
+        views.tvSubTitle.text = ""
+        views.btnBack.setOnClickListener {
             handleBackWithAnimation()
         }
+        views.btnSave.setOnClickListener {
+            viewModel.liveData.currentFigure.value?.let { currentFigure ->
+                viewModel.liveData.currentFigure.value?.apply {
+                    val isSaved = viewModel.userController.state.checkIsSaved(this.id, PageInfo.Type.HISTORICAL_FIGURE) == true
+                    val dynastyId: String = currentFigure.id ?: ""
+
+                    viewModel.userController.savePage(PageInfo.fromHistoricalFigure(this, dynastyId), !isSaved)
+                }
+            }
+        }
+
     }
 
     private fun handleBackWithAnimation() {
@@ -107,10 +117,38 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
         viewModel.settingRepository.state.backgroundColor.observe(this){
             val backgroundColor = viewModel.settingRepository.state.getBackgroundColor(this)
 
-            views.toolbar.setBackgroundColor(backgroundColor)
+            views.lyToolbar.setBackgroundColor(backgroundColor)
             views.lyRoot.setBackgroundColor(backgroundColor)
-            views.toolbar.setSubtitleTextColor(viewModel.settingRepository.state.getTextColor(this))
-            views.toolbar.setNavigationIconTint(viewModel.settingRepository.state.getTextColor(this))
+
+            views.tvSubTitle.setTextColor(viewModel.settingRepository.state.getTextColor(this))
+            views.btnBack.setColorFilter(viewModel.settingRepository.state.getTextColor(this))
+            viewModel.userController.state.checkIsSaved(viewModel.liveData.currentFigure.value?.id, PageInfo.Type.HISTORICAL_FIGURE)?.apply {
+                views.btnSave.setColorFilter(if(this) ContextCompat.getColor(baseContext, R.color.gold) else viewModel.settingRepository.state.getTextColor(baseContext))
+            }
+        }
+
+        viewModel.userController.state.loginUser.observe(this){
+            if(it && !viewModel.userController.state.isLogin){
+                showDialogConfirm(
+                    title = "Opps!",
+                    content = "Hãy đăng nhập để thực hiện chức năng này?",
+                    buttonConfirm = "Đăng nhập",
+                    buttonCancel = "Đóng",
+                    confirm = {
+                        startActivity(Intent(this, AuthActivity::class.java))
+                    }
+                )
+            }
+            viewModel.userController.state.loginUser.postValue(false)
+        }
+
+        viewModel.liveData.currentFigure.observe(this){
+            views.btnSave.isVisible = it != null
+            checkStatusSaveQuiz()
+        }
+
+        viewModel.userController.state.currentUser.observe(this){
+            checkStatusSaveQuiz()
         }
     }
 
@@ -119,14 +157,20 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
             when(it){
                 is HistoricalFigureViewEvent.SetCurrentDynasty -> {
                     val dynasty = Dynasty.getDynasty(it.historyDynasty.fromDate)
-                    supportActionBar?.title = dynasty.first
-                    supportActionBar?.subtitle = dynasty.second
-                    views.toolbar.invalidate()
+                    views.tvTitle.text = dynasty.first
+                    views.tvSubTitle.text = dynasty.second
                 }
                 else -> {
 
                 }
             }
+        }
+    }
+
+    private fun checkStatusSaveQuiz(){
+        viewModel.userController.state.checkIsSaved(viewModel.liveData.currentFigure.value?.id, PageInfo.Type.HISTORICAL_FIGURE)?.apply {
+            views.btnSave.setImageResource(if(this) R.drawable.icon_save_select else R.drawable.icon_save)
+            views.btnSave.setColorFilter(if(this) ContextCompat.getColor(baseContext, R.color.gold) else viewModel.settingRepository.state.getTextColor(baseContext))
         }
     }
 }

@@ -20,7 +20,8 @@ class RecheckQuestionAdapter (
 ): AppBaseAdapter<AnswerQuestion, ItemRecheckQuizBinding>() {
     override fun inflateBinding(
         inflater: LayoutInflater,
-        parent: ViewGroup
+        parent: ViewGroup,
+        viewType: Int
     ): ItemRecheckQuizBinding {
          return ItemRecheckQuizBinding.inflate(inflater, parent, false)
     }

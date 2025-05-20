@@ -1,6 +1,7 @@
 package com.app.motel.data.repository
 
 import android.content.SharedPreferences
+import com.app.motel.data.model.PageInfo
 import com.app.motel.data.network.FirebaseManager
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.data.model.User
@@ -43,11 +44,20 @@ class UserRepository @Inject constructor(
         } catch (e: Exception) {
             return Resource.Error(message = e.message ?: "Unknown error")
         }
-        return Resource.Error(message = "Unknown error")
     }
 
     suspend fun getUserById(id: String?): User?{
         if(id.isNullOrEmpty()) return null
         return firebaseManager.getObject("${AppConstants.FIREBASE_USER_PATH}/$id", User::class.java).data
+    }
+
+    suspend fun savePage(pageInfo: PageInfo, save: Boolean): Resource<PageInfo>{
+        val userId = getCurrentUserId()
+        if(userId.isEmpty()) return Resource.Error(message = "User id is empty")
+        if(pageInfo.id.isNullOrEmpty()) return Resource.Error(message = "Page id is empty")
+
+        val path = "${AppConstants.FIREBASE_USER_PATH}/$userId/${AppConstants.FIREBASE_SAVE_PATH}/${pageInfo.id}"
+        return if(save) firebaseManager.push(path, pageInfo)
+        else firebaseManager.remove(path, pageInfo)
     }
 }
