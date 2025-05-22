@@ -1,5 +1,6 @@
 package com.history.vietnam.data.model
 
+import com.app.motel.data.model.AppNotification
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.RealTimeId
 
@@ -12,6 +13,8 @@ data class User(
     val numberPhone: String? = null,
     val avatar: String? = null,
     val saves: Map<String, PageInfo>? = null,
+    val tokenDevice: String? = null,
+    val notifications: Map<String, AppNotification>? = null,
 ): RealTimeId {
     val getUserName get() =  if(name?.isNotEmpty() == true) name else username ?: "..."
 

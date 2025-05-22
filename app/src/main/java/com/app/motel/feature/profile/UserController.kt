@@ -1,5 +1,6 @@
 package com.app.motel.feature.profile
 
+import android.util.Log
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.network.FirebaseManager
 import com.app.motel.data.repository.UserRepository
@@ -14,7 +15,6 @@ import javax.inject.Singleton
 
 @Singleton
 class UserController @Inject constructor(
-    private val firebaseManager: FirebaseManager,
     private val repo: UserRepository,
 ) {
     val state: UserState = UserState()
@@ -24,17 +24,20 @@ class UserController @Inject constructor(
 
     fun getCurrentUser(){
         scope.launch {
+            Log.e("TAG", "getCurrentUser: ")
             val user = repo.getCurrentUser()
             if(user == null){
                 state.currentUser.postValue(Resource.Error(message = "Không tìm thấy người dùng"))
             }else{
                 state.currentUser.postValue(Resource.Success(user))
+                repo.updateTokenDeviceCurrentUser(true)
             }
         }
     }
 
     fun logout(){
         scope.launch {
+            repo.updateTokenDeviceCurrentUser(false)
             repo.removeCurrentUser()
             state.currentUser.postValue(Resource.Initialize())
         }

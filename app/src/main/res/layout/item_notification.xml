@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingVertical="@dimen/PADDING_SIZE_EXTRA_SMALL"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/ly_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="1000dp"
+        android:layout_margin="@dimen/PADDING_SIZE_SMALL"
+        android:layout_marginEnd="@dimen/PADDING_SIZE_SMALL"
+        android:background="@drawable/background_circle"
+        android:backgroundTint="@color/background2">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_user"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circle"
+            tools:ignore="UseAppTint" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_marginStart="@dimen/PADDING_SIZE_SMALL">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/TEXT_SIZE_DEFAULT"
+            tools:ignore="NestedWeights" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/TEXT_SIZE_SMALL"
+            android:textColor="@color/textColor2"
+            android:layout_marginTop="@dimen/PADDING_SIZE_EXTRA_SMALL"
+            android:text="7 giờ"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/icon_readed"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="@color/primary"
+        android:background="@drawable/background_circle"
+        android:layout_marginHorizontal="@dimen/PADDING_SIZE_SMALL"/>
+
+</LinearLayout>

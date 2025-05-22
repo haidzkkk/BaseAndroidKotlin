@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.motel.data.model.PageInfo
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity
 import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
+import com.app.motel.feature.notification.viewmodel.NotificationViewModel
 import com.app.motel.ui.adapter.SavedHorizontalAdapter
 import com.app.motel.feature.territory.TerritoryActivity
 import com.history.vietnam.AppApplication
@@ -20,6 +21,8 @@ import com.history.vietnam.core.AppBaseAdapter
 import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.databinding.FragmentHomeBinding
 import com.history.vietnam.ultis.DateConverter
+import com.history.vietnam.ultis.formatRoomName
+import com.history.vietnam.ultis.formatTopPosition
 import com.history.vietnam.ultis.navigateFragmentWithSlide
 import com.history.vietnam.ultis.startActivityWithSlide
 import java.util.Date
@@ -36,7 +39,9 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     private val mViewModel : HomeViewModel by lazy {
         ViewModelProvider(requireActivity(), viewModelFactory).get(HomeViewModel::class.java)
     }
-
+    private val notificationViewModel : NotificationViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(NotificationViewModel::class.java)
+    }
     private val savedAdapter = SavedHorizontalAdapter(object : AppBaseAdapter.AppListener<PageInfo>(){
         override fun onClickItem(item: PageInfo, action: AppBaseAdapter.ItemAction) {
             item.apply {
@@ -69,6 +74,9 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
             )
             navigateFragmentWithSlide(R.id.searchFragment, navigatorExtras = extras)
         }
+        views.iconNotification.setOnClickListener {
+            navigateFragmentWithSlide(R.id.notificationFragment)
+        }
         mViewModel.handle(HomeViewAction.getMotelViewAction)
 
         mViewModel.liveData.apply {
@@ -88,6 +96,12 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
 
             views.tvSaved.isVisible = saves.isNotEmpty()
             views.rcvSaved.isVisible = saves.isNotEmpty()
+        }
+
+        notificationViewModel.liveData.notifications.observe(viewLifecycleOwner){
+            val count = notificationViewModel.liveData.getCountNotificationUnread
+            views.tvNotifyBadge.isVisible = count > 0
+            views.tvNotifyBadge.text = count.toString()
         }
     }
 }

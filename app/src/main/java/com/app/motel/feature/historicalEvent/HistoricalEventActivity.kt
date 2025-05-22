@@ -92,7 +92,7 @@ class HistoricalEventActivity : AppBaseActivity<ActivityHistoricalEventBinding>(
         views.btnSave.setOnClickListener {
             viewModel.liveData.currentEvent.value?.apply {
                 val isSaved = viewModel.userController.state.checkIsSaved(this.id, PageInfo.Type.HISTORICAL_EVENT) == true
-                viewModel.userController.savePage(PageInfo.fromHistoricalEvent(this), !isSaved)
+                viewModel.userController.savePage(PageInfo.from(this), !isSaved)
             }
         }
     }

@@ -2,10 +2,12 @@ package com.history.vietnam.di.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.app.motel.data.network.ApiFirebase
 import com.app.motel.data.network.ApiWiki
 import com.app.motel.data.network.FirebaseManager
 import com.app.motel.data.repository.AuthRepository
 import com.app.motel.data.repository.HistoricalFigureRepository
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.PageRepository
 import com.app.motel.data.repository.QuizRepository
 import com.app.motel.data.repository.UserRepository
@@ -60,6 +62,26 @@ object AppModule {
         context,
         AppConstants.WIKI_BASE_URL
     )
+
+    @Provides
+    fun providerApiFirebase(
+        remoteDataSource: RemoteDataSource,
+        context: Context,
+    ): ApiFirebase {
+        val firebaseAccessToken = context.getSharedPreferences(AppConstants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).getString(AppConstants.SHARED_PREFERENCES_FIREBASE_ACCESS_TOKEN, "").let { token ->
+            if (token.isNullOrEmpty()) "Basic Y29yZV9jbGllbnQ6c2VjcmV0" else "Bearer $token"
+        }
+
+        return remoteDataSource.buildApi(
+            ApiFirebase::class.java,
+            context,
+            AppConstants.FIREBASE__BASE_URL,
+            headers = mapOf(
+                "Content-Type" to "application/json",
+                "Authorization" to firebaseAccessToken,
+            )
+        )
+    }
 
     @Provides
     fun provideRoomDAO(db: AppDatabase): RoomDAO = db.roomDao()
@@ -127,8 +149,20 @@ object AppModule {
         context: Context,
         firebaseManager: FirebaseManager,
     ): UserRepository = UserRepository(
-        prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE),
+        prefs = context.getSharedPreferences(AppConstants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE),
         firebaseManager = firebaseManager
+    )
+
+    @Provides
+    fun providerNotificationRepository(
+        context: Context,
+        api: ApiFirebase,
+        userRepository: UserRepository,
+        firebaseManager: FirebaseManager,
+    ): NotificationRepository = NotificationRepository(
+        apiFirebase = api,
+        userRepository = userRepository,
+        firebaseManager = firebaseManager,
     )
 
     @Provides
@@ -138,7 +172,6 @@ object AppModule {
         firebaseManager: FirebaseManager,
     ): UserController {
         return UserController(
-            firebaseManager = firebaseManager,
             repo = repository,
         )
     }

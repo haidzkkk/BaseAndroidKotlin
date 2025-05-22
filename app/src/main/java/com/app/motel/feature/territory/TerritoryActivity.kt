@@ -110,8 +110,12 @@ class TerritoryActivity : AppBaseActivity<ActivityTerritoryBinding>() {
     private fun listenStateViewModel() {
         viewModel.liveData.selectContent.observe(this){
             views.viewPager.setCurrentItem(0, true)
-
-
+        }
+        viewModel.liveData.infoSelect.observe(this){
+            if(it?.action == PageInfo.Action.LIKE || it?.action == PageInfo.Action.COMMENT){
+                views.navBottom.menu.getItem(1).isChecked = true
+                views.viewPager.setCurrentItem(1, true)
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.app.motel.data.repository
 
 import com.app.motel.data.network.FirebaseManager
+import com.app.motel.data.service.FirebaseAccessToken
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.data.model.User
 import com.history.vietnam.ultis.AppConstants
@@ -10,7 +11,6 @@ import javax.inject.Inject
 class AuthRepository @Inject constructor(
     private val firebaseManager: FirebaseManager
 ) {
-
     suspend fun loginUser(username: String, password: String): Resource<User> {
         if(username.isEmpty() || password.isEmpty()){
             return Resource.Error("Vui lòng nhập đầy đủ thông tin đăng nhập!")

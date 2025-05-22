@@ -92,6 +92,9 @@ class TerritoryHomeFragment : AppBaseFragment<FragmentTerritoryHomeBinding>() {
     }
 
     private fun handleSelectInfo(){
+        if(viewModel.liveData.firstSelectPageInfo) return
+        viewModel.liveData.firstSelectPageInfo = true
+
         val info = viewModel.liveData.infoSelect.value ?: return
         if(info.type == PageInfo.Type.TERRITORY || info.type == PageInfo.Type.TERRITORY_TIMELINE_ENTRY){
             val position = viewModel.liveData.getTerritoryInfoSelectIndex
@@ -105,6 +108,5 @@ class TerritoryHomeFragment : AppBaseFragment<FragmentTerritoryHomeBinding>() {
                 viewModel.liveData.getTimeLineInfoSelectId,
             )
         }
-        viewModel.setInfoSelect(null)
     }
 }

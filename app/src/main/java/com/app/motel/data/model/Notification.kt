@@ -1,29 +1,33 @@
 package com.app.motel.data.model
 
 data class AppNotification(
-    val id: String = "",
-    val title: String = "",
-    val message: String = "",
-    val type: String = "",
+    val id: String? = null,
+    val title: String? = null,
+    val message: String? = null,
+    val type: Type? = null,
     val senderId: String? = null,
     val receiverId: String? = null,
-    val imageUrl: String? = null,
-    val timestamp: Long = System.currentTimeMillis(),
-    val read: Boolean = false,
-    val data: Map<String, String>? = null
+    val time: String? = null,
+    val read: Boolean? = false,
+    val data: Map<String, String?>? = null
 ){
+    companion object{
+        val focusId = "focusId"
+        val objectPath = "objectPath"
+        val focusParentId = "focusParentId"
+    }
 
-    enum class Type(val value: String){
-        QUIZ("quiz"),
-        EVENT("event"),
-        COMMENT("comment"),
-        LIKE("like"),
-        SYSTEM("system");
-
-        companion object {
-            fun fromValue(value: String): Type? {
-                return entries.find { it.value == value }
-            }
-        }
+    enum class Type(){
+        QUIZ,
+        EVENT,
+        EVENT_LIKE,
+        EVENT_COMMENT,
+        FIGURE,
+        FIGURE_LIKE,
+        FIGURE_COMMENT,
+        TERRITORY,
+        TERRITORY_LIKE,
+        TERRITORY_COMMENT,
+        SYSTEM;
     }
 }

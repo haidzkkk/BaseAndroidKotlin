@@ -2,8 +2,10 @@ package com.app.motel.feature.territory.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.app.motel.data.model.AppNotification
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Territory
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.TerritoryRepository
 import com.app.motel.data.repository.UserRepository
 import com.app.motel.feature.profile.UserController
@@ -14,6 +16,7 @@ import com.google.firebase.database.ValueEventListener
 import com.history.vietnam.core.AppBaseViewModel
 import com.history.vietnam.data.model.Comment
 import com.history.vietnam.data.model.Resource
+import com.history.vietnam.ultis.AppConstants
 import com.history.vietnam.ultis.DateConverter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,6 +24,7 @@ import javax.inject.Inject
 class TerritoryViewModel @Inject constructor(
     private val repository: TerritoryRepository,
     private val userRepository: UserRepository,
+    private val notificationRepository: NotificationRepository,
     val userController: UserController,
 ): AppBaseViewModel<TerritoryState, TerritoryViewAction, TerritoryViewEvent>(TerritoryState()) {
     override fun handle(action: TerritoryViewAction) {
@@ -93,7 +97,8 @@ class TerritoryViewModel @Inject constructor(
 
         if(comment.likes == null) comment.likes = hashMapOf()
 
-        if(comment.likes!![userController.state.getCurrentUserId] != null){
+        val isLike = comment.likes!![userController.state.getCurrentUserId] == null
+        if(!isLike){
             comment.likes!!.remove(userController.state.getCurrentUserId)
         }else{
             comment.likes!![userController.state.getCurrentUserId] = userController.state.getCurrentUserId
@@ -104,13 +109,29 @@ class TerritoryViewModel @Inject constructor(
         viewModelScope.launch {
             repository.likeComment(comment)
         }
+
+        if(isLike
+            && userController.state.getCurrentUserId.isNotBlank()
+            && comment.idUser != userController.state.getCurrentUserId){
+
+            sendNotificationLikeComment(
+                comment = comment,
+                senderId = userController.state.getCurrentUserId,
+                receiverId = comment.idUser ?: "",
+                payload = mapOf(
+                    AppNotification.focusId to comment.id,
+                    AppNotification.focusParentId to comment.parentCommentId,
+                    AppNotification.objectPath to AppConstants.FIREBASE_HISTORY_TERRITORY_PATH,
+                )
+            )
+        }
     }
 
     fun replyComment(comment: Comment?) {
         liveData.currentCommentReply.postValue(comment)
     }
 
-    fun sendComment(content: String):Boolean {
+    fun sendComment(content: String, commentReply: Comment?):Boolean {
         if(userController.state.getCurrentUser == null) {
             userController.state.loginUser.postValue(true)
             return false
@@ -146,6 +167,76 @@ class TerritoryViewModel @Inject constructor(
             repository.sendComment(comment)
         }
 
+        val isReply = comment.parentCommentId != null
+
+        if(isReply && commentReply != null &&
+            userController.state.getCurrentUserId.isNotBlank()
+            && commentReply.idUser != userController.state.getCurrentUserId){
+
+            sendNotificationComment(
+                comment = comment,
+                senderId = userController.state.getCurrentUserId,
+                receiverId = commentReply.idUser ?: "",
+                payload = mapOf(
+                    AppNotification.focusId to comment.id,
+                    AppNotification.focusParentId to comment.parentCommentId,
+                    AppNotification.objectPath to AppConstants.FIREBASE_HISTORY_TERRITORY_PATH,
+                )
+            )
+        }
+
         return true
+    }
+
+    private fun sendNotificationComment(
+        comment: Comment,
+        senderId: String,
+        receiverId: String,
+        payload: Map<String, String?>? = null
+    ){
+        viewModelScope.launch {
+            val sender = userController.state.getCurrentUser
+
+            val notification = AppNotification(
+                id = IDManager.createID(),
+                title = "Thông báo",
+                message = "${sender?.name ?: "Người dùng"} đã trả lời luận của bạn: ${comment.content}",
+                type = AppNotification.Type.TERRITORY_COMMENT,
+                senderId = senderId,
+                receiverId = receiverId,
+                time = DateConverter.getCurrentStringDateTime(),
+                read = false,
+                data = payload
+            )
+
+            notificationRepository.addNotification(notification)
+            notificationRepository.sendNotification(notification)
+        }
+    }
+
+    private fun sendNotificationLikeComment(
+        comment: Comment,
+        senderId: String,
+        receiverId: String,
+        payload: Map<String, String?>? = null
+    ){
+        viewModelScope.launch {
+            val sender = userController.state.getCurrentUser
+
+            val notification = AppNotification(
+                id = IDManager.createID(),
+                title = "Thông báo",
+                message = "${sender?.name ?: "Người dùng"} đã thích bình luận của bạn: ${comment.content}",
+                type = AppNotification.Type.TERRITORY_LIKE,
+                senderId = senderId,
+                receiverId = receiverId,
+                time = DateConverter.getCurrentStringDateTime(),
+                read = false,
+                data = payload
+            )
+
+            notificationRepository.addNotification(notification)
+            notificationRepository.sendNotification(notification)
+        }
     }
 }

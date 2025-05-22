@@ -19,4 +19,5 @@ class PageState: AppState{
 
     val currentCommentReply = MutableLiveData<Comment?>()
     var selectContent = MutableLiveData<Int>(0)
+    var firstSelectPageInfo = false
 }

@@ -1,5 +1,6 @@
 package com.app.motel.feature.page
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -21,6 +22,13 @@ class CommentAdapter(
     override fun inflateBinding(inflater: LayoutInflater, parent: ViewGroup,
         viewType: Int): ItemCommentBinding {
          return ItemCommentBinding.inflate(inflater, parent, false)
+    }
+
+    private var selectChildPosition: Pair<Int, Int>? = null
+    @SuppressLint("NotifyDataSetChanged")
+    fun setSelectChildPosition(parentPosition: Int, childPosition: Int){
+        selectChildPosition = parentPosition to childPosition
+        notifyDataSetChanged()
     }
 
     override fun bind(binding: ItemCommentBinding, item: Comment, position: Int) {
@@ -64,6 +72,11 @@ class CommentAdapter(
         val adapter = CommentAdapter(listener, userController, settingController)
         binding.rcv.adapter = adapter
         adapter.updateData(item.comments?.values?.toList())
+        if(position == selectChildPosition?.first){
+            binding.rcv.post {
+                binding.rcv.smoothScrollToPosition(selectChildPosition?.second ?: 0)
+            }
+        }
 
         binding.btnLike.setTextColor(if(item.likes?.containsKey(userController.state.getCurrentUserId) == true){
             ContextCompat.getColor(binding.root.context, R.color.blue )

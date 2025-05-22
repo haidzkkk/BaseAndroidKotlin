@@ -3,18 +3,22 @@ package com.history.vietnam.feature.Home
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.data.model.PageInfo
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.QuizRepository
+import com.app.motel.data.service.FirebaseAccessToken
 import com.app.motel.feature.profile.UserController
 import com.history.vietnam.core.AppBaseViewModel
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.data.repository.HomeRepository
 import com.history.vietnam.ultis.containsRemoveAccents
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val repo: HomeRepository,
     private val quizRepository: QuizRepository,
+    val notificationRepository: NotificationRepository,
     val userController: UserController,
     ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
@@ -48,14 +52,14 @@ class HomeViewModel @Inject constructor(
                 if(it.title?.containsRemoveAccents(keyword, true) == true
                     || it.period?.containsRemoveAccents(keyword, true) == true
                     ){
-                    searchSection.add(PageInfo.fromQuiz(it))
+                    searchSection.add(PageInfo.from(it))
                 }
             }
             events.forEach {
                 if(it.name?.containsRemoveAccents(keyword, true) == true
                     || it.birthYear?.containsRemoveAccents(keyword, true) == true
                     ){
-                    searchSection.add(PageInfo.fromHistoricalEvent(it))
+                    searchSection.add(PageInfo.from(it))
                 }
             }
             dynasties.forEach { dynasty ->
@@ -63,7 +67,7 @@ class HomeViewModel @Inject constructor(
                     || dynasty.fromDate?.containsRemoveAccents(keyword, true) == true
                     || dynasty.toDate?.containsRemoveAccents(keyword, true) == true
                 ){
-                    searchSection.add(PageInfo.fromHistoryDynasty(dynasty))
+                    searchSection.add(PageInfo.from(dynasty))
                 }
                 dynasty.figures?.forEach { figure ->
                     if(figure.name?.containsRemoveAccents(keyword, true) == true
@@ -72,7 +76,7 @@ class HomeViewModel @Inject constructor(
                         || figure.spouse?.containsRemoveAccents(keyword, true) == true
                         || figure.title?.containsRemoveAccents(keyword, true) == true
                     ){
-                        searchSection.add(PageInfo.fromHistoricalFigure(figure, dynasty.id))
+                        searchSection.add(PageInfo.from(figure, dynasty.id))
                     }
                 }
             }
@@ -80,13 +84,13 @@ class HomeViewModel @Inject constructor(
                 if(it.title?.containsRemoveAccents(keyword, true) == true
                     || it.period?.containsRemoveAccents(keyword, true) == true
                 ){
-                    searchSection.add(PageInfo.fromTerritory(it))
+                    searchSection.add(PageInfo.from(it))
                 }
                 it.timelineEntries?.forEach { section ->
                     if(section.title?.containsRemoveAccents(keyword, true) == true
                         || section.content?.containsRemoveAccents(keyword, true) == true
                     ) {
-                        searchSection.add(PageInfo.fromSection(section, it.id ?: ""))
+                        searchSection.add(PageInfo.from(section, it.id ?: ""))
                     }
                 }
             }

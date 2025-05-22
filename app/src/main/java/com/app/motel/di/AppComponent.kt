@@ -25,6 +25,7 @@ import com.history.vietnam.di.modules.AppModule
 import com.history.vietnam.di.modules.ViewModelModule
 import com.history.vietnam.feature.Home.HomeFragment
 import com.app.motel.feature.home.MainActivity
+import com.app.motel.feature.notification.NotificationFragment
 import com.app.motel.feature.search.SearchFragment
 import com.app.motel.feature.profile.InformationFragment
 import com.app.motel.feature.profile.SavedFragment
@@ -74,13 +75,13 @@ interface AppComponent {
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: InformationFragment)
     fun inject(fragment: QuizListFragment)
-
     fun inject(fragment: QuizFinalFragment)
     fun inject(fragment: QuizTestFragment)
     fun inject(fragment: QuizDashBroadFragment)
     fun inject(fragment: QuizRecheckFragment)
     fun inject(fragment: QuizRankingFragment)
     fun inject(fragment: SavedFragment)
+    fun inject(fragment: NotificationFragment)
 
     fun fragmentFactory(): FragmentFactory
     fun viewModelFactory(): ViewModelProvider.Factory

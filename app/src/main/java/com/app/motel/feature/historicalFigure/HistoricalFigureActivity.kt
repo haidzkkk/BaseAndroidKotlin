@@ -97,7 +97,7 @@ class HistoricalFigureActivity : AppBaseActivity<ActivityHistoricalFigureBinding
                     val isSaved = viewModel.userController.state.checkIsSaved(this.id, PageInfo.Type.HISTORICAL_FIGURE) == true
                     val dynastyId: String = currentFigure.id ?: ""
 
-                    viewModel.userController.savePage(PageInfo.fromHistoricalFigure(this, dynastyId), !isSaved)
+                    viewModel.userController.savePage(PageInfo.from(this, dynastyId), !isSaved)
                 }
             }
         }

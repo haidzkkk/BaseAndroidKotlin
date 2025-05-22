@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.auth.viewmodel.AuthViewModel
+import com.app.motel.feature.notification.viewmodel.NotificationViewModel
 import com.app.motel.feature.profile.UserController
 import com.history.vietnam.AppApplication
 import com.history.vietnam.R
@@ -29,6 +30,12 @@ class ProfileFragment : AppBaseFragment<FragmentProfileBinding>() {
     @Inject
     lateinit var userController: UserController
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val notificationViewModel : NotificationViewModel by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(NotificationViewModel::class.java)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity().application as AppApplication).appComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
@@ -39,6 +46,9 @@ class ProfileFragment : AppBaseFragment<FragmentProfileBinding>() {
 
     @SuppressLint("SetTextI18n")
     private fun init(){
+        views.iconNotification.setOnClickListener {
+            navigateFragmentWithSlide(R.id.notificationFragment)
+        }
         views.itemInfo.apply {
             startIcon.setImageResource(R.drawable.icon_info)
             label.text = "Thông tin tài khoản"
@@ -104,6 +114,11 @@ class ProfileFragment : AppBaseFragment<FragmentProfileBinding>() {
             views.tvWelcome.text = it.data.let { user ->
                 "Xin chào${if(user != null) ", ${user.getUserName}" else ""}"
             }
+        }
+        notificationViewModel.liveData.notifications.observe(viewLifecycleOwner){
+            val count = notificationViewModel.liveData.getCountNotificationUnread
+            views.tvNotifyBadge.isVisible = count > 0
+            views.tvNotifyBadge.text = count.toString()
         }
     }
 }

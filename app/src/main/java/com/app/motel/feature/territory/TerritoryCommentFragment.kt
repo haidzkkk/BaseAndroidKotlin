@@ -2,6 +2,7 @@ package com.app.motel.feature.territory
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.app.motel.data.model.AppNotification
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.page.CommentAdapter
 import com.app.motel.feature.territory.viewmodel.TerritoryViewModel
@@ -21,6 +23,7 @@ import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.data.model.Comment
 import com.history.vietnam.databinding.FragmentTerritoryCommentBinding
 import com.history.vietnam.ui.showDialogConfirm
+import com.history.vietnam.ultis.focus
 import javax.inject.Inject
 
 class TerritoryCommentFragment : AppBaseFragment<FragmentTerritoryCommentBinding>() {
@@ -79,7 +82,9 @@ class TerritoryCommentFragment : AppBaseFragment<FragmentTerritoryCommentBinding
         views.tilComment.setEndIconOnClickListener {
             views.txtComment.text.toString().apply {
                 if(this.isNotEmpty()){
-                    val success = viewModel.sendComment(this)
+                    val currentCommentReply = viewModel.liveData.currentCommentReply.value
+
+                    val success = viewModel.sendComment(this, currentCommentReply)
                     if(success){
                         views.txtComment.setText("")
                     }
@@ -98,7 +103,9 @@ class TerritoryCommentFragment : AppBaseFragment<FragmentTerritoryCommentBinding
 
                 views.txtComment.text.toString().apply {
                     if(this.isNotEmpty()){
-                        val success = viewModel.sendComment(this)
+                        val currentCommentReply = viewModel.liveData.currentCommentReply.value
+
+                        val success = viewModel.sendComment(this, currentCommentReply)
                         if(success){
                             views.txtComment.setText("")
                         }
@@ -114,11 +121,13 @@ class TerritoryCommentFragment : AppBaseFragment<FragmentTerritoryCommentBinding
         viewModel.liveData.comments.observe(viewLifecycleOwner){
             adapter?.updateData(it.data)
             views.tvEmpty.isVisible = it.data.isNullOrEmpty()
+            handleSelectCommentInPageInfo(it.data)
         }
         viewModel.liveData.currentCommentReply.observe(viewLifecycleOwner){
             views.tvUserReply.text = it?.user?.getUserName
             views.lyReply.isVisible = it != null
             views.txtComment.setText(it?.user?.getUserName ?: "")
+            views.txtComment.focus()
         }
         viewModel.userController.state.loginUser.observe(viewLifecycleOwner){
             if(it && !viewModel.userController.state.isLogin){
@@ -133,6 +142,29 @@ class TerritoryCommentFragment : AppBaseFragment<FragmentTerritoryCommentBinding
                 )
             }
             viewModel.userController.state.loginUser.postValue(false)
+        }
+    }
+
+    private fun handleSelectCommentInPageInfo(comments: List<Comment>?) {
+
+        if(comments.isNullOrEmpty()) return
+        if(viewModel.liveData.firstSelectCommentPageInfo) return
+        viewModel.liveData.firstSelectCommentPageInfo = true
+
+        val pageInfo = viewModel.liveData.infoSelect.value ?: return
+        val commentId = pageInfo.data?.get(AppNotification.focusId)
+        val parentCommentId = pageInfo.data?.get(AppNotification.focusParentId)
+
+        val parentCommentPosition = comments.indexOfFirst { it.id == (parentCommentId ?: commentId) }
+        val childCommentPosition = comments.getOrNull(parentCommentPosition)?.comments?.values?.indexOfFirst { it.id == commentId }
+
+        if(parentCommentPosition != -1){
+            views.rcv.post {
+                views.rcv.smoothScrollToPosition(parentCommentPosition)
+                if(childCommentPosition != null && childCommentPosition != -1){
+                    adapter?.setSelectChildPosition(parentCommentPosition, childCommentPosition)
+                }
+            }
         }
     }
 }

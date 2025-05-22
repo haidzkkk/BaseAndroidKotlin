@@ -39,12 +39,12 @@
                 />
 
             <ImageView
-                android:id="@+id/btn_search"
+                android:id="@+id/btn_shared"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_gravity="end|center_vertical"
                 android:paddingVertical="@dimen/PADDING_SIZE_SMALL"
                 android:paddingEnd="@dimen/PADDING_SIZE_DEFAULT"
-                android:layout_gravity="end|center_vertical"
                 android:src="@drawable/icon_share"
                 tools:ignore="RtlSymmetry" />
 

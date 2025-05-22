@@ -6,17 +6,21 @@ import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.app.motel.data.model.AnswerQuestion
+import com.app.motel.data.model.AppNotification
 import com.app.motel.data.model.Question
 import com.app.motel.data.model.Quiz
 import com.app.motel.data.model.QuizCompleted
 import com.app.motel.data.model.Ranking
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.QuizRepository
 import com.app.motel.data.repository.UserRepository
 import com.app.motel.feature.profile.UserController
 import com.app.motel.ultis.IDManager
 import com.history.vietnam.core.AppBaseViewModel
 import com.history.vietnam.data.model.Resource
+import com.history.vietnam.ultis.AppConstants
 import com.history.vietnam.ultis.DateConverter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -26,11 +30,16 @@ import java.util.LinkedList
 import javax.inject.Inject
 
 class QuizViewModel @Inject constructor(
-    private val quizRepository: QuizRepository,
+    val quizRepository: QuizRepository,
+    private val notificationRepository: NotificationRepository,
     private val userRepository: UserRepository,
     val userController: UserController,
 ): AppBaseViewModel<QuizState, QuizViewAction, QuizViewEvent>(QuizState()) {
     override fun handle(action: QuizViewAction) {
+
+    }
+
+    fun handleFindQuizDynamicLink(){
 
     }
 
@@ -202,6 +211,11 @@ class QuizViewModel @Inject constructor(
             }
             quizCompleted.ranking = ranking.data
             liveData.quizCompleted.postValue(Resource.Success(quizCompleted))
+
+            sendTopQuizToEveryOne(
+                quiz,
+                quizCompleted,
+            )
         }
     }
 
@@ -233,6 +247,37 @@ class QuizViewModel @Inject constructor(
             quiz.rankings = rankings?.let { ArrayList(it) }
 
             liveData.currentQuiz.postValue(Resource.Success(quiz))
+        }
+    }
+
+    private fun sendTopQuizToEveryOne(
+        quiz: Quiz,
+        quizCompleted: QuizCompleted,
+    ){
+        viewModelScope.launch(Dispatchers.IO) {
+            val sender = userController.state.getCurrentUser
+
+            val notification = AppNotification(
+                id = IDManager.createID(),
+                title = "Thông báo",
+                message = "${sender?.name ?: "Người dùng"} đã đạt ${quizCompleted.score} điểm của bộ ${quiz.title}, hãy thử thôi nào",
+                type = AppNotification.Type.QUIZ,
+                senderId = sender?.id,
+                receiverId = null,
+                time = DateConverter.getCurrentStringDateTime(),
+                read = false,
+                data = mapOf(
+                    AppNotification.focusId to quiz.id,
+                    AppNotification.objectPath to "${AppConstants.FIREBASE_QUIZ_PATH}/${quiz.id}",
+                )
+            )
+
+            userRepository.getAllUser()?.forEach { receiver ->
+                if(receiver.id != sender?.id){
+                    val notifySend = notification.copy(receiverId = receiver.id)
+                    notificationRepository.addNotification(notifySend)
+                }
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package com.app.motel.data.model
 
 import android.content.Intent
 import androidx.fragment.app.FragmentActivity
+import com.app.motel.data.network.FirebaseManager
 import com.app.motel.feature.historicalEvent.HistoricalEventActivity
 import com.app.motel.feature.historicalFigure.HistoricalFigureActivity
 import com.app.motel.feature.quiz.QuizActivity
@@ -10,6 +11,9 @@ import com.google.gson.Gson
 import com.history.vietnam.ultis.AppConstants
 import com.history.vietnam.ultis.DateConverter
 import com.history.vietnam.ultis.startActivityWithSlide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 data class PageInfo(
     val name: String? = null,
@@ -23,6 +27,7 @@ data class PageInfo(
     override val id: String? = firebaseId + type?.name,
 ): RealTimeId {
     var action: Action? = null
+    var data: Map<String, String?>? = null
 
     fun startActivity(activity: FragmentActivity){
         when(type){
@@ -51,7 +56,7 @@ data class PageInfo(
     companion object{
         fun getIdPageInfo(id: String?, type: Type): String = id + type.name
 
-        fun fromHistoricalFigure(figure: HistoricalFigure, dynastyId: String? = null): PageInfo {
+        fun from(figure: HistoricalFigure, dynastyId: String?): PageInfo {
             return PageInfo(
                 name = figure.name,
                 year = figure.birthYear,
@@ -69,7 +74,7 @@ data class PageInfo(
                 ),
             )
         }
-        fun fromHistoricalEvent(event: HistoricalEvent): PageInfo {
+        fun from(event: HistoricalEvent): PageInfo {
             return PageInfo(
                 name = event.name,
                 year = event.birthYear,
@@ -85,7 +90,7 @@ data class PageInfo(
                 ),
             )
         }
-        fun fromHistoryDynasty(dynasty: HistoryDynasty): PageInfo {
+        fun from(dynasty: HistoryDynasty): PageInfo {
             return PageInfo(
                 name = dynasty.name,
                 year = "${dynasty.fromDate ?: "Không rõ"} - ${dynasty.toDate ?: "Không rõ"}",
@@ -96,7 +101,7 @@ data class PageInfo(
             )
         }
 
-        fun fromTerritory(territory: Territory): PageInfo {
+        fun from(territory: Territory): PageInfo {
             return PageInfo(
                 name = territory.title,
                 year = territory.period,
@@ -107,7 +112,7 @@ data class PageInfo(
             )
         }
 
-        fun fromSection(section: Section, territoryId: String): PageInfo {
+        fun from(section: Section, territoryId: String): PageInfo {
             return PageInfo(
                 name = section.content,
                 year = section.title,
@@ -118,7 +123,7 @@ data class PageInfo(
             )
         }
 
-        fun fromQuiz(quiz: Quiz): PageInfo {
+        fun from(quiz: Quiz): PageInfo {
             return PageInfo(
                 name = quiz.title,
                 year = quiz.period,
@@ -141,6 +146,9 @@ data class PageInfo(
 
     enum class Action{
         TIME_LINE,
-        DETAIL
+        DETAIL,
+        LIKE,
+        RANK,
+        COMMENT,
     }
 }

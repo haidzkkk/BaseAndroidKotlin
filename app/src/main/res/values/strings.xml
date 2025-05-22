@@ -1,4 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">History of VietNam</string>
-    <string name="hello_blank_fragment">Trần Hưng Đạo (chữ Nho: 陳興道; 1228 – 1300)</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

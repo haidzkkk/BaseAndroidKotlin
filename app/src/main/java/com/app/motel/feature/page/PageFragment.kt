@@ -16,7 +16,6 @@ import com.history.vietnam.AppApplication
 import com.history.vietnam.R
 import com.history.vietnam.core.AppBaseFragment
 import com.history.vietnam.databinding.FragmentPageBinding
-import com.history.vietnam.ultis.AppConstants
 import javax.inject.Inject
 
 class PageFragment : AppBaseFragment<FragmentPageBinding>() {
@@ -25,14 +24,14 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
         const val KEY_ITEM = "KEY_ITEM"
 
         fun getPageInfo(figure: HistoricalFigure, dynastyId: String? = null): Bundle {
-            val pageInfo = PageInfo.fromHistoricalFigure(figure, dynastyId)
+            val pageInfo = PageInfo.from(figure, dynastyId)
             return Bundle().apply {
                 putString(KEY_ITEM, Gson().toJson(pageInfo))
             }
         }
 
         fun getPageInfo(event: HistoricalEvent): Bundle {
-            val pageInfo = PageInfo.fromHistoricalEvent(event)
+            val pageInfo = PageInfo.from(event)
             return Bundle().apply {
                 putString(KEY_ITEM, Gson().toJson(pageInfo))
             }
@@ -74,7 +73,7 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
         val pageInfo: PageInfo? = arguments?.getString(KEY_ITEM)?.let {
             Gson().fromJson(it, PageInfo::class.java)
         }
-        viewModel.initFigure(pageInfo)
+        viewModel.initPage(pageInfo)
 
         val fragments = arrayListOf(
             PageHomeFragment(),
@@ -109,6 +108,12 @@ class PageFragment : AppBaseFragment<FragmentPageBinding>() {
     }
 
     private fun listenStateViewModel() {
+        viewModel.liveData.pageInfo.observe(viewLifecycleOwner){
+            if(it.action == PageInfo.Action.LIKE || it.action == PageInfo.Action.COMMENT){
+                views.navBottom.menu.getItem(1).isChecked = true
+                views.viewPager.setCurrentItem(1, true)
+            }
+        }
         viewModel.liveData.selectContent.observe(viewLifecycleOwner){
             views.viewPager.setCurrentItem(0, true)
         }

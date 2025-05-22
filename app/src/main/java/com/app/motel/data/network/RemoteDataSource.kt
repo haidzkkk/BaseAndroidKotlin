@@ -65,15 +65,15 @@ class RemoteDataSource {
         context: Context,
         headers: Map<String, String>? = null,
     ): Interceptor = Interceptor {
-        val prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(AppConstants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
         val originalRequest: Request = it.request()
         val newRequest : Request = originalRequest.newBuilder()
             .apply {
+//                this.header("Authorization", prefs.getString(AppConstants.TOKEN_KEY, "").let { token ->
+//                    if (token.isNullOrEmpty()) "Basic Y29yZV9jbGllbnQ6c2VjcmV0" else "Bearer $token"
+//                })
                 headers?.forEach { (key, value) -> this.header(key, value) }
-                this.header("Authorization", prefs.getString(AppConstants.TOKEN_KEY, "").let { token ->
-                    if (token.isNullOrEmpty()) "Basic Y29yZV9jbGllbnQ6c2VjcmV0" else "Bearer $token"
-                })
             }
             .build();
         it.proceed(newRequest)
@@ -105,24 +105,21 @@ class RemoteDataSource {
 
             while (attempt < maxRetries) {
                 try {
-                    // Kiểm tra kết nối mạng trước khi thực hiện request
                     if (!NetworkUtil.isNetworkAvailable(context)) {
-                        throw IOException("No network available") // Ném lỗi nếu không có mạng
+                        throw IOException("No network available")
                     }
 
-                    response = chain.proceed(chain.request()) // Thực hiện request
-                    return response // Nếu thành công, trả về response
+                    response = chain.proceed(chain.request())
+                    return response
                 } catch (e: Exception) {
                     attempt++
                     lastException = e
                     if (attempt >= maxRetries) {
-                        throw lastException // Ném lỗi cuối cùng nếu retry hết số lần
+                        throw lastException
                     }
-                    // Delay giữa các lần thử
                     Thread.sleep(retryDelay)
                 }
             }
-            // Nếu không thành công, ném lỗi cuối cùng
             throw lastException ?: IllegalStateException("Unknown error")
         }
     }

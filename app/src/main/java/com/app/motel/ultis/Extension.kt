@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.google.gson.Gson
 import com.history.vietnam.data.model.Resource
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -115,4 +116,17 @@ fun View.setWeight(weight: Float){
     val params = this.layoutParams as LinearLayout.LayoutParams
     params.weight = weight
     this.layoutParams = params
+}
+
+
+inline fun <reified T : Any> T.serializeToMap(): Map<String, String> {
+    val gson = Gson()
+    val jsonObject = gson.toJsonTree(this).asJsonObject
+    val map = mutableMapOf<String, String>()
+
+    for ((key, value) in jsonObject.entrySet()) {
+        map[key] = if (value.isJsonNull) "" else value.toString().trim('"')
+    }
+
+    return map
 }

@@ -2,8 +2,10 @@ package com.app.motel.feature.page.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.app.motel.data.model.AppNotification
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Section
+import com.app.motel.data.repository.NotificationRepository
 import com.app.motel.data.repository.PageRepository
 import com.app.motel.data.repository.UserRepository
 import com.app.motel.feature.profile.UserController
@@ -22,6 +24,7 @@ import javax.inject.Inject
 class PageViewModel @Inject constructor(
     private val pageRepository: PageRepository,
     private val userRepository: UserRepository,
+    private val notificationRepository: NotificationRepository,
     val settingController: SettingController,
     val userController: UserController,
 ): AppBaseViewModel<PageState, PageViewAction, PageViewEvent>(PageState()) {
@@ -29,7 +32,7 @@ class PageViewModel @Inject constructor(
 
     }
 
-    fun initFigure(pageInfo: PageInfo?){
+    fun initPage(pageInfo: PageInfo?){
         liveData.pageInfo.postValue(pageInfo)
 
         viewModelScope.launch {
@@ -53,6 +56,7 @@ class PageViewModel @Inject constructor(
         }
 
         if(pageInfo?.firebasePath != null){
+            Log.e("FirebaseManager", "--> addListenerComment: ${pageInfo}")
             pageRepository.addListenerComment(pageInfo.firebasePath, commentListener)
         }
     }
@@ -66,6 +70,7 @@ class PageViewModel @Inject constructor(
         liveData.selectContent.postValue(0)
         liveData.comments.postValue(Resource.Initialize())
         liveData.currentCommentReply.postValue(null)
+        liveData.firstSelectPageInfo = false
     }
 
     fun likeComment(comment: Comment) {
@@ -76,7 +81,8 @@ class PageViewModel @Inject constructor(
 
         if(comment.likes == null) comment.likes = hashMapOf()
 
-        if(comment.likes!![userController.state.getCurrentUserId] != null){
+        val isLike = comment.likes!![userController.state.getCurrentUserId] == null
+        if(!isLike){
             comment.likes!!.remove(userController.state.getCurrentUserId)
         }else{
             comment.likes!![userController.state.getCurrentUserId] = userController.state.getCurrentUserId
@@ -87,13 +93,31 @@ class PageViewModel @Inject constructor(
         viewModelScope.launch {
             pageRepository.likeComment(liveData.pageInfo.value?.firebasePath ?: "", comment)
         }
+
+        if(isLike
+            && userController.state.getCurrentUserId.isNotBlank()
+            && comment.idUser != userController.state.getCurrentUserId){
+            val isFigure = liveData.pageInfo.value?.type == PageInfo.Type.HISTORICAL_FIGURE
+
+            sendNotificationLikeComment(
+                comment = comment,
+                type = if(isFigure) AppNotification.Type.FIGURE_LIKE else AppNotification.Type.EVENT_LIKE,
+                senderId = userController.state.getCurrentUserId,
+                receiverId = comment.idUser ?: "",
+                payload = mapOf(
+                    AppNotification.focusId to comment.id,
+                    AppNotification.focusParentId to comment.parentCommentId,
+                    AppNotification.objectPath to liveData.pageInfo.value?.firebasePath,
+                )
+            )
+        }
     }
 
     fun replyComment(comment: Comment?) {
         liveData.currentCommentReply.postValue(comment)
     }
 
-    fun sendComment(content: String):Boolean {
+    fun sendComment(content: String, commentReply: Comment?):Boolean {
         if(userController.state.getCurrentUser == null) {
             userController.state.loginUser.postValue(true)
             return false
@@ -129,6 +153,27 @@ class PageViewModel @Inject constructor(
             pageRepository.sendComment(liveData.pageInfo.value?.firebasePath ?: "", comment)
         }
 
+        val isReply = comment.parentCommentId != null
+
+        if(isReply && commentReply != null &&
+            userController.state.getCurrentUserId.isNotBlank()
+            && commentReply.idUser != userController.state.getCurrentUserId){
+
+            val isFigure = liveData.pageInfo.value?.type == PageInfo.Type.HISTORICAL_FIGURE
+
+            sendNotificationComment(
+                comment = comment,
+                type = if(isFigure) AppNotification.Type.FIGURE_COMMENT else AppNotification.Type.EVENT_COMMENT,
+                senderId = userController.state.getCurrentUserId,
+                receiverId = commentReply.idUser ?: "",
+                payload = mapOf(
+                    AppNotification.focusId to comment.id,
+                    AppNotification.focusParentId to comment.parentCommentId,
+                    AppNotification.objectPath to liveData.pageInfo.value?.firebasePath,
+                )
+            )
+        }
+
         return true
     }
 
@@ -153,6 +198,60 @@ class PageViewModel @Inject constructor(
 
         override fun onCancelled(error: DatabaseError) {
             Log.e("FirebaseManager", "<-- ${error.code} comment: ${error.toException()}")
+        }
+    }
+
+    private fun sendNotificationComment(
+        comment: Comment,
+        type: AppNotification.Type,
+        senderId: String,
+        receiverId: String,
+        payload: Map<String, String?>? = null
+    ){
+        viewModelScope.launch {
+            val sender = userController.state.getCurrentUser
+
+            val notification = AppNotification(
+                    id = IDManager.createID(),
+                    title = "Thông báo",
+                    message = "${sender?.name ?: "Người dùng"} đã trả lời luận của bạn: ${comment.content}",
+                    type = type,
+                    senderId = senderId,
+                    receiverId = receiverId,
+                    time = DateConverter.getCurrentStringDateTime(),
+                    read = false,
+                    data = payload
+                )
+
+            notificationRepository.addNotification(notification)
+            notificationRepository.sendNotification(notification)
+        }
+    }
+
+    private fun sendNotificationLikeComment(
+        comment: Comment,
+        type: AppNotification.Type,
+        senderId: String,
+        receiverId: String,
+        payload: Map<String, String?>? = null
+    ){
+        viewModelScope.launch {
+            val sender = userController.state.getCurrentUser
+
+            val notification = AppNotification(
+                    id = IDManager.createID(),
+                    title = "Thông báo",
+                    message = "${sender?.name ?: "Người dùng"} đã thích bình luận của bạn: ${comment.content}",
+                    type = type,
+                    senderId = senderId,
+                    receiverId = receiverId,
+                    time = DateConverter.getCurrentStringDateTime(),
+                    read = false,
+                    data = payload
+                )
+
+            notificationRepository.addNotification(notification)
+            notificationRepository.sendNotification(notification)
         }
     }
 }

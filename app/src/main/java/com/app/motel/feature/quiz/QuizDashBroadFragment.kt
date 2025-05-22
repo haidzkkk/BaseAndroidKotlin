@@ -21,6 +21,7 @@ import com.history.vietnam.databinding.FragmentQuizDashBroadBinding
 import com.history.vietnam.databinding.FragmentQuizFinalBinding
 import com.history.vietnam.ui.showDialogConfirm
 import com.history.vietnam.ui.showToast
+import com.history.vietnam.ultis.AppConstants
 import com.history.vietnam.ultis.navigateFragmentWithSlide
 import com.history.vietnam.ultis.popFragmentWithSlide
 import javax.inject.Inject
@@ -62,9 +63,28 @@ class QuizDashBroadFragment : AppBaseFragment<FragmentQuizDashBroadBinding>() {
         views.btnSave.setOnClickListener {
             viewModel.liveData.currentQuiz.value?.data?.apply {
                 val isSaved = viewModel.userController.state.checkIsSaved(this.id, PageInfo.Type.QUIZ) == true
-                viewModel.userController.savePage(PageInfo.fromQuiz(this), !isSaved)
+                viewModel.userController.savePage(PageInfo.from(this), !isSaved)
             }
         }
+        views.btnShared.setOnClickListener {
+            shareQuiz()
+        }
+    }
+
+    private fun shareQuiz(){
+        val currentQuiz = viewModel.liveData.currentQuiz.value?.data
+        if(currentQuiz == null){
+            requireActivity().showToast("Không tìm thấy quiz")
+            return
+        }
+
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "hãy luyện tập quiz này: ${AppConstants.DYNAMIC_LINK}?quizId=${currentQuiz.id}")
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(shareIntent, "Chia sẻ qua"))
+
     }
 
     @SuppressLint("SetTextI18n")

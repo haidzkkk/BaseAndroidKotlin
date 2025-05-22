@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
+import com.app.motel.data.model.AppNotification
 import com.app.motel.feature.auth.AuthActivity
 import com.app.motel.feature.page.viewmodel.PageViewModel
 import com.history.vietnam.AppApplication
@@ -80,7 +81,9 @@ class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
         views.tilComment.setEndIconOnClickListener {
             views.txtComment.text.toString().apply {
                 if(this.isNotEmpty()){
-                    val success = viewModel.sendComment(this)
+                    val currentCommentReply = viewModel.liveData.currentCommentReply.value
+
+                    val success = viewModel.sendComment(this, currentCommentReply)
                     if(success){
                         views.txtComment.setText("")
                     }
@@ -99,7 +102,9 @@ class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
 
                 views.txtComment.text.toString().apply {
                     if(this.isNotEmpty()){
-                        val success = viewModel.sendComment(this)
+                        val currentCommentReply = viewModel.liveData.currentCommentReply.value
+
+                        val success = viewModel.sendComment(this, currentCommentReply)
                         if(success){
                             views.txtComment.setText("")
                         }
@@ -117,6 +122,7 @@ class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
         viewModel.liveData.comments.observe(viewLifecycleOwner){
             adapter?.updateData(it.data)
             views.tvEmpty.isVisible = it.data.isNullOrEmpty()
+            handleSelectCommentInPageInfo(it.data)
         }
         viewModel.liveData.currentCommentReply.observe(viewLifecycleOwner){
             views.tvUserReply.text = it?.user?.getUserName
@@ -152,6 +158,28 @@ class CommentFragment : AppBaseFragment<FragmentCommentBinding>() {
         }
         viewModel.settingController.state.textFont.observe(viewLifecycleOwner){
             adapter?.notifyDataSetChanged()
+        }
+    }
+
+    private fun handleSelectCommentInPageInfo(comments: List<Comment>?) {
+        if(comments.isNullOrEmpty()) return
+        if(viewModel.liveData.firstSelectPageInfo) return
+        viewModel.liveData.firstSelectPageInfo = true
+
+        val pageInfo = viewModel.liveData.pageInfo.value ?: return
+        val commentId = pageInfo.data?.get(AppNotification.focusId)
+        val parentCommentId = pageInfo.data?.get(AppNotification.focusParentId)
+
+        val parentCommentPosition = comments.indexOfFirst { it.id == (parentCommentId ?: commentId) }
+        val childCommentPosition = comments.getOrNull(parentCommentPosition)?.comments?.values?.indexOfFirst { it.id == commentId }
+
+        if(parentCommentPosition != -1){
+            views.rcv.post {
+                views.rcv.smoothScrollToPosition(parentCommentPosition)
+                if(childCommentPosition != null && childCommentPosition != -1){
+                    adapter?.setSelectChildPosition(parentCommentPosition, childCommentPosition)
+                }
+            }
         }
     }
 }

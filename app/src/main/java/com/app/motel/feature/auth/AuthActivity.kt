@@ -84,9 +84,4 @@ class AuthActivity : AppBaseActivity<ActivityAuthBinding>() {
             }
         }
     }
-
-    override fun onPause() {
-        super.onPause()
-        userController.getCurrentUser()
-    }
 }

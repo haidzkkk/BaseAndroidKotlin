@@ -13,4 +13,7 @@ class HistoricalEventRepository @Inject constructor(
 
     suspend fun getHistoryEvent() = firebaseManager.getList(AppConstants.FIREBASE_HISTORY_EVENT_PATH, HistoricalEvent::class.java)
 
+    suspend fun getEventById(id: String) = firebaseManager.getObject("${AppConstants.FIREBASE_HISTORY_EVENT_PATH}/$id", HistoricalEvent::class.java)
+
+    suspend fun getEventByPath(path: String) = firebaseManager.getObject(path, HistoricalEvent::class.java)
 }

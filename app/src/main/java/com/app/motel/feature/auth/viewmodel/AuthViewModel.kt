@@ -16,6 +16,7 @@ class AuthViewModel @Inject constructor(
     }
 
     fun login(username: String, password: String) {
+
         viewModelScope.launch {
             liveData.login.postValue(Resource.Loading())
             try {

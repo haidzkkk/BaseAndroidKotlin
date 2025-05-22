@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_home_to_quizListFragment"
             app:destination="@id/nav_quiz" />
+        <action
+            android:id="@+id/action_nav_home_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_profile"
@@ -37,6 +40,9 @@
         <action
             android:id="@+id/action_nav_profile_to_savedFragment"
             app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_nav_profile_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/informationFragment"
@@ -75,6 +81,18 @@
         tools:layout="@layout/fragment_saved" >
         <action
             android:id="@+id/action_savedFragment_to_nav_profile"
+            app:destination="@id/nav_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.app.motel.feature.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_notificationFragment_to_nav_profile"
             app:destination="@id/nav_profile" />
     </fragment>
 </navigation>

@@ -1,5 +1,7 @@
 package com.app.motel.data.repository
 
+import com.app.motel.data.model.HistoricalEvent
+import com.app.motel.data.model.HistoricalFigure
 import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.data.network.ApiWiki
 import com.app.motel.data.network.FirebaseManager
@@ -13,4 +15,5 @@ class HistoricalFigureRepository @Inject constructor(
 
     suspend fun getHistoryFigures() = firebaseManager.getList(AppConstants.FIREBASE_HISTORY_DYNASTY_PATH, HistoryDynasty::class.java)
 
+    suspend fun getFiguresByPath(path: String) = firebaseManager.getObject(path, HistoricalFigure::class.java)
 }

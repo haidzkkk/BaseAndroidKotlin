@@ -1,8 +1,10 @@
 package com.app.motel.data.repository
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.network.FirebaseManager
+import com.app.motel.data.service.FirebaseAccessToken
 import com.history.vietnam.data.model.Resource
 import com.history.vietnam.data.model.User
 import com.history.vietnam.ultis.AppConstants
@@ -49,6 +51,26 @@ class UserRepository @Inject constructor(
     suspend fun getUserById(id: String?): User?{
         if(id.isNullOrEmpty()) return null
         return firebaseManager.getObject("${AppConstants.FIREBASE_USER_PATH}/$id", User::class.java).data
+    }
+
+    suspend fun getAllUser(): List<User>?{
+        return firebaseManager.getList(AppConstants.FIREBASE_USER_PATH, User::class.java).data
+    }
+
+    suspend fun updateTokenDeviceCurrentUser(isAdd: Boolean): Resource<User> {
+        try {
+            val currentUser = getCurrentUser()
+            if(currentUser?.id == null) {
+                return Resource.Error(message = "User id is null")
+            }
+            val tokenDevice = if(isAdd) FirebaseAccessToken.getTokenDevice() else null
+            val newUser = currentUser.copy(
+                tokenDevice = tokenDevice?.data
+            )
+            return firebaseManager.overwrite("${AppConstants.FIREBASE_USER_PATH}/${currentUser.id}", newUser)
+        } catch (e: Exception) {
+            return Resource.Error(message = e.message ?: "Unknown error")
+        }
     }
 
     suspend fun savePage(pageInfo: PageInfo, save: Boolean): Resource<PageInfo>{

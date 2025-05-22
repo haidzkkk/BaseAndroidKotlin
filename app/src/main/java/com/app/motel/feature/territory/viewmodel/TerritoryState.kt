@@ -1,7 +1,6 @@
 package com.app.motel.feature.territory.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.app.motel.data.model.HistoryDynasty
 import com.app.motel.data.model.PageInfo
 import com.app.motel.data.model.Territory
 import com.history.vietnam.core.AppState
@@ -15,6 +14,8 @@ class TerritoryState: AppState {
     val currentCommentReply = MutableLiveData<Comment?>()
     var selectContent = MutableLiveData<Int>(0)
 
+    var firstSelectPageInfo = false
+    var firstSelectCommentPageInfo = false
     val infoSelect = MutableLiveData<PageInfo?>()
     val getTerritoryInfoSelectIndex get() = infoSelect.value?.let {
         var position: Int? = null
