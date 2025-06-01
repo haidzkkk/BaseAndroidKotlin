@@ -1,5 +1,7 @@
 package com.app.langking.feature.Home
 
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import com.app.langking.core.AppBaseViewModel
 import com.app.langking.data.local.DatabaseManager
 import com.app.langking.data.model.Category
@@ -9,17 +11,17 @@ import com.app.langking.data.repository.HomeRepository
 import com.app.langking.data.repository.UserRepository
 import com.app.langking.ultis.DateConverter
 import com.app.langking.ultis.Resource
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val repo: HomeRepository,
     private val userRepository: UserRepository,
-    private val dbManager: DatabaseManager,
     ) : AppBaseViewModel<HomeViewLiveData, HomeViewAction, HomeViewEvent>(HomeViewLiveData()) {
 
     init {
         onUpdate()
-        getCategory()
+        importSampleData()
     }
 
     override fun handle(action: HomeViewAction) {
@@ -30,26 +32,51 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onUpdate(){
-        liveData.currentUser.postValue(userRepository.getCurrentUser())
+        viewModelScope.launch {
+            liveData.currentUser.postValue(userRepository.getCurrentUser())
+        }
+    }
+
+    private fun importSampleData(){
+        viewModelScope.launch {
+//            repo.importSampleData()
+        }
+    }
+
+    fun getSampleData(){
+        viewModelScope.launch {
+            val categories = repo.getSampleData()
+        }
     }
 
     private fun getCategory(){
-        val userId = userRepository.getCurrentUser().id
-        val categories: List<Category> = dbManager.getAllCategoriesWithLessonsAndWords(userId)
-        updateLesson(categories)
+        val userId = userRepository.getCurrentUserId()
+        viewModelScope.launch {
+            val categories: Resource<List<Category>> = repo.getCategoriesByUser()
+            categories.data?.forEach {
+                it.lessons = repo.getLessonProcessById(it.id, userId)
+                liveData.categories.postValue(categories)
+            }
+            updateLesson(categories.data ?: arrayListOf())
+        }
     }
 
     private fun updateLesson(currentCategories: List<Category>){
-        for (index in currentCategories.indices) {
+
+        val categoriesSortPosition = currentCategories.sortedBy { it.position }
+        val firstPosition = currentCategories.minByOrNull { it.position ?: 1 }?.position ?: 1
+
+        for (index in categoriesSortPosition.indices) {
             val category = currentCategories[index]
-            val listLessonWithoutProcess = category.getLessonWithoutProcess() ?: arrayListOf()
-            var mapLessonWithoutProcessUpdated: HashMap<Int, Lesson>? = null
-            if(index == 0
+
+            val listLessonWithoutProcess = category.lessonWithoutProcess() ?: arrayListOf()
+            var mapLessonWithoutProcessUpdated: HashMap<String, Lesson>? = null
+            if(category.position == firstPosition
                 && category.checkCompletedCategoryPrevious(category)
                 && listLessonWithoutProcess.isNotEmpty()){
                 mapLessonWithoutProcessUpdated = createUserProcessForLesson(listLessonWithoutProcess)
-            }else if(index != 0
-                && category.checkCompletedCategoryPrevious(currentCategories[index - 1])
+            }else if(category.position != firstPosition
+                && category.checkCompletedCategoryPrevious(categoriesSortPosition[index - 1])
                 && listLessonWithoutProcess.isNotEmpty()){
                 mapLessonWithoutProcessUpdated = createUserProcessForLesson(listLessonWithoutProcess)
             }
@@ -65,14 +92,13 @@ class HomeViewModel @Inject constructor(
                     category.lessons = mapLessonWithoutProcessUpdated.values.toList()
                 }
             }
-
         }
         liveData.categories.postValue(Resource.Success(currentCategories))
     }
 
-    private fun createUserProcessForLesson(listLessonWithoutProcess : List<Lesson>): HashMap<Int, Lesson>{
-        val myMap: HashMap<Int, Lesson> = hashMapOf()
-        val userId = userRepository.getCurrentUser().id
+    private fun createUserProcessForLesson(listLessonWithoutProcess : List<Lesson>): HashMap<String, Lesson>{
+        val myMap: HashMap<String, Lesson> = hashMapOf()
+        val userId = userRepository.getCurrentUserId()
         listLessonWithoutProcess.forEach {lesson ->
             val userProcessAdd = UserProgress(
                 userId = userId,
@@ -80,7 +106,9 @@ class HomeViewModel @Inject constructor(
                 score = 0,
                 dateStart = DateConverter.getCurrentDateTime()
             )
-            dbManager.addUserProgress(userProcessAdd)
+            viewModelScope.launch {
+                repo.pushUserProgress(userProcessAdd)
+            }
             lesson.userProgress = userProcessAdd
             myMap[lesson.id] = lesson
         }
@@ -90,7 +118,7 @@ class HomeViewModel @Inject constructor(
     fun initProcessWithCategoryLesson(categories: List<Category>){
         for (index in categories.indices) {
             val category = categories[index]
-            val listLessonWithoutProcess = category.getLessonWithoutProcess() ?: arrayListOf()
+            val listLessonWithoutProcess = category.lessonWithoutProcess() ?: arrayListOf()
             if(listLessonWithoutProcess.isNotEmpty()){
                 createUserProcessForLesson(listLessonWithoutProcess)
             }

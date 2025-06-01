@@ -1,21 +1,26 @@
 package com.app.langking.feature.Learn.viewmodel
+import android.util.Log
+import androidx.lifecycle.viewModelScope
 import com.app.langking.core.AppBaseViewModel
-import com.app.langking.data.local.DatabaseManager
 import com.app.langking.data.local.LocalRepository
 import com.app.langking.data.model.Lesson
 import com.app.langking.data.model.TypeSpeak
 import com.app.langking.data.model.UserProgress
 import com.app.langking.data.model.Word
+import com.app.langking.data.repository.HomeRepository
+import com.app.langking.data.repository.LessonRepository
 import com.app.langking.data.repository.UserRepository
 import com.app.langking.ultis.DateConverter
+import kotlinx.coroutines.launch
 import java.util.LinkedList
 import java.util.Queue
 import javax.inject.Inject
 
 class LearnViewModel @Inject constructor(
-    private val dbManager: DatabaseManager,
     private val localRepo: LocalRepository,
-    private val userRepository: UserRepository
+    private val lessonRepository: LessonRepository,
+    private val userRepository: UserRepository,
+    private val homeRepository: HomeRepository,
 ) : AppBaseViewModel<LearnViewState, LearnViewAction, LearnViewEvent>(LearnViewState()) {
 
     override fun handle(action: LearnViewAction) {
@@ -37,9 +42,17 @@ class LearnViewModel @Inject constructor(
     }
 
     fun initViewmodel(lesson: Lesson?){
-        val result = dbManager.getLessonDetailById(lesson?.id ?: -1, userRepository.getCurrentUser()?.id ?: -1)
-        liveData.currentLesson.postValue(result ?: lesson
-            ?: liveData.categories.value?.firstOrNull()?.lessons?.firstOrNull())
+        if(lesson?.categoryId.isNullOrEmpty() || lesson?.id.isNullOrEmpty()){
+            liveData.currentLesson.postValue(lesson)
+            return
+        }
+
+        viewModelScope.launch {
+            val result = lessonRepository.getLessonById(lesson?.categoryId, lesson?.id, userRepository.getCurrentUserId())
+            liveData.currentLesson.postValue(result.data
+                ?: lesson
+            )
+        }
     }
 
     fun startTest(): Boolean{
@@ -95,12 +108,22 @@ class LearnViewModel @Inject constructor(
     }
 
     fun submitTest() {
-        val userProgress: UserProgress = liveData.currentLesson.value?.userProgress
-            ?: UserProgress(userRepository.getCurrentUser()?.id ?: -1, liveData.currentLesson.value?.id ?: -1)
+        val currentProgress = liveData.currentLesson.value?.userProgress
+
+        val userProgressPush: UserProgress = liveData.currentLesson.value?.userProgress?.copy()
+            ?: UserProgress(userRepository.getCurrentUserId(), liveData.currentLesson.value?.id ?: "")
 
         val allMistakes: Int = liveData.testAllowedMistakesCount.value ?: 0
-        userProgress.score = if(allMistakes == 3) 100 else if(allMistakes == 2) 75 else if(allMistakes == 1) 50 else 10
-        userProgress.dateTest = DateConverter.getCurrentDateTime()
-        dbManager.addUserProgress(userProgress)
+        userProgressPush.score = if(allMistakes == 3) 100 else if(allMistakes == 2) 75 else if(allMistakes == 1) 50 else 10
+        userProgressPush.dateTest = DateConverter.getCurrentDateTime()
+
+        Log.e("submitTest", "submitTest: ${currentProgress?.score} < ${userProgressPush.score}")
+        if(currentProgress == null
+            || currentProgress.score < userProgressPush.score
+        ){
+            viewModelScope.launch {
+                homeRepository.pushUserProgress(userProgressPush)
+            }
+        }
     }
 }

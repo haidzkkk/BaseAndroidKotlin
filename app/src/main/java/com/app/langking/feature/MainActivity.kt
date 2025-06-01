@@ -81,7 +81,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
     private fun handleStateViewModel(){
         viewModel.liveData.apply {
-            val lessonId = intent?.extras?.getInt("lesson_id")
+            val lessonId = intent?.extras?.getString("lesson_id")
             if(lessonId != null){
                 categories.observeOnce(this@MainActivity) {
                     when(it.status){
@@ -104,17 +104,17 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
                 }
             }
 
-            val userLogin = intent?.getBooleanExtra(AppConstants.EXTRA_USER_LOGIN, false)
-            Log.e("TAG", "userLogin: $userLogin")
-            if(userLogin == true){
-                categories.observeOnce(this@MainActivity) {
-                    when(it.status){
-                        Status.SUCCESS ->{
+            var checkNewBie = true
+            categories.observe(this@MainActivity) {
+                when(it.status){
+                    Status.SUCCESS ->{
+                        if(checkNewBie && categories.value?.data?.lastOrNull()?.lessons != null){
+                            checkNewBie = false
                             val userNewbieDialogManager = UserNewbieDialogManager(this@MainActivity, viewModel, layoutInflater)
                             userNewbieDialogManager.checkNewbie(it.data)
                         }
-                        else -> {}
                     }
+                    else -> {}
                 }
             }
         }

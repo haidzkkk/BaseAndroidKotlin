@@ -12,6 +12,7 @@ class LessonDao(context: Context) {
     fun insertLesson(lesson: Lesson): Long {
         val db: SQLiteDatabase = dbHelper.writableDatabase
         val values = ContentValues().apply {
+            put("id", lesson.id)
             put("category_id", lesson.categoryId)
             put("name", lesson.name)
             put("content", lesson.content)
@@ -21,7 +22,7 @@ class LessonDao(context: Context) {
         return id
     }
 
-    fun getLessonsByCategory(categoryId: Int): List<Lesson> {
+    fun getLessonsByCategory(categoryId: String): List<Lesson> {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val cursor: Cursor = db.query(
             "lessons",
@@ -33,7 +34,7 @@ class LessonDao(context: Context) {
 
         val lessons = mutableListOf<Lesson>()
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
             val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
             val content = cursor.getString(cursor.getColumnIndexOrThrow("content"))
             lessons.add(Lesson(id, categoryId, name, content))
@@ -43,7 +44,7 @@ class LessonDao(context: Context) {
         return lessons
     }
 
-    fun getLessonById(id: Int): Lesson? {
+    fun getLessonById(id: String): Lesson? {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             "lessons",
@@ -57,8 +58,8 @@ class LessonDao(context: Context) {
         val lesson = cursor.use {
             if (it.moveToFirst()) {
                 Lesson(
-                    id = it.getInt(it.getColumnIndexOrThrow("id")),
-                    categoryId = it.getInt(it.getColumnIndexOrThrow("category_id")),
+                    id = it.getString(it.getColumnIndexOrThrow("id")),
+                    categoryId = it.getString(it.getColumnIndexOrThrow("category_id")),
                     name = it.getString(it.getColumnIndexOrThrow("name")),
                     content = it.getString(it.getColumnIndexOrThrow("content")),
                 )

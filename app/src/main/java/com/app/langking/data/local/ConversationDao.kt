@@ -10,6 +10,7 @@ class ConversationDao(context: Context) {
     fun insertConversation(conversation: Conversation): Long {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
+            put("id", conversation.id)
             put("user_id", conversation.userId)
             put("topic", conversation.topic)
             put("created_at", conversation.createdAt)
@@ -26,8 +27,8 @@ class ConversationDao(context: Context) {
             while (it.moveToNext()) {
                 conversations.add(
                     Conversation(
-                        id = it.getInt(it.getColumnIndexOrThrow("id")),
-                        userId = it.getInt(it.getColumnIndexOrThrow("user_id")),
+                        id = it.getString(it.getColumnIndexOrThrow("id")),
+                        userId = it.getString(it.getColumnIndexOrThrow("user_id")),
                         topic = it.getString(it.getColumnIndexOrThrow("topic")),
                         createdAt = it.getString(it.getColumnIndexOrThrow("created_at"))
                     )

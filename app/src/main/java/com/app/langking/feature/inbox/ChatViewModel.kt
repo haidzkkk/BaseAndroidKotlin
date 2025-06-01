@@ -33,8 +33,8 @@ class ChatViewModel @Inject constructor(
 }
 
     fun initializeChat(refresh: Boolean = false, words: String? = null){
-        if(refresh) dbManager.removeMessageByUserId(userRepository.getCurrentUser().id)
-        val messages = dbManager.getMessageByUserId(userRepository.getCurrentUser().id)
+        if(refresh) dbManager.removeMessageByUserId(userRepository.getCurrentUserId())
+        val messages = dbManager.getMessageByUserId(userRepository.getCurrentUserId())
         liveData.messages.postValue(ArrayList(messages))
         Log.d("ChatViewModel", "initializeChat: $messages")
         repo.initChat(messages)
@@ -56,7 +56,7 @@ class ChatViewModel @Inject constructor(
 
     fun addMessage(content: String, sender: String){
          val messageResult = Message(
-             userId = userRepository.getCurrentUser().id,
+             userId = userRepository.getCurrentUserId(),
              sender = sender,
              message = content,
              timestamp = DateConverter.getCurrentDateTime()

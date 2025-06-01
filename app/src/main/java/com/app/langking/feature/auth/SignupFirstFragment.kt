@@ -39,7 +39,7 @@ class SignupFirstFragment : AppBaseFragment<FragmentSignupFirstBinding>() {
             }
             views.tilName.error = null
 
-            val myAccount = Account(username = username)
+            val myAccount = Account(fullName = username)
 
             mViewModel.handle(AuthViewAction.RegisterSetupViewAction(myAccount))
             mViewModel.handle(AuthViewAction.SignupForwardPageViewAction(1))

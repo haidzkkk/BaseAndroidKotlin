@@ -159,11 +159,6 @@ class ExerciseFragment @Inject constructor() : AppBaseFragment<FragmentExerciseB
             return
         }
         val isCorrect = viewModel.submitAnswer(answer!!)
-        if(isCorrect){
-            Toast.makeText(requireContext(), "Đáp án đúng", Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(requireContext(), "Sai đáp án", Toast.LENGTH_SHORT).show()
-        }
         showBottomSheet(isCorrect, viewModel.liveData.testCurrentWord.value)
     }
 

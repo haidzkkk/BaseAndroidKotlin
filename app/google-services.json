@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "587695602198",
+    "firebase_url": "https://lang-king-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "lang-king",
+    "storage_bucket": "lang-king.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587695602198:android:0d8a3827364fbff2e6d337",
+        "android_client_info": {
+          "package_name": "com.app.langking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaTtdoTx1r-flw28mjOzMhmuziAw3veGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

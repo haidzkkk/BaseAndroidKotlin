@@ -71,6 +71,7 @@ class HomeFragment @Inject constructor() : AppBaseFragment<FragmentHomeBinding>(
     }
 
     private fun init(){
+        mViewModel.getSampleData()
         categoryAdapter = CategoryAdapter{ lesson ->
             if(lesson.userProgress != null){
                 LearnActivity.start(requireActivity(), lesson)

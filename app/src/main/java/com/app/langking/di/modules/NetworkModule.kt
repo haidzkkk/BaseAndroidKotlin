@@ -9,8 +9,11 @@ import com.app.langking.data.local.LocalRepository
 import com.app.langking.data.local.UserProfileDAO
 import com.app.langking.data.network.ApiTravle
 import com.app.langking.data.network.ChatRepository
+import com.app.langking.data.network.FirebaseManager
 import com.app.langking.data.network.RemoteDataSource
+import com.app.langking.data.repository.AuthRepository
 import com.app.langking.data.repository.HomeRepository
+import com.app.langking.data.repository.LessonRepository
 import com.app.langking.data.repository.UserRepository
 import com.app.langking.feature.inbox.ChatViewModel
 import com.app.langking.ultis.AppConstants
@@ -30,11 +33,16 @@ object NetworkModule {
         context: Context
     ): ApiTravle = remoteDataSource.buildApi(ApiTravle::class.java, context)
 
+    @Provides
+    @Singleton
+    fun providerFirebaseManager(): FirebaseManager = FirebaseManager()
 
     @Provides
     fun providerHomeRepository(
-        api: ApiTravle
-    ): HomeRepository = HomeRepository(api)
+        api: ApiTravle,
+        firebaseManager: FirebaseManager,
+        dbManager: DatabaseManager,
+    ): HomeRepository = HomeRepository(api, firebaseManager, dbManager)
 
     @Provides
     fun providerAccountRepository(
@@ -72,13 +80,28 @@ object NetworkModule {
     )
 
     @Provides
+    fun provideAuthRepository(
+        firebaseManager: FirebaseManager,
+    ): AuthRepository = AuthRepository(
+        firebaseManager = firebaseManager,
+    )
+
+    @Provides
+    fun provideLessonRepository(
+        firebaseManager: FirebaseManager,
+    ): LessonRepository = LessonRepository(
+        firebaseManager = firebaseManager,
+    )
+
+    @Provides
     @Singleton
     fun provideUserRepository(
-        context: Context
+        context: Context,
+        firebaseManager: FirebaseManager
     ): UserRepository {
         return UserRepository(
             context.getSharedPreferences(AppConstants.prefsKey, Context.MODE_PRIVATE),
-            AccountDAO(context)
+            firebaseManager
         )
     }
 

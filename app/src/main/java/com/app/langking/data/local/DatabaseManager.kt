@@ -12,7 +12,7 @@ import javax.inject.Inject
 class DatabaseManager @Inject constructor(val context: Context) {
     init {
         if(getUserCategory().isEmpty()){
-            insertData()
+//            insertData()
         }
     }
 
@@ -35,19 +35,19 @@ class DatabaseManager @Inject constructor(val context: Context) {
 
     fun addMessage(message: Message): Message? {
         val messageDao = MessageDao(context)
-        val messageId: Int = messageDao.insertMessage(message).toInt()
-        if(messageId == -1) return null
-        return message.copy(id = messageId)
+        val status: Int = messageDao.insertMessage(message).toInt()
+        if(status == -1) return null
+        return message.copy()
     }
 
     /// get
-    fun getMessageByUserId(userId: Int): List<Message>{
+    fun getMessageByUserId(userId: String): List<Message>{
         val messageDao = MessageDao(context)
         val messages = messageDao.getMessagesByUser(userId)
         return messages;
     }
 
-    fun removeMessageByUserId(userId: Int){
+    fun removeMessageByUserId(userId: String){
         val messageDao = MessageDao(context)
         val messages = messageDao.deleteMessagesByUser(userId)
     }
@@ -59,17 +59,17 @@ class DatabaseManager @Inject constructor(val context: Context) {
     }
     fun getUserLesson(): List<Lesson>{
         val lessonDao = LessonDao(context)
-        val lessons = lessonDao.getLessonsByCategory(0)
+        val lessons = lessonDao.getLessonsByCategory("")
         return lessons
     }
 
-    fun getLessonById(lessonId: Int): Lesson?{
+    fun getLessonById(lessonId: String): Lesson?{
         val lessonDao = LessonDao(context)
         val lesson = lessonDao.getLessonById(lessonId)
         return lesson
     }
 
-    fun getLessonDetailById(lessonId: Int, userId: Int): Lesson?{
+    fun getLessonDetailById(lessonId: String, userId: String): Lesson?{
         val lessonDao = LessonDao(context)
         val userProgressDao = UserProgressDao(context)
         val lesson: Lesson? = lessonDao.getLessonById(lessonId)
@@ -80,23 +80,24 @@ class DatabaseManager @Inject constructor(val context: Context) {
 
     fun getUserWord(): List<Word>{
         val wordDao = WordDao(context)
-        val words = wordDao.getWordsByLesson(0)
+        val words = wordDao.getWordsByLesson("")
         return words;
     }
 
-    fun getUserProgress(userId: Int): List<UserProgress>{
+    fun getUserProgress(userId: String): List<UserProgress>{
         val userProgressDao = UserProgressDao(context)
         val userProgresses = userProgressDao.getUserProgress(userId)
         return userProgresses
     }
 
-    fun getUserProgress(userId: Int, lessonId: Int): UserProgress?{
+    fun getUserProgress(userId: String, lessonId: String): UserProgress?{
         val userProgressDao = UserProgressDao(context)
         val userProgress = userProgressDao.getUserProgress(userId, lessonId)
         return userProgress
     }
 
-    fun getAllCategoriesWithLessonsAndWords(userId: Int): List<Category>{
+    fun getAllCategoriesWithLessonsAndWords(userId: String): List<Category>{
+        Log.e("getAllCategoriesWithLessonsAndWords", "start getAllCategoriesWithLessonsAndWords")
         val categoryDao = CategoryDao(context)
         val categories = categoryDao.getAllCategoriesDetail()
         categories.forEach {
@@ -104,7 +105,7 @@ class DatabaseManager @Inject constructor(val context: Context) {
                 lesson.userProgress = getUserProgress(userId, lesson.id)
             }
         }
-        Log.e("getAllCategoriesWithLessonsAndWords", categories.toString())
+        Log.e("getAllCategoriesWithLessonsAndWords", "stop getAllCategoriesWithLessonsAndWords: ${categories.toString()}")
         return categories
     }
 

@@ -13,6 +13,7 @@ class CategoryDao(context: Context) {
     fun insertCategory(category: Category): Long {
         val db: SQLiteDatabase = dbHelper.writableDatabase
         val values = ContentValues().apply {
+            put("id", category.id)
             put("name", category.name)
         }
         val id = db.insert("categories", null, values)
@@ -26,7 +27,7 @@ class CategoryDao(context: Context) {
 
         val categories = mutableListOf<Category>()
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
             val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
             categories.add(Category(id, name))
         }
@@ -44,18 +45,17 @@ class CategoryDao(context: Context) {
 
         categoryCursor.use { catCursor ->
             while (catCursor.moveToNext()) {
-                val categoryId = catCursor.getInt(catCursor.getColumnIndexOrThrow("id"))
+                val categoryId = catCursor.getString(catCursor.getColumnIndexOrThrow("id"))
                 val categoryName = catCursor.getString(catCursor.getColumnIndexOrThrow("name"))
 
                 val lessonCursor = db.rawQuery("SELECT * FROM lessons WHERE category_id = ?", arrayOf(categoryId.toString()))
-                val lessonList = mutableListOf<Lesson>()
+                val lessonList = arrayListOf<Lesson>()
 
                 lessonCursor.use { lessCursor ->
                     while (lessCursor.moveToNext()) {
-                        val lessonId = lessCursor.getInt(lessCursor.getColumnIndexOrThrow("id"))
+                        val lessonId = lessCursor.getString(lessCursor.getColumnIndexOrThrow("id"))
                         val lessonName = lessCursor.getString(lessCursor.getColumnIndexOrThrow("name"))
-
-                        lessonList.add(Lesson(lessonId, categoryId, lessonName, ))
+                        lessonList.add(Lesson(lessonId, categoryId, lessonName))
                     }
                 }
 

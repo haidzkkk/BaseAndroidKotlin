@@ -18,4 +18,11 @@ object AppConstants {
 
     const val EXTRA_USER_LOGIN = "user_login"
 
+    const val FIREBASE_ROOT_DB = "LangKingData"
+    const val FIREBASE_CATEGORY_NODE = "categories"
+    const val FIREBASE_LESSON_NODE = "lessons"
+    const val FIREBASE_WORD_NODE = "words"
+    const val FIREBASE_USER_NODE = "users"
+    const val FIREBASE_USER_PROGRESS_NODE = "userProcesses"
+
 }

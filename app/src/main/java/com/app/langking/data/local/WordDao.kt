@@ -11,6 +11,7 @@ class WordDao(context: Context) {
     fun insertWord(word: Word): Long {
         val db: SQLiteDatabase = dbHelper.writableDatabase
         val values = ContentValues().apply {
+            put("id", word.id)
             put("lesson_id", word.lessonId)
             put("english", word.english)
             put("vietnamese", word.vietnamese)
@@ -25,7 +26,7 @@ class WordDao(context: Context) {
         return id
     }
 
-    fun getWordsByLesson(lessonId: Int): List<Word> {
+    fun getWordsByLesson(lessonId: String): List<Word> {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val cursor: Cursor = db.query(
             "words",
@@ -37,7 +38,7 @@ class WordDao(context: Context) {
 
         val words = mutableListOf<Word>()
         while (cursor.moveToNext()) {
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
             val english = cursor.getString(cursor.getColumnIndexOrThrow("english"))
             val vietnamese = cursor.getString(cursor.getColumnIndexOrThrow("vietnamese"))
             val pronunciation = cursor.getString(cursor.getColumnIndexOrThrow("pronunciation"))

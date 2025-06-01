@@ -41,7 +41,7 @@ class CategoryAdapter(
             if(position == 0) isExpanded = true
             with(binding as ItemCategoryBinding){
                 this.tvTitle.text = category.name
-                val adapter = LessonAdapter(category.lessons ?: arrayListOf(), onItemClick)
+                val adapter = LessonAdapter(category.lessons?.toList() ?: arrayListOf(), onItemClick)
                 rcvLesson.adapter = adapter
 
                 val process = category.lessons

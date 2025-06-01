@@ -31,15 +31,15 @@ class SignupSecondFragment : AppBaseFragment<FragmentSignupSecondBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         views.btnContinue.setOnClickListener {
-            val email: String? = views.tilUsername.editText?.text?.toString()
-            if(email.isNullOrEmpty()){
+            val username: String? = views.tilUsername.editText?.text?.toString()
+            if(username.isNullOrEmpty()){
                 views.tilUsername.error = "Hãy nhập tên đăng nhập"
                 return@setOnClickListener
             }
             views.tilUsername.error = null
 
             val myAccount = (mViewModel.liveData.registerAccount ?: Account()).apply {
-                this.email = email
+                this.username = username
             }
 
             mViewModel.handle(AuthViewAction.RegisterSetupViewAction(myAccount))

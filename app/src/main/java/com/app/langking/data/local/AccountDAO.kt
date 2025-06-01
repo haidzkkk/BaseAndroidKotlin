@@ -35,6 +35,7 @@ class AccountDAO @Inject constructor(val context: Context) {
     fun insertAccount(account: Account): Long {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
+            put(COLUMN_ID, account.id)
             put(COLUMN_USERNAME, account.username)
             put(COLUMN_EMAIL, account.email)
             put(COLUMN_PASSWORD, account.password)
@@ -50,7 +51,7 @@ class AccountDAO @Inject constructor(val context: Context) {
 
         return if (cursor.moveToFirst()) {
             val account = Account(
-                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                id = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                 username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME)),
                 email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
                 password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD)),
@@ -87,7 +88,7 @@ class AccountDAO @Inject constructor(val context: Context) {
 
         return if (cursor.moveToFirst()) {
             val account = Account(
-                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                id = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                 username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME)),
                 email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
                 password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD)),
@@ -108,7 +109,7 @@ class AccountDAO @Inject constructor(val context: Context) {
 
         return if (cursor.moveToFirst()) {
             val account = Account(
-                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                id = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                 username = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME)),
                 email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
                 password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD)),

@@ -39,12 +39,12 @@ class ChatAdapter(
 
     fun listenGeneration(thinking: Boolean) {
         if(thinking){
-            if (messages.none { it.id == -999 }) {
-                messages.add(Message(-999, -1, Message.SENDER_BOT, "Thinking...", DateConverter.getCurrentDateTime()))
+            if (messages.none { it.id == "-999" }) {
+                messages.add(Message("-999", "-1", Message.SENDER_BOT, "Thinking...", DateConverter.getCurrentDateTime()))
                 notifyItemInserted(messages.size - 1)
             }
         }else{
-            val index = messages.indexOfFirst { it.id == -999 }
+            val index = messages.indexOfFirst { it.id == "-999" }
             if (index != -1) {
                 messages.removeAt(index)
                 notifyItemRemoved(index)

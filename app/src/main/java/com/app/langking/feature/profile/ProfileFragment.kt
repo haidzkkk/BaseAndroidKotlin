@@ -30,7 +30,7 @@ class ProfileFragment : AppBaseFragment<FragmentProfileBinding>() {
         (requireActivity().application as TravleApplication).travleComponent.inject(this)
         super.onViewCreated(view, savedInstanceState)
 
-        val currentUser = userRepo.getCurrentUser()
+        val currentUser = userRepo.getCurrentUser
 
         views.lvBack.setOnClickListener {
             popFragmentWithSlide()

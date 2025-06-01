@@ -9,9 +9,11 @@ import com.app.langking.data.local.LessonDao
 import com.app.langking.data.local.UserProgressDao
 import com.app.langking.data.model.Account
 import com.app.langking.data.model.Lesson
+import com.app.langking.data.network.FirebaseManager
 import com.app.langking.data.repository.UserRepository
 import com.app.langking.feature.notification.AppNotificationManager
 import com.app.langking.ultis.AppConstants
+import com.google.firebase.FirebaseApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,14 +33,13 @@ class DailyAlarmReceiver : BroadcastReceiver() {
     private suspend fun getLessonLearning(context: Context): Lesson?{
         val userRepo = UserRepository(
             sharedPreferences = context.getSharedPreferences(AppConstants.prefsKey, Context.MODE_PRIVATE),
-            accountRepo = AccountDAO(context)
+            firebaseManager = FirebaseManager()
         )
         val userProgressDao = UserProgressDao(context)
         val lessonDao = LessonDao(context)
 
-        val user: Account = userRepo.getCurrentUser()
-        val listData = userProgressDao.getUserProgress(user.id)
+        val listData = userProgressDao.getUserProgress(userRepo.getCurrentUserId())
         val userProgress = listData.firstOrNull { !it.isComplete }
-        return lessonDao.getLessonById(userProgress?.lessonId ?: 0)
+        return lessonDao.getLessonById(userProgress?.lessonId ?: "")
     }
 }

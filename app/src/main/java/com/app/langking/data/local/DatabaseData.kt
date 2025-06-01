@@ -1,23 +1,75 @@
 package com.app.langking.data.local
 
+import com.app.langking.data.model.Account
 import com.app.langking.data.model.Category
 import com.app.langking.data.model.Lesson
 import com.app.langking.data.model.UserProgress
 import com.app.langking.data.model.Word
 
 object DatabaseData {
+
+    fun getSampleUser(): List<Account> {
+        return listOf(
+            Account(
+                id = "admin",
+                username = "admin",
+                password = "admin",
+                email = "admin@gmail.com",
+                fullName = "admin",
+                avatar = "",
+                role = "ADMIN"
+            ),
+            Account(
+                id = "user1",
+                username = "user1",
+                password = "user1",
+                email = "user1@gmail.com",
+                fullName = "user1",
+                avatar = "",
+                role = "USER"
+            ),
+            Account(
+                id = "user2",
+                username = "user2",
+                password = "user2",
+                email = "user2@gmail.com",
+                fullName = "user2",
+                avatar = "",
+                role = "USER"
+            ),
+            Account(
+                id = "user3",
+                username = "user3",
+                password = "user3",
+                email = "user3@gmail.com",
+                fullName = "user3",
+                avatar = "",
+                role = "USER"
+            ),
+            Account(
+                id = "user4",
+                username = "user4",
+                password = "user4",
+                email = "user4@gmail.com",
+                fullName = "user4",
+                avatar = "",
+                role = "USER"
+            ),
+        )
+    }
+
     fun getSampleCategories(): List<Category> {
         return listOf(
-            Category(id = 1, name = "Basic grammar"),
-            Category(id = 2, name = "Basic Vocabulary"),
-            Category(id = 3, name = "English for Kids"),
-            Category(id = 4, name = "Business English"),
-            Category(id = 5, name = "Everyday Conversations"),
-            Category(id = 6, name = "Travel & Tourism"),
-            Category(id = 7, name = "Entertainment"),
-            Category(id = 8, name = "Study"),
-            Category(id = 9, name = "Environment & Nature"),
-            Category(id = 10, name = "Sports"),
+            Category(id = "1", position = 1, name = "Basic grammar"),
+            Category(id = "2", position = 2, name = "Basic Vocabulary"),
+            Category(id = "3", position = 3, name = "English for Kids"),
+            Category(id = "4", position = 4, name = "Business English"),
+            Category(id = "5", position = 5, name = "Everyday Conversations"),
+            Category(id = "6", position = 6, name = "Travel & Tourism"),
+            Category(id = "7", position = 7, name = "Entertainment"),
+            Category(id = "8", position = 8, name = "Study"),
+            Category(id = "9", position = 9, name = "Environment & Nature"),
+            Category(id = "10", position = 10, name = "Sports"),
 
             )
     }
@@ -25,57 +77,57 @@ object DatabaseData {
     fun getSampleLesson(): List<Lesson> {
         return listOf(
             // Basic grammar
-            Lesson(id = 1, categoryId = 1, name = "Tenses (Verb Forms)", content = ContentLessonData.tensesLesson),
-            Lesson(id = 2, categoryId = 1, name = "Conditional Sentences", content = ContentLessonData.conditionalSentencesLesson),
-            Lesson(id = 3, categoryId = 1, name = "Passive Voice", content = ContentLessonData.passiveVoiceLesson),
-            Lesson(id = 4, categoryId = 1, name = "Reported Speech", content = ContentLessonData.reportedSpeechLesson),
-            Lesson(id = 5, categoryId = 1, name = "Relative Clauses", content = ContentLessonData.relativeClauseLesson),
-            Lesson(id = 6, categoryId = 1, name = "Phrasal Verbs", content = ContentLessonData.phrasalVerbLesson),
+            Lesson(id = "1", categoryId = "1", name = "Tenses (Verb Forms)", content = ContentLessonData.tensesLesson),
+            Lesson(id = "2", categoryId = "1", name = "Conditional Sentences", content = ContentLessonData.conditionalSentencesLesson),
+            Lesson(id = "3", categoryId = "1", name = "Passive Voice", content = ContentLessonData.passiveVoiceLesson),
+            Lesson(id = "4", categoryId = "1", name = "Reported Speech", content = ContentLessonData.reportedSpeechLesson),
+            Lesson(id = "5", categoryId = "1", name = "Relative Clauses", content = ContentLessonData.relativeClauseLesson),
+            Lesson(id = "6", categoryId = "1", name = "Phrasal Verbs", content = ContentLessonData.phrasalVerbLesson),
 
 // Basic Vocabulary
-            Lesson(id = 7, categoryId = 2, name = "Common Words", content = "Learn essential everyday vocabulary to help you begin communicating in English."),
-            Lesson(id = 8, categoryId = 2, name = "Numbers & Colors", content = "Master basic numbers and colors used in daily conversations."),
-            Lesson(id = 9, categoryId = 2, name = "Basic Phrases", content = "Familiarize yourself with useful expressions and greetings."),
+            Lesson(id = "7", categoryId = "2", name = "Common Words", content = "Learn essential everyday vocabulary to help you begin communicating in English."),
+            Lesson(id = "8", categoryId = "2", name = "Numbers & Colors", content = "Master basic numbers and colors used in daily conversations."),
+            Lesson(id = "9", categoryId = "2", name = "Basic Phrases", content = "Familiarize yourself with useful expressions and greetings."),
 
 // English for Kids
-            Lesson(id = 10, categoryId = 3, name = "Animal Names", content = "Explore fun and engaging words related to animals."),
-            Lesson(id = 11, categoryId = 3, name = "Fun with Rhymes", content = "Enjoy learning English through rhymes and playful verses."),
-            Lesson(id = 12, categoryId = 3, name = "Storytelling", content = "Build vocabulary and creativity by listening to and telling stories."),
+            Lesson(id = "10", categoryId = "3", name = "Animal Names", content = "Explore fun and engaging words related to animals."),
+            Lesson(id = "11", categoryId = "3", name = "Fun with Rhymes", content = "Enjoy learning English through rhymes and playful verses."),
+            Lesson(id = "12", categoryId = "3", name = "Storytelling", content = "Build vocabulary and creativity by listening to and telling stories."),
 
 // Business English
-            Lesson(id = 13, categoryId = 4, name = "Office Communication", content = "Learn common phrases used in office and professional environments."),
-            Lesson(id = 14, categoryId = 4, name = "Email Writing", content = "Practice writing effective and professional emails."),
-            Lesson(id = 15, categoryId = 4, name = "Job Interviews", content = "Prepare for job interviews with useful tips and expressions."),
+            Lesson(id = "13", categoryId = "4", name = "Office Communication", content = "Learn common phrases used in office and professional environments."),
+            Lesson(id = "14", categoryId = "4", name = "Email Writing", content = "Practice writing effective and professional emails."),
+            Lesson(id = "15", categoryId = "4", name = "Job Interviews", content = "Prepare for job interviews with useful tips and expressions."),
 
 // Everyday Conversations
-            Lesson(id = 16, categoryId = 5, name = "Shopping Dialogues", content = "Learn how to talk about prices, items, and transactions while shopping."),
-            Lesson(id = 17, categoryId = 5, name = "Making Appointments", content = "Understand how to make and change appointments in English."),
-            Lesson(id = 18, categoryId = 5, name = "Small Talk", content = "Master the art of light conversation in social settings."),
+            Lesson(id = "16", categoryId = "5", name = "Shopping Dialogues", content = "Learn how to talk about prices, items, and transactions while shopping."),
+            Lesson(id = "17", categoryId = "5", name = "Making Appointments", content = "Understand how to make and change appointments in English."),
+            Lesson(id = "18", categoryId = "5", name = "Small Talk", content = "Master the art of light conversation in social settings."),
 
 // Travel & Tourism
-            Lesson(id = 19, categoryId = 6, name = "At the Airport", content = "Useful English for navigating the airport experience."),
-            Lesson(id = 20, categoryId = 6, name = "Hotel Conversations", content = "Common phrases used while staying at hotels."),
-            Lesson(id = 21, categoryId = 6, name = "Ordering Food", content = "Learn how to order meals and ask about dishes in English."),
+            Lesson(id = "19", categoryId = "6", name = "At the Airport", content = "Useful English for navigating the airport experience."),
+            Lesson(id = "20", categoryId = "6", name = "Hotel Conversations", content = "Common phrases used while staying at hotels."),
+            Lesson(id = "21", categoryId = "6", name = "Ordering Food", content = "Learn how to order meals and ask about dishes in English."),
 
 // Entertainment
-            Lesson(id = 22, categoryId = 7, name = "Movies", content = "Talk about films, genres, and favorite movie scenes."),
-            Lesson(id = 23, categoryId = 7, name = "Music", content = "Learn vocabulary related to music, instruments, and styles."),
-            Lesson(id = 24, categoryId = 7, name = "Video Games", content = "Explore gaming vocabulary and how to talk about your favorite games."),
+            Lesson(id = "22", categoryId = "7", name = "Movies", content = "Talk about films, genres, and favorite movie scenes."),
+            Lesson(id = "23", categoryId = "7", name = "Music", content = "Learn vocabulary related to music, instruments, and styles."),
+            Lesson(id = "24", categoryId = "7", name = "Video Games", content = "Explore gaming vocabulary and how to talk about your favorite games."),
 
 // Work & Study
-            Lesson(id = 25, categoryId = 8, name = "Subject", content = "Learn names of school subjects and how to describe them."),
-            Lesson(id = 26, categoryId = 8, name = "Class", content = "Understand classroom-related vocabulary and interactions."),
-            Lesson(id = 27, categoryId = 8, name = "School", content = "Explore school life vocabulary including people and places."),
+            Lesson(id = "25", categoryId = "8", name = "Subject", content = "Learn names of school subjects and how to describe them."),
+            Lesson(id = "26", categoryId = "8", name = "Class", content = "Understand classroom-related vocabulary and interactions."),
+            Lesson(id = "27", categoryId = "8", name = "School", content = "Explore school life vocabulary including people and places."),
 
 // Environment & Nature
-            Lesson(id = 28, categoryId = 9, name = "Weather and Seasons", content = "Discuss the weather, seasons, and how they affect our lives."),
-            Lesson(id = 29, categoryId = 9, name = "Natural Disasters", content = "Learn important terms for describing natural disasters."),
-            Lesson(id = 30, categoryId = 9, name = "Protecting the Environment", content = "Talk about environmental issues and how to protect nature."),
+            Lesson(id = "28", categoryId = "9", name = "Weather and Seasons", content = "Discuss the weather, seasons, and how they affect our lives."),
+            Lesson(id = "29", categoryId = "9", name = "Natural Disasters", content = "Learn important terms for describing natural disasters."),
+            Lesson(id = "30", categoryId = "9", name = "Protecting the Environment", content = "Talk about environmental issues and how to protect nature."),
 
 // Sports
-            Lesson(id = 31, categoryId = 10, name = "Sport", content = "Get familiar with general sports vocabulary and expressions."),
-            Lesson(id = 32, categoryId = 10, name = "Playing Team Sports", content = "Learn about teamwork, positions, and sports strategies."),
-            Lesson(id = 33, categoryId = 10, name = "Watching Sports Events", content = "Use English to talk about live games and fan experiences."),
+            Lesson(id = "31", categoryId = "10", name = "Sport", content = "Get familiar with general sports vocabulary and expressions."),
+            Lesson(id = "32", categoryId = "10", name = "Playing Team Sports", content = "Learn about teamwork, positions, and sports strategies."),
+            Lesson(id = "33", categoryId = "10", name = "Watching Sports Events", content = "Use English to talk about live games and fan experiences."),
 
 
         )
@@ -84,84 +136,84 @@ object DatabaseData {
     fun getSampleWords(): List<Word> {
         return listOf(
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "I drink coffee every morning",
                 vietnamese = "Tôi uống cà phê mỗi sáng",
                 description = "Present Simple Tense: S + V1 + ...",
                 descriptionVietnamese = "Dùng để diễn tả thói quen, sự thật hiển nhiên hoặc lịch trình cố định."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "She is reading a book now",
                 vietnamese = "Cô ấy đang đọc sách bây giờ",
                 description = "Present Continuous Tense: S + am/is/are + V-ing",
                 descriptionVietnamese = "Dùng để diễn tả hành động đang xảy ra ngay lúc nói hoặc xung quanh thời điểm nói."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "They have finished their homework",
                 vietnamese = "Họ đã hoàn thành bài tập về nhà",
                 description = "Present Perfect Tense: S + has/have + V3 + ...",
                 descriptionVietnamese = "Dùng để diễn tả hành động đã xảy ra trong quá khứ nhưng vẫn còn liên quan đến hiện tại."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "He has been working all morning",
                 vietnamese = "Anh ấy đã làm việc suốt cả buổi sáng",
                 description = "Present Perfect Continuous Tense: S + has/have + been + V-ing",
                 descriptionVietnamese = "Dùng để nhấn mạnh hành động bắt đầu trong quá khứ và vẫn còn đang tiếp diễn đến hiện tại."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "I visited my grandparents last weekend",
                 vietnamese = "Tôi đã thăm ông bà vào cuối tuần trước",
                 description = "Past Simple Tense: S + V2/V-ed + ...",
                 descriptionVietnamese = "Dùng để diễn tả hành động đã xảy ra và kết thúc trong quá khứ, với thời gian xác định."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "She was cooking dinner when I arrived",
                 vietnamese = "Cô ấy đang nấu ăn khi tôi đến",
                 description = "Past Continuous Tense: S + was/were + V-ing + ...",
                 descriptionVietnamese = "Dùng để diễn tả hành động đang xảy ra tại một thời điểm trong quá khứ hoặc bị gián đoạn bởi hành động khác."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "We had left before it started raining",
                 vietnamese = "Chúng tôi đã rời đi trước khi trời bắt đầu mưa",
                 description = "Past Perfect Tense: S + had + V3/ed + ...",
                 descriptionVietnamese = "Dùng để diễn tả hành động đã xảy ra trước một hành động khác trong quá khứ."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "He had been waiting for two hours",
                 vietnamese = "Anh ấy đã đợi suốt hai tiếng",
                 description = "Past Perfect Continuous Tense: S + had + been + V-ing + ...",
                 descriptionVietnamese = "Dùng để nhấn mạnh hành động kéo dài liên tục đến một thời điểm cụ thể trong quá khứ."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "They will travel to Japan next month",
                 vietnamese = "Họ sẽ đi Nhật vào tháng sau",
                 description = "Future Simple Tense: S + will/shall + V1 + ...",
                 descriptionVietnamese = "Dùng để diễn tả hành động sẽ xảy ra trong tương lai, không có kế hoạch cụ thể."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "I will be staying at a hotel this weekend",
                 vietnamese = "Tôi sẽ ở khách sạn vào cuối tuần này",
                 description = "Future Continuous Tense: S + will/shall + be + V-ing + ...",
                 descriptionVietnamese = "Dùng để nói về hành động sẽ đang xảy ra tại một thời điểm cụ thể trong tương lai."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "She will have graduated by next year",
                 vietnamese = "Cô ấy sẽ đã tốt nghiệp vào năm sau",
                 description = "Future Perfect Tense: S + will + have + V3/ed + ...",
                 descriptionVietnamese = "Dùng để diễn tả hành động sẽ hoàn thành trước một thời điểm trong tương lai."
             ),
             Word(
-                lessonId = 1,
+                lessonId = "1",
                 english = "By this time next week, I will have been working here for a year",
                 vietnamese = "Vào thời điểm này tuần sau, tôi sẽ đã làm việc ở đây được một năm",
                 description = "Future Perfect Continuous Tense: S + will + have + been + V-ing + ...",
@@ -169,105 +221,105 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If water reaches 100 degrees Celsius, it boils",
                 vietnamese = "Nếu nước đạt 100 độ C, nó sẽ sôi",
                 description = "Zero Conditional: If + S + V1, S + V1",
                 descriptionVietnamese = "Dùng để diễn tả sự thật hiển nhiên hoặc quy luật trong tự nhiên."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If you heat ice, it melts.",
                 vietnamese = "Nếu bạn đun nóng đá, nó sẽ tan chảy.",
                 description = "Zero Conditional: If + S + V1, S + V1",
                 descriptionVietnamese = "Dùng khi kết quả luôn xảy ra nếu điều kiện xảy ra."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If you study hard, you will pass the exam",
                 vietnamese = "Nếu bạn học chăm chỉ, bạn sẽ vượt qua kỳ thi",
                 description = "First Conditional: If + S + V1, S + will + V",
                 descriptionVietnamese = "Dùng để diễn tả tình huống có thể xảy ra trong tương lai nếu điều kiện được đáp ứng."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I see her, I will tell her the news.",
                 vietnamese = "Nếu tôi gặp cô ấy, tôi sẽ nói cho cô ấy biết tin tức.",
                 description = "First Conditional: If + S + V1, S + will + V",
                 descriptionVietnamese = "Nói về một khả năng thực tế trong tương lai."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I had more free time, I would learn Spanish",
                 vietnamese = "Nếu tôi có nhiều thời gian rảnh hơn, tôi sẽ học tiếng Tây Ban Nha",
                 description = "Second Conditional: If + S + V2, S + would + V",
                 descriptionVietnamese = "Dùng để nói về điều không có thật hoặc ít khả năng xảy ra ở hiện tại hoặc tương lai."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I won the lottery, I would buy a house.",
                 vietnamese = "Nếu tôi trúng xổ số, tôi sẽ mua một căn nhà.",
                 description = "Second Conditional: If + S + V2, S + would + V",
                 descriptionVietnamese = "Nói về điều tưởng tượng hoặc không thật ở hiện tại."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If she had remembered his birthday, he wouldn’t have been upset",
                 vietnamese = "Nếu cô ấy nhớ sinh nhật anh ấy, anh ấy đã không buồn",
                 description = "Third Conditional: If + S + had + V3, S + would have + V3",
                 descriptionVietnamese = "Dùng để nói về điều không xảy ra trong quá khứ và hậu quả giả định."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If you had studied harder, you would have passed the exam.",
                 vietnamese = "Nếu bạn học chăm hơn, bạn đã vượt qua kỳ thi.",
                 description = "Third Conditional: If + S + had + V3, S + would have + V3",
                 descriptionVietnamese = "Nói về sự tiếc nuối với điều đã không xảy ra."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I had gone to bed earlier, I wouldn’t be so tired now",
                 vietnamese = "Nếu tôi đi ngủ sớm hơn, bây giờ tôi đã không mệt như vậy",
                 description = "Mixed Conditional (Past → Present): If + had + V3, S + would + V",
                 descriptionVietnamese = "Nói về nguyên nhân quá khứ dẫn đến kết quả hiện tại không như ý."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I had taken that job, I would be rich now.",
                 vietnamese = "Nếu tôi đã nhận công việc đó, bây giờ tôi đã giàu.",
                 description = "Mixed Conditional (Third + Second): If + had + V3, would + V",
                 descriptionVietnamese = "Dùng khi hành động trong quá khứ ảnh hưởng đến hiện tại."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I were rich, I would have bought that car last week",
                 vietnamese = "Nếu tôi giàu, tôi đã mua chiếc xe đó vào tuần trước",
                 description = "Mixed Conditional (Present → Past): If + V2, S + would have + V3",
                 descriptionVietnamese = "Giả định điều kiện hiện tại không có thật dẫn đến kết quả trong quá khứ không xảy ra."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If she were smarter, she would have avoided the mistake.",
                 vietnamese = "Nếu cô ấy thông minh hơn, cô ấy đã tránh được sai lầm đó.",
                 description = "Mixed Conditional (Second + Third): If + V2, would have + V3",
                 descriptionVietnamese = "Tưởng tượng điều kiện hiện tại không có thật gây ra hậu quả trong quá khứ."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If I were you, I wouldn’t do that.",
                 vietnamese = "Nếu tôi là bạn, tôi sẽ không làm điều đó.",
                 description = "Unreal Conditional (Present): If + S + were, S + would + V",
                 descriptionVietnamese = "Dùng để đưa ra lời khuyên hoặc giả định không thực ở hiện tại."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "If only I had listened to her advice!",
                 vietnamese = "Giá mà tôi đã nghe lời khuyên của cô ấy!",
                 description = "If only (regret): If only + S + had + V3",
                 descriptionVietnamese = "Dùng để diễn tả sự tiếc nuối về một điều trong quá khứ."
             ),
             Word(
-                lessonId = 2,
+                lessonId = "2",
                 english = "Suppose you lost your job, what would you do?",
                 vietnamese = "Giả sử bạn mất việc, bạn sẽ làm gì?",
                 description = "Suppose/Supposing: Suppose (that) + S + V2, S + would + V",
@@ -275,91 +327,91 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The cake should be made before the guests arrive.",
                 vietnamese = "Chiếc bánh nên được làm trước khi khách đến.",
                 description = "Passive voice with modal verb: S + modal verb + be + P2 + (by + O)",
                 descriptionVietnamese = "Dùng để nói hành động nên, cần hoặc phải được thực hiện bởi ai đó, không cần nêu rõ chủ thể."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The documents must be signed today.",
                 vietnamese = "Tài liệu phải được ký hôm nay.",
                 description = "Passive voice with modal verb: S + must/can/should + be + P2 + (by + O)",
                 descriptionVietnamese = "Dùng khi muốn nhấn mạnh nghĩa vụ hoặc khả năng thực hiện hành động mà không cần nêu rõ người thực hiện."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The rules can be changed if necessary.",
                 vietnamese = "Các quy tắc có thể được thay đổi nếu cần thiết.",
                 description = "Passive voice with modal verb: S + can + be + P2",
                 descriptionVietnamese = "Diễn tả khả năng hành động được thực hiện mà không cần nêu rõ ai làm."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "Mistakes should be avoided at all costs.",
                 vietnamese = "Những sai lầm nên được tránh bằng mọi giá.",
                 description = "Passive voice with modal verb: S + should + be + P2",
                 descriptionVietnamese = "Dùng để đưa ra lời khuyên về hành động nên tránh mà không cần nêu ai thực hiện."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The room needs to be cleaned.",
                 vietnamese = "Căn phòng cần được dọn dẹp.",
                 description = "Passive with 'need to be': S + need(s) + to be + P2",
                 descriptionVietnamese = "Dùng để nói điều gì đó cần được thực hiện, thường áp dụng với vật thể."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The house was going to be sold.",
                 vietnamese = "Căn nhà đã định được bán.",
                 description = "Passive voice with 'be going to': S + was/were going to be + P2",
                 descriptionVietnamese = "Dùng để diễn tả kế hoạch bị động trong quá khứ."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The problem needs to be solved immediately.",
                 vietnamese = "Vấn đề cần được giải quyết ngay lập tức.",
                 description = "Passive with 'need to be': S + need(s) + to be + P2",
                 descriptionVietnamese = "Thể hiện nhu cầu cần giải quyết một việc gì đó mà không nói rõ ai làm."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "The book is being read by many students.",
                 vietnamese = "Cuốn sách đang được nhiều sinh viên đọc.",
                 description = "Passive voice of Present Continuous: S + is/am/are + being + P2 + (by + O)",
                 descriptionVietnamese = "Dùng để mô tả hành động đang xảy ra và được thực hiện bởi người khác."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "A new road is being built in my town.",
                 vietnamese = "Một con đường mới đang được xây dựng trong thị trấn của tôi.",
                 description = "Passive voice of Present Continuous: S + is/am/are + being + P2",
                 descriptionVietnamese = "Dùng để diễn tả hành động đang diễn ra ở hiện tại trong thể bị động."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "It is said that she is a good teacher.",
                 vietnamese = "Người ta nói rằng cô ấy là một giáo viên giỏi.",
                 description = "Passive with reporting verbs: It + be + said/believed/known + that + S + V",
                 descriptionVietnamese = "Dùng khi trích dẫn ý kiến hoặc thông tin chung mà không cần nêu rõ nguồn."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "She is believed to be living in Paris.",
                 vietnamese = "Người ta tin rằng cô ấy đang sống ở Paris.",
                 description = "Passive infinitive with reporting verbs: S + be + believed/thought + to V / to be V-ing",
                 descriptionVietnamese = "Cách viết bị động của câu gián tiếp với động từ tường thuật, dùng để diễn tả hành động đang diễn ra."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "He is known to have won several awards.",
                 vietnamese = "Anh ấy được biết là đã giành được vài giải thưởng.",
                 description = "Passive perfect infinitive: S + be + known/supposed + to have + P2",
                 descriptionVietnamese = "Dùng để nói về hành động đã hoàn thành trong quá khứ với dạng bị động và động từ tường thuật."
             ),
             Word(
-                lessonId = 3,
+                lessonId = "3",
                 english = "She is thought to have left the city.",
                 vietnamese = "Người ta cho rằng cô ấy đã rời khỏi thành phố.",
                 description = "Passive perfect infinitive: S + be + thought + to have + P2",
@@ -367,91 +419,91 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I like coffee,\" she said.",
                 vietnamese = "→ She said that she liked coffee.",
                 description = "Reported speech with present simple",
                 descriptionVietnamese = "Câu gián tiếp với thì hiện tại đơn",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I am working now,\" he said.",
                 vietnamese = "→ He said that he was working then.",
                 description = "Reported speech with present continuous",
                 descriptionVietnamese = "Câu gián tiếp với thì hiện tại tiếp diễn",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I went to the party,\" John said.",
                 vietnamese = "→ John said that he had gone to the party.",
                 description = "Reported speech with past simple",
                 descriptionVietnamese = "Câu gián tiếp với thì quá khứ đơn",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I will call you tomorrow,\" she said.",
                 vietnamese = "→ She said that she would call me the next day.",
                 description = "Reported speech with future simple",
                 descriptionVietnamese = "Câu gián tiếp với thì tương lai đơn",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"Do you like music?\" he asked.",
                 vietnamese = "→ He asked if I liked music.",
                 description = "Reported Yes/No question",
                 descriptionVietnamese = "Câu hỏi Yes/No gián tiếp",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"Where do you live?\" she asked.",
                 vietnamese = "→ She asked where I lived.",
                 description = "Reported Wh-question",
                 descriptionVietnamese = "Câu hỏi Wh- gián tiếp",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I can swim,\" he said.",
                 vietnamese = "→ He said that he could swim.",
                 description = "Reported speech with modals: can → could",
                 descriptionVietnamese = "Chuyển 'can' sang 'could'",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I may go out,\" she said.",
                 vietnamese = "→ She said that she might go out.",
                 description = "Reported speech with modals: may → might",
                 descriptionVietnamese = "Chuyển 'may' sang 'might'",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"Close the door,\" he said to me.",
                 vietnamese = "→ He told me to close the door.",
                 description = "Reported command – tell + to V",
                 descriptionVietnamese = "Câu mệnh lệnh gián tiếp",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"Don't shout,\" she said.",
                 vietnamese = "→ She told me not to shout.",
                 description = "Reported negative command – tell + not to V",
                 descriptionVietnamese = "Câu mệnh lệnh phủ định gián tiếp",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I met her yesterday,\" he said.",
                 vietnamese = "→ He said he had met her the day before.",
                 description = "Change of time expressions",
                 descriptionVietnamese = "Thay đổi trạng từ chỉ thời gian",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"I am staying here,\" she said.",
                 vietnamese = "→ She said that she was staying there.",
                 description = "Change of place expressions",
                 descriptionVietnamese = "Thay đổi trạng từ chỉ nơi chốn",
                 ),
             Word(
-                lessonId = 4,
+                lessonId = "4",
                 english = "\"Be quiet,\" the teacher told us.",
                 vietnamese = "→ The teacher told us to be quiet.",
                 description = "Mixed reporting verb – ask/tell/say",
@@ -459,91 +511,91 @@ object DatabaseData {
                 ),
 
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The man who lives next door is very friendly.",
                 vietnamese = "Người đàn ông sống bên cạnh rất thân thiện.",
                 description = "Relative clause with 'who' (chủ ngữ chỉ người)",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'who' làm chủ ngữ chỉ người"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The book which is on the table is mine.",
                 vietnamese = "Cuốn sách ở trên bàn là của tôi.",
                 description = "Relative clause with 'which' (chủ ngữ chỉ vật)",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'which' làm chủ ngữ chỉ vật"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "I met a girl who can speak six languages.",
                 vietnamese = "Tôi gặp một cô gái có thể nói sáu thứ tiếng.",
                 description = "Relative clause giving extra information about a person",
                 descriptionVietnamese = "Mệnh đề quan hệ cung cấp thêm thông tin về người"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The man whom I saw yesterday is my teacher.",
                 vietnamese = "Người đàn ông tôi gặp hôm qua là thầy giáo của tôi.",
                 description = "Relative clause with 'whom' (tân ngữ chỉ người)",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'whom' làm tân ngữ chỉ người"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "This is the laptop that I bought last week.",
                 vietnamese = "Đây là chiếc laptop tôi mua tuần trước.",
                 description = "Using 'that' instead of 'which' or 'who'",
                 descriptionVietnamese = "Sử dụng 'that' thay cho 'which' hoặc 'who'"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "She’s the woman whose son is a doctor.",
                 vietnamese = "Cô ấy là người phụ nữ có con trai là bác sĩ.",
                 description = "Relative clause with 'whose' (sở hữu)",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'whose' thể hiện sở hữu"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "Do you know the reason why she left?",
                 vietnamese = "Bạn có biết lý do tại sao cô ấy rời đi không?",
                 description = "Relative clause with 'why'",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'why'"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The hotel where we stayed was very nice.",
                 vietnamese = "Khách sạn mà chúng tôi ở rất đẹp.",
                 description = "Relative clause with 'where' (chỉ nơi chốn)",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'where' chỉ nơi chốn"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "That’s the day when I met her.",
                 vietnamese = "Đó là ngày tôi gặp cô ấy.",
                 description = "Relative clause with 'when' (chỉ thời gian)",
                 descriptionVietnamese = "Mệnh đề quan hệ với 'when' chỉ thời gian"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The students who study hard will pass the exam.",
                 vietnamese = "Những học sinh học chăm sẽ vượt qua kỳ thi.",
                 description = "Defining relative clause",
                 descriptionVietnamese = "Mệnh đề quan hệ xác định"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "My brother, who lives in Da Nang, is an engineer.",
                 vietnamese = "Anh trai tôi, người sống ở Đà Nẵng, là kỹ sư.",
                 description = "Non-defining relative clause",
                 descriptionVietnamese = "Mệnh đề quan hệ không xác định"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The girl sitting next to me is my cousin.",
                 vietnamese = "Cô gái ngồi cạnh tôi là em họ tôi.",
                 description = "Reduced relative clause (rút gọn với V-ing)",
                 descriptionVietnamese = "Mệnh đề quan hệ rút gọn với V-ing"
             ),
             Word(
-                lessonId = 5,
+                lessonId = "5",
                 english = "The documents sent yesterday are very important.",
                 vietnamese = "Các tài liệu được gửi hôm qua rất quan trọng.",
                 description = "Reduced relative clause (rút gọn với V-ed)",
@@ -551,91 +603,91 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "She looks after her little brother every day.",
                 vietnamese = "Cô ấy chăm sóc em trai mình mỗi ngày.",
                 description = "Phrasal verb: look after",
                 descriptionVietnamese = "Phrasal verb: trông nom, chăm sóc"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "He ran into an old friend at the supermarket.",
                 vietnamese = "Anh ấy tình cờ gặp lại một người bạn cũ ở siêu thị.",
                 description = "Phrasal verb: run into",
                 descriptionVietnamese = "Phrasal verb: tình cờ gặp"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "We need to deal with this problem now.",
                 vietnamese = "Chúng ta cần giải quyết vấn đề này ngay bây giờ.",
                 description = "Phrasal verb: deal with",
                 descriptionVietnamese = "Phrasal verb: giải quyết, xử lý"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "Don’t give up! You can do it!",
                 vietnamese = "Đừng bỏ cuộc! Bạn có thể làm được!",
                 description = "Phrasal verb: give up",
                 descriptionVietnamese = "Phrasal verb: từ bỏ"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "He turned down the job offer.",
                 vietnamese = "Anh ấy đã từ chối lời đề nghị công việc.",
                 description = "Phrasal verb: turn down",
                 descriptionVietnamese = "Phrasal verb: từ chối"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "She came up with a great idea for the project.",
                 vietnamese = "Cô ấy đã nảy ra một ý tưởng tuyệt vời cho dự án.",
                 description = "Phrasal verb: come up with",
                 descriptionVietnamese = "Phrasal verb: nghĩ ra, nảy ra"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "I’m looking forward to the weekend.",
                 vietnamese = "Tôi đang mong đợi đến cuối tuần.",
                 description = "Phrasal verb: look forward to",
                 descriptionVietnamese = "Phrasal verb: mong đợi điều gì"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "He got over the flu quickly.",
                 vietnamese = "Anh ấy đã hồi phục sau cơn cảm cúm rất nhanh.",
                 description = "Phrasal verb: get over",
                 descriptionVietnamese = "Phrasal verb: hồi phục, vượt qua"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "Please turn off the lights before leaving.",
                 vietnamese = "Làm ơn tắt đèn trước khi rời đi.",
                 description = "Phrasal verb: turn off",
                 descriptionVietnamese = "Phrasal verb: tắt"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "We should carry on with the meeting.",
                 vietnamese = "Chúng ta nên tiếp tục cuộc họp.",
                 description = "Phrasal verb: carry on",
                 descriptionVietnamese = "Phrasal verb: tiếp tục"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "They set up a new company last year.",
                 vietnamese = "Họ đã thành lập một công ty mới vào năm ngoái.",
                 description = "Phrasal verb: set up",
                 descriptionVietnamese = "Phrasal verb: thành lập, thiết lập"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "He broke up with his girlfriend last week.",
                 vietnamese = "Anh ấy đã chia tay bạn gái vào tuần trước.",
                 description = "Phrasal verb: break up with",
                 descriptionVietnamese = "Phrasal verb: chia tay"
             ),
             Word(
-                lessonId = 6,
+                lessonId = "6",
                 english = "Let’s find out what happened.",
                 vietnamese = "Hãy tìm hiểu xem chuyện gì đã xảy ra.",
                 description = "Phrasal verb: find out",
@@ -643,198 +695,198 @@ object DatabaseData {
             ),
 
             // Common Words
-            Word(lessonId = 7, english = "Hello", vietnamese = "Xin chào", pronunciation = "həˈloʊ", description = "A greeting used when meeting someone.", descriptionVietnamese = "Một lời chào khi gặp ai đó."),
-            Word(lessonId = 7, english = "Goodbye", vietnamese = "Tạm biệt", pronunciation = "ˌɡʊdˈbaɪ", description = "A farewell when leaving.", descriptionVietnamese = "Lời chào khi rời đi."),
-            Word(lessonId = 7, english = "Please", vietnamese = "Làm ơn", pronunciation = "pliːz", description = "A polite word used in requests.", descriptionVietnamese = "Từ lịch sự dùng khi yêu cầu."),
-            Word(lessonId = 7, english = "Thank you", vietnamese = "Cảm ơn", pronunciation = "ˈθæŋk ju", description = "An expression of gratitude.", descriptionVietnamese = "Biểu hiện sự biết ơn."),
-            Word(lessonId = 7, english = "Yes", vietnamese = "Vâng", pronunciation = "jɛs", description = "An affirmative response.", descriptionVietnamese = "Một câu trả lời khẳng định."),
-            Word(lessonId = 7, english = "No", vietnamese = "Không", pronunciation = "noʊ", description = "A negative response.", descriptionVietnamese = "Một câu trả lời phủ định."),
-            Word(lessonId = 7, english = "Excuse me", vietnamese = "Xin lỗi", pronunciation = "ɪkˈskjuːz mi", description = "Used to get someone's attention or to apologize.", descriptionVietnamese = "Dùng để thu hút sự chú ý hoặc xin lỗi."),
-            Word(lessonId = 7, english = "Sorry", vietnamese = "Xin lỗi", pronunciation = "ˈsɑːri", description = "An expression of apology.", descriptionVietnamese = "Biểu hiện sự xin lỗi."),
-            Word(lessonId = 7, english = "Help", vietnamese = "Giúp đỡ", pronunciation = "hɛlp", description = "A request for assistance.", descriptionVietnamese = "Yêu cầu sự giúp đỡ."),
-            Word(lessonId = 7, english = "Friend", vietnamese = "Bạn bè", pronunciation = "frɛnd", description = "A person whom one knows and has a bond with.", descriptionVietnamese = "Một người quen biết và có mối quan hệ thân thiết."),
+            Word(lessonId = "7", english = "Hello", vietnamese = "Xin chào", pronunciation = "həˈloʊ", description = "A greeting used when meeting someone.", descriptionVietnamese = "Một lời chào khi gặp ai đó."),
+            Word(lessonId = "7", english = "Goodbye", vietnamese = "Tạm biệt", pronunciation = "ˌɡʊdˈbaɪ", description = "A farewell when leaving.", descriptionVietnamese = "Lời chào khi rời đi."),
+            Word(lessonId = "7", english = "Please", vietnamese = "Làm ơn", pronunciation = "pliːz", description = "A polite word used in requests.", descriptionVietnamese = "Từ lịch sự dùng khi yêu cầu."),
+            Word(lessonId = "7", english = "Thank you", vietnamese = "Cảm ơn", pronunciation = "ˈθæŋk ju", description = "An expression of gratitude.", descriptionVietnamese = "Biểu hiện sự biết ơn."),
+            Word(lessonId = "7", english = "Yes", vietnamese = "Vâng", pronunciation = "jɛs", description = "An affirmative response.", descriptionVietnamese = "Một câu trả lời khẳng định."),
+            Word(lessonId = "7", english = "No", vietnamese = "Không", pronunciation = "noʊ", description = "A negative response.", descriptionVietnamese = "Một câu trả lời phủ định."),
+            Word(lessonId = "7", english = "Excuse me", vietnamese = "Xin lỗi", pronunciation = "ɪkˈskjuːz mi", description = "Used to get someone's attention or to apologize.", descriptionVietnamese = "Dùng để thu hút sự chú ý hoặc xin lỗi."),
+            Word(lessonId = "7", english = "Sorry", vietnamese = "Xin lỗi", pronunciation = "ˈsɑːri", description = "An expression of apology.", descriptionVietnamese = "Biểu hiện sự xin lỗi."),
+            Word(lessonId = "7", english = "Help", vietnamese = "Giúp đỡ", pronunciation = "hɛlp", description = "A request for assistance.", descriptionVietnamese = "Yêu cầu sự giúp đỡ."),
+            Word(lessonId = "7", english = "Friend", vietnamese = "Bạn bè", pronunciation = "frɛnd", description = "A person whom one knows and has a bond with.", descriptionVietnamese = "Một người quen biết và có mối quan hệ thân thiết."),
 
             // Numbers & Colors
-            Word(lessonId = 8, english = "One", vietnamese = "Một", pronunciation = "wʌn", description = "The number 1.", descriptionVietnamese = "Số 1."),
-            Word(lessonId = 8, english = "Two", vietnamese = "Hai", pronunciation = "tuː", description = "The number 2.", descriptionVietnamese = "Số 2."),
-            Word(lessonId = 8, english = "Three", vietnamese = "Ba", pronunciation = "θriː", description = "The number 3.", descriptionVietnamese = "Số 3."),
-            Word(lessonId = 8, english = "Four", vietnamese = "Bốn", pronunciation = "fɔːr", description = "The number 4.", descriptionVietnamese = "Số 4."),
-            Word(lessonId = 8, english = "Five", vietnamese = "Năm", pronunciation = "faɪv", description = "The number 5.", descriptionVietnamese = "Số 5."),
-            Word(lessonId = 8, english = "Red", vietnamese = "Màu đỏ", pronunciation = "rɛd", description = "A primary color often associated with passion.", descriptionVietnamese = "Màu chính thường gắn với sự đam mê."),
-            Word(lessonId = 8, english = "Blue", vietnamese = "Màu xanh dương", pronunciation = "bluː", description = "A primary color often associated with calmness.", descriptionVietnamese = "Màu chính thường gắn với sự bình tĩnh."),
-            Word(lessonId = 8, english = "Green", vietnamese = "Màu xanh lá", pronunciation = "ɡriːn", description = "A color often associated with nature.", descriptionVietnamese = "Màu thường liên quan đến thiên nhiên."),
-            Word(lessonId = 8, english = "Yellow", vietnamese = "Màu vàng", pronunciation = "ˈjɛloʊ", description = "A bright color often associated with happiness.", descriptionVietnamese = "Màu sáng thường liên quan đến niềm vui."),
-            Word(lessonId = 8, english = "Black", vietnamese = "Màu đen", pronunciation = "blæk", description = "A color often associated with mystery.", descriptionVietnamese = "Màu thường liên quan đến sự bí ẩn."),
+            Word(lessonId = "8", english = "One", vietnamese = "Một", pronunciation = "wʌn", description = "The number 1.", descriptionVietnamese = "Số 1."),
+            Word(lessonId = "8", english = "Two", vietnamese = "Hai", pronunciation = "tuː", description = "The number 2.", descriptionVietnamese = "Số 2."),
+            Word(lessonId = "8", english = "Three", vietnamese = "Ba", pronunciation = "θriː", description = "The number 3.", descriptionVietnamese = "Số 3."),
+            Word(lessonId = "8", english = "Four", vietnamese = "Bốn", pronunciation = "fɔːr", description = "The number 4.", descriptionVietnamese = "Số 4."),
+            Word(lessonId = "8", english = "Five", vietnamese = "Năm", pronunciation = "faɪv", description = "The number 5.", descriptionVietnamese = "Số 5."),
+            Word(lessonId = "8", english = "Red", vietnamese = "Màu đỏ", pronunciation = "rɛd", description = "A primary color often associated with passion.", descriptionVietnamese = "Màu chính thường gắn với sự đam mê."),
+            Word(lessonId = "8", english = "Blue", vietnamese = "Màu xanh dương", pronunciation = "bluː", description = "A primary color often associated with calmness.", descriptionVietnamese = "Màu chính thường gắn với sự bình tĩnh."),
+            Word(lessonId = "8", english = "Green", vietnamese = "Màu xanh lá", pronunciation = "ɡriːn", description = "A color often associated with nature.", descriptionVietnamese = "Màu thường liên quan đến thiên nhiên."),
+            Word(lessonId = "8", english = "Yellow", vietnamese = "Màu vàng", pronunciation = "ˈjɛloʊ", description = "A bright color often associated with happiness.", descriptionVietnamese = "Màu sáng thường liên quan đến niềm vui."),
+            Word(lessonId = "8", english = "Black", vietnamese = "Màu đen", pronunciation = "blæk", description = "A color often associated with mystery.", descriptionVietnamese = "Màu thường liên quan đến sự bí ẩn."),
 
             // Basic Phrases
-            Word(lessonId = 9, english = "How are you?", vietnamese = "Bạn khỏe không?", pronunciation = "haʊ ɑr ju?", description = "A common greeting to ask about someone's well-being.", descriptionVietnamese = "Câu chào hỏi sức khỏe phổ biến."),
-            Word(lessonId = 9, english = "What’s your name?", vietnamese = "Bạn tên gì?", pronunciation = "wɑːts jɔːr neɪm?", description = "A question to ask for someone's name.", descriptionVietnamese = "Câu hỏi để biết tên ai đó."),
-            Word(lessonId = 9, english = "Where are you from?", vietnamese = "Bạn đến từ đâu?", pronunciation = "wɛr ɑr ju frʌm?", description = "A question to ask about someone's origin.", descriptionVietnamese = "Câu hỏi về quê quán của ai đó."),
-            Word(lessonId = 9, english = "I don’t understand", vietnamese = "Tôi không hiểu", pronunciation = "aɪ doʊnt ˌʌndərˈstænd", description = "A phrase used when something is unclear.", descriptionVietnamese = "Câu nói khi không hiểu điều gì đó."),
-            Word(lessonId = 9, english = "Can you help me?", vietnamese = "Bạn có thể giúp tôi không?", pronunciation = "kæn ju hɛlp mi?", description = "A request for assistance.", descriptionVietnamese = "Lời yêu cầu sự giúp đỡ."),
-            Word(lessonId = 9, english = "Good morning", vietnamese = "Chào buổi sáng", pronunciation = "ɡʊd ˈmɔrnɪŋ", description = "A greeting used in the morning.", descriptionVietnamese = "Lời chào vào buổi sáng."),
-            Word(lessonId = 9, english = "Good night", vietnamese = "Chúc ngủ ngon", pronunciation = "ɡʊd naɪt", description = "A phrase used before going to sleep.", descriptionVietnamese = "Câu chúc trước khi đi ngủ."),
-            Word(lessonId = 9, english = "I am lost", vietnamese = "Tôi bị lạc", pronunciation = "aɪ æm lɔst", description = "A phrase used to indicate that someone doesn't know where they are.", descriptionVietnamese = "Câu nói khi ai đó không biết mình đang ở đâu."),
-            Word(lessonId = 9, english = "I am sorry", vietnamese = "Tôi xin lỗi", pronunciation = "aɪ æm ˈsɑːri", description = "A phrase used to apologize for something.", descriptionVietnamese = "Câu nói để xin lỗi vì một điều gì đó."),
-            Word(lessonId = 9, english = "Good morning", vietnamese = "Chào buổi sáng", pronunciation = "ɡʊd ˈmɔrnɪŋ", description = "A greeting used in the morning.", descriptionVietnamese = "Lời chào dùng vào buổi sáng."),
-            Word(lessonId = 9, english = "See you later", vietnamese = "Hẹn gặp lại", pronunciation = "si ju ˈleɪtər", description = "A phrase used to say goodbye with the expectation of meeting again.", descriptionVietnamese = "Câu nói khi tạm biệt với mong đợi sẽ gặp lại."),
+            Word(lessonId = "9", english = "How are you?", vietnamese = "Bạn khỏe không?", pronunciation = "haʊ ɑr ju?", description = "A common greeting to ask about someone's well-being.", descriptionVietnamese = "Câu chào hỏi sức khỏe phổ biến."),
+            Word(lessonId = "9", english = "What’s your name?", vietnamese = "Bạn tên gì?", pronunciation = "wɑːts jɔːr neɪm?", description = "A question to ask for someone's name.", descriptionVietnamese = "Câu hỏi để biết tên ai đó."),
+            Word(lessonId = "9", english = "Where are you from?", vietnamese = "Bạn đến từ đâu?", pronunciation = "wɛr ɑr ju frʌm?", description = "A question to ask about someone's origin.", descriptionVietnamese = "Câu hỏi về quê quán của ai đó."),
+            Word(lessonId = "9", english = "I don’t understand", vietnamese = "Tôi không hiểu", pronunciation = "aɪ doʊnt ˌʌndərˈstænd", description = "A phrase used when something is unclear.", descriptionVietnamese = "Câu nói khi không hiểu điều gì đó."),
+            Word(lessonId = "9", english = "Can you help me?", vietnamese = "Bạn có thể giúp tôi không?", pronunciation = "kæn ju hɛlp mi?", description = "A request for assistance.", descriptionVietnamese = "Lời yêu cầu sự giúp đỡ."),
+            Word(lessonId = "9", english = "Good morning", vietnamese = "Chào buổi sáng", pronunciation = "ɡʊd ˈmɔrnɪŋ", description = "A greeting used in the morning.", descriptionVietnamese = "Lời chào vào buổi sáng."),
+            Word(lessonId = "9", english = "Good night", vietnamese = "Chúc ngủ ngon", pronunciation = "ɡʊd naɪt", description = "A phrase used before going to sleep.", descriptionVietnamese = "Câu chúc trước khi đi ngủ."),
+            Word(lessonId = "9", english = "I am lost", vietnamese = "Tôi bị lạc", pronunciation = "aɪ æm lɔst", description = "A phrase used to indicate that someone doesn't know where they are.", descriptionVietnamese = "Câu nói khi ai đó không biết mình đang ở đâu."),
+            Word(lessonId = "9", english = "I am sorry", vietnamese = "Tôi xin lỗi", pronunciation = "aɪ æm ˈsɑːri", description = "A phrase used to apologize for something.", descriptionVietnamese = "Câu nói để xin lỗi vì một điều gì đó."),
+            Word(lessonId = "9", english = "Good morning", vietnamese = "Chào buổi sáng", pronunciation = "ɡʊd ˈmɔrnɪŋ", description = "A greeting used in the morning.", descriptionVietnamese = "Lời chào dùng vào buổi sáng."),
+            Word(lessonId = "9", english = "See you later", vietnamese = "Hẹn gặp lại", pronunciation = "si ju ˈleɪtər", description = "A phrase used to say goodbye with the expectation of meeting again.", descriptionVietnamese = "Câu nói khi tạm biệt với mong đợi sẽ gặp lại."),
 
             // Animal Names
-            Word(lessonId = 10, english = "Dog", vietnamese = "Chó", pronunciation = "dɔːɡ", description = "A domesticated carnivorous mammal known for loyalty.", descriptionVietnamese = "Một loài động vật ăn thịt được thuần hóa, nổi tiếng vì sự trung thành."),
-            Word(lessonId = 10, english = "Cat", vietnamese = "Mèo", pronunciation = "kæt", description = "A small domesticated carnivorous mammal with soft fur.", descriptionVietnamese = "Một loài động vật ăn thịt nhỏ đã được thuần hóa với bộ lông mềm."),
-            Word(lessonId = 10, english = "Elephant", vietnamese = "Voi", pronunciation = "ˈɛləfənt", description = "The largest land animal with a long trunk.", descriptionVietnamese = "Loài động vật trên cạn lớn nhất với chiếc vòi dài."),
-            Word(lessonId = 10, english = "Tiger", vietnamese = "Hổ", pronunciation = "ˈtaɪɡər", description = "A large wild cat with orange fur and black stripes.", descriptionVietnamese = "Một loài mèo lớn có bộ lông màu cam và sọc đen."),
-            Word(lessonId = 10, english = "Dolphin", vietnamese = "Cá heo", pronunciation = "ˈdɒlfɪn", description = "A highly intelligent marine mammal known for playfulness.", descriptionVietnamese = "Một loài động vật biển thông minh, nổi tiếng vì sự tinh nghịch."),
-            Word(lessonId = 10, english = "Kangaroo", vietnamese = "Chuột túi", pronunciation = "ˌkæŋɡəˈruː", description = "A marsupial from Australia that moves by hopping.", descriptionVietnamese = "Một loài thú có túi ở Úc di chuyển bằng cách nhảy."),
-            Word(lessonId = 10, english = "Giraffe", vietnamese = "Hươu cao cổ", pronunciation = "dʒɪˈræf", description = "The tallest land animal with a long neck.", descriptionVietnamese = "Loài động vật trên cạn cao nhất với chiếc cổ dài."),
-            Word(lessonId = 10, english = "Penguin", vietnamese = "Chim cánh cụt", pronunciation = "ˈpɛŋɡwɪn", description = "A flightless bird that lives in cold climates.", descriptionVietnamese = "Một loài chim không bay sống ở vùng khí hậu lạnh."),
-            Word(lessonId = 10, english = "Eagle", vietnamese = "Đại bàng", pronunciation = "ˈiːɡl", description = "A large bird of prey known for sharp eyesight.", descriptionVietnamese = "Một loài chim săn mồi lớn nổi tiếng với thị lực sắc bén."),
-            Word(lessonId = 10, english = "Crocodile", vietnamese = "Cá sấu", pronunciation = "ˈkrɒkədaɪl", description = "A large aquatic reptile with a powerful jaw.", descriptionVietnamese = "Một loài bò sát lớn sống dưới nước với hàm răng mạnh mẽ."),
+            Word(lessonId = "10", english = "Dog", vietnamese = "Chó", pronunciation = "dɔːɡ", description = "A domesticated carnivorous mammal known for loyalty.", descriptionVietnamese = "Một loài động vật ăn thịt được thuần hóa, nổi tiếng vì sự trung thành."),
+            Word(lessonId = "10", english = "Cat", vietnamese = "Mèo", pronunciation = "kæt", description = "A small domesticated carnivorous mammal with soft fur.", descriptionVietnamese = "Một loài động vật ăn thịt nhỏ đã được thuần hóa với bộ lông mềm."),
+            Word(lessonId = "10", english = "Elephant", vietnamese = "Voi", pronunciation = "ˈɛləfənt", description = "The largest land animal with a long trunk.", descriptionVietnamese = "Loài động vật trên cạn lớn nhất với chiếc vòi dài."),
+            Word(lessonId = "10", english = "Tiger", vietnamese = "Hổ", pronunciation = "ˈtaɪɡər", description = "A large wild cat with orange fur and black stripes.", descriptionVietnamese = "Một loài mèo lớn có bộ lông màu cam và sọc đen."),
+            Word(lessonId = "10", english = "Dolphin", vietnamese = "Cá heo", pronunciation = "ˈdɒlfɪn", description = "A highly intelligent marine mammal known for playfulness.", descriptionVietnamese = "Một loài động vật biển thông minh, nổi tiếng vì sự tinh nghịch."),
+            Word(lessonId = "10", english = "Kangaroo", vietnamese = "Chuột túi", pronunciation = "ˌkæŋɡəˈruː", description = "A marsupial from Australia that moves by hopping.", descriptionVietnamese = "Một loài thú có túi ở Úc di chuyển bằng cách nhảy."),
+            Word(lessonId = "10", english = "Giraffe", vietnamese = "Hươu cao cổ", pronunciation = "dʒɪˈræf", description = "The tallest land animal with a long neck.", descriptionVietnamese = "Loài động vật trên cạn cao nhất với chiếc cổ dài."),
+            Word(lessonId = "10", english = "Penguin", vietnamese = "Chim cánh cụt", pronunciation = "ˈpɛŋɡwɪn", description = "A flightless bird that lives in cold climates.", descriptionVietnamese = "Một loài chim không bay sống ở vùng khí hậu lạnh."),
+            Word(lessonId = "10", english = "Eagle", vietnamese = "Đại bàng", pronunciation = "ˈiːɡl", description = "A large bird of prey known for sharp eyesight.", descriptionVietnamese = "Một loài chim săn mồi lớn nổi tiếng với thị lực sắc bén."),
+            Word(lessonId = "10", english = "Crocodile", vietnamese = "Cá sấu", pronunciation = "ˈkrɒkədaɪl", description = "A large aquatic reptile with a powerful jaw.", descriptionVietnamese = "Một loài bò sát lớn sống dưới nước với hàm răng mạnh mẽ."),
 
             // Fun with Rhymes
-            Word(lessonId = 11, english = "Cat", vietnamese = "Mèo", pronunciation = "kæt", description = "A small pet that loves to nap.", descriptionVietnamese = "Một con vật nhỏ thích ngủ trưa."),
-            Word(lessonId = 11, english = "Hat", vietnamese = "Mũ", pronunciation = "hæt", description = "Something you wear upon your head.", descriptionVietnamese = "Thứ bạn đội trên đầu."),
-            Word(lessonId = 11, english = "Sun", vietnamese = "Mặt trời", pronunciation = "sʌn", description = "Shining brightly in the sky.", descriptionVietnamese = "Tỏa sáng rực rỡ trên bầu trời."),
-            Word(lessonId = 11, english = "Run", vietnamese = "Chạy", pronunciation = "rʌn", description = "Moving quickly on your feet.", descriptionVietnamese = "Di chuyển nhanh bằng đôi chân."),
-            Word(lessonId = 11, english = "Bee", vietnamese = "Ong", pronunciation = "biː", description = "Buzzing round from tree to tree.", descriptionVietnamese = "Bay vo ve từ cây này sang cây khác."),
-            Word(lessonId = 11, english = "See", vietnamese = "Nhìn", pronunciation = "siː", description = "Using your eyes to look around.", descriptionVietnamese = "Dùng mắt để quan sát xung quanh."),
-            Word(lessonId = 11, english = "Star", vietnamese = "Ngôi sao", pronunciation = "stɑːr", description = "Twinkling brightly in the night.", descriptionVietnamese = "Lấp lánh trong đêm tối."),
-            Word(lessonId = 11, english = "Car", vietnamese = "Xe hơi", pronunciation = "kɑːr", description = "A vehicle that goes far.", descriptionVietnamese = "Một chiếc xe đi rất xa."),
-            Word(lessonId = 11, english = "Boat", vietnamese = "Thuyền", pronunciation = "boʊt", description = "Floating on water near the coast.", descriptionVietnamese = "Trôi trên mặt nước gần bờ."),
-            Word(lessonId = 11, english = "Goat", vietnamese = "Dê", pronunciation = "ɡoʊt", description = "Climbing mountains high and steep.", descriptionVietnamese = "Leo lên núi cao và dốc."),
+            Word(lessonId = "11", english = "Cat", vietnamese = "Mèo", pronunciation = "kæt", description = "A small pet that loves to nap.", descriptionVietnamese = "Một con vật nhỏ thích ngủ trưa."),
+            Word(lessonId = "11", english = "Hat", vietnamese = "Mũ", pronunciation = "hæt", description = "Something you wear upon your head.", descriptionVietnamese = "Thứ bạn đội trên đầu."),
+            Word(lessonId = "11", english = "Sun", vietnamese = "Mặt trời", pronunciation = "sʌn", description = "Shining brightly in the sky.", descriptionVietnamese = "Tỏa sáng rực rỡ trên bầu trời."),
+            Word(lessonId = "11", english = "Run", vietnamese = "Chạy", pronunciation = "rʌn", description = "Moving quickly on your feet.", descriptionVietnamese = "Di chuyển nhanh bằng đôi chân."),
+            Word(lessonId = "11", english = "Bee", vietnamese = "Ong", pronunciation = "biː", description = "Buzzing round from tree to tree.", descriptionVietnamese = "Bay vo ve từ cây này sang cây khác."),
+            Word(lessonId = "11", english = "See", vietnamese = "Nhìn", pronunciation = "siː", description = "Using your eyes to look around.", descriptionVietnamese = "Dùng mắt để quan sát xung quanh."),
+            Word(lessonId = "11", english = "Star", vietnamese = "Ngôi sao", pronunciation = "stɑːr", description = "Twinkling brightly in the night.", descriptionVietnamese = "Lấp lánh trong đêm tối."),
+            Word(lessonId = "11", english = "Car", vietnamese = "Xe hơi", pronunciation = "kɑːr", description = "A vehicle that goes far.", descriptionVietnamese = "Một chiếc xe đi rất xa."),
+            Word(lessonId = "11", english = "Boat", vietnamese = "Thuyền", pronunciation = "boʊt", description = "Floating on water near the coast.", descriptionVietnamese = "Trôi trên mặt nước gần bờ."),
+            Word(lessonId = "11", english = "Goat", vietnamese = "Dê", pronunciation = "ɡoʊt", description = "Climbing mountains high and steep.", descriptionVietnamese = "Leo lên núi cao và dốc."),
 
             // Storytelling
-            Word(lessonId = 12, english = "Once upon a time", vietnamese = "Ngày xửa ngày xưa", pronunciation = "wʌns əˈpɒn ə taɪm", description = "A common phrase used to begin fairy tales and stories.", descriptionVietnamese = "Cụm từ thường dùng để bắt đầu truyện cổ tích."),
-            Word(lessonId = 12, english = "Hero", vietnamese = "Anh hùng", pronunciation = "ˈhɪəroʊ", description = "The main character who faces challenges and overcomes them.", descriptionVietnamese = "Nhân vật chính đối mặt với thử thách và vượt qua."),
-            Word(lessonId = 12, english = "Villain", vietnamese = "Nhân vật phản diện", pronunciation = "ˈvɪlən", description = "The character who opposes the hero in a story.", descriptionVietnamese = "Nhân vật đối đầu với anh hùng trong câu chuyện."),
-            Word(lessonId = 12, english = "Magic", vietnamese = "Phép thuật", pronunciation = "ˈmædʒɪk", description = "A supernatural power often seen in fantasy stories.", descriptionVietnamese = "Sức mạnh siêu nhiên thường xuất hiện trong truyện kỳ ảo."),
-            Word(lessonId = 12, english = "Adventure", vietnamese = "Cuộc phiêu lưu", pronunciation = "ədˈvɛntʃər", description = "An exciting journey filled with challenges and discoveries.", descriptionVietnamese = "Một hành trình thú vị với nhiều thử thách và khám phá."),
-            Word(lessonId = 12, english = "Twist", vietnamese = "Tình tiết bất ngờ", pronunciation = "twɪst", description = "An unexpected change in the story that surprises the reader.", descriptionVietnamese = "Một sự thay đổi bất ngờ trong câu chuyện khiến người đọc ngạc nhiên."),
-            Word(lessonId = 12, english = "Moral", vietnamese = "Bài học đạo đức", pronunciation = "ˈmɒrəl", description = "The lesson or message a story teaches.", descriptionVietnamese = "Bài học hoặc thông điệp mà câu chuyện truyền tải."),
-            Word(lessonId = 12, english = "Narrator", vietnamese = "Người kể chuyện", pronunciation = "ˈnærətər", description = "The person or voice that tells the story.", descriptionVietnamese = "Người hoặc giọng kể chuyện trong câu chuyện."),
-            Word(lessonId = 12, english = "Happily ever after", vietnamese = "Hạnh phúc mãi mãi về sau", pronunciation = "ˈhæpɪli ˈɛvər ˈæftər", description = "A phrase used to end fairy tales where everything turns out well.", descriptionVietnamese = "Cụm từ kết thúc truyện cổ tích khi mọi chuyện đều tốt đẹp."),
-            Word(lessonId = 12, english = "Climax", vietnamese = "Cao trào", pronunciation = "ˈklaɪmæks", description = "The most exciting or intense part of a story.", descriptionVietnamese = "Phần kịch tính nhất của câu chuyện."),
+            Word(lessonId = "12", english = "Once upon a time", vietnamese = "Ngày xửa ngày xưa", pronunciation = "wʌns əˈpɒn ə taɪm", description = "A common phrase used to begin fairy tales and stories.", descriptionVietnamese = "Cụm từ thường dùng để bắt đầu truyện cổ tích."),
+            Word(lessonId = "12", english = "Hero", vietnamese = "Anh hùng", pronunciation = "ˈhɪəroʊ", description = "The main character who faces challenges and overcomes them.", descriptionVietnamese = "Nhân vật chính đối mặt với thử thách và vượt qua."),
+            Word(lessonId = "12", english = "Villain", vietnamese = "Nhân vật phản diện", pronunciation = "ˈvɪlən", description = "The character who opposes the hero in a story.", descriptionVietnamese = "Nhân vật đối đầu với anh hùng trong câu chuyện."),
+            Word(lessonId = "12", english = "Magic", vietnamese = "Phép thuật", pronunciation = "ˈmædʒɪk", description = "A supernatural power often seen in fantasy stories.", descriptionVietnamese = "Sức mạnh siêu nhiên thường xuất hiện trong truyện kỳ ảo."),
+            Word(lessonId = "12", english = "Adventure", vietnamese = "Cuộc phiêu lưu", pronunciation = "ədˈvɛntʃər", description = "An exciting journey filled with challenges and discoveries.", descriptionVietnamese = "Một hành trình thú vị với nhiều thử thách và khám phá."),
+            Word(lessonId = "12", english = "Twist", vietnamese = "Tình tiết bất ngờ", pronunciation = "twɪst", description = "An unexpected change in the story that surprises the reader.", descriptionVietnamese = "Một sự thay đổi bất ngờ trong câu chuyện khiến người đọc ngạc nhiên."),
+            Word(lessonId = "12", english = "Moral", vietnamese = "Bài học đạo đức", pronunciation = "ˈmɒrəl", description = "The lesson or message a story teaches.", descriptionVietnamese = "Bài học hoặc thông điệp mà câu chuyện truyền tải."),
+            Word(lessonId = "12", english = "Narrator", vietnamese = "Người kể chuyện", pronunciation = "ˈnærətər", description = "The person or voice that tells the story.", descriptionVietnamese = "Người hoặc giọng kể chuyện trong câu chuyện."),
+            Word(lessonId = "12", english = "Happily ever after", vietnamese = "Hạnh phúc mãi mãi về sau", pronunciation = "ˈhæpɪli ˈɛvər ˈæftər", description = "A phrase used to end fairy tales where everything turns out well.", descriptionVietnamese = "Cụm từ kết thúc truyện cổ tích khi mọi chuyện đều tốt đẹp."),
+            Word(lessonId = "12", english = "Climax", vietnamese = "Cao trào", pronunciation = "ˈklaɪmæks", description = "The most exciting or intense part of a story.", descriptionVietnamese = "Phần kịch tính nhất của câu chuyện."),
 
             // Office Communication
-            Word(lessonId = 13, english = "Email", vietnamese = "Thư điện tử", pronunciation = "ˈiːmeɪl", description = "A method of sending messages electronically between computers.", descriptionVietnamese = "Một phương thức gửi tin nhắn điện tử giữa các máy tính."),
-            Word(lessonId = 13, english = "Meeting", vietnamese = "Cuộc họp", pronunciation = "ˈmiːtɪŋ", description = "A gathering of people for discussion or decision-making.", descriptionVietnamese = "Một cuộc tụ họp của mọi người để thảo luận hoặc đưa ra quyết định."),
-            Word(lessonId = 13, english = "Deadline", vietnamese = "Hạn chót", pronunciation = "ˈdɛdˌlaɪn", description = "The latest time or date by which something should be completed.", descriptionVietnamese = "Thời hạn cuối cùng mà một công việc cần phải hoàn thành."),
-            Word(lessonId = 13, english = "Agenda", vietnamese = "Chương trình họp", pronunciation = "əˈdʒɛndə", description = "A list of topics to be discussed in a meeting.", descriptionVietnamese = "Danh sách các chủ đề cần thảo luận trong một cuộc họp."),
-            Word(lessonId = 13, english = "Minutes", vietnamese = "Biên bản cuộc họp", pronunciation = "ˈmɪnɪts", description = "A written record of everything that was discussed in a meeting.", descriptionVietnamese = "Bản ghi chép nội dung cuộc họp."),
-            Word(lessonId = 13, english = "Conference call", vietnamese = "Cuộc gọi hội nghị", pronunciation = "ˈkɒnfərəns kɔːl", description = "A phone call where multiple participants are involved.", descriptionVietnamese = "Một cuộc gọi điện thoại với nhiều người tham gia."),
-            Word(lessonId = 13, english = "Brainstorming session", vietnamese = "Buổi động não", pronunciation = "ˈbreɪnstɔːrmɪŋ ˈsɛʃən", description = "A meeting where people come up with new ideas and solutions.", descriptionVietnamese = "Một cuộc họp mà mọi người đưa ra các ý tưởng và giải pháp mới."),
-            Word(lessonId = 13, english = "Presentation", vietnamese = "Bài thuyết trình", pronunciation = "ˌprɛzənˈteɪʃən", description = "A talk or speech given to share information with an audience.", descriptionVietnamese = "Một bài nói hoặc bài diễn thuyết để chia sẻ thông tin với khán giả."),
-            Word(lessonId = 13, english = "Follow-up", vietnamese = "Theo dõi sau cuộc họp", pronunciation = "ˈfɒloʊ ˌʌp", description = "An action or communication that continues a previous discussion.", descriptionVietnamese = "Một hành động hoặc cuộc trao đổi tiếp nối một cuộc thảo luận trước đó."),
-            Word(lessonId = 13, english = "Memo", vietnamese = "Bản ghi nhớ", pronunciation = "ˈmɛmoʊ", description = "A written message sent within an organization.", descriptionVietnamese = "Một thông báo bằng văn bản được gửi trong tổ chức."),
+            Word(lessonId = "13", english = "Email", vietnamese = "Thư điện tử", pronunciation = "ˈiːmeɪl", description = "A method of sending messages electronically between computers.", descriptionVietnamese = "Một phương thức gửi tin nhắn điện tử giữa các máy tính."),
+            Word(lessonId = "13", english = "Meeting", vietnamese = "Cuộc họp", pronunciation = "ˈmiːtɪŋ", description = "A gathering of people for discussion or decision-making.", descriptionVietnamese = "Một cuộc tụ họp của mọi người để thảo luận hoặc đưa ra quyết định."),
+            Word(lessonId = "13", english = "Deadline", vietnamese = "Hạn chót", pronunciation = "ˈdɛdˌlaɪn", description = "The latest time or date by which something should be completed.", descriptionVietnamese = "Thời hạn cuối cùng mà một công việc cần phải hoàn thành."),
+            Word(lessonId = "13", english = "Agenda", vietnamese = "Chương trình họp", pronunciation = "əˈdʒɛndə", description = "A list of topics to be discussed in a meeting.", descriptionVietnamese = "Danh sách các chủ đề cần thảo luận trong một cuộc họp."),
+            Word(lessonId = "13", english = "Minutes", vietnamese = "Biên bản cuộc họp", pronunciation = "ˈmɪnɪts", description = "A written record of everything that was discussed in a meeting.", descriptionVietnamese = "Bản ghi chép nội dung cuộc họp."),
+            Word(lessonId = "13", english = "Conference call", vietnamese = "Cuộc gọi hội nghị", pronunciation = "ˈkɒnfərəns kɔːl", description = "A phone call where multiple participants are involved.", descriptionVietnamese = "Một cuộc gọi điện thoại với nhiều người tham gia."),
+            Word(lessonId = "13", english = "Brainstorming session", vietnamese = "Buổi động não", pronunciation = "ˈbreɪnstɔːrmɪŋ ˈsɛʃən", description = "A meeting where people come up with new ideas and solutions.", descriptionVietnamese = "Một cuộc họp mà mọi người đưa ra các ý tưởng và giải pháp mới."),
+            Word(lessonId = "13", english = "Presentation", vietnamese = "Bài thuyết trình", pronunciation = "ˌprɛzənˈteɪʃən", description = "A talk or speech given to share information with an audience.", descriptionVietnamese = "Một bài nói hoặc bài diễn thuyết để chia sẻ thông tin với khán giả."),
+            Word(lessonId = "13", english = "Follow-up", vietnamese = "Theo dõi sau cuộc họp", pronunciation = "ˈfɒloʊ ˌʌp", description = "An action or communication that continues a previous discussion.", descriptionVietnamese = "Một hành động hoặc cuộc trao đổi tiếp nối một cuộc thảo luận trước đó."),
+            Word(lessonId = "13", english = "Memo", vietnamese = "Bản ghi nhớ", pronunciation = "ˈmɛmoʊ", description = "A written message sent within an organization.", descriptionVietnamese = "Một thông báo bằng văn bản được gửi trong tổ chức."),
 
             // Email Writing
-            Word(lessonId = 14, english = "Subject line", vietnamese = "Dòng tiêu đề", pronunciation = "ˈsʌbdʒɛkt laɪn", description = "The title of an email that summarizes its content.", descriptionVietnamese = "Tiêu đề của email, tóm tắt nội dung chính."),
-            Word(lessonId = 14, english = "Greeting", vietnamese = "Lời chào", pronunciation = "ˈɡriːtɪŋ", description = "A polite way to start an email, such as 'Dear Sir/Madam'.", descriptionVietnamese = "Một cách lịch sự để bắt đầu email, ví dụ: 'Kính gửi...'"),
-            Word(lessonId = 14, english = "Salutation", vietnamese = "Cách mở đầu", pronunciation = "ˌsæljʊˈteɪʃən", description = "A formal way to address the recipient at the beginning of an email.", descriptionVietnamese = "Cách gọi trang trọng khi bắt đầu email."),
-            Word(lessonId = 14, english = "Body", vietnamese = "Nội dung chính", pronunciation = "ˈbɒdi", description = "The main text of an email containing the message.", descriptionVietnamese = "Phần nội dung chính của email chứa thông điệp cần truyền tải."),
-            Word(lessonId = 14, english = "Closing", vietnamese = "Lời kết", pronunciation = "ˈkloʊzɪŋ", description = "A polite way to end an email, such as 'Best regards'.", descriptionVietnamese = "Cách kết thúc email lịch sự, ví dụ: 'Trân trọng'."),
-            Word(lessonId = 14, english = "Signature", vietnamese = "Chữ ký", pronunciation = "ˈsɪɡnətʃər", description = "A block of text at the end of an email that includes the sender’s name and contact details.", descriptionVietnamese = "Phần cuối email bao gồm tên người gửi và thông tin liên hệ."),
-            Word(lessonId = 14, english = "Attachment", vietnamese = "Tệp đính kèm", pronunciation = "əˈtætʃmənt", description = "A file sent along with an email.", descriptionVietnamese = "Tệp tin được gửi kèm theo email."),
-            Word(lessonId = 14, english = "CC (Carbon Copy)", vietnamese = "Gửi bản sao", pronunciation = "ˌsiː ˈsiː", description = "A feature that sends a copy of the email to additional recipients.", descriptionVietnamese = "Chức năng gửi bản sao email cho nhiều người nhận."),
-            Word(lessonId = 14, english = "BCC (Blind Carbon Copy)", vietnamese = "Gửi bản sao ẩn", pronunciation = "ˌbiː ˈsiː ˈsiː", description = "A feature that sends a copy of the email without revealing the recipients.", descriptionVietnamese = "Chức năng gửi bản sao email mà không hiển thị người nhận."),
-            Word(lessonId = 14, english = "Reply all", vietnamese = "Trả lời tất cả", pronunciation = "rɪˈplaɪ ɔːl", description = "A function that allows a response to be sent to all recipients of the email.", descriptionVietnamese = "Tính năng cho phép gửi phản hồi đến tất cả người nhận trong email."),
+            Word(lessonId = "14", english = "Subject line", vietnamese = "Dòng tiêu đề", pronunciation = "ˈsʌbdʒɛkt laɪn", description = "The title of an email that summarizes its content.", descriptionVietnamese = "Tiêu đề của email, tóm tắt nội dung chính."),
+            Word(lessonId = "14", english = "Greeting", vietnamese = "Lời chào", pronunciation = "ˈɡriːtɪŋ", description = "A polite way to start an email, such as 'Dear Sir/Madam'.", descriptionVietnamese = "Một cách lịch sự để bắt đầu email, ví dụ: 'Kính gửi...'"),
+            Word(lessonId = "14", english = "Salutation", vietnamese = "Cách mở đầu", pronunciation = "ˌsæljʊˈteɪʃən", description = "A formal way to address the recipient at the beginning of an email.", descriptionVietnamese = "Cách gọi trang trọng khi bắt đầu email."),
+            Word(lessonId = "14", english = "Body", vietnamese = "Nội dung chính", pronunciation = "ˈbɒdi", description = "The main text of an email containing the message.", descriptionVietnamese = "Phần nội dung chính của email chứa thông điệp cần truyền tải."),
+            Word(lessonId = "14", english = "Closing", vietnamese = "Lời kết", pronunciation = "ˈkloʊzɪŋ", description = "A polite way to end an email, such as 'Best regards'.", descriptionVietnamese = "Cách kết thúc email lịch sự, ví dụ: 'Trân trọng'."),
+            Word(lessonId = "14", english = "Signature", vietnamese = "Chữ ký", pronunciation = "ˈsɪɡnətʃər", description = "A block of text at the end of an email that includes the sender’s name and contact details.", descriptionVietnamese = "Phần cuối email bao gồm tên người gửi và thông tin liên hệ."),
+            Word(lessonId = "14", english = "Attachment", vietnamese = "Tệp đính kèm", pronunciation = "əˈtætʃmənt", description = "A file sent along with an email.", descriptionVietnamese = "Tệp tin được gửi kèm theo email."),
+            Word(lessonId = "14", english = "CC (Carbon Copy)", vietnamese = "Gửi bản sao", pronunciation = "ˌsiː ˈsiː", description = "A feature that sends a copy of the email to additional recipients.", descriptionVietnamese = "Chức năng gửi bản sao email cho nhiều người nhận."),
+            Word(lessonId = "14", english = "BCC (Blind Carbon Copy)", vietnamese = "Gửi bản sao ẩn", pronunciation = "ˌbiː ˈsiː ˈsiː", description = "A feature that sends a copy of the email without revealing the recipients.", descriptionVietnamese = "Chức năng gửi bản sao email mà không hiển thị người nhận."),
+            Word(lessonId = "14", english = "Reply all", vietnamese = "Trả lời tất cả", pronunciation = "rɪˈplaɪ ɔːl", description = "A function that allows a response to be sent to all recipients of the email.", descriptionVietnamese = "Tính năng cho phép gửi phản hồi đến tất cả người nhận trong email."),
 
             // Job Interviews
-            Word(lessonId = 15, english = "Resume", vietnamese = "Sơ yếu lý lịch", pronunciation = "ˈrɛzjʊmeɪ", description = "A document summarizing a person's work experience, skills, and education.", descriptionVietnamese = "Tài liệu tóm tắt kinh nghiệm làm việc, kỹ năng và học vấn của một người."),
-            Word(lessonId = 15, english = "Cover letter", vietnamese = "Thư xin việc", pronunciation = "ˈkʌvər ˈlɛtər", description = "A letter sent with a resume to introduce the applicant and highlight qualifications.", descriptionVietnamese = "Lá thư được gửi kèm sơ yếu lý lịch để giới thiệu ứng viên và nhấn mạnh năng lực."),
-            Word(lessonId = 15, english = "Job description", vietnamese = "Mô tả công việc", pronunciation = "ʤɒb dɪˈskrɪpʃən", description = "A written statement outlining the responsibilities and requirements of a job.", descriptionVietnamese = "Bản mô tả bằng văn bản về trách nhiệm và yêu cầu của một công việc."),
-            Word(lessonId = 15, english = "Interview", vietnamese = "Buổi phỏng vấn", pronunciation = "ˈɪntərvjuː", description = "A formal meeting where an employer asks a candidate questions about a job.", descriptionVietnamese = "Cuộc gặp chính thức nơi nhà tuyển dụng hỏi ứng viên về công việc."),
-            Word(lessonId = 15, english = "Candidate", vietnamese = "Ứng viên", pronunciation = "ˈkændɪdət", description = "A person who applies for a job position.", descriptionVietnamese = "Người nộp đơn xin việc."),
-            Word(lessonId = 15, english = "Recruiter", vietnamese = "Nhà tuyển dụng", pronunciation = "rɪˈkruːtər", description = "A person responsible for finding and hiring employees.", descriptionVietnamese = "Người chịu trách nhiệm tìm kiếm và tuyển dụng nhân viên."),
-            Word(lessonId = 15, english = "Salary negotiation", vietnamese = "Thương lượng lương", pronunciation = "ˈsæləri nɪˌɡoʊʃiˈeɪʃən", description = "The process of discussing and agreeing on a salary.", descriptionVietnamese = "Quá trình thảo luận và đạt được thỏa thuận về mức lương."),
-            Word(lessonId = 15, english = "Strengths and weaknesses", vietnamese = "Điểm mạnh và điểm yếu", pronunciation = "strɛŋkθs ænd ˈwiːknəsɪz", description = "Personal qualities that help or hinder job performance.", descriptionVietnamese = "Những phẩm chất cá nhân giúp ích hoặc cản trở hiệu suất công việc."),
-            Word(lessonId = 15, english = "Dress code", vietnamese = "Quy tắc trang phục", pronunciation = "drɛs koʊd", description = "A set of rules about what kind of clothes employees should wear.", descriptionVietnamese = "Bộ quy tắc về trang phục nhân viên nên mặc."),
-            Word(lessonId = 15, english = "Follow-up email", vietnamese = "Email theo dõi", pronunciation = "ˈfɑːloʊ ʌp ˈiːmeɪl", description = "A message sent after an interview to thank the interviewer and express interest.", descriptionVietnamese = "Email được gửi sau phỏng vấn để cảm ơn người phỏng vấn và thể hiện sự quan tâm."),
+            Word(lessonId = "15", english = "Resume", vietnamese = "Sơ yếu lý lịch", pronunciation = "ˈrɛzjʊmeɪ", description = "A document summarizing a person's work experience, skills, and education.", descriptionVietnamese = "Tài liệu tóm tắt kinh nghiệm làm việc, kỹ năng và học vấn của một người."),
+            Word(lessonId = "15", english = "Cover letter", vietnamese = "Thư xin việc", pronunciation = "ˈkʌvər ˈlɛtər", description = "A letter sent with a resume to introduce the applicant and highlight qualifications.", descriptionVietnamese = "Lá thư được gửi kèm sơ yếu lý lịch để giới thiệu ứng viên và nhấn mạnh năng lực."),
+            Word(lessonId = "15", english = "Job description", vietnamese = "Mô tả công việc", pronunciation = "ʤɒb dɪˈskrɪpʃən", description = "A written statement outlining the responsibilities and requirements of a job.", descriptionVietnamese = "Bản mô tả bằng văn bản về trách nhiệm và yêu cầu của một công việc."),
+            Word(lessonId = "15", english = "Interview", vietnamese = "Buổi phỏng vấn", pronunciation = "ˈɪntərvjuː", description = "A formal meeting where an employer asks a candidate questions about a job.", descriptionVietnamese = "Cuộc gặp chính thức nơi nhà tuyển dụng hỏi ứng viên về công việc."),
+            Word(lessonId = "15", english = "Candidate", vietnamese = "Ứng viên", pronunciation = "ˈkændɪdət", description = "A person who applies for a job position.", descriptionVietnamese = "Người nộp đơn xin việc."),
+            Word(lessonId = "15", english = "Recruiter", vietnamese = "Nhà tuyển dụng", pronunciation = "rɪˈkruːtər", description = "A person responsible for finding and hiring employees.", descriptionVietnamese = "Người chịu trách nhiệm tìm kiếm và tuyển dụng nhân viên."),
+            Word(lessonId = "15", english = "Salary negotiation", vietnamese = "Thương lượng lương", pronunciation = "ˈsæləri nɪˌɡoʊʃiˈeɪʃən", description = "The process of discussing and agreeing on a salary.", descriptionVietnamese = "Quá trình thảo luận và đạt được thỏa thuận về mức lương."),
+            Word(lessonId = "15", english = "Strengths and weaknesses", vietnamese = "Điểm mạnh và điểm yếu", pronunciation = "strɛŋkθs ænd ˈwiːknəsɪz", description = "Personal qualities that help or hinder job performance.", descriptionVietnamese = "Những phẩm chất cá nhân giúp ích hoặc cản trở hiệu suất công việc."),
+            Word(lessonId = "15", english = "Dress code", vietnamese = "Quy tắc trang phục", pronunciation = "drɛs koʊd", description = "A set of rules about what kind of clothes employees should wear.", descriptionVietnamese = "Bộ quy tắc về trang phục nhân viên nên mặc."),
+            Word(lessonId = "15", english = "Follow-up email", vietnamese = "Email theo dõi", pronunciation = "ˈfɑːloʊ ʌp ˈiːmeɪl", description = "A message sent after an interview to thank the interviewer and express interest.", descriptionVietnamese = "Email được gửi sau phỏng vấn để cảm ơn người phỏng vấn và thể hiện sự quan tâm."),
 
             // Shopping Dialogues
-            Word(lessonId = 16, english = "Price", vietnamese = "Giá cả", pronunciation = "praɪs", description = "The amount of money required to buy something.", descriptionVietnamese = "Số tiền cần trả để mua một thứ gì đó."),
-            Word(lessonId = 16, english = "Discount", vietnamese = "Giảm giá", pronunciation = "ˈdɪskaʊnt", description = "A reduction in the price of an item.", descriptionVietnamese = "Sự giảm giá của một mặt hàng."),
-            Word(lessonId = 16, english = "Receipt", vietnamese = "Hóa đơn", pronunciation = "rɪˈsiːt", description = "A document that proves payment has been made.", descriptionVietnamese = "Giấy tờ chứng minh đã thanh toán."),
-            Word(lessonId = 16, english = "Cashier", vietnamese = "Thu ngân", pronunciation = "kæˈʃɪr", description = "A person responsible for handling payments in a store.", descriptionVietnamese = "Người chịu trách nhiệm xử lý thanh toán trong cửa hàng."),
-            Word(lessonId = 16, english = "Exchange", vietnamese = "Đổi hàng", pronunciation = "ɪksˈʧeɪndʒ", description = "The process of returning an item and getting another one in return.", descriptionVietnamese = "Quá trình trả lại một món hàng và lấy món khác thay thế."),
-            Word(lessonId = 16, english = "Refund", vietnamese = "Hoàn tiền", pronunciation = "ˈriːfʌnd", description = "Money returned to a customer when they return an item.", descriptionVietnamese = "Số tiền được trả lại khi khách hàng trả hàng."),
-            Word(lessonId = 16, english = "Fitting room", vietnamese = "Phòng thử đồ", pronunciation = "ˈfɪtɪŋ ruːm", description = "A small room where customers try on clothes before buying.", descriptionVietnamese = "Phòng nhỏ nơi khách thử quần áo trước khi mua."),
-            Word(lessonId = 16, english = "Shopping cart", vietnamese = "Giỏ hàng", pronunciation = "ˈʃɒpɪŋ kɑːrt", description = "A wheeled cart used to carry items while shopping.", descriptionVietnamese = "Xe đẩy có bánh để mang hàng hóa khi mua sắm."),
-            Word(lessonId = 16, english = "Buy one get one free", vietnamese = "Mua một tặng một", pronunciation = "baɪ wʌn ɡɛt wʌn friː", description = "A special offer where customers get an extra item for free.", descriptionVietnamese = "Ưu đãi đặc biệt khi khách hàng mua một món sẽ được tặng thêm một món."),
-            Word(lessonId = 16, english = "Out of stock", vietnamese = "Hết hàng", pronunciation = "aʊt ʌv stɒk", description = "When a store does not have a certain product available.", descriptionVietnamese = "Khi cửa hàng không còn sản phẩm đó để bán."),
+            Word(lessonId = "16", english = "Price", vietnamese = "Giá cả", pronunciation = "praɪs", description = "The amount of money required to buy something.", descriptionVietnamese = "Số tiền cần trả để mua một thứ gì đó."),
+            Word(lessonId = "16", english = "Discount", vietnamese = "Giảm giá", pronunciation = "ˈdɪskaʊnt", description = "A reduction in the price of an item.", descriptionVietnamese = "Sự giảm giá của một mặt hàng."),
+            Word(lessonId = "16", english = "Receipt", vietnamese = "Hóa đơn", pronunciation = "rɪˈsiːt", description = "A document that proves payment has been made.", descriptionVietnamese = "Giấy tờ chứng minh đã thanh toán."),
+            Word(lessonId = "16", english = "Cashier", vietnamese = "Thu ngân", pronunciation = "kæˈʃɪr", description = "A person responsible for handling payments in a store.", descriptionVietnamese = "Người chịu trách nhiệm xử lý thanh toán trong cửa hàng."),
+            Word(lessonId = "16", english = "Exchange", vietnamese = "Đổi hàng", pronunciation = "ɪksˈʧeɪndʒ", description = "The process of returning an item and getting another one in return.", descriptionVietnamese = "Quá trình trả lại một món hàng và lấy món khác thay thế."),
+            Word(lessonId = "16", english = "Refund", vietnamese = "Hoàn tiền", pronunciation = "ˈriːfʌnd", description = "Money returned to a customer when they return an item.", descriptionVietnamese = "Số tiền được trả lại khi khách hàng trả hàng."),
+            Word(lessonId = "16", english = "Fitting room", vietnamese = "Phòng thử đồ", pronunciation = "ˈfɪtɪŋ ruːm", description = "A small room where customers try on clothes before buying.", descriptionVietnamese = "Phòng nhỏ nơi khách thử quần áo trước khi mua."),
+            Word(lessonId = "16", english = "Shopping cart", vietnamese = "Giỏ hàng", pronunciation = "ˈʃɒpɪŋ kɑːrt", description = "A wheeled cart used to carry items while shopping.", descriptionVietnamese = "Xe đẩy có bánh để mang hàng hóa khi mua sắm."),
+            Word(lessonId = "16", english = "Buy one get one free", vietnamese = "Mua một tặng một", pronunciation = "baɪ wʌn ɡɛt wʌn friː", description = "A special offer where customers get an extra item for free.", descriptionVietnamese = "Ưu đãi đặc biệt khi khách hàng mua một món sẽ được tặng thêm một món."),
+            Word(lessonId = "16", english = "Out of stock", vietnamese = "Hết hàng", pronunciation = "aʊt ʌv stɒk", description = "When a store does not have a certain product available.", descriptionVietnamese = "Khi cửa hàng không còn sản phẩm đó để bán."),
 
             // Making Appointments
-            Word(lessonId = 17, english = "Schedule", vietnamese = "Lịch trình", pronunciation = "ˈskɛdʒuːl", description = "A plan that lists when certain events will happen.", descriptionVietnamese = "Một kế hoạch liệt kê thời gian diễn ra các sự kiện."),
-            Word(lessonId = 17, english = "Availability", vietnamese = "Tình trạng rảnh", pronunciation = "əˌveɪləˈbɪləti", description = "The time when someone is free to meet or do something.", descriptionVietnamese = "Khoảng thời gian ai đó rảnh để gặp hoặc làm gì đó."),
-            Word(lessonId = 17, english = "Reschedule", vietnamese = "Dời lịch", pronunciation = "ˌriːˈskɛdʒuːl", description = "To change the time of an appointment to a later date.", descriptionVietnamese = "Thay đổi thời gian của một cuộc hẹn sang ngày khác."),
-            Word(lessonId = 17, english = "Cancel", vietnamese = "Hủy lịch hẹn", pronunciation = "ˈkænsəl", description = "To call off a scheduled appointment.", descriptionVietnamese = "Hủy bỏ một cuộc hẹn đã lên lịch."),
-            Word(lessonId = 17, english = "Confirmation", vietnamese = "Xác nhận", pronunciation = "ˌkɒnfɪˈmeɪʃən", description = "A statement that something has been arranged or agreed upon.", descriptionVietnamese = "Một thông báo xác nhận rằng điều gì đó đã được sắp xếp."),
-            Word(lessonId = 17, english = "Reminder", vietnamese = "Lời nhắc", pronunciation = "rɪˈmaɪndər", description = "A notification or message to help someone remember an appointment.", descriptionVietnamese = "Thông báo hoặc tin nhắn nhắc nhở ai đó về cuộc hẹn."),
-            Word(lessonId = 17, english = "Appointment slot", vietnamese = "Khung giờ hẹn", pronunciation = "əˈpɔɪntmənt slɒt", description = "A specific time set aside for an appointment.", descriptionVietnamese = "Một khoảng thời gian cụ thể được dành cho một cuộc hẹn."),
-            Word(lessonId = 17, english = "No-show", vietnamese = "Không đến hẹn", pronunciation = "noʊ ʃoʊ", description = "A person who does not arrive for an appointment without notice.", descriptionVietnamese = "Người không xuất hiện tại cuộc hẹn mà không thông báo trước."),
-            Word(lessonId = 17, english = "Walk-in", vietnamese = "Khách không hẹn trước", pronunciation = "wɔːk ɪn", description = "A person who arrives without an appointment.", descriptionVietnamese = "Người đến mà không đặt lịch trước."),
-            Word(lessonId = 17, english = "Fully booked", vietnamese = "Kín lịch", pronunciation = "ˈfʊli bʊkt", description = "When all available appointment slots are taken.", descriptionVietnamese = "Khi tất cả khung giờ hẹn đã được đặt."),
+            Word(lessonId = "17", english = "Schedule", vietnamese = "Lịch trình", pronunciation = "ˈskɛdʒuːl", description = "A plan that lists when certain events will happen.", descriptionVietnamese = "Một kế hoạch liệt kê thời gian diễn ra các sự kiện."),
+            Word(lessonId = "17", english = "Availability", vietnamese = "Tình trạng rảnh", pronunciation = "əˌveɪləˈbɪləti", description = "The time when someone is free to meet or do something.", descriptionVietnamese = "Khoảng thời gian ai đó rảnh để gặp hoặc làm gì đó."),
+            Word(lessonId = "17", english = "Reschedule", vietnamese = "Dời lịch", pronunciation = "ˌriːˈskɛdʒuːl", description = "To change the time of an appointment to a later date.", descriptionVietnamese = "Thay đổi thời gian của một cuộc hẹn sang ngày khác."),
+            Word(lessonId = "17", english = "Cancel", vietnamese = "Hủy lịch hẹn", pronunciation = "ˈkænsəl", description = "To call off a scheduled appointment.", descriptionVietnamese = "Hủy bỏ một cuộc hẹn đã lên lịch."),
+            Word(lessonId = "17", english = "Confirmation", vietnamese = "Xác nhận", pronunciation = "ˌkɒnfɪˈmeɪʃən", description = "A statement that something has been arranged or agreed upon.", descriptionVietnamese = "Một thông báo xác nhận rằng điều gì đó đã được sắp xếp."),
+            Word(lessonId = "17", english = "Reminder", vietnamese = "Lời nhắc", pronunciation = "rɪˈmaɪndər", description = "A notification or message to help someone remember an appointment.", descriptionVietnamese = "Thông báo hoặc tin nhắn nhắc nhở ai đó về cuộc hẹn."),
+            Word(lessonId = "17", english = "Appointment slot", vietnamese = "Khung giờ hẹn", pronunciation = "əˈpɔɪntmənt slɒt", description = "A specific time set aside for an appointment.", descriptionVietnamese = "Một khoảng thời gian cụ thể được dành cho một cuộc hẹn."),
+            Word(lessonId = "17", english = "No-show", vietnamese = "Không đến hẹn", pronunciation = "noʊ ʃoʊ", description = "A person who does not arrive for an appointment without notice.", descriptionVietnamese = "Người không xuất hiện tại cuộc hẹn mà không thông báo trước."),
+            Word(lessonId = "17", english = "Walk-in", vietnamese = "Khách không hẹn trước", pronunciation = "wɔːk ɪn", description = "A person who arrives without an appointment.", descriptionVietnamese = "Người đến mà không đặt lịch trước."),
+            Word(lessonId = "17", english = "Fully booked", vietnamese = "Kín lịch", pronunciation = "ˈfʊli bʊkt", description = "When all available appointment slots are taken.", descriptionVietnamese = "Khi tất cả khung giờ hẹn đã được đặt."),
 
             // Small Talk
-            Word(lessonId = 18, english = "Greeting", vietnamese = "Lời chào", pronunciation = "ˈɡriːtɪŋ", description = "A polite way to start a conversation.", descriptionVietnamese = "Cách lịch sự để bắt đầu một cuộc trò chuyện."),
-            Word(lessonId = 18, english = "Weather", vietnamese = "Thời tiết", pronunciation = "ˈwɛðər", description = "A common topic for casual conversation.", descriptionVietnamese = "Chủ đề phổ biến trong các cuộc trò chuyện ngẫu nhiên."),
-            Word(lessonId = 18, english = "Compliment", vietnamese = "Lời khen", pronunciation = "ˈkɑːmplɪmənt", description = "A polite expression of praise or admiration.", descriptionVietnamese = "Cách bày tỏ sự khen ngợi hoặc ngưỡng mộ."),
-            Word(lessonId = 18, english = "Icebreaker", vietnamese = "Câu mở đầu", pronunciation = "ˈaɪsˌbreɪkər", description = "A statement or question that starts a conversation easily.", descriptionVietnamese = "Câu hỏi hoặc câu nói giúp bắt đầu trò chuyện một cách tự nhiên."),
-            Word(lessonId = 18, english = "Hobby", vietnamese = "Sở thích", pronunciation = "ˈhɑːbi", description = "An activity someone enjoys doing in their free time.", descriptionVietnamese = "Hoạt động mà ai đó yêu thích làm trong thời gian rảnh."),
-            Word(lessonId = 18, english = "Current events", vietnamese = "Tin tức hiện tại", pronunciation = "ˈkʌrənt ɪˈvɛnts", description = "Recent news or happenings that people talk about.", descriptionVietnamese = "Tin tức mới hoặc sự kiện mà mọi người thường thảo luận."),
-            Word(lessonId = 18, english = "Body language", vietnamese = "Ngôn ngữ cơ thể", pronunciation = "ˈbɒdi ˈlæŋɡwɪdʒ", description = "Non-verbal signals that convey meaning in communication.", descriptionVietnamese = "Các tín hiệu không lời truyền đạt ý nghĩa trong giao tiếp."),
-            Word(lessonId = 18, english = "Chit-chat", vietnamese = "Trò chuyện phiếm", pronunciation = "ʧɪt-ʧæt", description = "Casual and light-hearted conversation.", descriptionVietnamese = "Cuộc trò chuyện nhẹ nhàng, không quá sâu sắc."),
-            Word(lessonId = 18, english = "Awkward silence", vietnamese = "Khoảnh khắc im lặng gượng gạo", pronunciation = "ˈɔːkwərd ˈsaɪləns", description = "A moment of uncomfortable quiet in a conversation.", descriptionVietnamese = "Khoảnh khắc im lặng không thoải mái trong cuộc trò chuyện."),
-            Word(lessonId = 18, english = "Farewell", vietnamese = "Lời tạm biệt", pronunciation = "ˌfɛrˈwɛl", description = "A polite way to end a conversation or say goodbye.", descriptionVietnamese = "Cách lịch sự để kết thúc cuộc trò chuyện hoặc nói lời tạm biệt."),
+            Word(lessonId = "18", english = "Greeting", vietnamese = "Lời chào", pronunciation = "ˈɡriːtɪŋ", description = "A polite way to start a conversation.", descriptionVietnamese = "Cách lịch sự để bắt đầu một cuộc trò chuyện."),
+            Word(lessonId = "18", english = "Weather", vietnamese = "Thời tiết", pronunciation = "ˈwɛðər", description = "A common topic for casual conversation.", descriptionVietnamese = "Chủ đề phổ biến trong các cuộc trò chuyện ngẫu nhiên."),
+            Word(lessonId = "18", english = "Compliment", vietnamese = "Lời khen", pronunciation = "ˈkɑːmplɪmənt", description = "A polite expression of praise or admiration.", descriptionVietnamese = "Cách bày tỏ sự khen ngợi hoặc ngưỡng mộ."),
+            Word(lessonId = "18", english = "Icebreaker", vietnamese = "Câu mở đầu", pronunciation = "ˈaɪsˌbreɪkər", description = "A statement or question that starts a conversation easily.", descriptionVietnamese = "Câu hỏi hoặc câu nói giúp bắt đầu trò chuyện một cách tự nhiên."),
+            Word(lessonId = "18", english = "Hobby", vietnamese = "Sở thích", pronunciation = "ˈhɑːbi", description = "An activity someone enjoys doing in their free time.", descriptionVietnamese = "Hoạt động mà ai đó yêu thích làm trong thời gian rảnh."),
+            Word(lessonId = "18", english = "Current events", vietnamese = "Tin tức hiện tại", pronunciation = "ˈkʌrənt ɪˈvɛnts", description = "Recent news or happenings that people talk about.", descriptionVietnamese = "Tin tức mới hoặc sự kiện mà mọi người thường thảo luận."),
+            Word(lessonId = "18", english = "Body language", vietnamese = "Ngôn ngữ cơ thể", pronunciation = "ˈbɒdi ˈlæŋɡwɪdʒ", description = "Non-verbal signals that convey meaning in communication.", descriptionVietnamese = "Các tín hiệu không lời truyền đạt ý nghĩa trong giao tiếp."),
+            Word(lessonId = "18", english = "Chit-chat", vietnamese = "Trò chuyện phiếm", pronunciation = "ʧɪt-ʧæt", description = "Casual and light-hearted conversation.", descriptionVietnamese = "Cuộc trò chuyện nhẹ nhàng, không quá sâu sắc."),
+            Word(lessonId = "18", english = "Awkward silence", vietnamese = "Khoảnh khắc im lặng gượng gạo", pronunciation = "ˈɔːkwərd ˈsaɪləns", description = "A moment of uncomfortable quiet in a conversation.", descriptionVietnamese = "Khoảnh khắc im lặng không thoải mái trong cuộc trò chuyện."),
+            Word(lessonId = "18", english = "Farewell", vietnamese = "Lời tạm biệt", pronunciation = "ˌfɛrˈwɛl", description = "A polite way to end a conversation or say goodbye.", descriptionVietnamese = "Cách lịch sự để kết thúc cuộc trò chuyện hoặc nói lời tạm biệt."),
 
             // At the Airport
-            Word(lessonId = 19, english = "Airport", vietnamese = "Sân bay", pronunciation = "ˈɛrˌpɔrt", description = "A place where aircraft regularly take off and land, with buildings for passengers.", descriptionVietnamese = "Nơi máy bay cất cánh và hạ cánh thường xuyên, có các tòa nhà phục vụ hành khách."),
-            Word(lessonId = 19, english = "Flight", vietnamese = "Chuyến bay", pronunciation = "flaɪt", description = "A journey made by an aircraft, especially a commercial one.", descriptionVietnamese = "Một hành trình bằng máy bay, đặc biệt là chuyến bay thương mại."),
-            Word(lessonId = 19, english = "Customs", vietnamese = "Hải quan", pronunciation = "ˈkʌstəmz", description = "The place at an airport where officials check incoming goods, travelers, or luggage.", descriptionVietnamese = "Nơi ở sân bay nơi nhân viên kiểm tra hàng hóa, hành khách hoặc hành lý đến."),
-            Word(lessonId = 19, english = "Layover", vietnamese = "Quá cảnh", pronunciation = "ˈleɪoʊvər", description = "A short stay at a place in between parts of a journey.", descriptionVietnamese = "Khoảng thời gian dừng chân ngắn giữa các chặng của một chuyến đi."),
-            Word(lessonId = 19, english = "Passport", vietnamese = "Hộ chiếu", pronunciation = "ˈpæspɔrt", description = "An official document issued by a government, certifying the holder's identity and citizenship.", descriptionVietnamese = "Giấy tờ chính thức do chính phủ cấp, xác nhận danh tính và quốc tịch của người sở hữu."),
-            Word(lessonId = 19, english = "Visa", vietnamese = "Thị thực", pronunciation = "ˈviːzə", description = "An endorsement on a passport indicating that the holder is allowed to enter, leave, or stay for a specified period of time in a country.", descriptionVietnamese = "Dấu xác nhận trên hộ chiếu cho phép người sở hữu nhập cảnh, xuất cảnh hoặc lưu trú trong một khoảng thời gian nhất định."),
-            Word(lessonId = 19, english = "Boarding", vietnamese = "Lên máy bay", pronunciation = "ˈbɔːrdɪŋ", description = "The process of getting onto a plane before departure.", descriptionVietnamese = "Quá trình lên máy bay trước khi khởi hành."),
-            Word(lessonId = 19, english = "Check-in", vietnamese = "Làm thủ tục", pronunciation = "ʧɛk ɪn", description = "The process of confirming your presence for a flight and receiving a boarding pass.", descriptionVietnamese = "Quá trình xác nhận sự có mặt của bạn cho chuyến bay và nhận thẻ lên máy bay."),
-            Word(lessonId = 19, english = "Luggage", vietnamese = "Hành lý", pronunciation = "ˈlʌɡɪʤ", description = "Bags and suitcases used for traveling.", descriptionVietnamese = "Túi xách và vali dùng cho việc đi du lịch."),
-            Word(lessonId = 19, english = "Security check", vietnamese = "Kiểm tra an ninh", pronunciation = "sɪˈkjʊrəti ʧɛk", description = "A checkpoint where passengers and luggage are screened for security threats.", descriptionVietnamese = "Một điểm kiểm tra nơi hành khách và hành lý được kiểm tra an ninh."),
-            Word(lessonId = 19, english = "Boarding pass", vietnamese = "Thẻ lên máy bay", pronunciation = "ˈbɔːrdɪŋ pæs", description = "A document that allows a passenger to enter the restricted area of an airport and board the aircraft.", descriptionVietnamese = "Giấy tờ cho phép hành khách vào khu vực hạn chế của sân bay và lên máy bay."),
-            Word(lessonId = 19, english = "Baggage claim", vietnamese = "Khu nhận hành lý", pronunciation = "ˈbæɡɪdʒ kleɪm", description = "The area in an airport where arriving passengers collect their checked luggage.", descriptionVietnamese = "Khu vực sân bay nơi hành khách đến nhận hành lý ký gửi."),
-            Word(lessonId = 19, english = "Departure gate", vietnamese = "Cửa khởi hành", pronunciation = "dɪˈpɑːrtʃər ɡeɪt", description = "The area where passengers wait before boarding the plane.", descriptionVietnamese = "Khu vực nơi hành khách chờ trước khi lên máy bay."),
-            Word(lessonId = 19, english = "International terminal", vietnamese = "Nhà ga quốc tế", pronunciation = "ˌɪntərˈnæʃənəl ˈtɜrmɪnəl", description = "A part of an airport that handles flights traveling to and from other countries.", descriptionVietnamese = "Một phần của sân bay phục vụ các chuyến bay quốc tế."),
-            Word(lessonId = 19, english = "Delayed flight", vietnamese = "Chuyến bay bị hoãn", pronunciation = "dɪˈleɪd flaɪt", description = "A flight that is postponed and does not leave on time.", descriptionVietnamese = "Một chuyến bay bị hoãn và không khởi hành đúng giờ."),
+            Word(lessonId = "19", english = "Airport", vietnamese = "Sân bay", pronunciation = "ˈɛrˌpɔrt", description = "A place where aircraft regularly take off and land, with buildings for passengers.", descriptionVietnamese = "Nơi máy bay cất cánh và hạ cánh thường xuyên, có các tòa nhà phục vụ hành khách."),
+            Word(lessonId = "19", english = "Flight", vietnamese = "Chuyến bay", pronunciation = "flaɪt", description = "A journey made by an aircraft, especially a commercial one.", descriptionVietnamese = "Một hành trình bằng máy bay, đặc biệt là chuyến bay thương mại."),
+            Word(lessonId = "19", english = "Customs", vietnamese = "Hải quan", pronunciation = "ˈkʌstəmz", description = "The place at an airport where officials check incoming goods, travelers, or luggage.", descriptionVietnamese = "Nơi ở sân bay nơi nhân viên kiểm tra hàng hóa, hành khách hoặc hành lý đến."),
+            Word(lessonId = "19", english = "Layover", vietnamese = "Quá cảnh", pronunciation = "ˈleɪoʊvər", description = "A short stay at a place in between parts of a journey.", descriptionVietnamese = "Khoảng thời gian dừng chân ngắn giữa các chặng của một chuyến đi."),
+            Word(lessonId = "19", english = "Passport", vietnamese = "Hộ chiếu", pronunciation = "ˈpæspɔrt", description = "An official document issued by a government, certifying the holder's identity and citizenship.", descriptionVietnamese = "Giấy tờ chính thức do chính phủ cấp, xác nhận danh tính và quốc tịch của người sở hữu."),
+            Word(lessonId = "19", english = "Visa", vietnamese = "Thị thực", pronunciation = "ˈviːzə", description = "An endorsement on a passport indicating that the holder is allowed to enter, leave, or stay for a specified period of time in a country.", descriptionVietnamese = "Dấu xác nhận trên hộ chiếu cho phép người sở hữu nhập cảnh, xuất cảnh hoặc lưu trú trong một khoảng thời gian nhất định."),
+            Word(lessonId = "19", english = "Boarding", vietnamese = "Lên máy bay", pronunciation = "ˈbɔːrdɪŋ", description = "The process of getting onto a plane before departure.", descriptionVietnamese = "Quá trình lên máy bay trước khi khởi hành."),
+            Word(lessonId = "19", english = "Check-in", vietnamese = "Làm thủ tục", pronunciation = "ʧɛk ɪn", description = "The process of confirming your presence for a flight and receiving a boarding pass.", descriptionVietnamese = "Quá trình xác nhận sự có mặt của bạn cho chuyến bay và nhận thẻ lên máy bay."),
+            Word(lessonId = "19", english = "Luggage", vietnamese = "Hành lý", pronunciation = "ˈlʌɡɪʤ", description = "Bags and suitcases used for traveling.", descriptionVietnamese = "Túi xách và vali dùng cho việc đi du lịch."),
+            Word(lessonId = "19", english = "Security check", vietnamese = "Kiểm tra an ninh", pronunciation = "sɪˈkjʊrəti ʧɛk", description = "A checkpoint where passengers and luggage are screened for security threats.", descriptionVietnamese = "Một điểm kiểm tra nơi hành khách và hành lý được kiểm tra an ninh."),
+            Word(lessonId = "19", english = "Boarding pass", vietnamese = "Thẻ lên máy bay", pronunciation = "ˈbɔːrdɪŋ pæs", description = "A document that allows a passenger to enter the restricted area of an airport and board the aircraft.", descriptionVietnamese = "Giấy tờ cho phép hành khách vào khu vực hạn chế của sân bay và lên máy bay."),
+            Word(lessonId = "19", english = "Baggage claim", vietnamese = "Khu nhận hành lý", pronunciation = "ˈbæɡɪdʒ kleɪm", description = "The area in an airport where arriving passengers collect their checked luggage.", descriptionVietnamese = "Khu vực sân bay nơi hành khách đến nhận hành lý ký gửi."),
+            Word(lessonId = "19", english = "Departure gate", vietnamese = "Cửa khởi hành", pronunciation = "dɪˈpɑːrtʃər ɡeɪt", description = "The area where passengers wait before boarding the plane.", descriptionVietnamese = "Khu vực nơi hành khách chờ trước khi lên máy bay."),
+            Word(lessonId = "19", english = "International terminal", vietnamese = "Nhà ga quốc tế", pronunciation = "ˌɪntərˈnæʃənəl ˈtɜrmɪnəl", description = "A part of an airport that handles flights traveling to and from other countries.", descriptionVietnamese = "Một phần của sân bay phục vụ các chuyến bay quốc tế."),
+            Word(lessonId = "19", english = "Delayed flight", vietnamese = "Chuyến bay bị hoãn", pronunciation = "dɪˈleɪd flaɪt", description = "A flight that is postponed and does not leave on time.", descriptionVietnamese = "Một chuyến bay bị hoãn và không khởi hành đúng giờ."),
 
             // Hotel Conversations
-            Word(lessonId = 20, english = "Hotel", vietnamese = "Khách sạn", pronunciation = "hoʊˈtɛl", description = "A place where people stay temporarily when traveling.", descriptionVietnamese = "Nơi mọi người ở tạm thời khi đi du lịch."),
-            Word(lessonId = 20, english = "Lobby", vietnamese = "Sảnh khách sạn", pronunciation = "ˈlɑːbi", description = "The entrance hall of a hotel where guests check in.", descriptionVietnamese = "Khu vực sảnh của khách sạn nơi khách làm thủ tục nhận phòng."),
-            Word(lessonId = 20, english = "Key", vietnamese = "Chìa khóa", pronunciation = "kiː", description = "A device used to open and lock a door in a hotel room.", descriptionVietnamese = "Một dụng cụ dùng để mở và khóa cửa phòng khách sạn."),
-            Word(lessonId = 20, english = "Guest", vietnamese = "Khách lưu trú", pronunciation = "ɡɛst", description = "A person who stays in a hotel.", descriptionVietnamese = "Người lưu trú tại khách sạn."),
-            Word(lessonId = 20, english = "Reservation", vietnamese = "Đặt chỗ trước", pronunciation = "ˌrɛzərˈveɪʃən", description = "An arrangement to have a room, table, or seat held for you at a hotel, restaurant, etc.", descriptionVietnamese = "Sự sắp xếp để có phòng, bàn hoặc ghế được giữ cho bạn tại khách sạn, nhà hàng, v.v."),
-            Word(lessonId = 20, english = "Housekeeping", vietnamese = "Dọn phòng", pronunciation = "ˈhaʊskiːpɪŋ", description = "The department responsible for cleaning rooms and public areas in a hotel.", descriptionVietnamese = "Bộ phận chịu trách nhiệm dọn dẹp phòng và khu vực công cộng trong khách sạn."),
-            Word(lessonId = 20, english = "Check-in", vietnamese = "Làm thủ tục nhận phòng", pronunciation = "ʧɛk ɪn", description = "The process of registering upon arrival at a hotel.", descriptionVietnamese = "Quá trình đăng ký khi đến khách sạn."),
-            Word(lessonId = 20, english = "Check-out", vietnamese = "Trả phòng", pronunciation = "ʧɛk aʊt", description = "The process of leaving a hotel and paying the bill.", descriptionVietnamese = "Quá trình rời khách sạn và thanh toán hóa đơn."),
-            Word(lessonId = 20, english = "Room service", vietnamese = "Dịch vụ phòng", pronunciation = "ruːm ˈsɜːrvɪs", description = "A service in a hotel where food and drinks are delivered to a guest’s room.", descriptionVietnamese = "Dịch vụ trong khách sạn cung cấp thức ăn và đồ uống đến phòng khách."),
-            Word(lessonId = 20, english = "Mini-bar", vietnamese = "Tủ lạnh mini", pronunciation = "ˈmɪni bɑːr", description = "A small fridge in a hotel room stocked with drinks and snacks.", descriptionVietnamese = "Một tủ lạnh nhỏ trong phòng khách sạn chứa đồ uống và đồ ăn nhẹ."),
-            Word(lessonId = 20, english = "Wake-up call", vietnamese = "Cuộc gọi báo thức", pronunciation = "ˈweɪk ʌp kɔːl", description = "A service in a hotel where staff calls guests at a requested time to wake them up.", descriptionVietnamese = "Dịch vụ trong khách sạn nơi nhân viên gọi khách vào thời gian yêu cầu để đánh thức họ."),
-            Word(lessonId = 20, english = "Late check-out", vietnamese = "Trả phòng muộn", pronunciation = "leɪt ʧɛk aʊt", description = "An arrangement that allows a guest to stay beyond the usual check-out time.", descriptionVietnamese = "Sự sắp xếp cho phép khách ở lại quá giờ trả phòng thông thường."),
+            Word(lessonId = "20", english = "Hotel", vietnamese = "Khách sạn", pronunciation = "hoʊˈtɛl", description = "A place where people stay temporarily when traveling.", descriptionVietnamese = "Nơi mọi người ở tạm thời khi đi du lịch."),
+            Word(lessonId = "20", english = "Lobby", vietnamese = "Sảnh khách sạn", pronunciation = "ˈlɑːbi", description = "The entrance hall of a hotel where guests check in.", descriptionVietnamese = "Khu vực sảnh của khách sạn nơi khách làm thủ tục nhận phòng."),
+            Word(lessonId = "20", english = "Key", vietnamese = "Chìa khóa", pronunciation = "kiː", description = "A device used to open and lock a door in a hotel room.", descriptionVietnamese = "Một dụng cụ dùng để mở và khóa cửa phòng khách sạn."),
+            Word(lessonId = "20", english = "Guest", vietnamese = "Khách lưu trú", pronunciation = "ɡɛst", description = "A person who stays in a hotel.", descriptionVietnamese = "Người lưu trú tại khách sạn."),
+            Word(lessonId = "20", english = "Reservation", vietnamese = "Đặt chỗ trước", pronunciation = "ˌrɛzərˈveɪʃən", description = "An arrangement to have a room, table, or seat held for you at a hotel, restaurant, etc.", descriptionVietnamese = "Sự sắp xếp để có phòng, bàn hoặc ghế được giữ cho bạn tại khách sạn, nhà hàng, v.v."),
+            Word(lessonId = "20", english = "Housekeeping", vietnamese = "Dọn phòng", pronunciation = "ˈhaʊskiːpɪŋ", description = "The department responsible for cleaning rooms and public areas in a hotel.", descriptionVietnamese = "Bộ phận chịu trách nhiệm dọn dẹp phòng và khu vực công cộng trong khách sạn."),
+            Word(lessonId = "20", english = "Check-in", vietnamese = "Làm thủ tục nhận phòng", pronunciation = "ʧɛk ɪn", description = "The process of registering upon arrival at a hotel.", descriptionVietnamese = "Quá trình đăng ký khi đến khách sạn."),
+            Word(lessonId = "20", english = "Check-out", vietnamese = "Trả phòng", pronunciation = "ʧɛk aʊt", description = "The process of leaving a hotel and paying the bill.", descriptionVietnamese = "Quá trình rời khách sạn và thanh toán hóa đơn."),
+            Word(lessonId = "20", english = "Room service", vietnamese = "Dịch vụ phòng", pronunciation = "ruːm ˈsɜːrvɪs", description = "A service in a hotel where food and drinks are delivered to a guest’s room.", descriptionVietnamese = "Dịch vụ trong khách sạn cung cấp thức ăn và đồ uống đến phòng khách."),
+            Word(lessonId = "20", english = "Mini-bar", vietnamese = "Tủ lạnh mini", pronunciation = "ˈmɪni bɑːr", description = "A small fridge in a hotel room stocked with drinks and snacks.", descriptionVietnamese = "Một tủ lạnh nhỏ trong phòng khách sạn chứa đồ uống và đồ ăn nhẹ."),
+            Word(lessonId = "20", english = "Wake-up call", vietnamese = "Cuộc gọi báo thức", pronunciation = "ˈweɪk ʌp kɔːl", description = "A service in a hotel where staff calls guests at a requested time to wake them up.", descriptionVietnamese = "Dịch vụ trong khách sạn nơi nhân viên gọi khách vào thời gian yêu cầu để đánh thức họ."),
+            Word(lessonId = "20", english = "Late check-out", vietnamese = "Trả phòng muộn", pronunciation = "leɪt ʧɛk aʊt", description = "An arrangement that allows a guest to stay beyond the usual check-out time.", descriptionVietnamese = "Sự sắp xếp cho phép khách ở lại quá giờ trả phòng thông thường."),
 
             // Ordering Food
-            Word(lessonId = 21, english = "Menu", vietnamese = "Thực đơn", pronunciation = "ˈmɛnjuː", description = "A list of dishes available at a restaurant.", descriptionVietnamese = "Danh sách các món ăn có sẵn tại nhà hàng."),
-            Word(lessonId = 21, english = "Waiter", vietnamese = "Người phục vụ nam", pronunciation = "ˈweɪtər", description = "A man who serves food and drinks in a restaurant.", descriptionVietnamese = "Người đàn ông phục vụ đồ ăn và đồ uống trong nhà hàng."),
-            Word(lessonId = 21, english = "Waitress", vietnamese = "Người phục vụ nữ", pronunciation = "ˈweɪtrɪs", description = "A woman who serves food and drinks in a restaurant.", descriptionVietnamese = "Người phụ nữ phục vụ đồ ăn và đồ uống trong nhà hàng."),
-            Word(lessonId = 21, english = "Chef", vietnamese = "Bếp trưởng", pronunciation = "ʃɛf", description = "A professional cook, especially the head cook in a restaurant.", descriptionVietnamese = "Đầu bếp chuyên nghiệp, đặc biệt là bếp trưởng trong một nhà hàng."),
-            Word(lessonId = 21, english = "Bill", vietnamese = "Hóa đơn", pronunciation = "bɪl", description = "A statement of the money owed for goods or services.", descriptionVietnamese = "Bảng kê số tiền phải trả cho hàng hóa hoặc dịch vụ."),
-            Word(lessonId = 21, english = "Tip", vietnamese = "Tiền boa", pronunciation = "tɪp", description = "A small amount of money given to service workers for good service.", descriptionVietnamese = "Một khoản tiền nhỏ được tặng cho nhân viên phục vụ để cảm ơn."),
-            Word(lessonId = 21, english = "Appetizer", vietnamese = "Món khai vị", pronunciation = "ˈæpɪˌtaɪzər", description = "A small dish served before the main course.", descriptionVietnamese = "Một món ăn nhẹ được phục vụ trước món chính."),
-            Word(lessonId = 21, english = "Side dish", vietnamese = "Món ăn kèm", pronunciation = "saɪd dɪʃ", description = "A small portion of food served with the main course.", descriptionVietnamese = "Một phần nhỏ của thức ăn được phục vụ kèm theo món chính."),
-            Word(lessonId = 21, english = "Main course", vietnamese = "Món chính", pronunciation = "meɪn kɔːrs", description = "The main part of a meal.", descriptionVietnamese = "Phần chính của bữa ăn."),
-            Word(lessonId = 21, english = "Dessert", vietnamese = "Tráng miệng", pronunciation = "dɪˈzɜːrt", description = "A sweet course typically served at the end of a meal.", descriptionVietnamese = "Một món ngọt thường được phục vụ vào cuối bữa ăn."),
-            Word(lessonId = 21, english = "Takeaway", vietnamese = "Món mang đi", pronunciation = "ˈteɪkəˌweɪ", description = "Food prepared in a restaurant and eaten elsewhere.", descriptionVietnamese = "Thức ăn được chuẩn bị trong nhà hàng nhưng được mang đi ăn ở nơi khác."),
-            Word(lessonId = 21, english = "Special of the day", vietnamese = "Món đặc biệt trong ngày", pronunciation = "ˈspɛʃəl ʌv ðə deɪ", description = "A unique dish prepared only for a particular day.", descriptionVietnamese = "Một món ăn đặc biệt chỉ được chế biến cho một ngày cụ thể."),
+            Word(lessonId = "21", english = "Menu", vietnamese = "Thực đơn", pronunciation = "ˈmɛnjuː", description = "A list of dishes available at a restaurant.", descriptionVietnamese = "Danh sách các món ăn có sẵn tại nhà hàng."),
+            Word(lessonId = "21", english = "Waiter", vietnamese = "Người phục vụ nam", pronunciation = "ˈweɪtər", description = "A man who serves food and drinks in a restaurant.", descriptionVietnamese = "Người đàn ông phục vụ đồ ăn và đồ uống trong nhà hàng."),
+            Word(lessonId = "21", english = "Waitress", vietnamese = "Người phục vụ nữ", pronunciation = "ˈweɪtrɪs", description = "A woman who serves food and drinks in a restaurant.", descriptionVietnamese = "Người phụ nữ phục vụ đồ ăn và đồ uống trong nhà hàng."),
+            Word(lessonId = "21", english = "Chef", vietnamese = "Bếp trưởng", pronunciation = "ʃɛf", description = "A professional cook, especially the head cook in a restaurant.", descriptionVietnamese = "Đầu bếp chuyên nghiệp, đặc biệt là bếp trưởng trong một nhà hàng."),
+            Word(lessonId = "21", english = "Bill", vietnamese = "Hóa đơn", pronunciation = "bɪl", description = "A statement of the money owed for goods or services.", descriptionVietnamese = "Bảng kê số tiền phải trả cho hàng hóa hoặc dịch vụ."),
+            Word(lessonId = "21", english = "Tip", vietnamese = "Tiền boa", pronunciation = "tɪp", description = "A small amount of money given to service workers for good service.", descriptionVietnamese = "Một khoản tiền nhỏ được tặng cho nhân viên phục vụ để cảm ơn."),
+            Word(lessonId = "21", english = "Appetizer", vietnamese = "Món khai vị", pronunciation = "ˈæpɪˌtaɪzər", description = "A small dish served before the main course.", descriptionVietnamese = "Một món ăn nhẹ được phục vụ trước món chính."),
+            Word(lessonId = "21", english = "Side dish", vietnamese = "Món ăn kèm", pronunciation = "saɪd dɪʃ", description = "A small portion of food served with the main course.", descriptionVietnamese = "Một phần nhỏ của thức ăn được phục vụ kèm theo món chính."),
+            Word(lessonId = "21", english = "Main course", vietnamese = "Món chính", pronunciation = "meɪn kɔːrs", description = "The main part of a meal.", descriptionVietnamese = "Phần chính của bữa ăn."),
+            Word(lessonId = "21", english = "Dessert", vietnamese = "Tráng miệng", pronunciation = "dɪˈzɜːrt", description = "A sweet course typically served at the end of a meal.", descriptionVietnamese = "Một món ngọt thường được phục vụ vào cuối bữa ăn."),
+            Word(lessonId = "21", english = "Takeaway", vietnamese = "Món mang đi", pronunciation = "ˈteɪkəˌweɪ", description = "Food prepared in a restaurant and eaten elsewhere.", descriptionVietnamese = "Thức ăn được chuẩn bị trong nhà hàng nhưng được mang đi ăn ở nơi khác."),
+            Word(lessonId = "21", english = "Special of the day", vietnamese = "Món đặc biệt trong ngày", pronunciation = "ˈspɛʃəl ʌv ðə deɪ", description = "A unique dish prepared only for a particular day.", descriptionVietnamese = "Một món ăn đặc biệt chỉ được chế biến cho một ngày cụ thể."),
 
             // Movie
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Blockbuster",
                 vietnamese =  "Phim bom tấn",
                 pronunciation =  "ˈblɑːkˌbʌstər",
@@ -843,7 +895,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Genre",
                 vietnamese =  "Thể loại",
                 pronunciation =  "ˈʒɑːnrə",
@@ -852,7 +904,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Plot",
                 vietnamese =  "Cốt truyện",
                 pronunciation =  "plɑːt",
@@ -861,7 +913,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Character",
                 vietnamese =  "Nhân vật",
                 pronunciation =  "ˈkærəktər",
@@ -870,7 +922,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Director",
                 vietnamese =  "Đạo diễn",
                 pronunciation =  "dəˈrɛktər",
@@ -879,7 +931,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Actor",
                 vietnamese =  "Diễn viên nam",
                 pronunciation =  "ˈæktər",
@@ -888,7 +940,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Actress",
                 vietnamese =  "Diễn viên nữ",
                 pronunciation =  "ˈæktrəs",
@@ -897,7 +949,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Scene",
                 vietnamese =  "Cảnh phim",
                 pronunciation =  "siːn",
@@ -906,7 +958,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Script",
                 vietnamese =  "Kịch bản",
                 pronunciation =  "skrɪpt",
@@ -915,7 +967,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Soundtrack",
                 vietnamese =  "Nhạc phim",
                 pronunciation =  "ˈsaʊndˌtræk",
@@ -924,7 +976,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Sequel",
                 vietnamese =  "Phần tiếp theo",
                 pronunciation =  "ˈsiːkwəl",
@@ -933,7 +985,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Premiere",
                 vietnamese =  "Buổi công chiếu",
                 pronunciation =  "prɪˈmɪr",
@@ -942,7 +994,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId =  22,
+                lessonId =  "22",
                 english =  "Subtitles",
                 vietnamese =  "Phụ đề",
                 pronunciation =  "ˈsʌbˌtaɪtəlz",
@@ -953,7 +1005,7 @@ object DatabaseData {
 
             // Music
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Melody",
                 vietnamese = "Giai điệu",
                 pronunciation = "ˈmɛlədi",
@@ -962,7 +1014,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Lyrics",
                 vietnamese = "Lời bài hát",
                 pronunciation = "ˈlɪrɪks",
@@ -971,7 +1023,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Chorus",
                 vietnamese = "Điệp khúc",
                 pronunciation = "ˈkɔːrəs",
@@ -980,7 +1032,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Instrument",
                 vietnamese = "Nhạc cụ",
                 pronunciation = "ˈɪnstrəmənt",
@@ -989,7 +1041,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Rhythm",
                 vietnamese = "Nhịp điệu",
                 pronunciation = "ˈrɪðəm",
@@ -998,7 +1050,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Harmony",
                 vietnamese = "Hòa âm",
                 pronunciation = "ˈhɑːrməni",
@@ -1007,7 +1059,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Album",
                 vietnamese = "Album",
                 pronunciation = "ˈælbəm",
@@ -1016,7 +1068,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Genre",
                 vietnamese = "Thể loại",
                 pronunciation = "ˈʒɑːnrə",
@@ -1025,7 +1077,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Tempo",
                 vietnamese = "Tốc độ nhạc",
                 pronunciation = "ˈtɛmpoʊ",
@@ -1034,7 +1086,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Band",
                 vietnamese = "Ban nhạc",
                 pronunciation = "bænd",
@@ -1043,7 +1095,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Solo",
                 vietnamese = "Độc tấu",
                 pronunciation = "ˈsoʊloʊ",
@@ -1052,7 +1104,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Live performance",
                 vietnamese = "Biểu diễn trực tiếp",
                 pronunciation = "laɪv pərˈfɔːrməns",
@@ -1061,7 +1113,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 23,
+                lessonId = "23",
                 english = "Hit song",
                 vietnamese = "Bản hit",
                 pronunciation = "hɪt sɔːŋ",
@@ -1071,7 +1123,7 @@ object DatabaseData {
 
             // video game
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Game console",
                 vietnamese = "Máy chơi game",
                 pronunciation = "ɡeɪm ˈkɒnsəʊl",
@@ -1080,7 +1132,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Controller",
                 vietnamese = "Tay cầm điều khiển",
                 pronunciation = "kənˈtrəʊlər",
@@ -1089,7 +1141,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Level up",
                 vietnamese = "Lên cấp",
                 pronunciation = "ˈlɛvəl ʌp",
@@ -1098,7 +1150,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Multiplayer",
                 vietnamese = "Nhiều người chơi",
                 pronunciation = "ˈmʌltipleɪər",
@@ -1107,7 +1159,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Boss fight",
                 vietnamese = "Trận đấu trùm",
                 pronunciation = "bɒs faɪt",
@@ -1116,7 +1168,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Power-up",
                 vietnamese = "Vật phẩm tăng sức mạnh",
                 pronunciation = "ˈpaʊər ʌp",
@@ -1125,7 +1177,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Health bar",
                 vietnamese = "Thanh máu",
                 pronunciation = "hɛlθ bɑːr",
@@ -1134,7 +1186,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Save point",
                 vietnamese = "Điểm lưu",
                 pronunciation = "seɪv pɔɪnt",
@@ -1143,7 +1195,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Quest",
                 vietnamese = "Nhiệm vụ",
                 pronunciation = "kwɛst",
@@ -1152,7 +1204,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Inventory",
                 vietnamese = "Hành trang",
                 pronunciation = "ˈɪnvənˌtɔri",
@@ -1161,7 +1213,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Cutscene",
                 vietnamese = "Đoạn phim cắt cảnh",
                 pronunciation = "ˈkʌtsiːn",
@@ -1170,7 +1222,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Lag",
                 vietnamese = "Độ trễ",
                 pronunciation = "læɡ",
@@ -1179,7 +1231,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 24,
+                lessonId = "24",
                 english = "Game over",
                 vietnamese = "Trò chơi kết thúc",
                 pronunciation = "ɡeɪm ˈəʊvər",
@@ -1187,9 +1239,8 @@ object DatabaseData {
                 descriptionVietnamese = "Thông báo xuất hiện khi người chơi thua hoặc hết mạng."
             ),
 
-//            Lesson(id = 25, categoryId = 8, name = "Subject"),
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Mathematics",
                 vietnamese = "Toán học",
                 pronunciation = "ˌmæθəˈmætɪks",
@@ -1198,7 +1249,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Biology",
                 vietnamese = "Sinh học",
                 pronunciation = "baɪˈɒlədʒi",
@@ -1207,7 +1258,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Chemistry",
                 vietnamese = "Hóa học",
                 pronunciation = "ˈkɛmɪstri",
@@ -1216,7 +1267,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Physics",
                 vietnamese = "Vật lý",
                 pronunciation = "ˈfɪzɪks",
@@ -1225,7 +1276,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "History",
                 vietnamese = "Lịch sử",
                 pronunciation = "ˈhɪstəri",
@@ -1234,7 +1285,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Geography",
                 vietnamese = "Địa lý",
                 pronunciation = "dʒiˈɒɡrəfi",
@@ -1243,7 +1294,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Literature",
                 vietnamese = "Văn học",
                 pronunciation = "ˈlɪtərətʃər",
@@ -1252,7 +1303,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "English",
                 vietnamese = "Tiếng Anh",
                 pronunciation = "ˈɪŋɡlɪʃ",
@@ -1261,7 +1312,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Information Technology",
                 vietnamese = "Công nghệ thông tin",
                 pronunciation = "ˌɪnfəˈmeɪʃən tɛkˈnɒlədʒi",
@@ -1270,7 +1321,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Art",
                 vietnamese = "Mỹ thuật",
                 pronunciation = "ɑːrt",
@@ -1279,7 +1330,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Music",
                 vietnamese = "Âm nhạc",
                 pronunciation = "ˈmjuːzɪk",
@@ -1288,7 +1339,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Physical Education",
                 vietnamese = "Giáo dục thể chất",
                 pronunciation = "ˈfɪzɪkəl ˌɛdjuˈkeɪʃən",
@@ -1297,7 +1348,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 25,
+                lessonId = "25",
                 english = "Civics",
                 vietnamese = "Giáo dục công dân",
                 pronunciation = "ˈsɪvɪks",
@@ -1305,9 +1356,8 @@ object DatabaseData {
                 descriptionVietnamese = "Môn học về quyền và nghĩa vụ của công dân."
             ),
 
-//            Lesson(id = 26, categoryId = 8, name = "Class"),
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Classroom",
                 vietnamese = "Lớp học",
                 pronunciation = "ˈklɑːsruːm",
@@ -1316,7 +1366,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Teacher",
                 vietnamese = "Giáo viên",
                 pronunciation = "ˈtiːtʃər",
@@ -1325,7 +1375,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Student",
                 vietnamese = "Học sinh",
                 pronunciation = "ˈstjuːdənt",
@@ -1334,7 +1384,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Whiteboard",
                 vietnamese = "Bảng trắng",
                 pronunciation = "ˈwaɪtbɔːrd",
@@ -1343,7 +1393,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Desk",
                 vietnamese = "Bàn học",
                 pronunciation = "dɛsk",
@@ -1352,7 +1402,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Chair",
                 vietnamese = "Ghế",
                 pronunciation = "tʃɛər",
@@ -1361,7 +1411,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Notebook",
                 vietnamese = "Vở ghi",
                 pronunciation = "ˈnəʊtbʊk",
@@ -1370,7 +1420,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Pencil",
                 vietnamese = "Bút chì",
                 pronunciation = "ˈpɛnsəl",
@@ -1379,7 +1429,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Eraser",
                 vietnamese = "Cục tẩy",
                 pronunciation = "ɪˈreɪsər",
@@ -1388,7 +1438,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Homework",
                 vietnamese = "Bài tập về nhà",
                 pronunciation = "ˈhoʊmwɜːrk",
@@ -1397,7 +1447,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Exam",
                 vietnamese = "Kỳ thi",
                 pronunciation = "ɪɡˈzæm",
@@ -1406,7 +1456,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Grade",
                 vietnamese = "Điểm số",
                 pronunciation = "ɡreɪd",
@@ -1415,7 +1465,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 26,
+                lessonId = "26",
                 english = "Attendance",
                 vietnamese = "Sự điểm danh",
                 pronunciation = "əˈtɛndəns",
@@ -1423,9 +1473,8 @@ object DatabaseData {
                 descriptionVietnamese = "Việc có mặt tại trường học."
             ),
 
-//            Lesson(id = 27, categoryId = 8, name = "School"),
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "School",
                 vietnamese = "Trường học",
                 pronunciation = "skuːl",
@@ -1434,7 +1483,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Principal",
                 vietnamese = "Hiệu trưởng",
                 pronunciation = "ˈprɪnsəpəl",
@@ -1443,7 +1492,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Recess",
                 vietnamese = "Giờ ra chơi",
                 pronunciation = "ˈriːsɛs",
@@ -1452,7 +1501,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Cafeteria",
                 vietnamese = "Căng tin",
                 pronunciation = "ˌkæfəˈtɪəriə",
@@ -1461,7 +1510,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Locker",
                 vietnamese = "Tủ đựng đồ",
                 pronunciation = "ˈlɒkər",
@@ -1470,7 +1519,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Hallway",
                 vietnamese = "Hành lang",
                 pronunciation = "ˈhɔːlweɪ",
@@ -1479,7 +1528,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Class schedule",
                 vietnamese = "Thời khóa biểu",
                 pronunciation = "klɑːs ˈʃɛdjuːl",
@@ -1488,7 +1537,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Backpack",
                 vietnamese = "Ba lô",
                 pronunciation = "ˈbækˌpæk",
@@ -1497,7 +1546,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Uniform",
                 vietnamese = "Đồng phục",
                 pronunciation = "ˈjuːnɪfɔːm",
@@ -1506,7 +1555,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Playground",
                 vietnamese = "Sân chơi",
                 pronunciation = "ˈpleɪɡraʊnd",
@@ -1515,7 +1564,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Assembly",
                 vietnamese = "Buổi chào cờ",
                 pronunciation = "əˈsɛmbli",
@@ -1524,7 +1573,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Library",
                 vietnamese = "Thư viện",
                 pronunciation = "ˈlaɪbrəri",
@@ -1533,7 +1582,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 27,
+                lessonId = "27",
                 english = "Exam paper",
                 vietnamese = "Đề thi",
                 pronunciation = "ɪɡˈzæm ˈpeɪpər",
@@ -1541,9 +1590,8 @@ object DatabaseData {
                 descriptionVietnamese = "Tờ giấy chứa câu hỏi cho một kỳ thi."
             ),
 
-//            Lesson(id = 28, categoryId = 9, name = "Weather and Seasons"),
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Sunny",
                 vietnamese = "Nắng",
                 pronunciation = "ˈsʌni",
@@ -1552,7 +1600,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Rainy",
                 vietnamese = "Mưa",
                 pronunciation = "ˈreɪni",
@@ -1561,7 +1609,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Cloudy",
                 vietnamese = "Nhiều mây",
                 pronunciation = "ˈklaʊdi",
@@ -1570,7 +1618,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Snowy",
                 vietnamese = "Có tuyết",
                 pronunciation = "ˈsnəʊi",
@@ -1579,7 +1627,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Windy",
                 vietnamese = "Có gió",
                 pronunciation = "ˈwɪndi",
@@ -1588,7 +1636,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Foggy",
                 vietnamese = "Có sương mù",
                 pronunciation = "ˈfɒɡi",
@@ -1597,7 +1645,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Thunderstorm",
                 vietnamese = "Cơn giông",
                 pronunciation = "ˈθʌndərstɔːm",
@@ -1606,7 +1654,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Hot",
                 vietnamese = "Nóng",
                 pronunciation = "hɒt",
@@ -1615,7 +1663,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Cold",
                 vietnamese = "Lạnh",
                 pronunciation = "kəʊld",
@@ -1624,7 +1672,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Spring",
                 vietnamese = "Mùa xuân",
                 pronunciation = "sprɪŋ",
@@ -1633,7 +1681,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Summer",
                 vietnamese = "Mùa hè",
                 pronunciation = "ˈsʌmər",
@@ -1642,7 +1690,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Autumn",
                 vietnamese = "Mùa thu",
                 pronunciation = "ˈɔːtəm",
@@ -1651,7 +1699,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 28,
+                lessonId = "28",
                 english = "Winter",
                 vietnamese = "Mùa đông",
                 pronunciation = "ˈwɪntər",
@@ -1659,9 +1707,8 @@ object DatabaseData {
                 descriptionVietnamese = "Mùa lạnh nhất trong năm."
             ),
 
-//            Lesson(id = 29, categoryId = 9, name = "Natural Disasters"),
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Earthquake",
                 vietnamese = "Động đất",
                 pronunciation = "ˈɜːrθ.kweɪk",
@@ -1670,7 +1717,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Tsunami",
                 vietnamese = "Sóng thần",
                 pronunciation = "tsuːˈnɑːmi",
@@ -1679,7 +1726,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Volcanic eruption",
                 vietnamese = "Núi lửa phun trào",
                 pronunciation = "vɒlˈkænɪk ɪˈrʌpʃən",
@@ -1688,7 +1735,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Flood",
                 vietnamese = "Lũ lụt",
                 pronunciation = "flʌd",
@@ -1697,7 +1744,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Hurricane",
                 vietnamese = "Bão (mạnh)",
                 pronunciation = "ˈhʌrɪkən",
@@ -1706,7 +1753,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Tornado",
                 vietnamese = "Lốc xoáy",
                 pronunciation = "tɔːˈneɪdəʊ",
@@ -1715,7 +1762,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Landslide",
                 vietnamese = "Sạt lở đất",
                 pronunciation = "ˈlændslaɪd",
@@ -1724,7 +1771,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Drought",
                 vietnamese = "Hạn hán",
                 pronunciation = "draʊt",
@@ -1733,7 +1780,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Wildfire",
                 vietnamese = "Cháy rừng",
                 pronunciation = "ˈwaɪldfaɪər",
@@ -1742,7 +1789,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Avalanche",
                 vietnamese = "Tuyết lở",
                 pronunciation = "ˈævəlɑːnʃ",
@@ -1751,7 +1798,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Heatwave",
                 vietnamese = "Đợt nắng nóng",
                 pronunciation = "ˈhiːtweɪv",
@@ -1760,7 +1807,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Blizzard",
                 vietnamese = "Bão tuyết",
                 pronunciation = "ˈblɪzərd",
@@ -1769,7 +1816,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 29,
+                lessonId = "29",
                 english = "Aftershock",
                 vietnamese = "Dư chấn",
                 pronunciation = "ˈæftərʃɒk",
@@ -1777,9 +1824,8 @@ object DatabaseData {
                 descriptionVietnamese = "Một trận động đất nhỏ hơn xảy ra sau trận động đất chính."
             ),
 
-//            Lesson(id = 30, categoryId = 9, name = "Protecting the Environment"),
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Recycling",
                 vietnamese = "Tái chế",
                 pronunciation = "ˌriːˈsaɪklɪŋ",
@@ -1788,7 +1834,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Renewable energy",
                 vietnamese = "Năng lượng tái tạo",
                 pronunciation = "rɪˈnjuːəbl ˈɛnədʒi",
@@ -1797,7 +1843,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Pollution",
                 vietnamese = "Ô nhiễm",
                 pronunciation = "pəˈluːʃən",
@@ -1806,7 +1852,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Compost",
                 vietnamese = "Phân hữu cơ",
                 pronunciation = "ˈkɒmpɒst",
@@ -1815,7 +1861,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Eco-friendly",
                 vietnamese = "Thân thiện với môi trường",
                 pronunciation = "ˌiːkəʊˈfrɛndli",
@@ -1824,7 +1870,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Carbon footprint",
                 vietnamese = "Dấu chân carbon",
                 pronunciation = "ˈkɑːbən ˈfʊtprɪnt",
@@ -1833,7 +1879,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Sustainable",
                 vietnamese = "Bền vững",
                 pronunciation = "səˈsteɪnəbl",
@@ -1842,7 +1888,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Conservation",
                 vietnamese = "Sự bảo tồn",
                 pronunciation = "ˌkɒnsəˈveɪʃən",
@@ -1851,7 +1897,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Deforestation",
                 vietnamese = "Phá rừng",
                 pronunciation = "ˌdiːˌfɒrɪˈsteɪʃən",
@@ -1860,7 +1906,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Greenhouse gases",
                 vietnamese = "Khí nhà kính",
                 pronunciation = "ˈɡriːnhaʊs ˈɡæsɪz",
@@ -1869,7 +1915,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Biodegradable",
                 vietnamese = "Phân hủy sinh học",
                 pronunciation = "ˌbaɪəʊdɪˈɡreɪdəbl",
@@ -1878,7 +1924,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Solar panel",
                 vietnamese = "Tấm pin mặt trời",
                 pronunciation = "ˈsəʊlə ˈpænl",
@@ -1887,7 +1933,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 30,
+                lessonId = "30",
                 english = "Reduce, Reuse, Recycle",
                 vietnamese = "Giảm thiểu, tái sử dụng, tái chế",
                 pronunciation = "rɪˈdjuːs riːˈjuːz riːˈsaɪkl",
@@ -1895,9 +1941,8 @@ object DatabaseData {
                 descriptionVietnamese = "Ba cách chính để giảm thiểu rác thải và bảo vệ môi trường."
             ),
 
-//            Lesson(id = 31, categoryId = 10, name = "Sport"),
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Team",
                 vietnamese = "Đội",
                 pronunciation = "tiːm",
@@ -1906,7 +1951,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Coach",
                 vietnamese = "Huấn luyện viên",
                 pronunciation = "kəʊtʃ",
@@ -1915,7 +1960,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Match",
                 vietnamese = "Trận đấu",
                 pronunciation = "mætʃ",
@@ -1924,7 +1969,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Goal",
                 vietnamese = "Bàn thắng",
                 pronunciation = "ɡəʊl",
@@ -1933,7 +1978,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Referee",
                 vietnamese = "Trọng tài",
                 pronunciation = "ˌrefəˈriː",
@@ -1942,7 +1987,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Score",
                 vietnamese = "Tỷ số / Ghi điểm",
                 pronunciation = "skɔː",
@@ -1951,7 +1996,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Competition",
                 vietnamese = "Cuộc thi / Cạnh tranh",
                 pronunciation = "ˌkɒmpəˈtɪʃən",
@@ -1960,7 +2005,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Practice",
                 vietnamese = "Luyện tập",
                 pronunciation = "ˈpræktɪs",
@@ -1969,7 +2014,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Stadium",
                 vietnamese = "Sân vận động",
                 pronunciation = "ˈsteɪdiəm",
@@ -1978,7 +2023,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Athlete",
                 vietnamese = "Vận động viên",
                 pronunciation = "ˈæθliːt",
@@ -1987,7 +2032,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Warm-up",
                 vietnamese = "Khởi động",
                 pronunciation = "ˈwɔːm ʌp",
@@ -1996,7 +2041,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Injury",
                 vietnamese = "Chấn thương",
                 pronunciation = "ˈɪndʒəri",
@@ -2005,7 +2050,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 31,
+                lessonId = "31",
                 english = "Champion",
                 vietnamese = "Nhà vô địch",
                 pronunciation = "ˈtʃæmpiən",
@@ -2013,9 +2058,8 @@ object DatabaseData {
                 descriptionVietnamese = "Người chiến thắng trong một cuộc thi hoặc trận đấu."
             ),
 
-//            Lesson(id = 32, categoryId = 10, name = "Playing Team Sports"),
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Pass the ball",
                 vietnamese = "Chuyền bóng",
                 pronunciation = "pɑːs ðə bɔːl",
@@ -2024,7 +2068,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Defense",
                 vietnamese = "Phòng thủ",
                 pronunciation = "dɪˈfɛns",
@@ -2033,7 +2077,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Offense",
                 vietnamese = "Tấn công",
                 pronunciation = "ˈɒfɛns",
@@ -2042,7 +2086,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Teamwork",
                 vietnamese = "Làm việc nhóm",
                 pronunciation = "ˈtiːmwɜːk",
@@ -2051,7 +2095,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Assist",
                 vietnamese = "Hỗ trợ",
                 pronunciation = "əˈsɪst",
@@ -2060,7 +2104,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Substitute",
                 vietnamese = "Cầu thủ dự bị",
                 pronunciation = "ˈsʌbstɪtjuːt",
@@ -2069,7 +2113,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Captain",
                 vietnamese = "Đội trưởng",
                 pronunciation = "ˈkæptɪn",
@@ -2078,7 +2122,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Position",
                 vietnamese = "Vị trí",
                 pronunciation = "pəˈzɪʃən",
@@ -2087,7 +2131,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Kick-off",
                 vietnamese = "Giao bóng",
                 pronunciation = "ˈkɪk ɒf",
@@ -2096,7 +2140,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Timeout",
                 vietnamese = "Thời gian tạm dừng",
                 pronunciation = "ˈtaɪmaʊt",
@@ -2105,7 +2149,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Strategy",
                 vietnamese = "Chiến thuật",
                 pronunciation = "ˈstrætədʒi",
@@ -2114,7 +2158,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Foul",
                 vietnamese = "Lỗi",
                 pronunciation = "faʊl",
@@ -2123,7 +2167,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 32,
+                lessonId = "32",
                 english = "Win as a team",
                 vietnamese = "Chiến thắng cùng đồng đội",
                 pronunciation = "wɪn æz ə tiːm",
@@ -2131,9 +2175,8 @@ object DatabaseData {
                 descriptionVietnamese = "Đạt được chiến thắng nhờ nỗ lực chung."
             ),
 
-//            Lesson(id = 33, categoryId = 10, name = "Watching Sports Events"),
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Cheer for the team",
                 vietnamese = "Cổ vũ cho đội",
                 pronunciation = "ʧɪə fɔː ðə tiːm",
@@ -2142,7 +2185,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Score a goal",
                 vietnamese = "Ghi bàn",
                 pronunciation = "skɔːr ə ɡəʊl",
@@ -2151,7 +2194,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Spectator",
                 vietnamese = "Khán giả",
                 pronunciation = "ˈspɛkteɪtə",
@@ -2160,7 +2203,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Live broadcast",
                 vietnamese = "Phát sóng trực tiếp",
                 pronunciation = "laɪv ˈbrɔːdkɑːst",
@@ -2169,7 +2212,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Final match",
                 vietnamese = "Trận chung kết",
                 pronunciation = "ˈfaɪnəl mæʧ",
@@ -2178,7 +2221,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Halftime show",
                 vietnamese = "Chương trình giữa hiệp",
                 pronunciation = "ˈhɑːftaɪm ʃəʊ",
@@ -2187,7 +2230,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Instant replay",
                 vietnamese = "Phát lại nhanh",
                 pronunciation = "ˈɪnstənt ˈriːpleɪ",
@@ -2196,7 +2239,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Referee decision",
                 vietnamese = "Quyết định của trọng tài",
                 pronunciation = "ˌrɛfəˈriː dɪˈsɪʒən",
@@ -2205,7 +2248,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Overtime",
                 vietnamese = "Hiệp phụ",
                 pronunciation = "ˈəʊvətaɪm",
@@ -2214,7 +2257,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Fan gear",
                 vietnamese = "Đồ dùng cổ vũ",
                 pronunciation = "fæn ɡɪə",
@@ -2223,7 +2266,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Stadium atmosphere",
                 vietnamese = "Không khí sân vận động",
                 pronunciation = "ˈsteɪdiəm ˈætməsfɪə",
@@ -2232,7 +2275,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Match highlight",
                 vietnamese = "Điểm nổi bật trận đấu",
                 pronunciation = "mæʧ ˈhaɪlaɪt",
@@ -2241,7 +2284,7 @@ object DatabaseData {
             ),
 
             Word(
-                lessonId = 33,
+                lessonId = "33",
                 english = "Victory celebration",
                 vietnamese = "Lễ ăn mừng chiến thắng",
                 pronunciation = "ˈvɪktəri ˌsɛlɪˈbreɪʃən",
@@ -2254,9 +2297,9 @@ object DatabaseData {
 
     fun getSampleUserProgress():  List<UserProgress> {
         return listOf(
-            UserProgress(userId = 1, lessonId = 1, score = 100, dateTest = "2025-02-20 10:00:00", dateStart = "2025-02-20 10:00:00"),
-            UserProgress(userId = 1, lessonId = 2, score = 45, dateTest = "2025-02-22 10:00:00", dateStart = "2025-02-22 10:00:00"),
-            UserProgress(userId = 1, lessonId = 3, score = 60, dateTest = "2025-02-25 10:00:00", dateStart = "2025-02-25 10:00:00")
+            UserProgress(userId = "1", lessonId = "1", score = 100, dateTest = "2025-02-20 10:00:00", dateStart = "2025-02-20 10:00:00"),
+            UserProgress(userId = "1", lessonId = "2", score = 45, dateTest = "2025-02-22 10:00:00", dateStart = "2025-02-22 10:00:00"),
+            UserProgress(userId = "1", lessonId = "3", score = 60, dateTest = "2025-02-25 10:00:00", dateStart = "2025-02-25 10:00:00")
         )
     }
 

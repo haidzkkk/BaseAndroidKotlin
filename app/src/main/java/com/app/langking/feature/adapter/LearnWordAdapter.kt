@@ -161,7 +161,7 @@ class LearnWordAdapter(
 
         private fun handleHideTextView(isEnglish: Boolean, textView: TextView, imageView: ImageView){
             textView.text = word.let{word -> if(isEnglish) word.english else word.vietnamese}.let{
-                if (settingItem.let {item -> if(isEnglish) item.isHideEnglish else item.isHideVietnamese }) "_".repeat(it.length)
+                if (settingItem.let {item -> if(isEnglish) item.isHideEnglish else item.isHideVietnamese }) "_".repeat(it?.length ?: 0)
                 else it
             }
             imageView.setImageResource(if (settingItem.let {item -> if(isEnglish) item.isHideEnglish else item.isHideVietnamese }) R.drawable.icons8_hide else R.drawable.icons8_show)

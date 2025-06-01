@@ -1,8 +1,10 @@
 package com.app.langking.data.model
 
+import com.app.langking.ultis.IDManager
+
 data class Message(
-    val id: Int? = null,
-    val userId: Int,
+    val id: String? = IDManager.createID(),
+    val userId: String,
     val sender: String,
     val message: String,
     val timestamp: String? = null

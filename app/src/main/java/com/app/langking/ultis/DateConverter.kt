@@ -6,11 +6,23 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 object DateConverter {
     private const val DATE_PATTERN = "yyyy-MM-dd HH:mm:ss"
+
+    fun getCurrentDate(): Date {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val currentDateTime = LocalDateTime.now()
+            Date.from(currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant())
+        } else {
+            val calendar = Calendar.getInstance()
+            calendar.time
+        }
+    }
+
     fun getCurrentDateTime(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val currentDateTime = LocalDateTime.now()

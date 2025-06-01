@@ -24,7 +24,7 @@ class UserProgressDao(context: Context) {
     }
 
 
-    fun getUserProgress(userId: Int): List<UserProgress> {
+    fun getUserProgress(userId: String): List<UserProgress> {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val progressList = mutableListOf<UserProgress>()
 
@@ -38,7 +38,7 @@ class UserProgressDao(context: Context) {
 
         if (cursor.moveToFirst()) {
             do {
-                val lessonId = cursor.getInt(cursor.getColumnIndexOrThrow("lesson_id"))
+                val lessonId = cursor.getString(cursor.getColumnIndexOrThrow("lesson_id"))
                 val score = cursor.getInt(cursor.getColumnIndexOrThrow("progress"))
                 val dateTest = cursor.getString(cursor.getColumnIndexOrThrow("date_test"))
                 val dateStart = cursor.getString(cursor.getColumnIndexOrThrow("date_start"))
@@ -53,7 +53,7 @@ class UserProgressDao(context: Context) {
         return progressList
     }
 
-    fun getUserProgress(userId: Int, lessonId: Int): UserProgress? {
+    fun getUserProgress(userId: String, lessonId: String): UserProgress? {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val cursor: Cursor = db.query(
             "user_progress",

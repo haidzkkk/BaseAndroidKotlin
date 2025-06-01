@@ -40,7 +40,7 @@ class DatabaseHelper @Inject constructor(context: Context) :
 
         private const val CREATE_TABLE_CATEGORIES: String = """
             CREATE TABLE categories (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id TEXT PRIMARY KEY,
                 name TEXT NOT NULL
             );
         """
@@ -48,8 +48,8 @@ class DatabaseHelper @Inject constructor(context: Context) :
 
         private const val CREATE_TABLE_LESSONS = """
             CREATE TABLE lessons (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                category_id INTEGER NOT NULL,
+                id TEXT PRIMARY KEY,
+                category_id TEXT NOT NULL,
                 name TEXT NOT NULL,
                 content TEXT NOT NULL,
                 FOREIGN KEY (category_id) REFERENCES categories(id)
@@ -58,8 +58,8 @@ class DatabaseHelper @Inject constructor(context: Context) :
 
         private const val CREATE_TABLE_WORDS = """
             CREATE TABLE words (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                lesson_id INTEGER NOT NULL,
+                id TEXT PRIMARY KEY,
+                lesson_id TEXT NOT NULL,
                 english TEXT NOT NULL,
                 vietnamese TEXT NOT NULL,
                 pronunciation TEXT,
@@ -74,8 +74,8 @@ class DatabaseHelper @Inject constructor(context: Context) :
 
         private const val CREATE_TABLE_USER_PROGRESS = """
             CREATE TABLE user_progress (
-                user_id INTEGER NOT NULL,
-                lesson_id INTEGER NOT NULL,
+                user_id TEXT NOT NULL,
+                lesson_id TEXT NOT NULL,
                 progress INTEGER DEFAULT 0,
                 date_test TEXT DEFAULT '',
                 date_start TEXT DEFAULT '',
@@ -87,8 +87,8 @@ class DatabaseHelper @Inject constructor(context: Context) :
 
         private const val CREATE_TABLE_MESSAGE = """
             CREATE TABLE messages (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
+                id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
                 sender TEXT CHECK(sender IN ('${Message.SENDER_USER}', '${Message.SENDER_BOT}')) NOT NULL,
                 message TEXT NOT NULL,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -97,8 +97,8 @@ class DatabaseHelper @Inject constructor(context: Context) :
         """
         private const val CREATE_TABLE_CONVERSATIONS= """
             CREATE TABLE conversations (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
+                id TEXT PRIMARY KEY,
+                user_id TEXT NOT NULL,
                 topic TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
@@ -106,9 +106,9 @@ class DatabaseHelper @Inject constructor(context: Context) :
         """
         private const val CREATE_TABLE_CONVERSATION_MESSAGE = """
             CREATE TABLE conversation_messages (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                conversation_id INTEGER NOT NULL,
-                message_id INTEGER NOT NULL,
+                id TEXT PRIMARY KEY,
+                conversation_id TEXT NOT NULL,
+                message_id TEXT NOT NULL,
                 FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE,
                 FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE
             );

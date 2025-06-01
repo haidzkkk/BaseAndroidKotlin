@@ -1,10 +1,12 @@
 package com.app.langking.feature.Home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.app.langking.core.AppBaseDialog
+import com.app.langking.data.model.Account
 import com.app.langking.data.model.Category
 import com.app.langking.data.model.Question
 import com.app.langking.databinding.FragmentExerciseBinding
@@ -22,10 +24,12 @@ class UserNewbieDialogManager (
         if(category?.firstOrNull()?.lessons.isNullOrEmpty()) return
 
         val isNewbie = category!!.all { cat ->
-            if (cat.id <= 1) {
+            if ((cat.position ?: 1) <= 1) {
                 cat.lessons?.all { lesson ->
                     val progress = lesson.userProgress
-                    progress == null || progress.userId == 0 || !progress.isStarted
+                        progress == null
+                        || (progress.userId != Account.ACCOUNT_DEFAULT_ID
+                                && !progress.isStarted)
                 } ?: true
             } else {
                 cat.lessons?.all { lesson ->
@@ -33,7 +37,6 @@ class UserNewbieDialogManager (
                 } ?: true
             }
         }
-
         if(isNewbie){
             showDialogNewbie(arrayListOf(
                 Question(
